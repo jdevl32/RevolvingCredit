@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="JDevl32.Entity" Version="1.0.0" />
+    <PackageReference Include="JDevl32.Entity" Version="1.0.0.1" />
   </ItemGroup>
 
 </Project>

@@ -4,12 +4,12 @@ namespace RevolvingCredit.Entity.Interface
 {
 
 	/// <summary>
-	/// An issuer of a revolving credit accont.
+	/// A payment record for a revolving credit account.
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
 	/// </remarks>
-	public interface IAccountIssuer
+	public interface IAccountPayment
 		//:
 		//IUnique
 	{
@@ -17,7 +17,7 @@ namespace RevolvingCredit.Entity.Interface
 #region Property
 
 		/// <summary>
-		/// The id of the account the issuer applies to.
+		/// The id of the account the payment applies to.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
@@ -25,23 +25,22 @@ namespace RevolvingCredit.Entity.Interface
 		int AccountId { get; }
 
 		/// <summary>
-		/// The issuer on the account.
+		/// The due timestamp of the payment.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		IIssuer Issuer { get; }
+		DateTime Due { get; }
 
 		/// <summary>
-		/// The update timestamp of the issuer on the account.
+		/// The payment amount.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		DateTime UpdateTimestamp { get; }
+		double Amount { get; }
 
 #endregion
 
 	}
-
 }

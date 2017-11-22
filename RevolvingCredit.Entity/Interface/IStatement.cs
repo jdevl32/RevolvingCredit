@@ -42,13 +42,14 @@ namespace RevolvingCredit.Entity.Interface
 		/// </remarks>
 		DateTime End { get; }
 
+		// todo|jdevl32: shouldn't this come from account-payment ???
 		/// <summary>
 		/// The minimum payment for the statement.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		IPayment MinimumPayment { get; }
+		IAccountPayment MinimumPayment { get; }
 
 		/// <summary>
 		/// The starting balance of the statement.
@@ -66,13 +67,14 @@ namespace RevolvingCredit.Entity.Interface
 		/// </remarks>
 		double EndBalance { get; }
 
+		// todo|jdevl32: shouldn't this come from account-payment ???
 		/// <summary>
 		/// The payments applied during the statement.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		IList<IPayment> Payments { get; }
+		IList<IAccountPayment> Payments { get; }
 
 		/// <summary>
 		/// The fee reported for the statement.
@@ -90,6 +92,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// </remarks>
 		double Interest { get; }
 
+		// todo|jdevl32: shouldn't this come from account-payment ???
 		/// <summary>
 		/// The APR of the cash allowance for the statement.
 		/// </summary>
@@ -98,6 +101,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// </remarks>
 		double CashAPR { get; }
 
+		// todo|jdevl32: shouldn't this come from account-payment ???
 		/// <summary>
 		/// The APR of the credit allowance for the statement.
 		/// </summary>

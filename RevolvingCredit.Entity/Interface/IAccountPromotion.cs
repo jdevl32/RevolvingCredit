@@ -4,18 +4,20 @@ namespace RevolvingCredit.Entity.Interface
 {
 
 	/// <summary>
-	/// 
+	/// A promotion for a revolving credit account.
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
 	/// </remarks>
-	public interface IAccountLine
+	public interface IAccountPromotion
+		//:
+		//IUnique
 	{
 
 #region Property
 
 		/// <summary>
-		/// The id of the account the line applies to.
+		/// The id of the account the promotion applies to.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
@@ -23,31 +25,39 @@ namespace RevolvingCredit.Entity.Interface
 		int AccountId { get; }
 
 		/// <summary>
-		/// The line (type) on the account.
+		/// The start timestamp of the promotion.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		ILine Line { get; }
+		DateTime Start { get; }
 
 		/// <summary>
-		/// The limit of the line on the account.
+		/// The end timestamp of the promotion.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		double Limit { get; }
+		DateTime End { get; }
 
 		/// <summary>
-		/// The update timestamp of the line on the account.
+		/// The APR (type) for the promotion.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		DateTime UpdateTimestamp { get; }
+		IAPR Type { get; }
+
+		/// <summary>
+		/// The APR for the promotion.
+		/// </summary>
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		double APR { get; }
 
 #endregion
 
 	}
-
+	
 }

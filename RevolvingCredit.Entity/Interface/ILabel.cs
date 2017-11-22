@@ -4,12 +4,12 @@ namespace RevolvingCredit.Entity.Interface
 {
 
 	/// <summary>
-	/// 
+	/// A (major) label for a revolving credit account.
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
 	/// </remarks>
-	public interface IPayment
+	public interface ILabel
 		:
 		IUnique
 	{

@@ -1,5 +1,4 @@
-﻿using JDevl32.Entity.Interface;
-using System;
+﻿using System;
 
 namespace RevolvingCredit.Entity.Interface
 {
@@ -10,15 +9,15 @@ namespace RevolvingCredit.Entity.Interface
 	/// <remarks>
 	/// Last modification:
 	/// </remarks>
-	public interface IPromotion
-		:
-		IUnique
+	public interface IAccountAPR
+		//:
+		//IUnique
 	{
 
 #region Property
 
 		/// <summary>
-		/// The id of the account the promotion applies to.
+		/// The id of the account the APR applies to.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
@@ -26,23 +25,23 @@ namespace RevolvingCredit.Entity.Interface
 		int AccountId { get; }
 
 		/// <summary>
-		/// The start timestamp of the promotion.
+		/// The update timestamp of the APR for the account.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		DateTime Start { get; }
+		DateTime UpdateTimestamp { get; }
 
 		/// <summary>
-		/// The end timestamp of the promotion.
+		/// The APR (type).
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		DateTime End { get; }
+		IAPR Type { get; }
 
 		/// <summary>
-		/// The APR for the promotion.
+		/// The APR.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
@@ -52,4 +51,5 @@ namespace RevolvingCredit.Entity.Interface
 #endregion
 
 	}
+	
 }

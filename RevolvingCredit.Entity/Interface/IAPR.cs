@@ -9,7 +9,7 @@ namespace RevolvingCredit.Entity.Interface
 	/// <remarks>
 	/// Last modification:
 	/// </remarks>
-	public interface IPayment
+	public interface IAPR
 		:
 		IUnique
 	{

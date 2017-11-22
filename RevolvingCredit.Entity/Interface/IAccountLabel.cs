@@ -1,4 +1,4 @@
-﻿using JDevl32.Entity.Interface;
+﻿using System;
 
 namespace RevolvingCredit.Entity.Interface
 {
@@ -10,11 +10,35 @@ namespace RevolvingCredit.Entity.Interface
 	/// Last modification:
 	/// </remarks>
 	public interface IAccountLabel
-		:
-		IUnique
+		//:
+		//IUnique
 	{
 
 #region Property
+
+		/// <summary>
+		/// The id of the account the label applies to.
+		/// </summary>
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		int AccountId { get; }
+
+		/// <summary>
+		/// The label on the account.
+		/// </summary>
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		ILabel Label { get; }
+
+		/// <summary>
+		/// The update timestamp of the label on the account.
+		/// </summary>
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		DateTime UpdateTimestamp { get; }
 
 #endregion
 
