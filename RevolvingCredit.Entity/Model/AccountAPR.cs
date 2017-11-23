@@ -1,4 +1,5 @@
-﻿using RevolvingCredit.Entity.Interface;
+﻿using AutoMapper;
+using RevolvingCredit.Entity.Interface;
 using System;
 
 namespace RevolvingCredit.Entity.Model
@@ -12,8 +13,6 @@ namespace RevolvingCredit.Entity.Model
 	/// </remarks>
 	public class AccountAPR
 		:
-		//UniqueBase
-		//,
 		IAccountAPR
 	{
 
@@ -27,9 +26,8 @@ namespace RevolvingCredit.Entity.Model
 		/// <inheritdoc />
 		public DateTime UpdateTimestamp { get; }
 
-		// todo|jdevl32: implement auto-mapper...
 		/// <inheritdoc />
-		IAPR IAccountAPR.Type { get; }
+		IAPR IAccountAPR.Type => Mapper.Map<IAPR>(Type);
 
 		/// <inheritdoc />
 		public double APR { get; }

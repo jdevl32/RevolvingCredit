@@ -1,4 +1,5 @@
-﻿using JDevl32.Entity.Model;
+﻿using AutoMapper;
+using JDevl32.Entity.Model;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -38,49 +39,103 @@ namespace RevolvingCredit.Entity
 
 #region IRevolvingCreditContext
 
-		// todo|jdevl32: implement auto-mapper...
+		/// <inheritdoc />
+		DbSet<IAccount> IRevolvingCreditContext.Account
+		{
+			get => Mapper.Map<DbSet<IAccount>>(Account);
+			set => Account = Mapper.Map<DbSet<Account>>(value);
+		}
 
 		/// <inheritdoc />
-		DbSet<IAccount> IRevolvingCreditContext.Account { get; set; }
+		DbSet<IAccountAPR> IRevolvingCreditContext.AccountAPR
+		{
+			get => Mapper.Map<DbSet<IAccountAPR>>(AccountAPR);
+			set => AccountAPR = Mapper.Map<DbSet<AccountAPR>>(value);
+		}
 
 		/// <inheritdoc />
-		DbSet<IAccountAPR> IRevolvingCreditContext.AccountAPR { get; set; }
+		DbSet<IAccountIssuer> IRevolvingCreditContext.AccountIssuer
+		{
+			get => Mapper.Map<DbSet<IAccountIssuer>>(AccountIssuer);
+			set => AccountIssuer = Mapper.Map<DbSet<AccountIssuer>>(value);
+		}
 
 		/// <inheritdoc />
-		DbSet<IAccountIssuer> IRevolvingCreditContext.AccountIssuer { get; set; }
+		DbSet<IAccountLabel> IRevolvingCreditContext.AccountLabel
+		{
+			get => Mapper.Map<DbSet<IAccountLabel>>(AccountLabel);
+			set => AccountLabel = Mapper.Map<DbSet<AccountLabel>>(value);
+		}
 
 		/// <inheritdoc />
-		DbSet<IAccountLabel> IRevolvingCreditContext.AccountLabel { get; set; }
+		DbSet<IAccountLine> IRevolvingCreditContext.AccountLine
+		{
+			get => Mapper.Map<DbSet<IAccountLine>>(AccountLine);
+			set => AccountLine = Mapper.Map<DbSet<AccountLine>>(value);
+		}
 
 		/// <inheritdoc />
-		DbSet<IAccountLine> IRevolvingCreditContext.AccountLine { get; set; }
+		DbSet<IAccountNote> IRevolvingCreditContext.AccountNote
+		{
+			get => Mapper.Map<DbSet<IAccountNote>>(AccountNote);
+			set => AccountNote = Mapper.Map<DbSet<AccountNote>>(value);
+		}
 
 		/// <inheritdoc />
-		DbSet<IAccountNote> IRevolvingCreditContext.AccountNote { get; set; }
+		DbSet<IAccountPayment> IRevolvingCreditContext.AccountPayment
+		{
+			get => Mapper.Map<DbSet<IAccountPayment>>(AccountPayment);
+			set => AccountPayment = Mapper.Map<DbSet<AccountPayment>>(value);
+		}
 
 		/// <inheritdoc />
-		DbSet<IAccountPayment> IRevolvingCreditContext.AccountPayment { get; set; }
+		DbSet<IAccountPromotion> IRevolvingCreditContext.AccountPromotion
+		{
+			get => Mapper.Map<DbSet<IAccountPromotion>>(AccountPromotion);
+			set => AccountPromotion = Mapper.Map<DbSet<AccountPromotion>>(value);
+		}
 
 		/// <inheritdoc />
-		DbSet<IAccountPromotion> IRevolvingCreditContext.AccountPromotion { get; set; }
+		DbSet<IAccountStatement> IRevolvingCreditContext.AccountStatement
+		{
+			get => Mapper.Map<DbSet<IAccountStatement>>(AccountStatement);
+			set => AccountStatement = Mapper.Map<DbSet<AccountStatement>>(value);
+		}
 
 		/// <inheritdoc />
-		DbSet<IAccountStatement> IRevolvingCreditContext.AccountStatement { get; set; }
+		DbSet<IAPR> IRevolvingCreditContext.APR
+		{
+			get => Mapper.Map<DbSet<IAPR>>(APR);
+			set => APR = Mapper.Map<DbSet<APR>>(value);
+		}
 
 		/// <inheritdoc />
-		DbSet<IAPR> IRevolvingCreditContext.APR { get; set; }
+		DbSet<IIssuer> IRevolvingCreditContext.Issuer
+		{
+			get => Mapper.Map<DbSet<IIssuer>>(Issuer);
+			set => Issuer = Mapper.Map<DbSet<Issuer>>(value);
+		}
 
 		/// <inheritdoc />
-		DbSet<IIssuer> IRevolvingCreditContext.Issuer { get; set; }
+		DbSet<ILabel> IRevolvingCreditContext.Label
+		{
+			get => Mapper.Map<DbSet<ILabel>>(Label);
+			set => Label = Mapper.Map<DbSet<Label>>(value);
+		}
 
 		/// <inheritdoc />
-		DbSet<ILabel> IRevolvingCreditContext.Label { get; set; }
+		DbSet<ILine> IRevolvingCreditContext.Line
+		{
+			get => Mapper.Map<DbSet<ILine>>(Line);
+			set => Line = Mapper.Map<DbSet<Line>>(value);
+		}
 
 		/// <inheritdoc />
-		DbSet<ILine> IRevolvingCreditContext.Line { get; set; }
-
-		/// <inheritdoc />
-		DbSet<IPayment> IRevolvingCreditContext.Payment { get; set; }
+		DbSet<IPayment> IRevolvingCreditContext.Payment
+		{
+			get => Mapper.Map<DbSet<IPayment>>(Payment);
+			set => Payment = Mapper.Map<DbSet<Payment>>(value);
+		}
 
 #endregion
 

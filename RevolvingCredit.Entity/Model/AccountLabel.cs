@@ -1,4 +1,5 @@
-﻿using RevolvingCredit.Entity.Interface;
+﻿using AutoMapper;
+using RevolvingCredit.Entity.Interface;
 using System;
 
 namespace RevolvingCredit.Entity.Model
@@ -12,8 +13,6 @@ namespace RevolvingCredit.Entity.Model
 	/// </remarks>
 	public class AccountLabel
 		:
-		//UniqueBase
-		//,
 		IAccountLabel
 	{
 
@@ -24,9 +23,8 @@ namespace RevolvingCredit.Entity.Model
 		/// <inheritdoc />
 		public int AccountId { get; }
 
-		// todo|jdevl32: implement auto-mapper...
 		/// <inheritdoc />
-		ILabel IAccountLabel.Label { get; }
+		ILabel IAccountLabel.Label => Mapper.Map<ILabel>(Label);
 
 		/// <inheritdoc />
 		public DateTime UpdateTimestamp { get; }
@@ -34,7 +32,7 @@ namespace RevolvingCredit.Entity.Model
 #endregion
 
 		/// <summary>
-		/// The label on the account.
+		/// The label for the account.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:

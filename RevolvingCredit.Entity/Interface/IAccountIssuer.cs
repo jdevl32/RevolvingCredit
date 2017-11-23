@@ -23,7 +23,7 @@ namespace RevolvingCredit.Entity.Interface
 		int AccountId { get; }
 
 		/// <summary>
-		/// The issuer on the account.
+		/// The issuer of the account.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
@@ -31,7 +31,7 @@ namespace RevolvingCredit.Entity.Interface
 		IIssuer Issuer { get; }
 
 		/// <summary>
-		/// The update timestamp of the issuer on the account.
+		/// The update timestamp of the issuer of the account.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:

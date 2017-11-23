@@ -1,19 +1,18 @@
-﻿using RevolvingCredit.Entity.Interface;
+﻿using AutoMapper;
+using RevolvingCredit.Entity.Interface;
 using System;
 
 namespace RevolvingCredit.Entity.Model
 {
 
 	/// <summary>
-	/// A line for a revolving credit account.
+	/// A line on a revolving credit account.
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
 	/// </remarks>
 	public class AccountLine
 		:
-		//UniqueBase
-		//,
 		IAccountLine
 	{
 
@@ -24,9 +23,8 @@ namespace RevolvingCredit.Entity.Model
 		/// <inheritdoc />
 		public int AccountId { get; }
 
-		// todo|jdevl32: implement auto-mapper...
 		/// <inheritdoc />
-		ILine IAccountLine.Line { get; }
+		ILine IAccountLine.Line => Mapper.Map<ILine>(Line);
 
 		/// <inheritdoc />
 		public double Limit { get; }

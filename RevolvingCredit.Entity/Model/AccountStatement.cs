@@ -1,4 +1,5 @@
-﻿using RevolvingCredit.Entity.Interface;
+﻿using AutoMapper;
+using RevolvingCredit.Entity.Interface;
 using System;
 using System.Collections.Generic;
 
@@ -29,9 +30,8 @@ namespace RevolvingCredit.Entity.Model
 		/// <inheritdoc />
 		public DateTime End { get; }
 
-		// todo|jdevl32: implement auto-mapper...
 		/// <inheritdoc />
-		IAccountPayment IAccountStatement.MinimumPayment { get; }
+		IAccountPayment IAccountStatement.MinimumPayment => Mapper.Map<IAccountPayment>(MinimumPayment);
 
 		/// <inheritdoc />
 		public double StartBalance { get; }
@@ -39,9 +39,8 @@ namespace RevolvingCredit.Entity.Model
 		/// <inheritdoc />
 		public double EndBalance { get; }
 
-		// todo|jdevl32: implement auto-mapper...
 		/// <inheritdoc />
-		IList<IAccountPayment> IAccountStatement.Payments { get; }
+		IList<IAccountPayment> IAccountStatement.Payments => Mapper.Map<IList<IAccountPayment>>(Payments);
 
 		/// <inheritdoc />
 		public double Fee { get; }
@@ -49,13 +48,11 @@ namespace RevolvingCredit.Entity.Model
 		/// <inheritdoc />
 		public double Interest { get; }
 
-		// todo|jdevl32: implement auto-mapper...
 		/// <inheritdoc />
-		IAccountAPR IAccountStatement.CashAPR { get; }
+		IAccountAPR IAccountStatement.CashAPR => Mapper.Map<IAccountAPR>(CashAPR);
 
-		// todo|jdevl32: implement auto-mapper...
 		/// <inheritdoc />
-		IAccountAPR IAccountStatement.CreditAPR { get; }
+		IAccountAPR IAccountStatement.CreditAPR => Mapper.Map<IAccountAPR>(CreditAPR);
 
 #endregion
 

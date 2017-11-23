@@ -23,7 +23,7 @@ namespace RevolvingCredit.Entity.Interface
 		int AccountId { get; }
 
 		/// <summary>
-		/// The label on the account.
+		/// The label for the account.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
@@ -31,7 +31,7 @@ namespace RevolvingCredit.Entity.Interface
 		ILabel Label { get; }
 
 		/// <summary>
-		/// The update timestamp of the label on the account.
+		/// The update timestamp of the label for the account.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:

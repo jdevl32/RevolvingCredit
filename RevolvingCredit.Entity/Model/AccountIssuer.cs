@@ -1,4 +1,5 @@
-﻿using RevolvingCredit.Entity.Interface;
+﻿using AutoMapper;
+using RevolvingCredit.Entity.Interface;
 using System;
 
 namespace RevolvingCredit.Entity.Model
@@ -12,8 +13,6 @@ namespace RevolvingCredit.Entity.Model
 	/// </remarks>
 	public class AccountIssuer
 		:
-		//UniqueBase
-		//,
 		IAccountIssuer
 	{
 
@@ -24,9 +23,8 @@ namespace RevolvingCredit.Entity.Model
 		/// <inheritdoc />
 		public int AccountId { get; }
 
-		// todo|jdevl32: implement auto-mapper...
 		/// <inheritdoc />
-		IIssuer IAccountIssuer.Issuer { get; }
+		IIssuer IAccountIssuer.Issuer => Mapper.Map<IIssuer>(Issuer);
 
 		/// <inheritdoc />
 		public DateTime UpdateTimestamp { get; }
@@ -34,7 +32,7 @@ namespace RevolvingCredit.Entity.Model
 #endregion
 
 		/// <summary>
-		/// The issuer on the account.
+		/// The issuer of the account.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
