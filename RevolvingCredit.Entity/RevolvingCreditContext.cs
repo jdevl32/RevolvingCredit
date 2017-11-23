@@ -218,6 +218,17 @@ namespace RevolvingCredit.Entity
 
 #endregion
 
+#region DbContext
+
+		/// <inheritdoc />
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+			base.OnModelCreating(modelBuilder);
+			// todo|jdevl32: add composite key(s)...
+		}
+
+#endregion
+
 	}
 
 }
