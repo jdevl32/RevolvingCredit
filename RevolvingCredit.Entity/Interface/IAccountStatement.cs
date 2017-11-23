@@ -1,5 +1,4 @@
-﻿using JDevl32.Entity.Interface;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace RevolvingCredit.Entity.Interface
@@ -11,9 +10,7 @@ namespace RevolvingCredit.Entity.Interface
 	/// <remarks>
 	/// Last modification:
 	/// </remarks>
-	public interface IStatement
-		:
-		IUnique
+	public interface IAccountStatement
 	{
 
 #region Property
@@ -92,23 +89,23 @@ namespace RevolvingCredit.Entity.Interface
 		/// </remarks>
 		double Interest { get; }
 
-		// todo|jdevl32: shouldn't this come from account-payment ???
+		// todo|jdevl32: shouldn't this come from account-apr ???
 		/// <summary>
 		/// The APR of the cash allowance for the statement.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		double CashAPR { get; }
+		IAccountAPR CashAPR { get; }
 
-		// todo|jdevl32: shouldn't this come from account-payment ???
+		// todo|jdevl32: shouldn't this come from account-apr ???
 		/// <summary>
 		/// The APR of the credit allowance for the statement.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		double CreditAPR { get; }
+		IAccountAPR CreditAPR { get; }
 
 #endregion
 

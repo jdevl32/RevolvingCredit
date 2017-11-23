@@ -10,8 +10,6 @@ namespace RevolvingCredit.Entity.Interface
 	/// Last modification:
 	/// </remarks>
 	public interface IAccountPromotion
-		//:
-		//IUnique
 	{
 
 #region Property
@@ -59,5 +57,5 @@ namespace RevolvingCredit.Entity.Interface
 #endregion
 
 	}
-	
+
 }

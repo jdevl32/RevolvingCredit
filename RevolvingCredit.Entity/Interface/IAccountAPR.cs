@@ -4,14 +4,12 @@ namespace RevolvingCredit.Entity.Interface
 {
 
 	/// <summary>
-	/// A promotion for a revolving credit account.
+	/// An APR for a revolving credit account.
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
 	/// </remarks>
 	public interface IAccountAPR
-		//:
-		//IUnique
 	{
 
 #region Property
@@ -41,7 +39,7 @@ namespace RevolvingCredit.Entity.Interface
 		IAPR Type { get; }
 
 		/// <summary>
-		/// The APR.
+		/// The APR (value).
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
@@ -51,5 +49,5 @@ namespace RevolvingCredit.Entity.Interface
 #endregion
 
 	}
-	
+
 }

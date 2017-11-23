@@ -10,8 +10,6 @@ namespace RevolvingCredit.Entity.Interface
 	/// Last modification:
 	/// </remarks>
 	public interface IAccountPayment
-		//:
-		//IUnique
 	{
 
 #region Property

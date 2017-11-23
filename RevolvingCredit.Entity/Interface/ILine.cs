@@ -4,7 +4,7 @@ namespace RevolvingCredit.Entity.Interface
 {
 
 	/// <summary>
-	/// 
+	/// A line type for a revolving credit account.
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
