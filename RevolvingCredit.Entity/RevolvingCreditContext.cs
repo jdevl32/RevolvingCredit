@@ -279,7 +279,90 @@ namespace RevolvingCredit.Entity
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			base.OnModelCreating(modelBuilder);
-			// todo|jdevl32: add composite key(s)...
+			modelBuilder.Entity<AccountAPR>().HasKey
+				(
+					accountAPR => new
+						{
+							accountAPR.AccountId
+							,
+							accountAPR.Type.Id
+							,
+							accountAPR.UpdateTimestamp
+						}
+				);
+			modelBuilder.Entity<AccountIssuer>().HasKey
+				(
+					accountIssuer => new
+						{
+							accountIssuer.AccountId
+							,
+							accountIssuer.Issuer.Id
+							,
+							accountIssuer.UpdateTimestamp
+						}
+				);
+			modelBuilder.Entity<AccountLabel>().HasKey
+				(
+					accountLabel => new
+						{
+							accountLabel.AccountId
+							,
+							accountLabel.Label.Id
+							,
+							accountLabel.UpdateTimestamp
+						}
+				);
+			modelBuilder.Entity<AccountLine>().HasKey
+				(
+					accountLine => new
+						{
+							accountLine.AccountId
+							,
+							accountLine.Line.Id
+							,
+							accountLine.UpdateTimestamp
+						}
+				);
+			modelBuilder.Entity<AccountNote>().HasKey
+				(
+					accountNote => new
+						{
+							accountNote.AccountId
+							,
+							accountNote.UpdateTimestamp
+						}
+				);
+			modelBuilder.Entity<AccountPayment>().HasKey
+				(
+					accountPayment => new
+						{
+							accountPayment.AccountId
+							,
+							accountPayment.Due
+						}
+				);
+			modelBuilder.Entity<AccountPromotion>().HasKey
+				(
+					accountPromotion => new
+						{
+							accountPromotion.AccountId
+							,
+							accountPromotion.Type.Id
+							,
+							accountPromotion.Start
+							,
+							accountPromotion.End
+						}
+				);
+			modelBuilder.Entity<AccountStatement>().HasKey
+				(
+					accountStatement => new
+						{
+							accountStatement.AccountId
+							,
+							accountStatement.End
+						}
+				);
 		}
 
 #endregion

@@ -12,8 +12,6 @@ namespace RevolvingCredit.Entity.Model
 	/// </remarks>
 	public class AccountNote
 		:
-		//UniqueBase
-		//,
 		IAccountNote
 	{
 

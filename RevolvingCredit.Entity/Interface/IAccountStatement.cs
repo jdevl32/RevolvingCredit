@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RevolvingCredit.Entity.Interface
 {
@@ -21,6 +23,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		[Required]
 		int AccountId { get; }
 
 		/// <summary>
@@ -29,6 +32,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		[Required]
 		DateTime Start { get; }
 
 		/// <summary>
@@ -37,6 +41,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		[Required]
 		DateTime End { get; }
 
 		// todo|jdevl32: shouldn't this come from account-payment ???
@@ -46,6 +51,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		[NotMapped]
 		IAccountPayment MinimumPayment { get; }
 
 		/// <summary>
@@ -54,6 +60,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		[Required]
 		double StartBalance { get; }
 
 		/// <summary>
@@ -62,6 +69,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		[Required]
 		double EndBalance { get; }
 
 		// todo|jdevl32: shouldn't this come from account-payment ???
@@ -71,6 +79,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		[NotMapped]
 		IList<IAccountPayment> Payments { get; }
 
 		/// <summary>
@@ -96,6 +105,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		[NotMapped]
 		IAccountAPR CashAPR { get; }
 
 		// todo|jdevl32: shouldn't this come from account-apr ???
@@ -105,6 +115,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		[NotMapped]
 		IAccountAPR CreditAPR { get; }
 
 #endregion

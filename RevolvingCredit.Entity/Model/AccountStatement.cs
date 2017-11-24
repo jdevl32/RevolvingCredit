@@ -2,6 +2,7 @@
 using RevolvingCredit.Entity.Interface;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RevolvingCredit.Entity.Model
 {
@@ -63,6 +64,7 @@ namespace RevolvingCredit.Entity.Model
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		[NotMapped]
 		public AccountPayment MinimumPayment { get; }
 
 		// todo|jdevl32: shouldn't this come from account-payment ???
@@ -72,6 +74,7 @@ namespace RevolvingCredit.Entity.Model
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		[NotMapped]
 		public IList<AccountPayment> Payments { get; }
 
 		// todo|jdevl32: shouldn't this come from account-apr ???
@@ -81,6 +84,7 @@ namespace RevolvingCredit.Entity.Model
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		[NotMapped]
 		public AccountAPR CashAPR { get; }
 
 		// todo|jdevl32: shouldn't this come from account-apr ???
@@ -90,6 +94,7 @@ namespace RevolvingCredit.Entity.Model
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		[NotMapped]
 		public AccountAPR CreditAPR { get; }
 
 #endregion

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using RevolvingCredit.Entity.Interface;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace RevolvingCredit.Entity.Model
 {
@@ -37,6 +38,7 @@ namespace RevolvingCredit.Entity.Model
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		[Required]
 		public Label Label { get; }
 
 #endregion

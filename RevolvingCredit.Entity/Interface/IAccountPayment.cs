@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace RevolvingCredit.Entity.Interface
 {
@@ -20,6 +21,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		[Required]
 		int AccountId { get; }
 
 		/// <summary>
@@ -28,6 +30,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		[Required]
 		DateTime Due { get; }
 
 		/// <summary>
@@ -36,6 +39,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		[Required]
 		double Amount { get; }
 
 #endregion
