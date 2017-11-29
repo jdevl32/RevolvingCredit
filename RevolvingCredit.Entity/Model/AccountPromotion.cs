@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using JDevl32.Mapper;
 using RevolvingCredit.Entity.Interface;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -11,9 +12,12 @@ namespace RevolvingCredit.Entity.Model
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
+	/// Extend instance mapper base class.
 	/// </remarks>
 	public class AccountPromotion
 		:
+		InstanceMapperBase
+		,
 		IAccountPromotion
 	{
 
@@ -51,30 +55,16 @@ namespace RevolvingCredit.Entity.Model
 
 #region Instance Initialization
 
-//#region UniqueBase
+#region InstanceMapperBase
 
-//		/// <inheritdoc />
-//		public AccountPromotion(int id)
-//			:
-//			base(id)
-//		{
-//		}
+		/// <inheritdoc />
+		public AccountPromotion(IMapper mapper)
+			:
+			base(mapper)
+		{
+		}
 
-//		/// <inheritdoc />
-//		public AccountPromotion(int id, string shortName, string fullName, string description)
-//			:
-//			base(id, shortName, fullName, description)
-//		{
-//		}
-
-//		/// <inheritdoc />
-//		public AccountPromotion(string shortName, string fullName, string description)
-//			:
-//			base(shortName, fullName, description)
-//		{
-//		}
-
-//#endregion
+#endregion
 
 		// todo|jdevl32: implement ctors...
 

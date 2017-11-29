@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using JDevl32.Entity.Interface;
 using JDevl32.Entity.Model;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using RevolvingCredit.Entity.Interface;
 using RevolvingCredit.Entity.Model;
 
@@ -14,241 +16,365 @@ namespace RevolvingCredit.Entity
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
+	/// Change base class to mapper entity context.
 	/// </remarks>
 	public class RevolvingCreditContext
 		:
-		EntityContextBase
+		MapperEntityContextBase
 		,
 		IRevolvingCreditContext
 	{
 
 #region Property
 
-//#region IEntityContext
+#region MapperEntityContextBase
 
-//		/// <inheritdoc />
-//		public IConfigurationRoot ConfigurationRoot { get; }
+		/// <summary>
+		/// The database connection string key.
+		/// </summary>
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		public override string ConnectionStringKey { get; } = "ConnectionStrings:RevolvingCreditConnection";
 
-//		/// <inheritdoc />
-//		public string ConnectionStringKey { get; }
+		/// <summary>
+		/// The logger.
+		/// </summary>
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		public new ILogger<RevolvingCreditContext> Logger { get; }
 
-//		/// <inheritdoc />
-//		public IHostingEnvironment HostingEnvironment { get; }
-
-//#endregion
+#endregion
 
 #region IRevolvingCreditContext
 
+		// todo|jdevl32: cleanup...
+		/**
 		/// <inheritdoc />
 		DbSet<IAccount> IRevolvingCreditContext.Account
 		{
 			get => Mapper.Map<DbSet<IAccount>>(Account);
-			set => Account = Mapper.Map<DbSet<Account>>(value);
+			set
+			{
+				switch (value)
+				{
+					case null:
+						Account = null;
+						break;
+
+					default:
+						// todo|jdevl32: probably not needed ???
+						if (null == Mapper)
+						{
+							throw new NullReferenceException($"Null {nameof(Mapper)} not allowed.");
+						} // if
+
+						Account = Mapper.Map<DbSet<Account>>(value);
+						break;
+				} // switch
+			}
 		}
 
 		/// <inheritdoc />
 		DbSet<IAccountAPR> IRevolvingCreditContext.AccountAPR
 		{
 			get => Mapper.Map<DbSet<IAccountAPR>>(AccountAPR);
-			set => AccountAPR = Mapper.Map<DbSet<AccountAPR>>(value);
+			set
+			{
+				switch (value)
+				{
+					case null:
+						Account = null;
+						break;
+
+					default:
+						AccountAPR = Mapper.Map<DbSet<AccountAPR>>(value);
+						break;
+				} // switch
+			}
 		}
 
 		/// <inheritdoc />
 		DbSet<IAccountIssuer> IRevolvingCreditContext.AccountIssuer
 		{
 			get => Mapper.Map<DbSet<IAccountIssuer>>(AccountIssuer);
-			set => AccountIssuer = Mapper.Map<DbSet<AccountIssuer>>(value);
+			set
+			{
+				switch (value)
+				{
+					case null:
+						Account = null;
+						break;
+
+					default:
+						AccountIssuer = Mapper.Map<DbSet<AccountIssuer>>(value);
+						break;
+				} // switch
+			}
 		}
 
 		/// <inheritdoc />
 		DbSet<IAccountLabel> IRevolvingCreditContext.AccountLabel
 		{
 			get => Mapper.Map<DbSet<IAccountLabel>>(AccountLabel);
-			set => AccountLabel = Mapper.Map<DbSet<AccountLabel>>(value);
+			set
+			{
+				switch (value)
+				{
+					case null:
+						Account = null;
+						break;
+
+					default:
+						AccountLabel = Mapper.Map<DbSet<AccountLabel>>(value);
+						break;
+				} // switch
+			}
 		}
 
 		/// <inheritdoc />
 		DbSet<IAccountLine> IRevolvingCreditContext.AccountLine
 		{
 			get => Mapper.Map<DbSet<IAccountLine>>(AccountLine);
-			set => AccountLine = Mapper.Map<DbSet<AccountLine>>(value);
+			set
+			{
+				switch (value)
+				{
+					case null:
+						Account = null;
+						break;
+
+					default:
+						AccountLine = Mapper.Map<DbSet<AccountLine>>(value);
+						break;
+				} // switch
+			}
 		}
 
 		/// <inheritdoc />
 		DbSet<IAccountNote> IRevolvingCreditContext.AccountNote
 		{
 			get => Mapper.Map<DbSet<IAccountNote>>(AccountNote);
-			set => AccountNote = Mapper.Map<DbSet<AccountNote>>(value);
+			set
+			{
+				switch (value)
+				{
+					case null:
+						Account = null;
+						break;
+
+					default:
+						AccountNote = Mapper.Map<DbSet<AccountNote>>(value);
+						break;
+				} // switch
+			}
 		}
 
 		/// <inheritdoc />
 		DbSet<IAccountPayment> IRevolvingCreditContext.AccountPayment
 		{
 			get => Mapper.Map<DbSet<IAccountPayment>>(AccountPayment);
-			set => AccountPayment = Mapper.Map<DbSet<AccountPayment>>(value);
+			set
+			{
+				switch (value)
+				{
+					case null:
+						Account = null;
+						break;
+
+					default:
+						AccountPayment = Mapper.Map<DbSet<AccountPayment>>(value);
+						break;
+				} // switch
+			}
 		}
 
 		/// <inheritdoc />
 		DbSet<IAccountPromotion> IRevolvingCreditContext.AccountPromotion
 		{
 			get => Mapper.Map<DbSet<IAccountPromotion>>(AccountPromotion);
-			set => AccountPromotion = Mapper.Map<DbSet<AccountPromotion>>(value);
+			set
+			{
+				switch (value)
+				{
+					case null:
+						Account = null;
+						break;
+
+					default:
+						AccountPromotion = Mapper.Map<DbSet<AccountPromotion>>(value);
+						break;
+				} // switch
+			}
 		}
 
 		/// <inheritdoc />
 		DbSet<IAccountStatement> IRevolvingCreditContext.AccountStatement
 		{
 			get => Mapper.Map<DbSet<IAccountStatement>>(AccountStatement);
-			set => AccountStatement = Mapper.Map<DbSet<AccountStatement>>(value);
+			set
+			{
+				switch (value)
+				{
+					case null:
+						Account = null;
+						break;
+
+					default:
+						AccountStatement = Mapper.Map<DbSet<AccountStatement>>(value);
+						break;
+				} // switch
+			}
 		}
 
 		/// <inheritdoc />
 		DbSet<IAPR> IRevolvingCreditContext.APR
 		{
 			get => Mapper.Map<DbSet<IAPR>>(APR);
-			set => APR = Mapper.Map<DbSet<APR>>(value);
+			set
+			{
+				switch (value)
+				{
+					case null:
+						Account = null;
+						break;
+
+					default:
+						APR = Mapper.Map<DbSet<APR>>(value);
+						break;
+				} // switch
+			}
 		}
 
 		/// <inheritdoc />
 		DbSet<IIssuer> IRevolvingCreditContext.Issuer
 		{
 			get => Mapper.Map<DbSet<IIssuer>>(Issuer);
-			set => Issuer = Mapper.Map<DbSet<Issuer>>(value);
+			set
+			{
+				switch (value)
+				{
+					case null:
+						Account = null;
+						break;
+
+					default:
+						Issuer = Mapper.Map<DbSet<Issuer>>(value);
+						break;
+				} // switch
+			}
 		}
 
 		/// <inheritdoc />
 		DbSet<ILabel> IRevolvingCreditContext.Label
 		{
 			get => Mapper.Map<DbSet<ILabel>>(Label);
-			set => Label = Mapper.Map<DbSet<Label>>(value);
+			set
+			{
+				switch (value)
+				{
+					case null:
+						Account = null;
+						break;
+
+					default:
+						Label = Mapper.Map<DbSet<Label>>(value);
+						break;
+				} // switch
+			}
 		}
 
 		/// <inheritdoc />
 		DbSet<ILine> IRevolvingCreditContext.Line
 		{
 			get => Mapper.Map<DbSet<ILine>>(Line);
-			set => Line = Mapper.Map<DbSet<Line>>(value);
+			set
+			{
+				switch (value)
+				{
+					case null:
+						Account = null;
+						break;
+
+					default:
+						Line = Mapper.Map<DbSet<Line>>(value);
+						break;
+				} // switch
+			}
 		}
 
 		/// <inheritdoc />
 		DbSet<IPayment> IRevolvingCreditContext.Payment
 		{
 			get => Mapper.Map<DbSet<IPayment>>(Payment);
-			set => Payment = Mapper.Map<DbSet<Payment>>(value);
+			set
+			{
+				switch (value)
+				{
+					case null:
+						Account = null;
+						break;
+
+					default:
+						Payment = Mapper.Map<DbSet<Payment>>(value);
+						break;
+				} // switch
+			}
 		}
+		**/
+
+		/// <summary>
+		/// The logger.
+		/// </summary>
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		ILogger<IRevolvingCreditContext> IEntityContext<IRevolvingCreditContext>.Logger
+			=> Mapper.Map<ILogger<IRevolvingCreditContext>>(Logger);
 
 #endregion
 
-		/// <summary>
-		/// The account table.
-		/// </summary>
-		/// <remarks>
-		/// Last modification:
-		/// </remarks>
+		/// <inheritdoc />
 		public DbSet<Account> Account { get; set; }
 
-		/// <summary>
-		/// The account APR table.
-		/// </summary>
-		/// <remarks>
-		/// Last modification:
-		/// </remarks>
+		/// <inheritdoc />
 		public DbSet<AccountAPR> AccountAPR { get; set; }
 
-		/// <summary>
-		/// The account issuer table.
-		/// </summary>
-		/// <remarks>
-		/// Last modification:
-		/// </remarks>
+		/// <inheritdoc />
 		public DbSet<AccountIssuer> AccountIssuer { get; set; }
 
-		/// <summary>
-		/// The account table.
-		/// </summary>
-		/// <remarks>
-		/// Last modification:
-		/// </remarks>
+		/// <inheritdoc />
 		public DbSet<AccountLabel> AccountLabel { get; set; }
 
-		/// <summary>
-		/// The account line table.
-		/// </summary>
-		/// <remarks>
-		/// Last modification:
-		/// </remarks>
+		/// <inheritdoc />
 		public DbSet<AccountLine> AccountLine { get; set; }
 
-		/// <summary>
-		/// The account note table.
-		/// </summary>
-		/// <remarks>
-		/// Last modification:
-		/// </remarks>
+		/// <inheritdoc />
 		public DbSet<AccountNote> AccountNote { get; set; }
 
-		/// <summary>
-		/// The account payment table.
-		/// </summary>
-		/// <remarks>
-		/// Last modification:
-		/// </remarks>
+		/// <inheritdoc />
 		public DbSet<AccountPayment> AccountPayment { get; set; }
 
-		/// <summary>
-		/// The account promotion table.
-		/// </summary>
-		/// <remarks>
-		/// Last modification:
-		/// </remarks>
+		/// <inheritdoc />
 		public DbSet<AccountPromotion> AccountPromotion { get; set; }
 
-		/// <summary>
-		/// The account statement table.
-		/// </summary>
-		/// <remarks>
-		/// Last modification:
-		/// </remarks>
+		/// <inheritdoc />
 		public DbSet<AccountStatement> AccountStatement { get; set; }
 
-		/// <summary>
-		/// The APR (type) table.
-		/// </summary>
-		/// <remarks>
-		/// Last modification:
-		/// </remarks>
+		/// <inheritdoc />
 		public DbSet<APR> APR { get; set; }
 
-		/// <summary>
-		/// The issuer (type) table.
-		/// </summary>
-		/// <remarks>
-		/// Last modification:
-		/// </remarks>
+		/// <inheritdoc />
 		public DbSet<Issuer> Issuer { get; set; }
 
-		/// <summary>
-		/// The label (type) table.
-		/// </summary>
-		/// <remarks>
-		/// Last modification:
-		/// </remarks>
+		/// <inheritdoc />
 		public DbSet<Label> Label { get; set; }
 
-		/// <summary>
-		/// The line (type) table.
-		/// </summary>
-		/// <remarks>
-		/// Last modification:
-		/// </remarks>
+		/// <inheritdoc />
 		public DbSet<Line> Line { get; set; }
 
-		/// <summary>
-		/// The payment (type) table.
-		/// </summary>
-		/// <remarks>
-		/// Last modification:
-		/// </remarks>
+		/// <inheritdoc />
 		public DbSet<Payment> Payment { get; set; }
 
 #endregion
@@ -256,18 +382,18 @@ namespace RevolvingCredit.Entity
 #region Instance Initialization
 
 		/// <inheritdoc />
-		public RevolvingCreditContext(DbContextOptions dbContextOptions, IConfigurationRoot configurationRoot, IHostingEnvironment hostingEnvironment)
+		public RevolvingCreditContext(DbContextOptions dbContextOptions, IConfigurationRoot configurationRoot, IHostingEnvironment hostingEnvironment, ILogger<RevolvingCreditContext> logger, IMapper mapper)
 			:
-			base(dbContextOptions, configurationRoot, hostingEnvironment)
-		{
-		}
+			base(dbContextOptions, configurationRoot, hostingEnvironment, logger, mapper)
+			=>
+			Logger = logger;
 
 		/// <inheritdoc />
-		public RevolvingCreditContext(DbContextOptions dbContextOptions, IConfigurationRoot configurationRoot, IHostingEnvironment hostingEnvironment, string connectionStringKey)
+		public RevolvingCreditContext(DbContextOptions dbContextOptions, IConfigurationRoot configurationRoot, IHostingEnvironment hostingEnvironment, ILogger<RevolvingCreditContext> logger, IMapper mapper, string connectionStringKey)
 			:
-			base(dbContextOptions, configurationRoot, hostingEnvironment, connectionStringKey)
-		{
-		}
+			base(dbContextOptions, configurationRoot, hostingEnvironment, logger, mapper, connectionStringKey)
+			=>
+			Logger = logger;
 
 		// todo|jdevl32: implement ctors...
 
@@ -278,14 +404,21 @@ namespace RevolvingCredit.Entity
 		/// <inheritdoc />
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			base.OnModelCreating(modelBuilder);
+			/**
+			modelBuilder.Entity<APR>().HasKey
+				(
+					apr => new { apr.Id }
+				);
+			**/
+			// todo|jdevl32: are these correct (or new property for ....id) ???
 			modelBuilder.Entity<AccountAPR>().HasKey
 				(
 					accountAPR => new
 						{
 							accountAPR.AccountId
 							,
-							accountAPR.Type.Id
+							//accountAPR.Type.Id
+							accountAPR.Type
 							,
 							accountAPR.UpdateTimestamp
 						}
@@ -296,7 +429,8 @@ namespace RevolvingCredit.Entity
 						{
 							accountIssuer.AccountId
 							,
-							accountIssuer.Issuer.Id
+							//accountIssuer.Issuer.Id
+							accountIssuer.Issuer
 							,
 							accountIssuer.UpdateTimestamp
 						}
@@ -307,7 +441,8 @@ namespace RevolvingCredit.Entity
 						{
 							accountLabel.AccountId
 							,
-							accountLabel.Label.Id
+							//accountLabel.Label.Id
+							accountLabel.Label
 							,
 							accountLabel.UpdateTimestamp
 						}
@@ -318,7 +453,8 @@ namespace RevolvingCredit.Entity
 						{
 							accountLine.AccountId
 							,
-							accountLine.Line.Id
+							//accountLine.Line.Id
+							accountLine.Line
 							,
 							accountLine.UpdateTimestamp
 						}
@@ -347,7 +483,8 @@ namespace RevolvingCredit.Entity
 						{
 							accountPromotion.AccountId
 							,
-							accountPromotion.Type.Id
+							//accountPromotion.Type.Id
+							accountPromotion.Type
 							,
 							accountPromotion.Start
 							,
@@ -363,6 +500,7 @@ namespace RevolvingCredit.Entity
 							accountStatement.End
 						}
 				);
+			base.OnModelCreating(modelBuilder);
 		}
 
 #endregion

@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".git", ".git", "{AAE3EEAE-5
 		.git\config = .git\config
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_MigrateDatabase", "_MigrateDatabase\_MigrateDatabase.csproj", "{FCE092DF-773D-46B6-A66F-933033ED8CEB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,6 +24,10 @@ Global
 		{A6E05A75-F467-44D2-83E2-70E33969D82A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6E05A75-F467-44D2-83E2-70E33969D82A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6E05A75-F467-44D2-83E2-70E33969D82A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCE092DF-773D-46B6-A66F-933033ED8CEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCE092DF-773D-46B6-A66F-933033ED8CEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCE092DF-773D-46B6-A66F-933033ED8CEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCE092DF-773D-46B6-A66F-933033ED8CEB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

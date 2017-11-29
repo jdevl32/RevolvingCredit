@@ -1,5 +1,6 @@
 ﻿using JDevl32.Entity.Interface;
 using Microsoft.EntityFrameworkCore;
+using RevolvingCredit.Entity.Model;
 
 namespace RevolvingCredit.Entity.Interface
 {
@@ -9,10 +10,12 @@ namespace RevolvingCredit.Entity.Interface
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
+	/// Re-implement entity context interface as generic.
+	/// Change db-set types from interface to class.
 	/// </remarks>
 	public interface IRevolvingCreditContext
 		:
-		IEntityContext
+		IEntityContext<IRevolvingCreditContext>
 	{
 
 #region Property
@@ -23,7 +26,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		DbSet<IAccount> Account { get; set; }
+		DbSet<Account> Account { get; set; }
 
 		/// <summary>
 		/// The account APR table.
@@ -31,7 +34,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		DbSet<IAccountAPR> AccountAPR { get; set; }
+		DbSet<AccountAPR> AccountAPR { get; set; }
 
 		/// <summary>
 		/// The account issuer table.
@@ -39,7 +42,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		DbSet<IAccountIssuer> AccountIssuer { get; set; }
+		DbSet<AccountIssuer> AccountIssuer { get; set; }
 
 		/// <summary>
 		/// The account table.
@@ -47,7 +50,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		DbSet<IAccountLabel> AccountLabel { get; set; }
+		DbSet<AccountLabel> AccountLabel { get; set; }
 
 		/// <summary>
 		/// The account line table.
@@ -55,7 +58,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		DbSet<IAccountLine> AccountLine { get; set; }
+		DbSet<AccountLine> AccountLine { get; set; }
 
 		/// <summary>
 		/// The account note table.
@@ -63,7 +66,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		DbSet<IAccountNote> AccountNote { get; set; }
+		DbSet<AccountNote> AccountNote { get; set; }
 
 		/// <summary>
 		/// The account payment table.
@@ -71,7 +74,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		DbSet<IAccountPayment> AccountPayment { get; set; }
+		DbSet<AccountPayment> AccountPayment { get; set; }
 
 		/// <summary>
 		/// The account promotion table.
@@ -79,7 +82,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		DbSet<IAccountPromotion> AccountPromotion { get; set; }
+		DbSet<AccountPromotion> AccountPromotion { get; set; }
 
 		/// <summary>
 		/// The account statement table.
@@ -87,7 +90,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		DbSet<IAccountStatement> AccountStatement { get; set; }
+		DbSet<AccountStatement> AccountStatement { get; set; }
 
 		/// <summary>
 		/// The APR (type) table.
@@ -95,7 +98,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		DbSet<IAPR> APR { get; set; }
+		DbSet<APR> APR { get; set; }
 
 		/// <summary>
 		/// The issuer (type) table.
@@ -103,7 +106,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		DbSet<IIssuer> Issuer { get; set; }
+		DbSet<Issuer> Issuer { get; set; }
 
 		/// <summary>
 		/// The label (type) table.
@@ -111,7 +114,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		DbSet<ILabel> Label { get; set; }
+		DbSet<Label> Label { get; set; }
 
 		/// <summary>
 		/// The line (type) table.
@@ -119,7 +122,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		DbSet<ILine> Line { get; set; }
+		DbSet<Line> Line { get; set; }
 
 		/// <summary>
 		/// The payment (type) table.
@@ -127,7 +130,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		DbSet<IPayment> Payment { get; set; }
+		DbSet<Payment> Payment { get; set; }
 
 #endregion
 
