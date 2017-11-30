@@ -2,7 +2,6 @@
 using JDevl32.Mapper;
 using RevolvingCredit.Entity.Interface;
 using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace RevolvingCredit.Entity.Model
 {
@@ -12,7 +11,7 @@ namespace RevolvingCredit.Entity.Model
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Extend instance mapper base class.
+	/// Re-engineer using EF navigation properties.
 	/// </remarks>
 	public class AccountAPR
 		:
@@ -25,19 +24,47 @@ namespace RevolvingCredit.Entity.Model
 
 #region IAccountAPR
 
-		/// <inheritdoc />
-		public int AccountId { get; }
+#region EF - Primary Key
+
+#region EF - Foreign Key
 
 		/// <inheritdoc />
-		public DateTime UpdateTimestamp { get; }
+		public int AccountId { get; set; }
 
 		/// <inheritdoc />
-		IAPR IAccountAPR.Type => Mapper.Map<IAPR>(Type);
+		public int TypeId { get; set; }
+
+#endregion
+
+		/// <inheritdoc />
+		public DateTime UpdateTimestamp { get; set; }
+
+#endregion
 
 		/// <inheritdoc />
 		public double APR { get; }
 
+#region EF - Navigation
+
+		/// <inheritdoc />
+		IAccount IAccountAPR.Account => Mapper.Map<IAccount>(Account);
+
+		/// <inheritdoc />
+		IAPR IAccountAPR.Type => Mapper.Map<IAPR>(Type);
+
 #endregion
+
+#endregion
+
+#region EF - Navigation
+
+		/// <summary>
+		/// The account the APR applies to.
+		/// </summary>
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		public virtual Account Account { get; }
 
 		/// <summary>
 		/// The APR (type).
@@ -45,8 +72,9 @@ namespace RevolvingCredit.Entity.Model
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		[Required]
-		public APR Type { get; }
+		public virtual APR Type { get; }
+
+#endregion
 
 #endregion
 

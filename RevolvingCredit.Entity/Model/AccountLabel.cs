@@ -2,7 +2,6 @@
 using JDevl32.Mapper;
 using RevolvingCredit.Entity.Interface;
 using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace RevolvingCredit.Entity.Model
 {
@@ -12,7 +11,7 @@ namespace RevolvingCredit.Entity.Model
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Extend instance mapper base class.
+	/// Re-engineer using EF navigation properties.
 	/// </remarks>
 	public class AccountLabel
 		:
@@ -25,16 +24,44 @@ namespace RevolvingCredit.Entity.Model
 
 #region IAccountLabel
 
+#region EF - Primary Key
+
+#region EF - Foreign Key
+
 		/// <inheritdoc />
-		public int AccountId { get; }
+		public int AccountId { get; set; }
+
+		/// <inheritdoc />
+		public int LabelId { get; set; }
+
+#endregion
+
+		/// <inheritdoc />
+		public DateTime UpdateTimestamp { get; set; }
+
+#endregion
+
+#region EF - Navigation
+
+		/// <inheritdoc />
+		IAccount IAccountLabel.Account => Mapper.Map<IAccount>(Account);
 
 		/// <inheritdoc />
 		ILabel IAccountLabel.Label => Mapper.Map<ILabel>(Label);
 
-		/// <inheritdoc />
-		public DateTime UpdateTimestamp { get; }
+#endregion
 
 #endregion
+
+#region EF - Navigation
+
+		/// <summary>
+		/// The account the label applies to.
+		/// </summary>
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		public virtual Account Account { get; }
 
 		/// <summary>
 		/// The label for the account.
@@ -42,8 +69,9 @@ namespace RevolvingCredit.Entity.Model
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		[Required]
-		public Label Label { get; }
+		public virtual Label Label { get; }
+
+#endregion
 
 #endregion
 

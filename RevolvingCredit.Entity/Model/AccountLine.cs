@@ -2,7 +2,6 @@
 using JDevl32.Mapper;
 using RevolvingCredit.Entity.Interface;
 using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace RevolvingCredit.Entity.Model
 {
@@ -12,7 +11,7 @@ namespace RevolvingCredit.Entity.Model
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Extend instance mapper base class.
+	/// Re-engineer using EF navigation properties.
 	/// </remarks>
 	public class AccountLine
 		:
@@ -25,19 +24,47 @@ namespace RevolvingCredit.Entity.Model
 
 #region IAccountLine
 
-		/// <inheritdoc />
-		public int AccountId { get; }
+#region EF - Primary Key
+
+#region EF - Foreign Key
 
 		/// <inheritdoc />
-		ILine IAccountLine.Line => Mapper.Map<ILine>(Line);
+		public int AccountId { get; set; }
+
+		/// <inheritdoc />
+		public int LineId { get; set; }
+
+#endregion
+
+		/// <inheritdoc />
+		public DateTime UpdateTimestamp { get; set; }
+
+#endregion
 
 		/// <inheritdoc />
 		public double Limit { get; }
 
+#region EF - Navigation
+
 		/// <inheritdoc />
-		public DateTime UpdateTimestamp { get; }
+		IAccount IAccountLine.Account => Mapper.Map<IAccount>(Account);
+
+		/// <inheritdoc />
+		ILine IAccountLine.Line => Mapper.Map<ILine>(Line);
 
 #endregion
+
+#endregion
+
+#region EF - Navigation
+
+		/// <summary>
+		/// The account the line applies to.
+		/// </summary>
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		public virtual Account Account { get; }
 
 		/// <summary>
 		/// The line (type) on the account.
@@ -45,8 +72,9 @@ namespace RevolvingCredit.Entity.Model
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		[Required]
-		public Line Line { get; }
+		public virtual Line Line { get; }
+
+#endregion
 
 #endregion
 

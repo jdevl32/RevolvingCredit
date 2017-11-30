@@ -8,10 +8,11 @@ namespace RevolvingCredit.Entity.Interface
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
+	/// Reset base as global unique.
 	/// </remarks>
 	public interface IAccount
 		:
-		IUnique
+		IGlobalUnique
 	{
 
 #region Property

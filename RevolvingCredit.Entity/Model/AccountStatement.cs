@@ -13,7 +13,7 @@ namespace RevolvingCredit.Entity.Model
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Extend instance mapper base class.
+	/// Re-engineer using EF navigation properties.
 	/// </remarks>
 	public class AccountStatement
 		:
@@ -26,17 +26,22 @@ namespace RevolvingCredit.Entity.Model
 
 #region IAccountStatement
 
+#region EF - Primary Key
+
+#region EF - Foreign Key
+
 		/// <inheritdoc />
-		public int AccountId { get; }
+		public int AccountId { get; set; }
+
+#endregion
+
+		/// <inheritdoc />
+		public DateTime End { get; set; }
+
+#endregion
 
 		/// <inheritdoc />
 		public DateTime Start { get; }
-
-		/// <inheritdoc />
-		public DateTime End { get; }
-
-		/// <inheritdoc />
-		IAccountPayment IAccountStatement.MinimumPayment => Mapper.Map<IAccountPayment>(MinimumPayment);
 
 		/// <inheritdoc />
 		public double StartBalance { get; }
@@ -45,19 +50,41 @@ namespace RevolvingCredit.Entity.Model
 		public double EndBalance { get; }
 
 		/// <inheritdoc />
-		IList<IAccountPayment> IAccountStatement.Payments => Mapper.Map<IList<IAccountPayment>>(Payments);
-
-		/// <inheritdoc />
 		public double Fee { get; }
 
 		/// <inheritdoc />
 		public double Interest { get; }
+
+#region EF - Navigation
+
+		/// <inheritdoc />
+		IAccount IAccountStatement.Account => Mapper.Map<IAccount>(Account);
+
+#endregion
+
+		/// <inheritdoc />
+		IAccountPayment IAccountStatement.MinimumPayment => Mapper.Map<IAccountPayment>(MinimumPayment);
+
+		/// <inheritdoc />
+		IList<IAccountPayment> IAccountStatement.Payments => Mapper.Map<IList<IAccountPayment>>(Payments);
 
 		/// <inheritdoc />
 		IAccountAPR IAccountStatement.CashAPR => Mapper.Map<IAccountAPR>(CashAPR);
 
 		/// <inheritdoc />
 		IAccountAPR IAccountStatement.CreditAPR => Mapper.Map<IAccountAPR>(CreditAPR);
+
+#endregion
+
+#region EF - Navigation
+
+		/// <summary>
+		/// The account the statement applies to.
+		/// </summary>
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		public virtual Account Account { get; }
 
 #endregion
 

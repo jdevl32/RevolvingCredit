@@ -2,7 +2,6 @@
 using JDevl32.Mapper;
 using RevolvingCredit.Entity.Interface;
 using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace RevolvingCredit.Entity.Model
 {
@@ -12,7 +11,7 @@ namespace RevolvingCredit.Entity.Model
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Extend instance mapper base class.
+	/// Re-engineer using EF navigation properties.
 	/// </remarks>
 	public class AccountPromotion
 		:
@@ -25,22 +24,50 @@ namespace RevolvingCredit.Entity.Model
 
 #region IAccountPromotion
 
-		/// <inheritdoc />
-		public int AccountId { get; }
+#region EF - Primary Key
+
+#region EF - Foreign Key
 
 		/// <inheritdoc />
-		public DateTime Start { get; }
+		public int AccountId { get; set; }
 
 		/// <inheritdoc />
-		public DateTime End { get; }
+		public int TypeId { get; set; }
+
+#endregion
 
 		/// <inheritdoc />
-		IAPR IAccountPromotion.Type => Mapper.Map<IAPR>(Type);
+		public DateTime Start { get; set; }
+
+		/// <inheritdoc />
+		public DateTime End { get; set; }
+
+#endregion
 
 		/// <inheritdoc />
 		public double APR { get; }
 
+#region EF - Navigation
+
+		/// <inheritdoc />
+		IAccount IAccountPromotion.Account => Mapper.Map<IAccount>(Account);
+
+		/// <inheritdoc />
+		IAPR IAccountPromotion.Type => Mapper.Map<IAPR>(Type);
+
 #endregion
+
+#endregion
+
+#region EF - Navigation
+
+		/// <summary>
+		/// The account the promotion applies to.
+		/// </summary>
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		public virtual Account Account { get; }
 
 		/// <summary>
 		/// The APR (type) for the promotion.
@@ -48,8 +75,9 @@ namespace RevolvingCredit.Entity.Model
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		[Required]
-		public APR Type { get; }
+		public virtual APR Type { get; }
+
+#endregion
 
 #endregion
 

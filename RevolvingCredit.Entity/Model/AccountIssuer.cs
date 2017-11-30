@@ -2,7 +2,6 @@
 using JDevl32.Mapper;
 using RevolvingCredit.Entity.Interface;
 using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace RevolvingCredit.Entity.Model
 {
@@ -12,7 +11,7 @@ namespace RevolvingCredit.Entity.Model
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Extend instance mapper base class.
+	/// Re-engineer using EF navigation properties.
 	/// </remarks>
 	public class AccountIssuer
 		:
@@ -25,16 +24,44 @@ namespace RevolvingCredit.Entity.Model
 
 #region IAccountIssuer
 
+#region EF - Primary Key
+
+#region EF - Foreign Key
+
 		/// <inheritdoc />
-		public int AccountId { get; }
+		public int AccountId { get; set; }
+
+		/// <inheritdoc />
+		public int IssuerId { get; set; }
+
+#endregion
+
+		/// <inheritdoc />
+		public DateTime UpdateTimestamp { get; set; }
+
+#endregion
+
+#region EF - Navigation
+
+		/// <inheritdoc />
+		IAccount IAccountIssuer.Account => Mapper.Map<IAccount>(Account);
 
 		/// <inheritdoc />
 		IIssuer IAccountIssuer.Issuer => Mapper.Map<IIssuer>(Issuer);
 
-		/// <inheritdoc />
-		public DateTime UpdateTimestamp { get; }
+#endregion
 
 #endregion
+
+#region EF - Navigation
+
+		/// <summary>
+		/// The account the issuer applies to.
+		/// </summary>
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		public virtual Account Account { get; }
 
 		/// <summary>
 		/// The issuer of the account.
@@ -42,8 +69,9 @@ namespace RevolvingCredit.Entity.Model
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		[Required]
-		public Issuer Issuer { get; }
+		public virtual Issuer Issuer { get; }
+
+#endregion
 
 #endregion
 

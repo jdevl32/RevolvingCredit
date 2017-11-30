@@ -41,10 +41,10 @@ namespace _MigrateDatabase.Profile
 				.ConstructUsing(source => new AccountLine(source.Mapper))
 				.ReverseMap();
 			CreateMap<AccountNote, IAccountNote>()
-				.ConstructUsing(source => new AccountNote())
+				.ConstructUsing(source => new AccountNote(source.Mapper))
 				.ReverseMap();
 			CreateMap<AccountPayment, IAccountPayment>()
-				.ConstructUsing(source => new AccountPayment())
+				.ConstructUsing(source => new AccountPayment(source.Mapper))
 				.ReverseMap();
 			CreateMap<AccountPromotion, IAccountPromotion>()
 				.ConstructUsing(source => new AccountPromotion(source.Mapper))
