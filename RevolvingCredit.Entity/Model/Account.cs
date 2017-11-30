@@ -9,6 +9,7 @@ namespace RevolvingCredit.Entity.Model
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
+	/// Add (EF-required) setters.
 	/// </remarks>
 	public class Account
 		:
@@ -22,7 +23,7 @@ namespace RevolvingCredit.Entity.Model
 #region IAccount
 
 		/// <inheritdoc />
-		public short SafeAccountNumber { get; }
+		public short SafeAccountNumber { get; set; }
 
 #endregion
 

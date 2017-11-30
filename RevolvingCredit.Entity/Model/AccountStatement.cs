@@ -13,7 +13,7 @@ namespace RevolvingCredit.Entity.Model
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Re-engineer using EF navigation properties.
+	/// Add (EF-required) setters.
 	/// </remarks>
 	public class AccountStatement
 		:
@@ -31,7 +31,7 @@ namespace RevolvingCredit.Entity.Model
 #region EF - Foreign Key
 
 		/// <inheritdoc />
-		public int AccountId { get; set; }
+		public Guid AccountId { get; set; }
 
 #endregion
 
@@ -41,19 +41,19 @@ namespace RevolvingCredit.Entity.Model
 #endregion
 
 		/// <inheritdoc />
-		public DateTime Start { get; }
+		public DateTime Start { get; set; }
 
 		/// <inheritdoc />
-		public double StartBalance { get; }
+		public double StartBalance { get; set; }
 
 		/// <inheritdoc />
-		public double EndBalance { get; }
+		public double EndBalance { get; set; }
 
 		/// <inheritdoc />
-		public double Fee { get; }
+		public double Fee { get; set; }
 
 		/// <inheritdoc />
-		public double Interest { get; }
+		public double Interest { get; set; }
 
 #region EF - Navigation
 

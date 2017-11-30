@@ -11,8 +11,7 @@ namespace RevolvingCredit.Entity.Model
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Extend instance mapper base class.
-	/// Re-engineer using EF navigation properties.
+	/// Add (EF-required) setters.
 	/// </remarks>
 	public class AccountPayment
 		:
@@ -30,7 +29,7 @@ namespace RevolvingCredit.Entity.Model
 #region EF - Foreign Key
 
 		/// <inheritdoc />
-		public int AccountId { get; set; }
+		public Guid AccountId { get; set; }
 
 		/// <inheritdoc />
 		public int TypeId { get; set; }
@@ -43,7 +42,7 @@ namespace RevolvingCredit.Entity.Model
 #endregion
 
 		/// <inheritdoc />
-		public double Amount { get; }
+		public double Amount { get; set; }
 
 #region EF - Navigation
 

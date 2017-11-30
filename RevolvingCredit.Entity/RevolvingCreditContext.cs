@@ -213,12 +213,57 @@ namespace RevolvingCredit.Entity
 							accountStatement.End
 						}
 				);
+			/**
 			modelBuilder.Entity<Account>().HasKey(account => account.Id);
 			modelBuilder.Entity<APR>().HasKey(apr => apr.Id);
 			modelBuilder.Entity<Issuer>().HasKey(issuer => issuer.Id);
 			modelBuilder.Entity<Label>().HasKey(label => label.Id);
-			modelBuilder.Entity<Line>().HasKey(line => line.Id);
-			modelBuilder.Entity<Payment>().HasKey(payment => payment.Id);
+			var lineBuilder = modelBuilder.Entity<Line>();
+			lineBuilder.HasKey(line => line.Id);
+			var paymentBuilder = modelBuilder.Entity<Payment>();
+			Expression<Func<Payment, object>> paymentExpression = payment => payment.Id;
+			paymentBuilder.HasKey(paymentExpression);
+
+			EntityTypeBuilder[] builder =
+			{
+				lineBuilder
+				,
+				paymentBuilder
+			};
+
+			foreach (var entityTypeBuilder in builder)
+			{
+				entityTypeBuilder
+					.HasKey("Id")
+					;
+				entityTypeBuilder
+					.Property<string>("ShortName")
+					.IsRequired()
+					;
+				entityTypeBuilder
+					.Property<string>("LongName")
+					.IsRequired(false)
+					;
+				entityTypeBuilder
+					.Property<string>("Description")
+					.IsRequired(false)
+					;
+			} // foreach
+			**/
+
+			//var x = new Dictionary<EntityTypeBuilder, Expression>();
+			//x.Add(paymentBuilder, paymentExpression);
+
+			//paymentBuilder
+			//	//.HasBaseType<UniqueBase>()
+			//	.HasKey(paymentExpression)
+			//	;
+
+			//foreach (var i in x)
+			//{
+			//	i.Key.HasKey(i.Value);
+			//} // foreach
+
 			base.OnModelCreating(modelBuilder);
 		}
 

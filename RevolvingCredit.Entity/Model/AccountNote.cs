@@ -30,7 +30,7 @@ namespace RevolvingCredit.Entity.Model
 #region EF - Foreign Key
 
 		/// <inheritdoc />
-		public int AccountId { get; set; }
+		public Guid AccountId { get; set; }
 
 #endregion
 
@@ -40,7 +40,7 @@ namespace RevolvingCredit.Entity.Model
 #endregion
 
 		/// <inheritdoc />
-		public string Note { get; }
+		public string Contents { get; set; }
 
 #region EF - Navigation
 

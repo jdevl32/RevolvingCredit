@@ -12,6 +12,7 @@ namespace RevolvingCredit.Entity.Model
 	/// <remarks>
 	/// Last modification:
 	/// Re-engineer using EF navigation properties.
+	/// Add (EF-required) setters.
 	/// </remarks>
 	public class AccountLine
 		:
@@ -29,7 +30,7 @@ namespace RevolvingCredit.Entity.Model
 #region EF - Foreign Key
 
 		/// <inheritdoc />
-		public int AccountId { get; set; }
+		public Guid AccountId { get; set; }
 
 		/// <inheritdoc />
 		public int LineId { get; set; }
@@ -42,7 +43,7 @@ namespace RevolvingCredit.Entity.Model
 #endregion
 
 		/// <inheritdoc />
-		public double Limit { get; }
+		public double Limit { get; set; }
 
 #region EF - Navigation
 

@@ -29,7 +29,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// Add (EF-required) setter.
 		/// </remarks>
 		[Required]
-		int AccountId { get; set; }
+		Guid AccountId { get; set; }
 
 #endregion
 
@@ -50,43 +50,48 @@ namespace RevolvingCredit.Entity.Interface
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
+		/// Add (EF-required) setter.
 		/// </remarks>
 		[Required]
-		DateTime Start { get; }
+		DateTime Start { get; set; }
 
 		/// <summary>
 		/// The starting balance of the statement.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
+		/// Add (EF-required) setter.
 		/// </remarks>
 		[Required]
-		double StartBalance { get; }
+		double StartBalance { get; set; }
 
 		/// <summary>
 		/// The ending balance of the statement.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
+		/// Add (EF-required) setter.
 		/// </remarks>
 		[Required]
-		double EndBalance { get; }
+		double EndBalance { get; set; }
 
 		/// <summary>
 		/// The fee reported for the statement.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
+		/// Add (EF-required) setter.
 		/// </remarks>
-		double Fee { get; }
+		double Fee { get; set; }
 
 		/// <summary>
 		/// The interest reported for the statement.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
+		/// Add (EF-required) setter.
 		/// </remarks>
-		double Interest { get; }
+		double Interest { get; set; }
 
 #region EF - Navigation
 

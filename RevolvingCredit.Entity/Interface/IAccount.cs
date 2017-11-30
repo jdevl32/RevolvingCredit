@@ -1,4 +1,5 @@
 ﻿using JDevl32.Entity.Interface;
+using System.ComponentModel.DataAnnotations;
 
 namespace RevolvingCredit.Entity.Interface
 {
@@ -8,7 +9,7 @@ namespace RevolvingCredit.Entity.Interface
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Reset base as global unique.
+	/// Add (EF-required) setters.
 	/// </remarks>
 	public interface IAccount
 		:
@@ -24,7 +25,8 @@ namespace RevolvingCredit.Entity.Interface
 		/// This should only ever contain the last four digits of the actual (full) account number.
 		/// Last modification:
 		/// </remarks>
-		short SafeAccountNumber { get; }
+		[Required(AllowEmptyStrings = false)]
+		short SafeAccountNumber { get; set; }
 
 #endregion
 

@@ -28,7 +28,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// Add (EF-required) setter.
 		/// </remarks>
 		[Required]
-		int AccountId { get; set; }
+		Guid AccountId { get; set; }
 
 		/// <summary>
 		/// The id of the label for the account.

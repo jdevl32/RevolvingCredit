@@ -29,7 +29,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// Add (EF-required) setter.
 		/// </remarks>
 		[Required]
-		int AccountId { get; set; }
+		Guid AccountId { get; set; }
 
 		/// <summary>
 		/// The id of the payment (type).
@@ -60,9 +60,10 @@ namespace RevolvingCredit.Entity.Interface
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
+		/// Add (EF-required) setter.
 		/// </remarks>
 		[Required]
-		double Amount { get; }
+		double Amount { get; set; }
 
 #region EF - Navigation
 

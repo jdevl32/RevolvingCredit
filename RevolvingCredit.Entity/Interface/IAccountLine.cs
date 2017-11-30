@@ -28,7 +28,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// Add (EF-required) setter.
 		/// </remarks>
 		[Required]
-		int AccountId { get; set; }
+		Guid AccountId { get; set; }
 
 		/// <summary>
 		/// The id of the line (type) on the account.
@@ -59,9 +59,10 @@ namespace RevolvingCredit.Entity.Interface
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
+		/// Add (EF-required) setter.
 		/// </remarks>
 		[Required]
-		double Limit { get; }
+		double Limit { get; set; }
 
 #region EF - Navigation
 

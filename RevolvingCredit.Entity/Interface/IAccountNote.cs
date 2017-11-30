@@ -28,7 +28,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// Add (EF-required) setter.
 		/// </remarks>
 		[Required]
-		int AccountId { get; set; }
+		Guid AccountId { get; set; }
 
 #endregion
 
@@ -45,12 +45,13 @@ namespace RevolvingCredit.Entity.Interface
 #endregion
 
 		/// <summary>
-		/// The note on the account.
+		/// The note (contents) on the account.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
+		/// Add (EF-required) setter.
 		/// </remarks>
-		string Note { get; }
+		string Contents { get; set; }
 
 #region EF - Navigation
 

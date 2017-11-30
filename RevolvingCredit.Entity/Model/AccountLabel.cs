@@ -29,7 +29,7 @@ namespace RevolvingCredit.Entity.Model
 #region EF - Foreign Key
 
 		/// <inheritdoc />
-		public int AccountId { get; set; }
+		public Guid AccountId { get; set; }
 
 		/// <inheritdoc />
 		public int LabelId { get; set; }

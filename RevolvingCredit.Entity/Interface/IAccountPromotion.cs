@@ -28,7 +28,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// Add (EF-required) setter.
 		/// </remarks>
 		[Required]
-		int AccountId { get; set; }
+		Guid AccountId { get; set; }
 
 		/// <summary>
 		/// The id of the APR (type) for the promotion.
@@ -69,9 +69,10 @@ namespace RevolvingCredit.Entity.Interface
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
+		/// Add (EF-required) setter.
 		/// </remarks>
 		[Required]
-		double APR { get; }
+		double APR { get; set; }
 
 #region EF - Navigation
 
