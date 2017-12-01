@@ -127,6 +127,9 @@ namespace RevolvingCredit.Entity
 #region DbContext
 
 		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<AccountAPR>()
@@ -141,7 +144,7 @@ namespace RevolvingCredit.Entity
 							accountAPR.UpdateTimestamp
 						}
 					)
-					;
+			;
 			modelBuilder.Entity<AccountIssuer>()
 				.HasKey
 					(
@@ -154,7 +157,7 @@ namespace RevolvingCredit.Entity
 							accountIssuer.UpdateTimestamp
 						}
 					)
-					;
+			;
 			modelBuilder.Entity<AccountLabel>()
 				.HasKey
 					(
@@ -167,7 +170,7 @@ namespace RevolvingCredit.Entity
 							accountLabel.UpdateTimestamp
 						}
 					)
-					;
+			;
 			modelBuilder.Entity<AccountLine>()
 				.HasKey
 					(
@@ -180,7 +183,7 @@ namespace RevolvingCredit.Entity
 							accountLine.UpdateTimestamp
 						}
 					)
-					;
+			;
 			modelBuilder.Entity<AccountNote>()
 				.HasKey
 					(
@@ -191,7 +194,7 @@ namespace RevolvingCredit.Entity
 							accountNote.UpdateTimestamp
 						}
 					)
-					;
+			;
 			modelBuilder.Entity<AccountPayment>()
 				.HasKey
 					(
@@ -202,7 +205,7 @@ namespace RevolvingCredit.Entity
 							accountPayment.Due
 						}
 					)
-					;
+			;
 			modelBuilder.Entity<AccountPromotion>()
 				.HasKey
 					(
@@ -217,72 +220,41 @@ namespace RevolvingCredit.Entity
 							accountPromotion.End
 						}
 					)
-					;
-			modelBuilder.Entity<AccountStatement>()
-				.HasKey
+			;
+			modelBuilder.Entity<AccountStatement>().HasKey
 					(
-						accountStatement => new
+						accountStatement => (new
 						{
 							accountStatement.AccountId
 							,
 							accountStatement.End
-						}
+						})
 					)
-					;
+			;
 			/**
-			modelBuilder.Entity<AccountStatement>()
-				.HasOne<Account>()
-				.WithMany<AccountStatement>();
-			modelBuilder.Entity<Account>().HasKey(account => account.Id);
-			modelBuilder.Entity<APR>().HasKey(apr => apr.Id);
-			modelBuilder.Entity<Issuer>().HasKey(issuer => issuer.Id);
-			modelBuilder.Entity<Label>().HasKey(label => label.Id);
-			var lineBuilder = modelBuilder.Entity<Line>();
-			lineBuilder.HasKey(line => line.Id);
-			var paymentBuilder = modelBuilder.Entity<Payment>();
-			Expression<Func<Payment, object>> paymentExpression = payment => payment.Id;
-			paymentBuilder.HasKey(paymentExpression);
-
-			EntityTypeBuilder[] builder =
-			{
-				lineBuilder
-				,
-				paymentBuilder
-			};
-
-			foreach (var entityTypeBuilder in builder)
-			{
-				entityTypeBuilder
-					.HasKey("Id")
-					;
-				entityTypeBuilder
-					.Property<string>("ShortName")
-					.IsRequired()
-					;
-				entityTypeBuilder
-					.Property<string>("LongName")
-					.IsRequired(false)
-					;
-				entityTypeBuilder
-					.Property<string>("Description")
-					.IsRequired(false)
-					;
-			} // foreach
+			// Define one-to-one relationship between account statement and minimum payment.
+			accountStatementBuilder
+				.HasOne
+					(
+						accountStatement => accountStatement.MinimumPayment
+					)
+				.WithOne
+					(
+						accountPayment => accountPayment.Statement
+					)
+			;
+			// Define one-to-many relationship between account statement and payments.
+			accountStatementBuilder
+				.HasMany
+					(
+						accountStatement => accountStatement.Payments
+					)
+				.WithOne
+					(
+						accountPayment => accountPayment.Statement
+					)
+			;
 			**/
-
-			//var x = new Dictionary<EntityTypeBuilder, Expression>();
-			//x.Add(paymentBuilder, paymentExpression);
-
-			//paymentBuilder
-			//	//.HasBaseType<UniqueBase>()
-			//	.HasKey(paymentExpression)
-			//	;
-
-			//foreach (var i in x)
-			//{
-			//	i.Key.HasKey(i.Value);
-			//} // foreach
-
 			base.OnModelCreating(modelBuilder);
 		}
 

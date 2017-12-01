@@ -99,14 +99,17 @@ namespace RevolvingCredit.Entity.Interface
 		/// </remarks>
 		IAccount Account { get; set; }
 
+#endregion
+
 		// todo|jdevl32: shouldn't this come from account-payment ???
 		/// <summary>
 		/// The minimum payment for the statement.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
+		/// Add not-mapped annotation.
 		/// </remarks>
-		//[NotMapped]
+		[NotMapped]
 		IAccountPayment MinimumPayment { get; set; }
 
 		// todo|jdevl32: shouldn't this come from account-payment ???
@@ -115,8 +118,9 @@ namespace RevolvingCredit.Entity.Interface
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
+		/// Add not-mapped annotation.
 		/// </remarks>
-		//[NotMapped]
+		[NotMapped]
 		IList<IAccountPayment> Payments { get; set; }
 
 		// todo|jdevl32: shouldn't this come from account-apr ???
@@ -125,8 +129,9 @@ namespace RevolvingCredit.Entity.Interface
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
+		/// Add not-mapped annotation.
 		/// </remarks>
-		//[NotMapped]
+		[NotMapped]
 		IAccountAPR CashAPR { get; set; }
 
 		// todo|jdevl32: shouldn't this come from account-apr ???
@@ -135,11 +140,10 @@ namespace RevolvingCredit.Entity.Interface
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
+		/// Add not-mapped annotation.
 		/// </remarks>
-		//[NotMapped]
+		[NotMapped]
 		IAccountAPR CreditAPR { get; set; }
-
-#endregion
 
 #endregion
 

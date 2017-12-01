@@ -10,7 +10,7 @@ namespace RevolvingCredit.Entity.Interface
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Add account statement (EF navigation property).
+	/// Re-implement account statement (not as EF navigation property).
 	/// </remarks>
 	public interface IAccountPayment
 	{
@@ -81,15 +81,17 @@ namespace RevolvingCredit.Entity.Interface
 		/// </remarks>
 		IPayment Type { get; set; }
 
+#endregion
+
 		/// <summary>
 		/// The account statement the payment applies to.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
+		/// Add not-mapped annotation.
 		/// </remarks>
+		[NotMapped]
 		IAccountStatement Statement { get; set; }
-
-#endregion
 
 #endregion
 

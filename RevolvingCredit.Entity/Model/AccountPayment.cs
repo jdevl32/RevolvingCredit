@@ -2,6 +2,7 @@
 using JDevl32.Mapper;
 using RevolvingCredit.Entity.Interface;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RevolvingCredit.Entity.Model
 {
@@ -11,7 +12,7 @@ namespace RevolvingCredit.Entity.Model
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Add account statement (EF navigation property).
+	/// Re-implement account statement (not as EF navigation property).
 	/// </remarks>
 	public class AccountPayment
 		:
@@ -60,14 +61,14 @@ namespace RevolvingCredit.Entity.Model
 			set => Mapper.Map<Payment>(value);
 		}
 
+#endregion
+
 		/// <inheritdoc />
 		IAccountStatement IAccountPayment.Statement
 		{
 			get => Mapper.Map<IAccountStatement>(Statement);
 			set => Mapper.Map<AccountStatement>(value);
 		}
-
-#endregion
 
 #endregion
 
@@ -89,15 +90,17 @@ namespace RevolvingCredit.Entity.Model
 		/// </remarks>
 		public virtual Payment Type { get; set; }
 
+#endregion
+
 		/// <summary>
 		/// The account statement the payment applies to.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
+		/// Add not-mapped annotation.
 		/// </remarks>
+		[NotMapped]
 		public virtual AccountStatement Statement { get; set; }
-
-#endregion
 
 #endregion
 
