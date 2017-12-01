@@ -129,9 +129,10 @@ namespace RevolvingCredit.Entity
 		/// <inheritdoc />
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			modelBuilder.Entity<AccountAPR>().HasKey
-				(
-					accountAPR => new
+			modelBuilder.Entity<AccountAPR>()
+				.HasKey
+					(
+						accountAPR => new
 						{
 							accountAPR.AccountId
 							,
@@ -139,10 +140,12 @@ namespace RevolvingCredit.Entity
 							,
 							accountAPR.UpdateTimestamp
 						}
-				);
-			modelBuilder.Entity<AccountIssuer>().HasKey
-				(
-					accountIssuer => new
+					)
+					;
+			modelBuilder.Entity<AccountIssuer>()
+				.HasKey
+					(
+						accountIssuer => new
 						{
 							accountIssuer.AccountId
 							,
@@ -150,10 +153,12 @@ namespace RevolvingCredit.Entity
 							,
 							accountIssuer.UpdateTimestamp
 						}
-				);
-			modelBuilder.Entity<AccountLabel>().HasKey
-				(
-					accountLabel => new
+					)
+					;
+			modelBuilder.Entity<AccountLabel>()
+				.HasKey
+					(
+						accountLabel => new
 						{
 							accountLabel.AccountId
 							,
@@ -161,10 +166,12 @@ namespace RevolvingCredit.Entity
 							,
 							accountLabel.UpdateTimestamp
 						}
-				);
-			modelBuilder.Entity<AccountLine>().HasKey
-				(
-					accountLine => new
+					)
+					;
+			modelBuilder.Entity<AccountLine>()
+				.HasKey
+					(
+						accountLine => new
 						{
 							accountLine.AccountId
 							,
@@ -172,28 +179,34 @@ namespace RevolvingCredit.Entity
 							,
 							accountLine.UpdateTimestamp
 						}
-				);
-			modelBuilder.Entity<AccountNote>().HasKey
-				(
-					accountNote => new
+					)
+					;
+			modelBuilder.Entity<AccountNote>()
+				.HasKey
+					(
+						accountNote => new
 						{
 							accountNote.AccountId
 							,
 							accountNote.UpdateTimestamp
 						}
-				);
-			modelBuilder.Entity<AccountPayment>().HasKey
-				(
-					accountPayment => new
+					)
+					;
+			modelBuilder.Entity<AccountPayment>()
+				.HasKey
+					(
+						accountPayment => new
 						{
 							accountPayment.AccountId
 							,
 							accountPayment.Due
 						}
-				);
-			modelBuilder.Entity<AccountPromotion>().HasKey
-				(
-					accountPromotion => new
+					)
+					;
+			modelBuilder.Entity<AccountPromotion>()
+				.HasKey
+					(
+						accountPromotion => new
 						{
 							accountPromotion.AccountId
 							,
@@ -203,7 +216,8 @@ namespace RevolvingCredit.Entity
 							,
 							accountPromotion.End
 						}
-				);
+					)
+					;
 			modelBuilder.Entity<AccountStatement>()
 				.HasKey
 					(

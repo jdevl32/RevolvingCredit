@@ -11,7 +11,7 @@ namespace RevolvingCredit.Entity.Model
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Add (EF-required) setters.
+	/// Add account statement (EF navigation property).
 	/// </remarks>
 	public class AccountPayment
 		:
@@ -60,6 +60,13 @@ namespace RevolvingCredit.Entity.Model
 			set => Mapper.Map<Payment>(value);
 		}
 
+		/// <inheritdoc />
+		IAccountStatement IAccountPayment.Statement
+		{
+			get => Mapper.Map<IAccountStatement>(Statement);
+			set => Mapper.Map<AccountStatement>(value);
+		}
+
 #endregion
 
 #endregion
@@ -81,6 +88,14 @@ namespace RevolvingCredit.Entity.Model
 		/// Last modification:
 		/// </remarks>
 		public virtual Payment Type { get; set; }
+
+		/// <summary>
+		/// The account statement the payment applies to.
+		/// </summary>
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		public virtual AccountStatement Statement { get; set; }
 
 #endregion
 

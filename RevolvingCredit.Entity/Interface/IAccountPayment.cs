@@ -10,8 +10,7 @@ namespace RevolvingCredit.Entity.Interface
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Add foreign key annotations.
-	/// Add (EF-required) setters.
+	/// Add account statement (EF navigation property).
 	/// </remarks>
 	public interface IAccountPayment
 	{
@@ -81,6 +80,14 @@ namespace RevolvingCredit.Entity.Interface
 		/// Last modification:
 		/// </remarks>
 		IPayment Type { get; set; }
+
+		/// <summary>
+		/// The account statement the payment applies to.
+		/// </summary>
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		IAccountStatement Statement { get; set; }
 
 #endregion
 
