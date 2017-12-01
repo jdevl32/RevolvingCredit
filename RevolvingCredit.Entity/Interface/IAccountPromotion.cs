@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RevolvingCredit.Entity.Interface
 {
@@ -9,7 +10,8 @@ namespace RevolvingCredit.Entity.Interface
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Re-engineer using EF navigation properties.
+	/// Add foreign key annotations.
+	/// Add (EF-required) setters.
 	/// </remarks>
 	public interface IAccountPromotion
 	{
@@ -25,8 +27,8 @@ namespace RevolvingCredit.Entity.Interface
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
-		/// Add (EF-required) setter.
 		/// </remarks>
+		[ForeignKey("Account")]
 		[Required]
 		Guid AccountId { get; set; }
 
@@ -35,8 +37,8 @@ namespace RevolvingCredit.Entity.Interface
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
-		/// Add (EF-required) setter.
 		/// </remarks>
+		[ForeignKey("Type")]
 		[Required]
 		int TypeId { get; set; }
 
@@ -47,7 +49,6 @@ namespace RevolvingCredit.Entity.Interface
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
-		/// Add (EF-required) setter.
 		/// </remarks>
 		[Required]
 		DateTime Start { get; set; }
@@ -57,7 +58,6 @@ namespace RevolvingCredit.Entity.Interface
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
-		/// Add (EF-required) setter.
 		/// </remarks>
 		[Required]
 		DateTime End { get; set; }
@@ -69,7 +69,6 @@ namespace RevolvingCredit.Entity.Interface
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
-		/// Add (EF-required) setter.
 		/// </remarks>
 		[Required]
 		double APR { get; set; }
@@ -82,7 +81,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		IAccount Account { get; }
+		IAccount Account { get; set; }
 
 		/// <summary>
 		/// The APR (type) for the promotion.
@@ -90,7 +89,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		IAPR Type { get; }
+		IAPR Type { get; set; }
 
 #endregion
 

@@ -11,8 +11,7 @@ namespace RevolvingCredit.Entity.Model
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Extend instance mapper base class.
-	/// Re-engineer using EF navigation properties.
+	/// Add (EF-required) setters.
 	/// </remarks>
 	public class AccountNote
 		:
@@ -45,7 +44,11 @@ namespace RevolvingCredit.Entity.Model
 #region EF - Navigation
 
 		/// <inheritdoc />
-		IAccount IAccountNote.Account => Mapper.Map<IAccount>(Account);
+		IAccount IAccountNote.Account
+		{
+			get => Mapper.Map<IAccount>(Account);
+			set => Mapper.Map<Account>(value);
+		}
 
 #endregion
 
@@ -59,7 +62,7 @@ namespace RevolvingCredit.Entity.Model
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		public virtual Account Account { get; }
+		public virtual Account Account { get; set; }
 
 #endregion
 

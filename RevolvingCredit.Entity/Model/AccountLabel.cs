@@ -11,7 +11,7 @@ namespace RevolvingCredit.Entity.Model
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Re-engineer using EF navigation properties.
+	/// Add (EF-required) setters.
 	/// </remarks>
 	public class AccountLabel
 		:
@@ -44,10 +44,18 @@ namespace RevolvingCredit.Entity.Model
 #region EF - Navigation
 
 		/// <inheritdoc />
-		IAccount IAccountLabel.Account => Mapper.Map<IAccount>(Account);
+		IAccount IAccountLabel.Account
+		{
+			get => Mapper.Map<IAccount>(Account);
+			set => Mapper.Map<Account>(value);
+		}
 
 		/// <inheritdoc />
-		ILabel IAccountLabel.Label => Mapper.Map<ILabel>(Label);
+		ILabel IAccountLabel.Label
+		{
+			get => Mapper.Map<ILabel>(Label);
+			set => Mapper.Map<Label>(value);
+		}
 
 #endregion
 
@@ -61,7 +69,7 @@ namespace RevolvingCredit.Entity.Model
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		public virtual Account Account { get; }
+		public virtual Account Account { get; set; }
 
 		/// <summary>
 		/// The label for the account.
@@ -69,7 +77,7 @@ namespace RevolvingCredit.Entity.Model
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		public virtual Label Label { get; }
+		public virtual Label Label { get; set; }
 
 #endregion
 

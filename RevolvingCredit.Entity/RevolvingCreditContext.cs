@@ -204,16 +204,21 @@ namespace RevolvingCredit.Entity
 							accountPromotion.End
 						}
 				);
-			modelBuilder.Entity<AccountStatement>().HasKey
-				(
-					accountStatement => new
+			modelBuilder.Entity<AccountStatement>()
+				.HasKey
+					(
+						accountStatement => new
 						{
 							accountStatement.AccountId
 							,
 							accountStatement.End
 						}
-				);
+					)
+					;
 			/**
+			modelBuilder.Entity<AccountStatement>()
+				.HasOne<Account>()
+				.WithMany<AccountStatement>();
 			modelBuilder.Entity<Account>().HasKey(account => account.Id);
 			modelBuilder.Entity<APR>().HasKey(apr => apr.Id);
 			modelBuilder.Entity<Issuer>().HasKey(issuer => issuer.Id);

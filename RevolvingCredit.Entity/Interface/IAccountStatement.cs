@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RevolvingCredit.Entity.Interface
 {
@@ -10,7 +11,8 @@ namespace RevolvingCredit.Entity.Interface
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Re-engineer using EF navigation properties.
+	/// Add foreign key annotations.
+	/// Add (EF-required) setters.
 	/// </remarks>
 	public interface IAccountStatement
 	{
@@ -26,8 +28,8 @@ namespace RevolvingCredit.Entity.Interface
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
-		/// Add (EF-required) setter.
 		/// </remarks>
+		[ForeignKey("Account")]
 		[Required]
 		Guid AccountId { get; set; }
 
@@ -38,7 +40,6 @@ namespace RevolvingCredit.Entity.Interface
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
-		/// Add (EF-required) setter.
 		/// </remarks>
 		[Required]
 		DateTime End { get; set; }
@@ -50,7 +51,6 @@ namespace RevolvingCredit.Entity.Interface
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
-		/// Add (EF-required) setter.
 		/// </remarks>
 		[Required]
 		DateTime Start { get; set; }
@@ -60,7 +60,6 @@ namespace RevolvingCredit.Entity.Interface
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
-		/// Add (EF-required) setter.
 		/// </remarks>
 		[Required]
 		double StartBalance { get; set; }
@@ -70,7 +69,6 @@ namespace RevolvingCredit.Entity.Interface
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
-		/// Add (EF-required) setter.
 		/// </remarks>
 		[Required]
 		double EndBalance { get; set; }
@@ -80,7 +78,6 @@ namespace RevolvingCredit.Entity.Interface
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
-		/// Add (EF-required) setter.
 		/// </remarks>
 		double Fee { get; set; }
 
@@ -89,7 +86,6 @@ namespace RevolvingCredit.Entity.Interface
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
-		/// Add (EF-required) setter.
 		/// </remarks>
 		double Interest { get; set; }
 
@@ -101,7 +97,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		IAccount Account { get; }
+		IAccount Account { get; set; }
 
 		// todo|jdevl32: shouldn't this come from account-payment ???
 		/// <summary>
@@ -111,7 +107,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// Last modification:
 		/// </remarks>
 		//[NotMapped]
-		IAccountPayment MinimumPayment { get; }
+		IAccountPayment MinimumPayment { get; set; }
 
 		// todo|jdevl32: shouldn't this come from account-payment ???
 		/// <summary>
@@ -121,7 +117,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// Last modification:
 		/// </remarks>
 		//[NotMapped]
-		IList<IAccountPayment> Payments { get; }
+		IList<IAccountPayment> Payments { get; set; }
 
 		// todo|jdevl32: shouldn't this come from account-apr ???
 		/// <summary>
@@ -131,7 +127,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// Last modification:
 		/// </remarks>
 		//[NotMapped]
-		IAccountAPR CashAPR { get; }
+		IAccountAPR CashAPR { get; set; }
 
 		// todo|jdevl32: shouldn't this come from account-apr ???
 		/// <summary>
@@ -141,7 +137,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// Last modification:
 		/// </remarks>
 		//[NotMapped]
-		IAccountAPR CreditAPR { get; }
+		IAccountAPR CreditAPR { get; set; }
 
 #endregion
 

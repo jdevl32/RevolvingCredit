@@ -11,7 +11,7 @@ namespace RevolvingCredit.Entity.Model
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Re-engineer using EF navigation properties.
+	/// Add (EF-required) setters.
 	/// </remarks>
 	public class AccountIssuer
 		:
@@ -44,10 +44,18 @@ namespace RevolvingCredit.Entity.Model
 #region EF - Navigation
 
 		/// <inheritdoc />
-		IAccount IAccountIssuer.Account => Mapper.Map<IAccount>(Account);
+		IAccount IAccountIssuer.Account
+		{
+			get => Mapper.Map<IAccount>(Account);
+			set => Mapper.Map<Account>(value);
+		}
 
 		/// <inheritdoc />
-		IIssuer IAccountIssuer.Issuer => Mapper.Map<IIssuer>(Issuer);
+		IIssuer IAccountIssuer.Issuer
+		{
+			get => Mapper.Map<IIssuer>(Issuer);
+			set => Mapper.Map<Issuer>(value);
+		}
 
 #endregion
 
@@ -61,7 +69,7 @@ namespace RevolvingCredit.Entity.Model
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		public virtual Account Account { get; }
+		public virtual Account Account { get; set; }
 
 		/// <summary>
 		/// The issuer of the account.
@@ -69,7 +77,7 @@ namespace RevolvingCredit.Entity.Model
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		public virtual Issuer Issuer { get; }
+		public virtual Issuer Issuer { get; set; }
 
 #endregion
 

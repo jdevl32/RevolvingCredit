@@ -58,21 +58,41 @@ namespace RevolvingCredit.Entity.Model
 #region EF - Navigation
 
 		/// <inheritdoc />
-		IAccount IAccountStatement.Account => Mapper.Map<IAccount>(Account);
+		IAccount IAccountStatement.Account
+		{
+			get => Mapper.Map<IAccount>(Account);
+			set => Mapper.Map<Account>(value);
+		}
+
+		/// <inheritdoc />
+		IAccountPayment IAccountStatement.MinimumPayment
+		{
+			get => Mapper.Map<IAccountPayment>(MinimumPayment);
+			set => Mapper.Map<AccountPayment>(value);
+		}
+
+		/// <inheritdoc />
+		IList<IAccountPayment> IAccountStatement.Payments
+		{
+			get => Mapper.Map<IList<IAccountPayment>>(Payments);
+			set => Mapper.Map<AccountPayment>(value);
+		}
+
+		/// <inheritdoc />
+		IAccountAPR IAccountStatement.CashAPR
+		{
+			get => Mapper.Map<IAccountAPR>(CashAPR);
+			set => Mapper.Map<AccountAPR>(value);
+		}
+
+		/// <inheritdoc />
+		IAccountAPR IAccountStatement.CreditAPR
+		{
+			get => Mapper.Map<IAccountAPR>(CreditAPR);
+			set => Mapper.Map<AccountAPR>(value);
+		}
 
 #endregion
-
-		/// <inheritdoc />
-		IAccountPayment IAccountStatement.MinimumPayment => Mapper.Map<IAccountPayment>(MinimumPayment);
-
-		/// <inheritdoc />
-		IList<IAccountPayment> IAccountStatement.Payments => Mapper.Map<IList<IAccountPayment>>(Payments);
-
-		/// <inheritdoc />
-		IAccountAPR IAccountStatement.CashAPR => Mapper.Map<IAccountAPR>(CashAPR);
-
-		/// <inheritdoc />
-		IAccountAPR IAccountStatement.CreditAPR => Mapper.Map<IAccountAPR>(CreditAPR);
 
 #endregion
 
@@ -84,9 +104,7 @@ namespace RevolvingCredit.Entity.Model
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		public virtual Account Account { get; }
-
-#endregion
+		public virtual Account Account { get; set; }
 
 		// todo|jdevl32: shouldn't this come from account-payment ???
 		/// <summary>
@@ -96,7 +114,7 @@ namespace RevolvingCredit.Entity.Model
 		/// Last modification:
 		/// </remarks>
 		[NotMapped]
-		public AccountPayment MinimumPayment { get; }
+		public virtual AccountPayment MinimumPayment { get; set; }
 
 		// todo|jdevl32: shouldn't this come from account-payment ???
 		/// <summary>
@@ -106,7 +124,7 @@ namespace RevolvingCredit.Entity.Model
 		/// Last modification:
 		/// </remarks>
 		[NotMapped]
-		public IList<AccountPayment> Payments { get; }
+		public virtual IList<AccountPayment> Payments { get; set; }
 
 		// todo|jdevl32: shouldn't this come from account-apr ???
 		/// <summary>
@@ -116,7 +134,7 @@ namespace RevolvingCredit.Entity.Model
 		/// Last modification:
 		/// </remarks>
 		[NotMapped]
-		public AccountAPR CashAPR { get; }
+		public virtual AccountAPR CashAPR { get; set; }
 
 		// todo|jdevl32: shouldn't this come from account-apr ???
 		/// <summary>
@@ -126,7 +144,9 @@ namespace RevolvingCredit.Entity.Model
 		/// Last modification:
 		/// </remarks>
 		[NotMapped]
-		public AccountAPR CreditAPR { get; }
+		public virtual AccountAPR CreditAPR { get; set; }
+
+#endregion
 
 #endregion
 

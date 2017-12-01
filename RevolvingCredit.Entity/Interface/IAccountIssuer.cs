@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RevolvingCredit.Entity.Interface
 {
@@ -9,7 +10,8 @@ namespace RevolvingCredit.Entity.Interface
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Re-engineer using EF navigation properties.
+	/// Add foreign key annotations.
+	/// Add (EF-required) setters.
 	/// </remarks>
 	public interface IAccountIssuer
 	{
@@ -25,8 +27,8 @@ namespace RevolvingCredit.Entity.Interface
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
-		/// Add (EF-required) setter.
 		/// </remarks>
+		[ForeignKey("Account")]
 		[Required]
 		Guid AccountId { get; set; }
 
@@ -35,8 +37,8 @@ namespace RevolvingCredit.Entity.Interface
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
-		/// Add (EF-required) setter.
 		/// </remarks>
+		[ForeignKey("Issuer")]
 		[Required]
 		int IssuerId { get; set; }
 
@@ -47,7 +49,6 @@ namespace RevolvingCredit.Entity.Interface
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
-		/// Add (EF-required) setter.
 		/// </remarks>
 		[Required]
 		DateTime UpdateTimestamp { get; set; }
@@ -62,7 +63,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		IAccount Account { get; }
+		IAccount Account { get; set; }
 
 		/// <summary>
 		/// The issuer of the account.
@@ -70,7 +71,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		IIssuer Issuer { get; }
+		IIssuer Issuer { get; set; }
 
 #endregion
 

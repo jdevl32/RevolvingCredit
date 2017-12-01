@@ -50,10 +50,18 @@ namespace RevolvingCredit.Entity.Model
 #region EF - Navigation
 
 		/// <inheritdoc />
-		IAccount IAccountPromotion.Account => Mapper.Map<IAccount>(Account);
+		IAccount IAccountPromotion.Account
+		{
+			get => Mapper.Map<IAccount>(Account);
+			set => Mapper.Map<Account>(value);
+		}
 
 		/// <inheritdoc />
-		IAPR IAccountPromotion.Type => Mapper.Map<IAPR>(Type);
+		IAPR IAccountPromotion.Type
+		{
+			get => Mapper.Map<IAPR>(Type);
+			set => Mapper.Map<APR>(value);
+		}
 
 #endregion
 
@@ -67,7 +75,7 @@ namespace RevolvingCredit.Entity.Model
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		public virtual Account Account { get; }
+		public virtual Account Account { get; set; }
 
 		/// <summary>
 		/// The APR (type) for the promotion.
@@ -75,7 +83,7 @@ namespace RevolvingCredit.Entity.Model
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		public virtual APR Type { get; }
+		public virtual APR Type { get; set; }
 
 #endregion
 

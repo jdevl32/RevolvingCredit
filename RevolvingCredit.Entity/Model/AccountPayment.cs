@@ -47,10 +47,18 @@ namespace RevolvingCredit.Entity.Model
 #region EF - Navigation
 
 		/// <inheritdoc />
-		IAccount IAccountPayment.Account => Mapper.Map<IAccount>(Account);
+		IAccount IAccountPayment.Account
+		{
+			get => Mapper.Map<IAccount>(Account);
+			set => Mapper.Map<Account>(value);
+		}
 
 		/// <inheritdoc />
-		IPayment IAccountPayment.Type => Mapper.Map<IPayment>(Type);
+		IPayment IAccountPayment.Type
+		{
+			get => Mapper.Map<IPayment>(Type);
+			set => Mapper.Map<Payment>(value);
+		}
 
 #endregion
 
@@ -64,7 +72,7 @@ namespace RevolvingCredit.Entity.Model
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		public virtual Account Account { get; }
+		public virtual Account Account { get; set; }
 
 		/// <summary>
 		/// The payment (type).
@@ -72,7 +80,7 @@ namespace RevolvingCredit.Entity.Model
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		public virtual Payment Type { get; }
+		public virtual Payment Type { get; set; }
 
 #endregion
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RevolvingCredit.Entity.Interface
 {
@@ -9,7 +10,8 @@ namespace RevolvingCredit.Entity.Interface
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Re-engineer using EF navigation properties.
+	/// Add foreign key annotations.
+	/// Add (EF-required) setters.
 	/// </remarks>
 	public interface IAccountLine
 	{
@@ -25,8 +27,8 @@ namespace RevolvingCredit.Entity.Interface
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
-		/// Add (EF-required) setter.
 		/// </remarks>
+		[ForeignKey("Account")]
 		[Required]
 		Guid AccountId { get; set; }
 
@@ -35,8 +37,8 @@ namespace RevolvingCredit.Entity.Interface
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
-		/// Add (EF-required) setter.
 		/// </remarks>
+		[ForeignKey("Line")]
 		[Required]
 		int LineId { get; set; }
 
@@ -47,7 +49,6 @@ namespace RevolvingCredit.Entity.Interface
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
-		/// Add (EF-required) setter.
 		/// </remarks>
 		[Required]
 		DateTime UpdateTimestamp { get; set; }
@@ -59,7 +60,6 @@ namespace RevolvingCredit.Entity.Interface
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
-		/// Add (EF-required) setter.
 		/// </remarks>
 		[Required]
 		double Limit { get; set; }
@@ -72,7 +72,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		IAccount Account { get; }
+		IAccount Account { get; set; }
 
 		/// <summary>
 		/// The line (type) on the account.
@@ -80,7 +80,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		ILine Line { get; }
+		ILine Line { get; set; }
 
 #endregion
 
