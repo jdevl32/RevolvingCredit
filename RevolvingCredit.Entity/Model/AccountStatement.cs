@@ -13,7 +13,7 @@ namespace RevolvingCredit.Entity.Model
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Add (EF-required) setters.
+	/// Remove not-mapped annotation (on EF navigation properties).
 	/// </remarks>
 	public class AccountStatement
 		:
@@ -113,7 +113,7 @@ namespace RevolvingCredit.Entity.Model
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		[NotMapped]
+		//[NotMapped]
 		public virtual AccountPayment MinimumPayment { get; set; }
 
 		// todo|jdevl32: shouldn't this come from account-payment ???
@@ -123,7 +123,7 @@ namespace RevolvingCredit.Entity.Model
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		[NotMapped]
+		//[NotMapped]
 		public virtual IList<AccountPayment> Payments { get; set; }
 
 		// todo|jdevl32: shouldn't this come from account-apr ???
@@ -133,7 +133,7 @@ namespace RevolvingCredit.Entity.Model
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		[NotMapped]
+		//[NotMapped]
 		public virtual AccountAPR CashAPR { get; set; }
 
 		// todo|jdevl32: shouldn't this come from account-apr ???
@@ -143,7 +143,7 @@ namespace RevolvingCredit.Entity.Model
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		[NotMapped]
+		//[NotMapped]
 		public virtual AccountAPR CreditAPR { get; set; }
 
 #endregion
