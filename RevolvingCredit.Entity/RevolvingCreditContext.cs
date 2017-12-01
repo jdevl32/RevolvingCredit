@@ -16,7 +16,7 @@ namespace RevolvingCredit.Entity
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Change base class to mapper entity context.
+	/// Add account balance.
 	/// </remarks>
 	public class RevolvingCreditContext
 		:
@@ -65,6 +65,9 @@ namespace RevolvingCredit.Entity
 
 		/// <inheritdoc />
 		public DbSet<AccountAPR> AccountAPR { get; set; }
+
+		/// <inheritdoc />
+		public DbSet<AccountBalance> AccountBalance { get; set; }
 
 		/// <inheritdoc />
 		public DbSet<AccountIssuer> AccountIssuer { get; set; }
@@ -129,6 +132,7 @@ namespace RevolvingCredit.Entity
 		/// <inheritdoc />
 		/// <remarks>
 		/// Last modification:
+		/// Add account balance.
 		/// </remarks>
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
@@ -142,6 +146,17 @@ namespace RevolvingCredit.Entity
 							accountAPR.TypeId
 							,
 							accountAPR.UpdateTimestamp
+						}
+					)
+			;
+			modelBuilder.Entity<AccountBalance>()
+				.HasKey
+					(
+						accountBalance => new
+						{
+							accountBalance.AccountId
+							,
+							accountBalance.Timestamp
 						}
 					)
 			;

@@ -10,8 +10,7 @@ namespace RevolvingCredit.Entity.Interface
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Re-implement entity context interface as generic.
-	/// Change db-set types from interface to class.
+	/// Add account balance.
 	/// </remarks>
 	public interface IRevolvingCreditContext
 		:
@@ -35,6 +34,14 @@ namespace RevolvingCredit.Entity.Interface
 		/// Last modification:
 		/// </remarks>
 		DbSet<AccountAPR> AccountAPR { get; set; }
+
+		/// <summary>
+		/// The account balance table.
+		/// </summary>
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		DbSet<AccountBalance> AccountBalance { get; set; }
 
 		/// <summary>
 		/// The account issuer table.

@@ -11,8 +11,7 @@ namespace RevolvingCredit.Entity.Interface
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Add foreign key annotations.
-	/// Add (EF-required) setters.
+	/// Re-implement account statement balance(s).
 	/// </remarks>
 	public interface IAccountStatement
 	{
@@ -28,21 +27,24 @@ namespace RevolvingCredit.Entity.Interface
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
+		/// Modify foreign key annotation.
 		/// </remarks>
-		[ForeignKey("Account")]
+		[ForeignKey("Account, EndBalance, StartBalance")]
 		[Required]
 		Guid AccountId { get; set; }
-
-#endregion
 
 		/// <summary>
 		/// The end timestamp of the statement.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
+		/// Add foreign key annotation.
 		/// </remarks>
+		[ForeignKey("EndBalance")]
 		[Required]
 		DateTime End { get; set; }
+
+#endregion
 
 #endregion
 
@@ -51,27 +53,35 @@ namespace RevolvingCredit.Entity.Interface
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
+		/// Add foreign key annotation.
 		/// </remarks>
+		[ForeignKey("StartBalance")]
 		[Required]
 		DateTime Start { get; set; }
 
 		/// <summary>
-		/// The starting balance of the statement.
+		/// The starting balance (amount) of the statement.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
+		/// Rename.
+		/// Add not-mapped annotation.
 		/// </remarks>
+		[NotMapped]
 		[Required]
-		double StartBalance { get; set; }
+		double StartBalanceAmount { get; set; }
 
 		/// <summary>
-		/// The ending balance of the statement.
+		/// The ending balance (amount) of the statement.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
+		/// Rename.
+		/// Add not-mapped annotation.
 		/// </remarks>
+		[NotMapped]
 		[Required]
-		double EndBalance { get; set; }
+		double EndBalanceAmount { get; set; }
 
 		/// <summary>
 		/// The fee reported for the statement.
@@ -98,6 +108,22 @@ namespace RevolvingCredit.Entity.Interface
 		/// Last modification:
 		/// </remarks>
 		IAccount Account { get; set; }
+
+		/// <summary>
+		/// The ending balance of the statement.
+		/// </summary>
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		IAccountBalance EndBalance { get; set; }
+
+		/// <summary>
+		/// The starting balance of the statement.
+		/// </summary>
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		IAccountBalance StartBalance { get; set; }
 
 #endregion
 

@@ -22,6 +22,7 @@ namespace _MigrateDatabase.Profile
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
+		/// Add account balance.
 		/// </remarks>
 		public AutoMapperProfile()
 		{
@@ -30,6 +31,9 @@ namespace _MigrateDatabase.Profile
 				.ReverseMap();
 			CreateMap<AccountAPR, IAccountAPR>()
 				.ConstructUsing(source => new AccountAPR(source.Mapper))
+				.ReverseMap();
+			CreateMap<AccountBalance, IAccountBalance>()
+				.ConstructUsing(source => new AccountBalance(source.Mapper))
 				.ReverseMap();
 			CreateMap<AccountIssuer, IAccountIssuer>()
 				.ConstructUsing(source => new AccountIssuer(source.Mapper))

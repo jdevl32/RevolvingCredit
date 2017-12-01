@@ -13,7 +13,7 @@ namespace RevolvingCredit.Entity.Model
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Revert:  Remove not-mapped annotation (on EF navigation properties).
+	/// Re-implement account statement balance(s).
 	/// </remarks>
 	public class AccountStatement
 		:
@@ -33,10 +33,10 @@ namespace RevolvingCredit.Entity.Model
 		/// <inheritdoc />
 		public Guid AccountId { get; set; }
 
-#endregion
-
 		/// <inheritdoc />
 		public DateTime End { get; set; }
+
+#endregion
 
 #endregion
 
@@ -44,10 +44,10 @@ namespace RevolvingCredit.Entity.Model
 		public DateTime Start { get; set; }
 
 		/// <inheritdoc />
-		public double StartBalance { get; set; }
+		public double StartBalanceAmount { get; set; }
 
 		/// <inheritdoc />
-		public double EndBalance { get; set; }
+		public double EndBalanceAmount { get; set; }
 
 		/// <inheritdoc />
 		public double Fee { get; set; }
@@ -62,6 +62,20 @@ namespace RevolvingCredit.Entity.Model
 		{
 			get => Mapper.Map<IAccount>(Account);
 			set => Mapper.Map<Account>(value);
+		}
+
+		/// <inheritdoc />
+		IAccountBalance IAccountStatement.EndBalance
+		{
+			get => Mapper.Map<IAccountBalance>(EndBalance);
+			set => Mapper.Map<AccountBalance>(value);
+		}
+
+		/// <inheritdoc />
+		IAccountBalance IAccountStatement.StartBalance
+		{
+			get => Mapper.Map<IAccountBalance>(StartBalance);
+			set => Mapper.Map<AccountBalance>(value);
 		}
 
 #endregion
@@ -105,6 +119,22 @@ namespace RevolvingCredit.Entity.Model
 		/// Last modification:
 		/// </remarks>
 		public virtual Account Account { get; set; }
+
+		/// <summary>
+		/// The ending balance of the statement.
+		/// </summary>
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		public virtual AccountBalance EndBalance { get; set; }
+
+		/// <summary>
+		/// The starting balance of the statement.
+		/// </summary>
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		public virtual AccountBalance StartBalance { get; set; }
 
 #endregion
 
