@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2009
+VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RevolvingCredit.Entity", "RevolvingCredit.Entity\RevolvingCredit.Entity.csproj", "{A6E05A75-F467-44D2-83E2-70E33969D82A}"
 EndProject
@@ -10,9 +10,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".git", ".git", "{AAE3EEAE-5
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
 		.git\config = .git\config
+		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_MigrateDatabase", "_MigrateDatabase\_MigrateDatabase.csproj", "{FCE092DF-773D-46B6-A66F-933033ED8CEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_MigrateDatabase", "_MigrateDatabase\_MigrateDatabase.csproj", "{FCE092DF-773D-46B6-A66F-933033ED8CEB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
