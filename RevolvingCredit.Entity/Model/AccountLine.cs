@@ -2,6 +2,7 @@
 using JDevl32.Mapper;
 using RevolvingCredit.Entity.Interface;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RevolvingCredit.Entity.Model
 {
@@ -11,7 +12,7 @@ namespace RevolvingCredit.Entity.Model
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Add (EF-required) setters.
+	/// Invert foreign key annotations.
 	/// </remarks>
 	public class AccountLine
 		:
@@ -46,6 +47,8 @@ namespace RevolvingCredit.Entity.Model
 
 #region EF - Navigation
 
+#region EF - Foreign Key
+
 		/// <inheritdoc />
 		IAccount IAccountLine.Account
 		{
@@ -64,7 +67,11 @@ namespace RevolvingCredit.Entity.Model
 
 #endregion
 
+#endregion
+
 #region EF - Navigation
+
+#region EF - Foreign Key
 
 		/// <summary>
 		/// The account the line applies to.
@@ -72,6 +79,7 @@ namespace RevolvingCredit.Entity.Model
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		[ForeignKey("AccountId")]
 		public virtual Account Account { get; set; }
 
 		/// <summary>
@@ -80,7 +88,10 @@ namespace RevolvingCredit.Entity.Model
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		[ForeignKey("LineId")]
 		public virtual Line Line { get; set; }
+
+#endregion
 
 #endregion
 

@@ -3,10 +3,12 @@ using JDevl32.Entity.Interface;
 using JDevl32.Entity.Model;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using RevolvingCredit.Entity.Interface;
 using RevolvingCredit.Entity.Model;
+using System.Linq;
 
 namespace RevolvingCredit.Entity
 {
@@ -42,8 +44,9 @@ namespace RevolvingCredit.Entity
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
+		/// Add setter.
 		/// </remarks>
-		public new ILogger<RevolvingCreditContext> Logger { get; }
+		public new ILogger<RevolvingCreditContext> Logger { get; protected set; }
 
 #endregion
 
@@ -133,6 +136,7 @@ namespace RevolvingCredit.Entity
 		/// <remarks>
 		/// Last modification:
 		/// Add account balance.
+		/// Turn off cascading deletes (to avoid cycles).
 		/// </remarks>
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
@@ -236,42 +240,62 @@ namespace RevolvingCredit.Entity
 						}
 					)
 			;
-			modelBuilder.Entity<AccountStatement>().HasKey
+			modelBuilder.Entity<AccountStatement>()
+				.HasKey
 					(
-						accountStatement => (new
+						accountStatement => new
 						{
 							accountStatement.AccountId
 							,
 							accountStatement.End
-						})
+						}
 					)
 			;
-			/**
-			// Define one-to-one relationship between account statement and minimum payment.
-			accountStatementBuilder
-				.HasOne
+
+			// Get all foreign keys.
+			foreach (var foreignKey in modelBuilder.Model.GetEntityTypes().SelectMany(entityType => entityType.GetForeignKeys()))
+			{
+				// Foreign keys (account-statement => account-balance)...
+				if
 					(
-						accountStatement => accountStatement.MinimumPayment
+						nameof(AccountStatement) == foreignKey.DeclaringEntityType.ShortName()
+						&&
+						nameof(AccountBalance) == foreignKey.PrincipalEntityType.ShortName()
 					)
-				.WithOne
-					(
-						accountPayment => accountPayment.Statement
-					)
-			;
-			// Define one-to-many relationship between account statement and payments.
-			accountStatementBuilder
-				.HasMany
-					(
-						accountStatement => accountStatement.Payments
-					)
-				.WithOne
-					(
-						accountPayment => accountPayment.Statement
-					)
-			;
-			**/
+				{
+					switch (foreignKey.DependentToPrincipal.Name)
+					{
+						// End-balance and start-balance navigation properties...
+						// todo|jdevl32: constant(s)...
+						case "EndBalance":
+						case "StartBalance":
+							// Turn off cascading deletes (to avoid cycles).
+							foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
+
+							// todo|jdevl32: consider implementing cascade-like (instead-of-delete) triggers
+
+							break;
+					} // switch
+				} // if
+			} // foreach
+
 			base.OnModelCreating(modelBuilder);
 		}
+
+#endregion
+
+#region MapperEntityContextBase
+
+		// todo|jdevl32: ???
+		/**
+		/// <inheritdoc />
+		protected override void SetLogger<TDerivedClass>(ILogger<TDerivedClass> logger)
+		{
+			base.SetLogger(logger);
+
+			Logger = Mapper.Map<ILogger<RevolvingCreditContext>>(logger);
+		}
+		/**/
 
 #endregion
 

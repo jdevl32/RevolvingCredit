@@ -55,6 +55,19 @@ namespace RevolvingCredit.Entity.Migration
                     b.ToTable("AccountAPR");
                 });
 
+            modelBuilder.Entity("RevolvingCredit.Entity.Model.AccountBalance", b =>
+                {
+                    b.Property<Guid>("AccountId");
+
+                    b.Property<DateTime>("Timestamp");
+
+                    b.Property<double>("Amount");
+
+                    b.HasKey("AccountId", "Timestamp");
+
+                    b.ToTable("AccountBalance");
+                });
+
             modelBuilder.Entity("RevolvingCredit.Entity.Model.AccountIssuer", b =>
                 {
                     b.Property<Guid>("AccountId");
@@ -157,17 +170,15 @@ namespace RevolvingCredit.Entity.Migration
 
                     b.Property<DateTime>("End");
 
-                    b.Property<double>("EndBalance");
-
                     b.Property<double>("Fee");
 
                     b.Property<double>("Interest");
 
                     b.Property<DateTime>("Start");
 
-                    b.Property<double>("StartBalance");
-
                     b.HasKey("AccountId", "End");
+
+                    b.HasIndex("AccountId", "Start");
 
                     b.ToTable("AccountStatement");
                 });
@@ -265,6 +276,14 @@ namespace RevolvingCredit.Entity.Migration
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("RevolvingCredit.Entity.Model.AccountBalance", b =>
+                {
+                    b.HasOne("RevolvingCredit.Entity.Model.Account", "Account")
+                        .WithMany()
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("RevolvingCredit.Entity.Model.AccountIssuer", b =>
                 {
                     b.HasOne("RevolvingCredit.Entity.Model.Account", "Account")
@@ -344,6 +363,16 @@ namespace RevolvingCredit.Entity.Migration
                         .WithMany()
                         .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("RevolvingCredit.Entity.Model.AccountBalance", "EndBalance")
+                        .WithMany()
+                        .HasForeignKey("AccountId", "End")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("RevolvingCredit.Entity.Model.AccountBalance", "StartBalance")
+                        .WithMany()
+                        .HasForeignKey("AccountId", "Start")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618
         }

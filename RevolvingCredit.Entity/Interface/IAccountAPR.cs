@@ -10,8 +10,7 @@ namespace RevolvingCredit.Entity.Interface
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Add foreign key annotations.
-	/// Add (EF-required) setters.
+	/// Invert foreign key annotations.
 	/// </remarks>
 	public interface IAccountAPR
 	{
@@ -28,7 +27,6 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		[ForeignKey("Account")]
 		[Required]
 		Guid AccountId { get; set; }
 
@@ -38,7 +36,6 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		[ForeignKey("Type")]
 		[Required]
 		int TypeId { get; set; }
 
@@ -64,7 +61,9 @@ namespace RevolvingCredit.Entity.Interface
 		[Required]
 		double APR { get; set; }
 
-#region EF Navigation
+#region EF - Navigation
+
+#region EF - Foreign Key
 
 		/// <summary>
 		/// The account the APR applies to.
@@ -72,6 +71,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		[ForeignKey("AccountId")]
 		IAccount Account { get; set; }
 
 		/// <summary>
@@ -80,7 +80,10 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		[ForeignKey("TypeId")]
 		IAPR Type { get; set; }
+
+#endregion
 
 #endregion
 

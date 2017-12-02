@@ -13,7 +13,7 @@ namespace RevolvingCredit.Entity.Model
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Re-implement account statement balance(s).
+	/// Invert foreign key annotations.
 	/// </remarks>
 	public class AccountStatement
 		:
@@ -40,13 +40,19 @@ namespace RevolvingCredit.Entity.Model
 
 #endregion
 
+#region EF - Foreign Key
+
 		/// <inheritdoc />
 		public DateTime Start { get; set; }
 
+#endregion
+
 		/// <inheritdoc />
+		[NotMapped]
 		public double StartBalanceAmount { get; set; }
 
 		/// <inheritdoc />
+		[NotMapped]
 		public double EndBalanceAmount { get; set; }
 
 		/// <inheritdoc />
@@ -56,6 +62,8 @@ namespace RevolvingCredit.Entity.Model
 		public double Interest { get; set; }
 
 #region EF - Navigation
+
+#region EF - Foreign Key
 
 		/// <inheritdoc />
 		IAccount IAccountStatement.Account
@@ -77,6 +85,8 @@ namespace RevolvingCredit.Entity.Model
 			get => Mapper.Map<IAccountBalance>(StartBalance);
 			set => Mapper.Map<AccountBalance>(value);
 		}
+
+#endregion
 
 #endregion
 
@@ -112,12 +122,15 @@ namespace RevolvingCredit.Entity.Model
 
 #region EF - Navigation
 
+#region EF - Foreign Key
+
 		/// <summary>
 		/// The account the statement applies to.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		[ForeignKey("AccountId")]
 		public virtual Account Account { get; set; }
 
 		/// <summary>
@@ -126,6 +139,7 @@ namespace RevolvingCredit.Entity.Model
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		[ForeignKey("AccountId, End")]
 		public virtual AccountBalance EndBalance { get; set; }
 
 		/// <summary>
@@ -134,7 +148,10 @@ namespace RevolvingCredit.Entity.Model
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		[ForeignKey("AccountId, Start")]
 		public virtual AccountBalance StartBalance { get; set; }
+
+#endregion
 
 #endregion
 

@@ -4,7 +4,7 @@ using System;
 
 namespace RevolvingCredit.Entity.Migration
 {
-	public partial class Create : Microsoft.EntityFrameworkCore.Migrations.Migration
+	public partial class Recreate : Microsoft.EntityFrameworkCore.Migrations.Migration
 	{
 		protected override void Up(MigrationBuilder migrationBuilder)
 		{
@@ -99,6 +99,25 @@ namespace RevolvingCredit.Entity.Migration
 				});
 
 			migrationBuilder.CreateTable(
+				name: "AccountBalance",
+				columns: table => new
+				{
+					AccountId = table.Column<Guid>(nullable: false),
+					Timestamp = table.Column<DateTime>(nullable: false),
+					Amount = table.Column<double>(nullable: false)
+				},
+				constraints: table =>
+				{
+					table.PrimaryKey("PK_AccountBalance", x => new { x.AccountId, x.Timestamp });
+					table.ForeignKey(
+						name: "FK_AccountBalance_Account_AccountId",
+						column: x => x.AccountId,
+						principalTable: "Account",
+						principalColumn: "Id",
+						onDelete: ReferentialAction.Cascade);
+				});
+
+			migrationBuilder.CreateTable(
 				name: "AccountNote",
 				columns: table => new
 				{
@@ -111,29 +130,6 @@ namespace RevolvingCredit.Entity.Migration
 					table.PrimaryKey("PK_AccountNote", x => new { x.AccountId, x.UpdateTimestamp });
 					table.ForeignKey(
 						name: "FK_AccountNote_Account_AccountId",
-						column: x => x.AccountId,
-						principalTable: "Account",
-						principalColumn: "Id",
-						onDelete: ReferentialAction.Cascade);
-				});
-
-			migrationBuilder.CreateTable(
-				name: "AccountStatement",
-				columns: table => new
-				{
-					AccountId = table.Column<Guid>(nullable: false),
-					End = table.Column<DateTime>(nullable: false),
-					EndBalance = table.Column<double>(nullable: false),
-					Fee = table.Column<double>(nullable: false),
-					Interest = table.Column<double>(nullable: false),
-					Start = table.Column<DateTime>(nullable: false),
-					StartBalance = table.Column<double>(nullable: false)
-				},
-				constraints: table =>
-				{
-					table.PrimaryKey("PK_AccountStatement", x => new { x.AccountId, x.End });
-					table.ForeignKey(
-						name: "FK_AccountStatement_Account_AccountId",
 						column: x => x.AccountId,
 						principalTable: "Account",
 						principalColumn: "Id",
@@ -295,6 +291,39 @@ namespace RevolvingCredit.Entity.Migration
 						onDelete: ReferentialAction.Cascade);
 				});
 
+			migrationBuilder.CreateTable(
+				name: "AccountStatement",
+				columns: table => new
+				{
+					AccountId = table.Column<Guid>(nullable: false),
+					End = table.Column<DateTime>(nullable: false),
+					Fee = table.Column<double>(nullable: false),
+					Interest = table.Column<double>(nullable: false),
+					Start = table.Column<DateTime>(nullable: false)
+				},
+				constraints: table =>
+				{
+					table.PrimaryKey("PK_AccountStatement", x => new { x.AccountId, x.End });
+					table.ForeignKey(
+						name: "FK_AccountStatement_Account_AccountId",
+						column: x => x.AccountId,
+						principalTable: "Account",
+						principalColumn: "Id",
+						onDelete: ReferentialAction.Cascade);
+					table.ForeignKey(
+						name: "FK_AccountStatement_AccountBalance_AccountId_End",
+						columns: x => new { x.AccountId, x.End },
+						principalTable: "AccountBalance",
+						principalColumns: new[] { "AccountId", "Timestamp" },
+						onDelete: ReferentialAction.Restrict);
+					table.ForeignKey(
+						name: "FK_AccountStatement_AccountBalance_AccountId_Start",
+						columns: x => new { x.AccountId, x.Start },
+						principalTable: "AccountBalance",
+						principalColumns: new[] { "AccountId", "Timestamp" },
+						onDelete: ReferentialAction.Restrict);
+				});
+
 			migrationBuilder.CreateIndex(
 				name: "IX_AccountAPR_TypeId",
 				table: "AccountAPR",
@@ -324,6 +353,11 @@ namespace RevolvingCredit.Entity.Migration
 				name: "IX_AccountPromotion_TypeId",
 				table: "AccountPromotion",
 				column: "TypeId");
+
+			migrationBuilder.CreateIndex(
+				name: "IX_AccountStatement_AccountId_Start",
+				table: "AccountStatement",
+				columns: new[] { "AccountId", "Start" });
 		}
 
 		protected override void Down(MigrationBuilder migrationBuilder)
@@ -366,6 +400,9 @@ namespace RevolvingCredit.Entity.Migration
 
 			migrationBuilder.DropTable(
 				name: "APR");
+
+			migrationBuilder.DropTable(
+				name: "AccountBalance");
 
 			migrationBuilder.DropTable(
 				name: "Account");

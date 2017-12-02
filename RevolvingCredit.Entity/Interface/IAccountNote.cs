@@ -10,8 +10,7 @@ namespace RevolvingCredit.Entity.Interface
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Add foreign key annotations.
-	/// Add (EF-required) setters.
+	/// Invert foreign key annotations.
 	/// </remarks>
 	public interface IAccountNote
 	{
@@ -28,7 +27,6 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		[ForeignKey("Account")]
 		[Required]
 		Guid AccountId { get; set; }
 
@@ -55,13 +53,18 @@ namespace RevolvingCredit.Entity.Interface
 
 #region EF - Navigation
 
+#region EF - Foreign Key
+
 		/// <summary>
 		/// The account the note applies to.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		[ForeignKey("AccountId")]
 		IAccount Account { get; set; }
+
+#endregion
 
 #endregion
 

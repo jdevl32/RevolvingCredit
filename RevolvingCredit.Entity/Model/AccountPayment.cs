@@ -12,7 +12,7 @@ namespace RevolvingCredit.Entity.Model
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Re-implement account statement (not as EF navigation property).
+	/// Invert foreign key annotations.
 	/// </remarks>
 	public class AccountPayment
 		:
@@ -47,6 +47,8 @@ namespace RevolvingCredit.Entity.Model
 
 #region EF - Navigation
 
+#region EF - Foreign Key
+
 		/// <inheritdoc />
 		IAccount IAccountPayment.Account
 		{
@@ -63,6 +65,8 @@ namespace RevolvingCredit.Entity.Model
 
 #endregion
 
+#endregion
+
 		/// <inheritdoc />
 		IAccountStatement IAccountPayment.Statement
 		{
@@ -74,12 +78,15 @@ namespace RevolvingCredit.Entity.Model
 
 #region EF - Navigation
 
+#region EF - Foreign Key
+
 		/// <summary>
 		/// The account the payment applies to.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		[ForeignKey("AccountId")]
 		public virtual Account Account { get; set; }
 
 		/// <summary>
@@ -88,7 +95,10 @@ namespace RevolvingCredit.Entity.Model
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		[ForeignKey("TypeId")]
 		public virtual Payment Type { get; set; }
+
+#endregion
 
 #endregion
 

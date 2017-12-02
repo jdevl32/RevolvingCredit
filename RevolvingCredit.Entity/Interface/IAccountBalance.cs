@@ -10,6 +10,7 @@ namespace RevolvingCredit.Entity.Interface
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
+	/// Invert foreign key annotations.
 	/// </remarks>
 	public interface IAccountBalance
 	{
@@ -26,20 +27,8 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		[ForeignKey("Account")]
 		[Required]
 		Guid AccountId { get; set; }
-
-		// todo|jdevl32: probably not needed...
-		///// <summary>
-		///// The id of the balance (type).
-		///// </summary>
-		///// <remarks>
-		///// Last modification:
-		///// </remarks>
-		//[ForeignKey("Type")]
-		//[Required]
-		//int TypeId { get; set; }
 
 #endregion
 
@@ -65,22 +54,18 @@ namespace RevolvingCredit.Entity.Interface
 
 #region EF - Navigation
 
+#region EF - Foreign Key
+
 		/// <summary>
 		/// The account the balance applies to.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		[ForeignKey("AccountId")]
 		IAccount Account { get; set; }
 
-		// todo|jdevl32: probably not needed...
-		///// <summary>
-		///// The balance (type).
-		///// </summary>
-		///// <remarks>
-		///// Last modification:
-		///// </remarks>
-		//IBalance Type { get; set; }
+#endregion
 
 #endregion
 

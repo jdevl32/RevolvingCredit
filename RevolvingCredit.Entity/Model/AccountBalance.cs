@@ -12,6 +12,7 @@ namespace RevolvingCredit.Entity.Model
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
+	/// Invert foreign key annotations.
 	/// </remarks>
 	public class AccountBalance
 		:
@@ -31,10 +32,6 @@ namespace RevolvingCredit.Entity.Model
 		/// <inheritdoc />
 		public Guid AccountId { get; set; }
 
-		// todo|jdevl32: probably not needed...
-		///// <inheritdoc />
-		//public int TypeId { get; set; }
-
 #endregion
 
 		/// <inheritdoc />
@@ -47,6 +44,8 @@ namespace RevolvingCredit.Entity.Model
 
 #region EF - Navigation
 
+#region EF - Foreign Key
+
 		/// <inheritdoc />
 		IAccount IAccountBalance.Account
 		{
@@ -54,13 +53,7 @@ namespace RevolvingCredit.Entity.Model
 			set => Mapper.Map<Account>(value);
 		}
 
-		// todo|jdevl32: probably not needed...
-		///// <inheritdoc />
-		//IBalance IAccountBalance.Type
-		//{
-		//	get => Mapper.Map<IBalance>(Type);
-		//	set => Mapper.Map<Balance>(value);
-		//}
+#endregion
 
 #endregion
 
@@ -75,22 +68,18 @@ namespace RevolvingCredit.Entity.Model
 
 #region EF - Navigation
 
+#region EF - Foreign Key
+
 		/// <summary>
 		/// The account the balance applies to.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		[ForeignKey("AccountId")]
 		public virtual Account Account { get; set; }
 
-		// todo|jdevl32: probably not needed...
-		///// <summary>
-		///// The balance (type).
-		///// </summary>
-		///// <remarks>
-		///// Last modification:
-		///// </remarks>
-		//public virtual Balance Type { get; set; }
+#endregion
 
 #endregion
 

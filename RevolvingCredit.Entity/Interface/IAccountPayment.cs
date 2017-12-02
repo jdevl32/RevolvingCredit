@@ -10,7 +10,7 @@ namespace RevolvingCredit.Entity.Interface
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Re-implement account statement (not as EF navigation property).
+	/// Invert foreign key annotations.
 	/// </remarks>
 	public interface IAccountPayment
 	{
@@ -27,7 +27,6 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		[ForeignKey("Account")]
 		[Required]
 		Guid AccountId { get; set; }
 
@@ -37,7 +36,6 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		[ForeignKey("Type")]
 		[Required]
 		int TypeId { get; set; }
 
@@ -65,12 +63,15 @@ namespace RevolvingCredit.Entity.Interface
 
 #region EF - Navigation
 
+#region EF - Foreign Key
+
 		/// <summary>
 		/// The account the payment applies to.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		[ForeignKey("AccountId")]
 		IAccount Account { get; set; }
 
 		/// <summary>
@@ -79,7 +80,10 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		[ForeignKey("TypeId")]
 		IPayment Type { get; set; }
+
+#endregion
 
 #endregion
 

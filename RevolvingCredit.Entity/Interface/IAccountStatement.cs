@@ -11,7 +11,7 @@ namespace RevolvingCredit.Entity.Interface
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Re-implement account statement balance(s).
+	/// Invert foreign key annotations.
 	/// </remarks>
 	public interface IAccountStatement
 	{
@@ -29,7 +29,6 @@ namespace RevolvingCredit.Entity.Interface
 		/// Last modification:
 		/// Modify foreign key annotation.
 		/// </remarks>
-		[ForeignKey("Account, EndBalance, StartBalance")]
 		[Required]
 		Guid AccountId { get; set; }
 
@@ -40,13 +39,14 @@ namespace RevolvingCredit.Entity.Interface
 		/// Last modification:
 		/// Add foreign key annotation.
 		/// </remarks>
-		[ForeignKey("EndBalance")]
 		[Required]
 		DateTime End { get; set; }
 
 #endregion
 
 #endregion
+
+#region EF - Foreign Key
 
 		/// <summary>
 		/// The start timestamp of the statement.
@@ -55,9 +55,10 @@ namespace RevolvingCredit.Entity.Interface
 		/// Last modification:
 		/// Add foreign key annotation.
 		/// </remarks>
-		[ForeignKey("StartBalance")]
 		[Required]
 		DateTime Start { get; set; }
+
+#endregion
 
 		/// <summary>
 		/// The starting balance (amount) of the statement.
@@ -65,10 +66,9 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// Rename.
-		/// Add not-mapped annotation.
+		/// Remove required annotation.
 		/// </remarks>
 		[NotMapped]
-		[Required]
 		double StartBalanceAmount { get; set; }
 
 		/// <summary>
@@ -77,10 +77,9 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// Rename.
-		/// Add not-mapped annotation.
+		/// Remove required annotation.
 		/// </remarks>
 		[NotMapped]
-		[Required]
 		double EndBalanceAmount { get; set; }
 
 		/// <summary>
@@ -101,12 +100,15 @@ namespace RevolvingCredit.Entity.Interface
 
 #region EF - Navigation
 
+#region EF - Foreign Key
+
 		/// <summary>
 		/// The account the statement applies to.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		[ForeignKey("AccountId")]
 		IAccount Account { get; set; }
 
 		/// <summary>
@@ -115,6 +117,7 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		[ForeignKey("AccountId, End")]
 		IAccountBalance EndBalance { get; set; }
 
 		/// <summary>
@@ -123,7 +126,10 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		[ForeignKey("AccountId, Start")]
 		IAccountBalance StartBalance { get; set; }
+
+#endregion
 
 #endregion
 

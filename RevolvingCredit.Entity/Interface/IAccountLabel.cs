@@ -10,8 +10,7 @@ namespace RevolvingCredit.Entity.Interface
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Add foreign key annotations.
-	/// Add (EF-required) setters.
+	/// Invert foreign key annotations.
 	/// </remarks>
 	public interface IAccountLabel
 	{
@@ -28,7 +27,6 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		[ForeignKey("Account")]
 		[Required]
 		Guid AccountId { get; set; }
 
@@ -38,7 +36,6 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		[ForeignKey("Label")]
 		[Required]
 		int LabelId { get; set; }
 
@@ -57,12 +54,15 @@ namespace RevolvingCredit.Entity.Interface
 
 #region EF - Navigation
 
+#region EF - Foreign Key
+
 		/// <summary>
 		/// The account the label applies to.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		[ForeignKey("AccountId")]
 		IAccount Account { get; set; }
 
 		/// <summary>
@@ -71,7 +71,10 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		[ForeignKey("LabelId")]
 		ILabel Label { get; set; }
+
+#endregion
 
 #endregion
 
