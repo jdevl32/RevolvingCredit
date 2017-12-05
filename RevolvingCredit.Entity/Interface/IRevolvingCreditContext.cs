@@ -10,11 +10,11 @@ namespace RevolvingCredit.Entity.Interface
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Add account balance.
+	/// Re-implement generic entity context interface as non-generic.
 	/// </remarks>
 	public interface IRevolvingCreditContext
 		:
-		IEntityContext<IRevolvingCreditContext>
+		IEntityContext
 	{
 
 #region Property

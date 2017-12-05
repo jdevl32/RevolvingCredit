@@ -18,7 +18,7 @@
 
   <ItemGroup>
 	<PackageReference Include="AutoMapper" Version="6.2.1" />
-	<PackageReference Include="JDevl32.Entity" Version="1.0.0.18" />
+	<PackageReference Include="JDevl32.Entity" Version="1.0.2.1" />
 	<PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.0.1" />
 	<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.1" />
   </ItemGroup>

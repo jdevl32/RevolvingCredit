@@ -1,5 +1,4 @@
-﻿using JDevl32.Entity.Model;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using RevolvingCredit.Entity;
 using StartupBase = JDevl32.Web.Host.StartupBase;
@@ -60,28 +59,10 @@ namespace _MigrateDatabase
 
 #region StartupBase
 
-		// todo|jdevl32: obsolete (due to profiles / auto-mapper extension for dependency-injection) ???
-		///// <inheritdoc />
-		//protected override void Configure(IMapperConfigurationExpression mapperConfigurationExpression)
-		//{
-		//	base.Configure(mapperConfigurationExpression);
-
-		//	mapperConfigurationExpression
-		//		.CreateMap<Account, IAccount>()
-		//		.ConstructUsing(account => new Account())
-		//		.ReverseMap();
-		//	// todo|jdevl32: finish the rest...
-		//	// todo|jdevl32: maybe not needed ???
-		//	//mapperConfigurationExpression
-		//	//	.CreateMap<RevolvingCreditContext, IRevolvingCreditContext>()
-		//	//	.ConstructUsing(revolvingCreditContext => new RevolvingCreditContext())
-		//	//	.ReverseMap();
-		//}
-
 		/// <inheritdoc />
 		protected override void ConfigureEntityContext(IServiceCollection serviceCollection)
 			=>
-			base.ConfigureEntityContext<RevolvingCreditContext, EntityContextBase>(serviceCollection);
+			serviceCollection.AddDbContext<RevolvingCreditContext>();
 
 #endregion
 

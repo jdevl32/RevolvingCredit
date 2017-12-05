@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using JDevl32.Entity.Interface;
 using JDevl32.Entity.Model;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -18,11 +17,12 @@ namespace RevolvingCredit.Entity
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Add account balance.
+	/// Re-implement logger from mapper entity context base class.
+	/// Re-implement base class as generic.
 	/// </remarks>
 	public class RevolvingCreditContext
 		:
-		MapperEntityContextBase
+		MapperEntityContextBase<RevolvingCreditContext>
 		,
 		IRevolvingCreditContext
 	{
@@ -51,15 +51,6 @@ namespace RevolvingCredit.Entity
 #endregion
 
 #region IRevolvingCreditContext
-
-		/// <summary>
-		/// The logger.
-		/// </summary>
-		/// <remarks>
-		/// Last modification:
-		/// </remarks>
-		ILogger<IRevolvingCreditContext> IEntityContext<IRevolvingCreditContext>.Logger
-			=> Mapper.Map<ILogger<IRevolvingCreditContext>>(Logger);
 
 #endregion
 
