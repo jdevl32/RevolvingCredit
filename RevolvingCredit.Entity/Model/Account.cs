@@ -9,7 +9,7 @@ namespace RevolvingCredit.Entity.Model
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Add (EF-required) default (parameterless) constructor.
+	/// Add (EF-required) setters.
 	/// </remarks>
 	public class Account
 		:
@@ -23,6 +23,9 @@ namespace RevolvingCredit.Entity.Model
 #region IAccount
 
 		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
 		public short SafeAccountNumber { get; set; }
 
 #endregion
@@ -30,6 +33,19 @@ namespace RevolvingCredit.Entity.Model
 #endregion
 
 #region Instance Initialization
+
+		// todo|jdevl32: ???
+		/**
+		/// <summary>
+		/// Create an account.
+		/// </summary>
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		public Account()
+		{
+		}
+		**/
 
 		// todo|jdevl32: implement ctors...
 

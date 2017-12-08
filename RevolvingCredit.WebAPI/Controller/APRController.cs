@@ -1,11 +1,23 @@
 ﻿using AutoMapper;
+using JDevl32.Logging.Interface;
 using JDevl32.Mapper.Interface;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using RevolvingCredit.WebAPI.Repository.Interface;
+using RevolvingCredit.WebAPI.ViewModel.Interface;
+using System;
+using System.Collections.Generic;
 
 namespace RevolvingCredit.WebAPI.Controller
 {
 
+	/// <summary>
+	/// The APR controller.
+	/// </summary>
+	/// <remarks>
+	/// Last modification:
+	/// Implement loggable interface.
+	/// </remarks>
 	[Produces("application/json")]
 	[Route("api/APR")]
 	public class APRController
@@ -13,9 +25,21 @@ namespace RevolvingCredit.WebAPI.Controller
 		Microsoft.AspNetCore.Mvc.Controller
 		,
 		IInstanceMapper
+		,
+		ILoggable<APRController>
 	{
 
 #region Property
+
+#region ILoggable<APRController>
+
+		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		public ILogger<APRController> Logger { get; }
+
+#endregion
 
 #region IInstanceMapper
 
@@ -45,25 +69,48 @@ namespace RevolvingCredit.WebAPI.Controller
 		/// <param name="aprRepository">
 		/// An APR repository.
 		/// </param>
+		/// <param name="logger">
+		/// A logger.
+		/// </param>
 		/// <param name="mapper">
 		/// A mapper.
 		/// </param>
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		public APRController(IAPRRepository aprRepository, IMapper mapper)
+		public APRController(IAPRRepository aprRepository, ILogger<APRController> logger, IMapper mapper)
 		{
 			APRRepository = aprRepository;
+			Logger = logger;
 			Mapper = mapper;
 		}
 
 #endregion
 
+		/// <summary>
+		/// GET: api/APR
+		/// </summary>
+		/// <returns>
+		/// 
+		/// </returns>
+		/// <remarks>
+		/// Last modification:
+		/// Implement view model.
+		/// Add error handling.
+		/// </remarks>
 		[HttpGet]
 		public IActionResult Get()
 		{
-			// todo|jdevl32: map to view-model...
-			return Ok(APRRepository.GetAPR());
+			try
+			{
+				return Ok(Mapper.Map<IEnumerable<IAPRViewModel>>(APRRepository.GetAPR()));
+			} // try
+			catch (Exception ex)
+			{
+				Logger.LogError(ex, $"Error retrieving APR (type)s from the repository:  {ex}");
+			} // catch
+
+			return BadRequest();
 		}
 
 		/**

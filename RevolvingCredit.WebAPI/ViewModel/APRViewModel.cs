@@ -1,21 +1,20 @@
 ﻿using JDevl32.Entity.Model;
-using RevolvingCredit.Entity.Interface;
+using RevolvingCredit.WebAPI.ViewModel.Interface;
 
-namespace RevolvingCredit.Entity.Model
+namespace RevolvingCredit.WebAPI.ViewModel
 {
 
 	/// <summary>
-	/// The APR (type) for a revolving credit account.
+	/// The APR (type) view model for a revolving credit account.
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Add (EF-required) default (parameterless) constructor.
 	/// </remarks>
-	public class APR
+	public class APRViewModel
 		:
 		UniqueBase
 		,
-		IAPR
+		IAPRViewModel
 	{
 
 #region Instance Initialization
@@ -26,7 +25,7 @@ namespace RevolvingCredit.Entity.Model
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		public APR()
+		public APRViewModel()
 		{
 		}
 
@@ -34,7 +33,7 @@ namespace RevolvingCredit.Entity.Model
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		public APR(int id)
+		public APRViewModel(int id)
 			:
 			base(id)
 		{
@@ -44,7 +43,7 @@ namespace RevolvingCredit.Entity.Model
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		public APR(int id, string shortName, string fullName, string description)
+		public APRViewModel(int id, string shortName, string fullName, string description)
 			:
 			base(id, shortName, fullName, description)
 		{
@@ -54,7 +53,7 @@ namespace RevolvingCredit.Entity.Model
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		public APR(string shortName, string fullName, string description)
+		public APRViewModel(string shortName, string fullName, string description)
 			:
 			base(shortName, fullName, description)
 		{
@@ -64,6 +63,12 @@ namespace RevolvingCredit.Entity.Model
 
 #endregion
 
+		#region Implementation of IAPRViewModel
+
+		/// <inheritdoc />
+		public double Test { get; set; }
+
+		#endregion
 	}
 
 }

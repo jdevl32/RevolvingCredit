@@ -1,20 +1,22 @@
 ﻿using JDevl32.Entity.Interface;
 
-namespace RevolvingCredit.Entity.Interface
+namespace RevolvingCredit.WebAPI.ViewModel.Interface
 {
 
 	/// <summary>
-	/// The APR (type) for a revolving credit account.
+	/// The APR (type) view model for a revolving credit account.
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
 	/// </remarks>
-	public interface IAPR
+	public interface IAPRViewModel
 		:
 		IUnique
 	{
 
 #region Property
+
+		double Test { get; }
 
 #endregion
 
