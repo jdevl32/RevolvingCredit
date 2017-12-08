@@ -16,10 +16,13 @@ namespace RevolvingCredit.WebAPI.Repository.Interface
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <returns>
+		/// 
+		/// </returns>
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		IEnumerable<IAPR> GetAPR { get; }
+		IEnumerable<IAPR> GetAPR();
 
 	}
 

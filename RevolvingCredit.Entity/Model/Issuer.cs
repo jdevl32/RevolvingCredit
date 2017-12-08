@@ -9,6 +9,7 @@ namespace RevolvingCredit.Entity.Model
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
+	/// Add (EF-required) default (parameterless) constructor.
 	/// </remarks>
 	public class Issuer
 		:
@@ -22,6 +23,17 @@ namespace RevolvingCredit.Entity.Model
 #region UniqueBase
 
 		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		public Issuer()
+		{
+		}
+
+		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
 		public Issuer(int id)
 			:
 			base(id)
@@ -29,6 +41,9 @@ namespace RevolvingCredit.Entity.Model
 		}
 
 		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
 		public Issuer(int id, string shortName, string fullName, string description)
 			:
 			base(id, shortName, fullName, description)
@@ -36,6 +51,9 @@ namespace RevolvingCredit.Entity.Model
 		}
 
 		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
 		public Issuer(string shortName, string fullName, string description)
 			:
 			base(shortName, fullName, description)

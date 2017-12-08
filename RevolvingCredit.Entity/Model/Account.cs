@@ -9,7 +9,7 @@ namespace RevolvingCredit.Entity.Model
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Add (EF-required) setters.
+	/// Add (EF-required) default (parameterless) constructor.
 	/// </remarks>
 	public class Account
 		:

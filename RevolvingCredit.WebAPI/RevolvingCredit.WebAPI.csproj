@@ -9,7 +9,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="JDevl32.Web" Version="1.0.2.1" />
+    <PackageReference Include="JDevl32.Entity" Version="1.0.3.2" />
+    <PackageReference Include="JDevl32.Web" Version="1.0.4.2" />
+    <PackageReference Include="JDevl32.Web.Host" Version="1.0.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.1" />
   </ItemGroup>

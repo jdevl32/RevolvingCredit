@@ -1,40 +1,127 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using RevolvingCredit.Entity;
+using RevolvingCredit.WebAPI.Repository;
+using RevolvingCredit.WebAPI.Repository.Interface;
+using StartupBase = JDevl32.Web.Host.StartupBase;
 
 namespace RevolvingCredit.WebAPI
 {
-    public class Startup
-    {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
 
-        public IConfiguration Configuration { get; }
+	/// <summary>
+	/// The app startup.
+	/// </summary>
+	/// <remarks>
+	/// Last modification:
+	/// </remarks>
+	public class Startup
+		:
+		StartupBase
+	{
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddMvc();
-        }
+#region Property
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+#region StartupBase
 
-            app.UseMvc();
-        }
-    }
+		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		public override bool UseAuthentication { get; } = false;
+
+		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		public override bool UseStaticFiles { get; } = false;
+
+#endregion
+
+#endregion
+
+#region Instance Initialization
+
+#region StartupBase
+
+		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		public Startup(IHostingEnvironment hostingEnvironment)
+			:
+			base(hostingEnvironment)
+		{
+		}
+
+		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		public Startup(IHostingEnvironment hostingEnvironment, string configPath)
+			:
+			base(hostingEnvironment, configPath)
+		{
+		}
+
+#endregion
+
+#endregion
+
+#region StartupBase
+
+		// todo|jdevl32: cleanup...
+		/**
+		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		protected override void Configure(IMapperConfigurationExpression mapperConfigurationExpression)
+		{
+			base.Configure(mapperConfigurationExpression);
+
+			// todo|jdevl32: is this needed ???
+			mapperConfigurationExpression.CreateMap<RevolvingCreditContext, IRevolvingCreditContext>()
+				.ConstructUsing
+					(
+						context => new RevolvingCreditContext
+							(
+								context.DbContextOptions
+								,
+								context.ConfigurationRoot
+								,
+								context.HostingEnvironment
+								,
+								context.Logger
+								,
+								context.Mapper
+								,
+								context.ConnectionStringKey
+							)
+					)
+				.ReverseMap();
+		}
+		**/
+
+		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		protected override void ConfigureEntityContext(IServiceCollection serviceCollection)
+			=>
+			serviceCollection.AddDbContext<RevolvingCreditContext>();
+
+		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		public override void ConfigureServices(IServiceCollection services)
+		{
+			base.ConfigureServices(services);
+			services.AddScoped<IAPRRepository, APRRepository>();
+		}
+
+#endregion
+
+	}
+
 }
