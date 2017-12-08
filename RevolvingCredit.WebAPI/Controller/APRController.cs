@@ -24,9 +24,9 @@ namespace RevolvingCredit.WebAPI.Controller
 		:
 		Microsoft.AspNetCore.Mvc.Controller
 		,
-		IInstanceMapper
-		,
 		ILoggable<APRController>
+		,
+		IInstanceMapper
 	{
 
 #region Property
