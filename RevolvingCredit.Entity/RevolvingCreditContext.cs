@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using JDevl32.Entity.Model;
+using JDevl32.Entity;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;

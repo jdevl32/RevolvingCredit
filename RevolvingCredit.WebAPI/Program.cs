@@ -25,7 +25,8 @@ namespace RevolvingCredit.WebAPI
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		public static IWebHost BuildWebHost(string[] args) =>
+		public static IWebHost BuildWebHost(string[] args)
+			=>
 			WebHost.CreateDefaultBuilder(args)
 				.UseStartup<Startup>()
 				.Build();
