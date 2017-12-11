@@ -8,6 +8,7 @@ namespace RevolvingCredit.WebAPI.ViewModel.Interface
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
+	/// Remove test.
 	/// </remarks>
 	public interface IAPRViewModel
 		:
@@ -15,8 +16,6 @@ namespace RevolvingCredit.WebAPI.ViewModel.Interface
 	{
 
 #region Property
-
-		double Test { get; }
 
 #endregion
 

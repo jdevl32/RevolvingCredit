@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="JDevl32.Entity" Version="1.0.4.2" />
+    <PackageReference Include="JDevl32.Entity" Version="1.0.5.1" />
     <PackageReference Include="JDevl32.Web" Version="1.0.4.3" />
     <PackageReference Include="JDevl32.Web.Host" Version="1.0.5.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />

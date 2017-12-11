@@ -86,51 +86,52 @@ namespace RevolvingCredit.Entity
 		/// <inheritdoc />
 		/// <remarks>
 		/// Last modification:
+		/// Add database generated identity annotation.
+		/// Enhance logging.
 		/// </remarks>
 		public override async Task Seed()
 		{
 			Logger.LogInformation("Seed APR...");
 
+			var @new = string.Empty;
+
 			if (EntityContext.APR.Any())
 			{
 				Logger.LogInformation("...APR already seeded.");
-				return;
 			} // if
+			else
+			{
+				@new = "New ";
 
-			//var now = DateTime.UtcNow;
-			//foreach (var i in a)
-			//{
-			//	EntityContext.APR.Add(i);
-			//} // foreach
+				await EntityContext.APR.AddRangeAsync
+					(
+						new APR
+						{
+							Description = "APR that applies to the line of cash for a revolving credit account."
+							,
+							FullName = "Cash APR"
+							//,
+							//Id = 1
+							,
+							ShortName = "Cash"
+						}
+						,
+						new APR
+						{
+							Description = "APR that applies to the line of credit for a revolving credit account."
+							,
+							FullName = "Credit APR"
+							//,
+							//Id = 2
+							,
+							ShortName = "Credit"
+						}
+					);
 
-			await EntityContext.APR.AddRangeAsync
-				(
-					new APR
-					{
-						Description = "APR that applies to the line of cash for a revolving credit account."
-						,
-						FullName = "Cash APR"
-						,
-						Id = 1
-						,
-						ShortName = "Cash"
-					}
-					,
-					new APR
-					{
-						Description = "APR that applies to the line of credit for a revolving credit account."
-						,
-						FullName = "Credit APR"
-						,
-						Id = 2
-						,
-						ShortName = "Credit"
-					}
-				);
+				await EntityContext.SaveChangesAsync();
+			} // else
 
-			await EntityContext.SaveChangesAsync();
-
-			Logger.LogInformation($"New APR count = {EntityContext.APR.Count()}.");
+			Logger.LogInformation($"{@new}APR count = {EntityContext.APR.Count()}.");
 		}
 
 #endregion

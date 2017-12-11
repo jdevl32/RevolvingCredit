@@ -9,6 +9,7 @@ namespace RevolvingCredit.WebAPI.ViewModel
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
+	/// Remove test.
 	/// </remarks>
 	public class APRViewModel
 		:
@@ -16,6 +17,14 @@ namespace RevolvingCredit.WebAPI.ViewModel
 		,
 		IAPRViewModel
 	{
+
+#region Property
+
+#region IAPRViewModel
+
+#endregion
+
+#endregion
 
 #region Instance Initialization
 
@@ -63,12 +72,6 @@ namespace RevolvingCredit.WebAPI.ViewModel
 
 #endregion
 
-		#region Implementation of IAPRViewModel
-
-		/// <inheritdoc />
-		public double Test { get; set; }
-
-		#endregion
 	}
 
 }
