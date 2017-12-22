@@ -1,0 +1,42 @@
+﻿/**
+	/style/site.css
+**/
+
+#main
+{
+	/*border: 3px solid red;*/
+	grid-area: a;
+}
+
+#menu
+{
+	/*border: 3px solid red;*/
+	grid-area: e;
+}
+
+#wrapper
+{
+	display: grid;
+	grid-template-areas:
+		"e e h h h h h h h h h h"
+		"e e a a a a a a a a a a"
+		"f f f f f f f f f f f f";
+	grid-template-columns: repeat(12, 1fr);
+}
+
+body
+{
+
+}
+
+footer
+{
+	/*border: 3px solid red;*/
+	grid-area: f;
+}
+
+header
+{
+	/*border: 3px solid red;*/
+	grid-area: h;
+}
