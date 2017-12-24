@@ -1,0 +1,21 @@
+﻿
+@{
+	ViewData["Title"] = "APR";
+}
+
+@section Script
+{
+	<script src="~/lib/underscore/underscore-min.js"></script>
+	<script src="~/lib/angular/angular.min.js"></script>
+	<script src="~/lib/angular-route/angular-route.min.js"></script>
+	<script src="~/script/directive/spinner.js"></script>
+	<script src="~/script/app/APR.js"></script>
+	<script src="~/script/controller/APR.js"></script>
+	@*
+	<script src="~/script/controller/APR.edit.js"></script>
+	*@
+}
+
+<div class="row" data-ng-app="app-APR">
+	<div data-ng-view></div>
+</div>

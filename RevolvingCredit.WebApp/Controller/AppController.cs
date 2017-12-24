@@ -49,6 +49,20 @@ namespace RevolvingCredit.WebApp.Controller
 			return View();
 		}
 
+		/// <summary>
+		/// GET: App/APR
+		/// </summary>
+		/// <returns>
+		/// 
+		/// </returns>
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		public ActionResult APR()
+		{
+			return View();
+		}
+
 	}
 
 }
