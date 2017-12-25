@@ -18,7 +18,7 @@
 			vm.errorMessage = "";
 
 			// Create empty container for APR(s).
-			vm.APR = [];
+			vm.items = [];
 
 			// Create success handler for GET.
 			var onGetSuccess =
@@ -31,13 +31,20 @@
 						debug(response, "response");
 					} // if
 
-					angular.copy(response.data, vm.APR);
+					angular.copy(response.data, vm.items);
 				};
 
 			// Create error handler for GET.
 			var onGetError =
 				function (error)
 				{
+					// todo|jdevl32: make this global method...
+					// todo|jdevl32: fix (is-dev not working) !!!
+					if (vm.isDev)
+					{
+						debug(error, "error");
+					} // if
+
 					vm.errorMessage = "[001] Failed to get APRs:  " + toString(error);
 				};
 
@@ -49,35 +56,38 @@
 					vm.isBusy = false;
 				};
 
-			var url = "/api/APR";
+			// todo|jdevl32: ??? url to use ???
+			var url = "http://localhost:58410/api/APR";
 
 			try
 			{
 				$http
 					// Get the set of APRs from the API...
 					.get(url)
-					// ...Using the defined handlers.
+					// ...using the defined handlers.
 					.then(onGetSuccess, onGetError)
 					.finally(doFinally);
 			} // try
 			catch (e)
 			{
+				// Reset busy flag.
 				vm.isBusy = false;
 				vm.errorMessage = "[002] Failed to get APRs:  " + toString(e);
 			} // catch
 
-			// Create empty container for new APR.
-			vm.new = {};
+			// Create empty container for edit/new APR.
+			vm.item = {};
 
 			// Create success handler for POST.
 			var onPostSuccess =
 				function (response)
 				{
+					// todo|jdevl32: ??? distinguish between edit/new ???
 					// Add new APR to the container.
-					vm.APR.push(response.data);
+					vm.items.push(response.data);
 
-					// Clear/reset new APR (form).
-					vm.new = {};
+					// Clear/reset edit/new APR (form).
+					vm.item = {};
 				};
 
 			// Create error handler for POST.
@@ -96,14 +106,14 @@
 
 					$http
 						// Post the new APR to the API...
-						.post(url, vm.new)
-						// ...Using the defined handlers.
+						.post(url, vm.item)
+						// ...using the defined handlers.
 						.then(onPostSuccess, onPostError)
 						.finally(doFinally);
 				};
 		}
 
 		// Use the existing module, specify controller.
-		angular.module("app-APR").controller("APR", controller);
+		angular.module("app-APR").controller("apr", controller);
 	}
 )();

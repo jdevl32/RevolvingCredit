@@ -1,5 +1,15 @@
-﻿APR.html...
-<div>
+﻿<div>
 	<spinner while="vm.isBusy">Loading APR(s)...</spinner>
 	<div class="text-danger" data-ng-bind="vm.errorMessage" data-ng-show="vm.errorMessage"></div>
+	<div>
+		<div data-ng-repeat="apr in vm.items">
+			<a data-ng-href="#!/edit/{{apr.id}}" class="btn btn-sm btn-primary">Edit</a>
+			|
+			<span data-ng-bind="apr.shortName"></span>
+			|
+			<span data-ng-bind="apr.fullName"></span>
+			|
+			<span data-ng-bind="apr.description"></span>
+		</div>
+	</div>
 </div>

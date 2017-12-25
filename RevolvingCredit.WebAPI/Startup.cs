@@ -16,6 +16,7 @@ namespace RevolvingCredit.WebAPI
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
+	/// Add CORS (and default configuration).
 	/// </remarks>
 	public class Startup
 		:
@@ -31,6 +32,12 @@ namespace RevolvingCredit.WebAPI
 		/// Last modification:
 		/// </remarks>
 		public override bool UseAuthentication { get; } = false;
+
+		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		public override bool UseCORS { get; } = true;
 
 		// todo|jdev32: ???
 		/**
