@@ -4,8 +4,8 @@
 		<div class="form-group form-group-sm">
 			<label for="shortName"></label>Short name:
 			<input class="form-control" id="shortName" name="shortName" type="text" data-ng-model="vm.item.shortName" required data-ng-minlength="1" />
-			<span ng-data-show="item.shortName.$error.required" class="text-warning">Required.</span>
-			<span ng-data-show="item.shortName.$error.minlength" class="text-warning">Minimum length not satisfied.</span>
+			<span data-ng-show="item.shortName.$error.required" class="text-warning">Required.</span>
+			<span data-ng-show="item.shortName.$error.minlength" class="text-warning">Minimum length not satisfied.</span>
 		</div>
 	</form>
 </div>

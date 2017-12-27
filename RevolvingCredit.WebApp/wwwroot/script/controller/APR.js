@@ -78,6 +78,20 @@
 			// Create empty container for edit/new APR.
 			vm.item = {};
 
+			// Create method to determine edit state.
+			vm.isEdit =
+				function()
+				{
+					return !$.isEmptyObject(vm.item);
+				};
+
+			// Create method to initiate edit state.
+			vm.onEdit =
+				function(index)
+				{
+					vm.item = vm.items[index];
+				};
+
 			// Create success handler for POST.
 			var onPostSuccess =
 				function (response)
