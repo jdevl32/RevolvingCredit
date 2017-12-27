@@ -2,14 +2,14 @@
 	<spinner while="vm.isBusy">Loading APR(s)...</spinner>
 	<div class="text-danger" data-ng-bind="vm.errorMessage" data-ng-show="vm.errorMessage"></div>
 	<div>
-		<div data-ng-repeat="apr in vm.items">
-			<a data-ng-href="#!/edit/{{apr.id}}" class="btn btn-sm btn-primary">Edit</a>
+		<div data-ng-repeat="item in vm.items">
+			<a data-ng-href="#!/edit/{{item.id}}" class="btn btn-sm btn-primary">Edit</a>
 			|
-			<span data-ng-bind="apr.shortName"></span>
+			<span data-ng-bind="item.shortName"></span>
 			|
-			<span data-ng-bind="apr.fullName"></span>
+			<span data-ng-bind="item.fullName"></span>
 			|
-			<span data-ng-bind="apr.description"></span>
+			<span data-ng-bind="item.description"></span>
 		</div>
 	</div>
 </div>
