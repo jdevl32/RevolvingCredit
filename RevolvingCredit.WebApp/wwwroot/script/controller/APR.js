@@ -85,11 +85,11 @@
 					return !$.isEmptyObject(vm.item);
 				};
 
-			// Create method to initiate edit state.
+			// Create method to initiate (edit) state.
 			vm.onEdit =
 				function(index)
 				{
-					vm.item = vm.items[index];
+					vm.item = index < 0 ? {} : vm.items[index];
 				};
 
 			// Create success handler for POST.
