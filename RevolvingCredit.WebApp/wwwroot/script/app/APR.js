@@ -17,28 +17,26 @@
 						"/"
 						,
 						{
-							controller: "APR"
+							controller: "apr"
 							,
 							controllerAs: "vm"
 							,
 							templateUrl: "/view/APR.html"
 						}
 					)
-				/**
 				// APR edit route configuration.
 				.when
 					(
-						"/edit/:name"
+						"/edit/:id"
 						,
 						{
-							controller: "APREdit"
+							controller: "aprEdit"
 							,
 							controllerAs: "vm"
 							,
 							templateUrl: "/view/APR.edit.html"
 						}
 					)
-				**/
 				// Default route configuration.
 				.otherwise({ redirectTo: "/" });
 		}

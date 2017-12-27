@@ -1,4 +1,4 @@
-﻿// /script/controller/APR.js
+﻿// /script/controller/APR.edit.js
 
 // Exclude from global scope.
 (
@@ -6,19 +6,22 @@
 	{
 		"use strict";
 
-		// Define the APR controller.
+		// Define the APR edit controller.
 		// Last modification:
-		function controller($http)
+		function controller($routeParams, $http)
 		{
 			var vm = this;
 			vm.isBusy = true;
 			vm.isDev = false;
 
+			// Get the id of the APR to edit from the route params.
+			vm.id = $routeParams.id;
+
 			// Create empty container for error message.
 			vm.errorMessage = "";
 
-			// Create empty container for APR(s).
-			vm.items = [];
+			// Create empty container for edit or new APR.
+			vm.item = {};
 
 			// Create success handler for GET.
 			var onGetSuccess =
@@ -31,7 +34,7 @@
 						debug(response, "response");
 					} // if
 
-					angular.copy(response.data, vm.items);
+					angular.copy(response.data, vm.item);
 				};
 
 			// Create error handler for GET.
@@ -45,7 +48,7 @@
 						debug(error, "error");
 					} // if
 
-					vm.errorMessage = "[001] Failed to get APRs:  " + toString(error);
+					vm.errorMessage = "[001] Failed to get APR:  " + toString(error);
 				};
 
 			// Create finally handler.
@@ -57,12 +60,12 @@
 				};
 
 			// todo|jdevl32: ??? url to use ???
-			var url = "http://localhost:58410/api/APR";
+			var url = "http://localhost:58410/api/APR/" + vm.id;
 
 			try
 			{
 				$http
-					// Get the set of APRs from the API...
+					// Get the APR to edit from the API...
 					.get(url)
 					// ...using the defined handlers.
 					.then(onGetSuccess, onGetError)
@@ -72,21 +75,17 @@
 			{
 				// Reset busy flag.
 				vm.isBusy = false;
-				vm.errorMessage = "[002] Failed to get APRs:  " + toString(e);
+				vm.errorMessage = "[002] Failed to get APR:  " + toString(e);
 			} // catch
-
-			// Create empty container for edit/new APR.
-			vm.item = {};
 
 			// Create success handler for POST.
 			var onPostSuccess =
 				function (response)
 				{
-					// todo|jdevl32: ??? distinguish between edit/new ???
 					// Add new APR to the container.
 					vm.items.push(response.data);
 
-					// Clear/reset edit/new APR (form).
+					// Clear/reset new APR (form).
 					vm.item = {};
 				};
 
@@ -114,6 +113,6 @@
 		}
 
 		// Use the existing module, specify controller.
-		angular.module("app-APR").controller("apr", controller);
+		angular.module("app-APR").controller("aprEdit", controller);
 	}
 )();
