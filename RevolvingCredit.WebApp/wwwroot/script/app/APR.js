@@ -27,7 +27,7 @@
 				// APR edit route configuration.
 				.when
 					(
-						"/edit/:id"
+						"/edit"
 						,
 						{
 							controller: "aprEdit"
@@ -41,8 +41,21 @@
 				.otherwise({ redirectTo: "/" });
 		}
 
-		// Create the module.
+		// Create the app module.
 		// Last modification:
-		angular.module("app-APR", ["spinner", "ngRoute"]).config(configRoute);
+		// Inject service(s) dependency.
+		angular.module
+			(
+				"app-APR"
+				,
+				[
+					"spinner"
+					,
+					"ngRoute"
+					,
+					"service"
+				]
+			)
+			.config(configRoute);
 	}
 )();

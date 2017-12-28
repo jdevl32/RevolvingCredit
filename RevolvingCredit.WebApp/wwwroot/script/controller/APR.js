@@ -8,7 +8,8 @@
 
 		// Define the APR controller.
 		// Last modification:
-		function controller($http)
+		// Inject item service dependency.
+		function controller($http, itemService)
 		{
 			var vm = this;
 			vm.isBusy = true;
@@ -75,6 +76,8 @@
 				vm.errorMessage = "[002] Failed to get APRs:  " + toString(e);
 			} // catch
 
+			// todo|jdevl32: cleanup...
+			/**
 			// Create empty container for edit/new APR.
 			vm.item = {};
 
@@ -84,14 +87,19 @@
 				{
 					return !$.isEmptyObject(vm.item);
 				};
+			**/
 
 			// Create method to initiate (edit) state.
 			vm.onEdit =
 				function(index)
 				{
-					vm.item = index < 0 ? {} : vm.items[index];
+					//vm.item =
+					itemService.item = 
+						index < 0 ? {} : vm.items[index];
 				};
 
+			// todo|jdevl32: eventually move to .edit.js...
+			/**
 			// Create success handler for POST.
 			var onPostSuccess =
 				function (response)
@@ -125,9 +133,24 @@
 						.then(onPostSuccess, onPostError)
 						.finally(doFinally);
 				};
+			**/
 		}
 
 		// Use the existing module, specify controller.
-		angular.module("app-APR").controller("apr", controller);
+		// Last modification:
+		// Inject item service dependency.
+		angular.module("app-APR")
+			.controller
+				(
+					"apr"
+					,
+					[
+						"$http"
+						,
+						"itemService"
+						,
+						controller
+					]
+				);
 	}
 )();

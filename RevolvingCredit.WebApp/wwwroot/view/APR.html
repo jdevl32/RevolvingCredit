@@ -2,40 +2,8 @@
 	<spinner while="vm.isBusy">Loading APR(s)...</spinner>
 	<div class="text-danger" data-ng-bind="vm.errorMessage" data-ng-show="vm.errorMessage"></div>
 	<div>
-		<div data-ng-show="vm.isEdit()">
-			<form name="item" novalidate data-ng-submit="">
-				<div class="form-group">
-					<label for="shortName">Short Name:</label>
-					<input class="form-control" id="shortName" name="shortName" type="text" data-ng-model="vm.item.shortName" required data-ng-minlength="1" />
-					<span data-ng-show="item.shortName.$dirty && item.shortName.$invalid" class="text-warning">
-						<span data-ng-show="item.shortName.$error.required">Required.</span>
-						<span data-ng-show="item.shortName.$error.minlength">Minimum length not satisfied.</span>
-					</span>
-				</div>
-				<div class="form-group">
-					<label for="fullName">Full Name:</label>
-					<input class="form-control" id="fullName" name="fullName" type="text" data-ng-model="vm.item.fullName" required data-ng-minlength="1" />
-					<span data-ng-show="item.fullName.$dirty && item.fullName.$invalid" class="text-warning">
-						<span data-ng-show="item.fullName.$error.required">Required.</span>
-						<span data-ng-show="item.fullName.$error.minlength">Minimum length not satisfied.</span>
-					</span>
-				</div>
-				<div class="form-group">
-					<label for="description">Description:</label>
-					<input class="form-control" id="description" name="description" type="text" data-ng-model="vm.item.description" required data-ng-minlength="1" />
-					<span data-ng-show="item.description.$dirty && item.description.$invalid" class="text-warning">
-						<span data-ng-show="item.description.$error.required">Required.</span>
-						<span data-ng-show="item.description.$error.minlength">Minimum length not satisfied.</span>
-					</span>
-				</div>
-				<div class="form-group">
-					<input class="btn btn-sm btn-primary" type="submit" value="Edit" data-ng-disabled="item.$pristine || item.$invalid" />
-					<a data-ng-click="vm.onEdit(-1)" class="btn btn-sm btn-default">Cancel</a>
-				</div>
-			</form>
-		</div>
-		<div data-ng-hide="vm.isEdit()" data-ng-repeat="item in vm.items track by $index">
-			<a data-ng-click="vm.onEdit($index)" class="btn btn-sm btn-primary">Edit</a>
+		<div data-ng-repeat="item in vm.items track by $index">
+			<a href="#!/edit" data-ng-click="vm.onEdit($index)" class="btn btn-sm btn-primary">Edit</a>
 			|
 			<span data-ng-bind="item.shortName"></span>
 			|
