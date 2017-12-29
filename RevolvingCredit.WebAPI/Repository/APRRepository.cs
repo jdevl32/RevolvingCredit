@@ -3,6 +3,7 @@ using JDevl32.Web.Repository;
 using Microsoft.Extensions.Logging;
 using RevolvingCredit.Entity;
 using RevolvingCredit.Entity.Interface;
+using RevolvingCredit.Entity.Model;
 using RevolvingCredit.WebAPI.Repository.Interface;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,8 +59,25 @@ namespace RevolvingCredit.WebAPI.Repository
 		/// <inheritdoc />
 		/// <remarks>
 		/// Last modification:
+		/// Add logging.
 		/// </remarks>
-		public IEnumerable<IAPR> GetAPR() => EntityContext.APR.ToList();
+		public IEnumerable<IAPR> Get()
+		{
+			Logger.LogInformation($"Get the list of APRs from the entity context...");
+
+			return EntityContext.APR.ToList();
+		}
+
+		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		public void Update(IAPR apr)
+		{
+			Logger.LogInformation($"Update the entity context with APR ({apr})...");
+
+			EntityContext.APR.Update(Mapper.Map<APR>(apr));
+		}
 
 #endregion
 

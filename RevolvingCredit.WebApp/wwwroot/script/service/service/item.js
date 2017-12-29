@@ -6,11 +6,18 @@
 	{
 		"use strict";
 
-		// .
+		// Item service object.
 		// Last modification:
+		// Add message(s).
 		function ItemService()
 		{
-			// The item for which this service holds.
+			// The error message associated with the item.
+			this.errorMessage = "";
+
+			// The success message associated with the item.
+			this.successMessage = "";
+
+			// The item which this service holds.
 			this.item = {};
 		}
 

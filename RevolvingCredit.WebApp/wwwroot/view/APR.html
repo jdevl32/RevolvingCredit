@@ -1,5 +1,6 @@
 ﻿<div>
 	<spinner while="vm.isBusy">Loading APR(s)...</spinner>
+	<div class="text-success" data-ng-bind="vm.successMessage" data-ng-show="vm.successMessage"></div>
 	<div class="text-danger" data-ng-bind="vm.errorMessage" data-ng-show="vm.errorMessage"></div>
 	<div>
 		<div data-ng-repeat="item in vm.items track by $index">

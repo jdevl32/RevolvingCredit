@@ -17,6 +17,8 @@ namespace RevolvingCredit.WebAPI.ViewModel.Interface
 
 #region Property
 
+		// todo|jdevl32: may not need to expose id (in which case define new private here...)
+
 #endregion
 
 	}
