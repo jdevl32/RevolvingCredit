@@ -16,7 +16,7 @@ namespace RevolvingCredit.WebAPI.Repository
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Change references to revolving credit context from interface to implementation.
+	/// Implement remove APR.
 	/// </remarks>
 	public class APRRepository
 		:
@@ -66,6 +66,17 @@ namespace RevolvingCredit.WebAPI.Repository
 			Logger.LogInformation($"Get the list of APRs from the entity context...");
 
 			return EntityContext.APR.ToList();
+		}
+
+		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		public void Remove(IAPR apr)
+		{
+			Logger.LogInformation($"Remove APR ({apr}) from the entity context...");
+
+			EntityContext.APR.Remove(Mapper.Map<APR>(apr));
 		}
 
 		/// <inheritdoc />

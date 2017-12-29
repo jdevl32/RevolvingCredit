@@ -9,7 +9,7 @@ namespace RevolvingCredit.WebAPI.Repository.Interface
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Add update.
+	/// Add remove.
 	/// </remarks>
 	public interface IAPRRepository
 	{
@@ -25,6 +25,14 @@ namespace RevolvingCredit.WebAPI.Repository.Interface
 		/// Rename.
 		/// </remarks>
 		IEnumerable<IAPR> Get();
+
+		/// <summary>
+		/// Remove the APR.
+		/// </summary>
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		void Remove(IAPR apr);
 
 		/// <summary>
 		/// Update the APR.

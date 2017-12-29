@@ -20,8 +20,7 @@ namespace RevolvingCredit.WebAPI.Controller
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Implement controller base class.
-	/// Implement post (update) APR.
+	/// Implement delete (remove) APR.
 	/// </remarks>
 	[Produces("application/json")]
 	[Route("api/APR")]
@@ -70,6 +69,46 @@ namespace RevolvingCredit.WebAPI.Controller
 		}
 
 #endregion
+
+		/// <summary>
+		/// DELETE: api/APR
+		/// </summary>
+		/// <returns>
+		/// 
+		/// </returns>
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		[HttpDelete]
+		public async Task<IActionResult> Delete([FromBody] APRViewModel aprViewModel)
+		{
+			try
+			{
+				if (ModelState.IsValid)
+				{
+					var apr = Mapper.Map<IAPR>(aprViewModel);
+					//apr.UserName = User.Identity.Name;
+
+					APRRepository.Remove(apr);
+
+					// todo|jdevl32: better way (instead of "as") ???
+					if (await (APRRepository as APRRepository).SaveChangesAsync())
+					{
+						return Ok();
+					} // if
+				} // if
+				else if (HostingEnvironment.IsDevelopment())
+				{
+					return BadRequest(ModelState);
+				} // if
+			} // try
+			catch (Exception ex)
+			{
+				Logger.LogError($"Error removing APR ({aprViewModel}):  {ex}");
+			} // catch
+
+			return BadRequest();
+		}
 
 		/// <summary>
 		/// GET: api/APR
@@ -140,20 +179,6 @@ namespace RevolvingCredit.WebAPI.Controller
 
 			return BadRequest();
 		}
-
-		/**
-		// PUT: api/APR/5
-		[HttpPut("{id}")]
-		public void Put(int id, [FromBody]string value)
-		{
-		}
-
-		// DELETE: api/ApiWithActions/5
-		[HttpDelete("{id}")]
-		public void Delete(int id)
-		{
-		}
-		**/
 
 	}
 
