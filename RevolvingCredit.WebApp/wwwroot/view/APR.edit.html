@@ -1,7 +1,7 @@
 ﻿<div>
 	<div class="text-danger" data-ng-bind="vm.errorMessage" data-ng-show="vm.errorMessage"></div>
 	<div>
-		<form name="item" novalidate data-ng-submit="">
+		<form name="item" novalidate data-ng-submit="vm.onSubmit()">
 			<div class="form-group">
 				<label for="shortName">Short Name:</label>
 				<input class="form-control" id="shortName" name="shortName" type="text" data-ng-model="vm.item.shortName" required data-ng-minlength="1" />

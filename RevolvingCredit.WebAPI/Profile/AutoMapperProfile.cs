@@ -1,8 +1,10 @@
 ﻿using RevolvingCredit.Entity;
 using RevolvingCredit.Entity.Interface;
 using RevolvingCredit.Entity.Model;
+using RevolvingCredit.WebAPI.ViewModel;
+using RevolvingCredit.WebAPI.ViewModel.Interface;
 
-namespace _MigrateDatabase.Profile
+namespace RevolvingCredit.WebAPI.Profile
 {
 
 	/// <inheritdoc />
@@ -22,7 +24,8 @@ namespace _MigrateDatabase.Profile
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
-		/// Add account balance.
+		/// Add APR view model.
+		/// Correct namespace.
 		/// </remarks>
 		public AutoMapperProfile()
 		{
@@ -72,6 +75,8 @@ namespace _MigrateDatabase.Profile
 				.ReverseMap();
 			CreateMap<Payment, IPayment>()
 				.ConstructUsing(source => new Payment(source.Id))
+				.ReverseMap();
+			CreateMap<APRViewModel, IAPRViewModel>()
 				.ReverseMap();
 			// todo|jdevl32: maybe not needed ???
 			CreateMap<RevolvingCreditContext, IRevolvingCreditContext>()

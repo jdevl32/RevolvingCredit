@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -24,10 +25,11 @@ namespace RevolvingCredit.WebApp.Controller
 		/// <inheritdoc />
 		/// <remarks>
 		/// Last modification:
+		/// Implement instance mapper interface.
 		/// </remarks>
-		public AppController(IHostingEnvironment hostingEnvironment, ILogger<JDevl32.Web.Controller.ControllerBase> logger)
+		public AppController(IHostingEnvironment hostingEnvironment, ILogger<ControllerBase> logger, IMapper mapper)
 			:
-			base(hostingEnvironment, logger)
+			base(hostingEnvironment, logger, mapper)
 		{
 		}
 
