@@ -35,10 +35,11 @@
 					// Clear/reset edit APR (form and item service).
 					itemService.item = vm.item = {};
 
-					// todo|jdevl32: set a success message in the item service that can be relayed back and displayed...
+					// Set success message in the item service that can be relayed back and displayed.
+					itemService.successMessage = "APR updated.";
 
 					// Redirect back to APR view.
-					$window.location.href = "/APR";
+					$window.location.href = "#!/";
 				};
 
 			// Create error handler for POST.

@@ -18,6 +18,22 @@
 			// Create empty container for error message.
 			vm.errorMessage = "";
 
+			// Get the success message from the item service.
+			vm.successMessage = itemService.successMessage;
+
+			// todo|jdevl32: no need to watch ?!?!
+			/**
+			// Create watch handler for success message.
+			var watchSuccessMessage =
+				function(newValue, oldValue)
+				{
+					vm.successMessage = newValue;
+				};
+
+			// Watch success message.
+			//$watch("itemService.successMessage", watchSuccessMessage);
+			/**/
+
 			// Create empty container for APR(s).
 			vm.items = [];
 
@@ -63,7 +79,7 @@
 			try
 			{
 				$http
-					// Get the set of APRs from the API...
+					// Get the APRs from the API...
 					.get(url)
 					// ...using the defined handlers.
 					.then(onGetSuccess, onGetError)
@@ -76,64 +92,15 @@
 				vm.errorMessage = "[002] Failed to get APRs:  " + toString(e);
 			} // catch
 
-			// todo|jdevl32: cleanup...
-			/**
-			// Create empty container for edit/new APR.
-			vm.item = {};
-
-			// Create method to determine edit state.
-			vm.isEdit =
-				function()
-				{
-					return !$.isEmptyObject(vm.item);
-				};
-			**/
-
 			// Create method to initiate (edit) state.
 			vm.onEdit =
 				function(index)
 				{
-					//vm.item =
-					itemService.item = 
-						index < 0 ? {} : vm.items[index];
+					// Reset message(s);
+					vm.errorMessage = itemService.errorMessage = "";
+					vm.successMessage = itemService.successMessage = "";
+					itemService.item = index < 0 ? {} : vm.items[index];
 				};
-
-			// todo|jdevl32: eventually move to .edit.js...
-			/**
-			// Create success handler for POST.
-			var onPostSuccess =
-				function (response)
-				{
-					// todo|jdevl32: ??? distinguish between edit/new ???
-					// Add new APR to the container.
-					vm.items.push(response.data);
-
-					// Clear/reset edit/new APR (form).
-					vm.item = {};
-				};
-
-			// Create error handler for POST.
-			var onPostError =
-				function (error)
-				{
-					vm.errorMessage = "Failed to save APR:  " + toString(error);
-				};
-
-			// Form submit handler.
-			vm.onSubmit =
-				function ()
-				{
-					vm.isBusy = true;
-					vm.errorMessage = "";
-
-					$http
-						// Post the new APR to the API...
-						.post(url, vm.item)
-						// ...using the defined handlers.
-						.then(onPostSuccess, onPostError)
-						.finally(doFinally);
-				};
-			**/
 		}
 
 		// Use the existing module, specify controller.
