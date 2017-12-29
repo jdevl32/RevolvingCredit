@@ -2,15 +2,14 @@
 	<spinner while="vm.isBusy">Loading APR(s)...</spinner>
 	<div class="text-success" data-ng-bind="vm.successMessage" data-ng-show="vm.successMessage"></div>
 	<div class="text-danger" data-ng-bind="vm.errorMessage" data-ng-show="vm.errorMessage"></div>
-	<div>
-		<div data-ng-repeat="item in vm.items track by $index">
-			<a href="#!/edit" data-ng-click="vm.onEdit($index)" class="btn btn-sm btn-primary">Edit</a>
-			|
-			<span data-ng-bind="item.shortName"></span>
-			|
-			<span data-ng-bind="item.fullName"></span>
-			|
-			<span data-ng-bind="item.description"></span>
-		</div>
+	<a href="#!/update" data-ng-click="vm.onUpdate()" class="btn btn-sm btn-primary">New</a>
+	<div data-ng-repeat="item in vm.items track by $index">
+		<a href="#!/update" data-ng-click="vm.onUpdate($index)" class="btn btn-sm btn-primary">Edit</a>
+		|
+		<span data-ng-bind="item.shortName"></span>
+		|
+		<span data-ng-bind="item.fullName"></span>
+		|
+		<span data-ng-bind="item.description"></span>
 	</div>
 </div>

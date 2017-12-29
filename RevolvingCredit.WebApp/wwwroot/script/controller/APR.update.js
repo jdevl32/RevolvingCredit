@@ -1,4 +1,4 @@
-﻿// /script/controller/APR.edit.js
+﻿// /script/controller/APR.update.js
 
 // Exclude from global scope.
 (
@@ -6,7 +6,7 @@
 	{
 		"use strict";
 
-		// Define the APR edit controller.
+		// Define the APR update controller.
 		// Last modification:
 		// Inject window.
 		function controller($routeParams, $http, $window, itemService)
@@ -18,7 +18,7 @@
 			// Create empty container for error message.
 			vm.errorMessage = "";
 
-			// Get the APR to edit from the item service.
+			// Get the APR to update from the item service.
 			vm.item = itemService.item;
 
 			// Create success handler for POST.
@@ -32,7 +32,7 @@
 						debug(response, "response");
 					} // if
 
-					// Clear/reset edit APR (form and item service).
+					// Clear/reset update APR (form and item service).
 					itemService.item = vm.item = {};
 
 					// Set success message in the item service that can be relayed back and displayed.
@@ -88,11 +88,11 @@
 
 		// Use the existing module, specify controller.
 		// Last modification:
-		// Inject window.
+		// Rename controller.
 		angular.module("app-APR")
 			.controller
 			(
-				"aprEdit"
+				"aprUpdate"
 				,
 				[
 					"$routeParams"

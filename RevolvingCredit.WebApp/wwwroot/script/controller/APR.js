@@ -92,14 +92,14 @@
 				vm.errorMessage = "[002] Failed to get APRs:  " + toString(e);
 			} // catch
 
-			// Create method to initiate (edit) state.
-			vm.onEdit =
-				function(index)
+			// Create method to initiate (update) state.
+			vm.onUpdate =
+				function(index = null)
 				{
 					// Reset message(s);
 					vm.errorMessage = itemService.errorMessage = "";
 					vm.successMessage = itemService.successMessage = "";
-					itemService.item = index < 0 ? {} : vm.items[index];
+					itemService.item = isNullOrUndefined(index) ? {} : vm.items[index];
 				};
 		}
 

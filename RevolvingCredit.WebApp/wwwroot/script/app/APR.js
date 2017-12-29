@@ -8,6 +8,7 @@
 
 		// Configure routing.
 		// Last modification:
+		// Rename controller and template (view).
 		function configRoute($routeProvider)
 		{
 			$routeProvider
@@ -24,17 +25,17 @@
 							templateUrl: "/view/APR.html"
 						}
 					)
-				// APR edit route configuration.
+				// APR update route configuration.
 				.when
 					(
-						"/edit"
+						"/update"
 						,
 						{
-							controller: "aprEdit"
+							controller: "aprUpdate"
 							,
 							controllerAs: "vm"
 							,
-							templateUrl: "/view/APR.edit.html"
+							templateUrl: "/view/APR.update.html"
 						}
 					)
 				// Default route configuration.
