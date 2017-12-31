@@ -5,6 +5,7 @@
 	<a href="#!/update" data-ng-click="vm.onUpdate()" class="btn btn-sm btn-primary">New</a>
 	<div data-ng-repeat="item in vm.items track by $index">
 		<a href="#!/update" data-ng-click="vm.onUpdate($index)" class="btn btn-sm btn-primary">Edit</a>
+		<a href="#!/remove" data-ng-click="vm.onRemove($index)" class="btn btn-sm">Delete</a>
 		|
 		<span data-ng-bind="item.shortName"></span>
 		|
