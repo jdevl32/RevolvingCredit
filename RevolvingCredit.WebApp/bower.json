@@ -11,7 +11,8 @@
     "bootswatch": "v3.3.7",
     "jquery-validation": "1.17.0",
     "jquery-validation-unobtrusive": "v3.2.6",
-    "less": "v2.7.3"
+    "less": "v2.7.3",
+    "bootstrap-confirmation2": "v2.4.0"
   },
   "resolutions": {
     "angular": "v1.6.8",
