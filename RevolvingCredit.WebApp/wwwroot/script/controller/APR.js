@@ -1,6 +1,6 @@
 ﻿// /script/controller/APR.js
 
-// Exclude from global scope.
+// Exclude from global scope...
 (
 	function ()
 	{

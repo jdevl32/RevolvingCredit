@@ -1,6 +1,6 @@
 ﻿// /script/directive/spinner.js
 
-// Exclude from global scope.
+// Exclude from global scope...
 (
 	function ()
 	{

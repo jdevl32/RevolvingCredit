@@ -1,6 +1,6 @@
 ﻿// /script/app/APR.js
 
-// Exclude from global scope.
+// Exclude from global scope...
 (
 	function ()
 	{
@@ -44,7 +44,7 @@
 
 		// Create the app module.
 		// Last modification:
-		// Inject service(s) dependency.
+		// Inject angular bootstrap confirm dependency.
 		angular.module
 			(
 				"app-APR"
@@ -55,6 +55,8 @@
 					"ngRoute"
 					,
 					"service"
+					,
+					"mwl.confirm"
 				]
 			)
 			.config(configRoute);

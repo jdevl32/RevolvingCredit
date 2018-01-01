@@ -1,9 +1,9 @@
 ﻿// /script/site.js
 
-// Exclude from global scope.
+// Exclude from global scope...
 (
 	function ()
 	{
-		"use script";
+		"use strict";
 	}
 )();

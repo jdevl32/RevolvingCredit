@@ -5,14 +5,16 @@
     "bootstrap": "v3.3.7",
     "underscore": "1.8.3",
     "font-awesome": "Font-Awesome#v4.7.0",
-    "jQuery": "3.2.1",
+    "jquery": "3.2.1",
     "angular": "v1.6.8",
     "angular-route": "v1.6.8",
     "bootswatch": "v3.3.7",
     "jquery-validation": "1.17.0",
     "jquery-validation-unobtrusive": "v3.2.6",
     "less": "v2.7.3",
-    "bootstrap-confirmation2": "v2.4.0"
+    "angular-sanitize": "v1.6.8",
+    "ui-bootstrap": "2.5.0",
+    "angular-bootstrap-confirm": "2.5.1"
   },
   "resolutions": {
     "angular": "v1.6.8",

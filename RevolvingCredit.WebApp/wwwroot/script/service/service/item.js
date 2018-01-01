@@ -1,6 +1,6 @@
 ﻿// /script/service/service/item.js
 
-// Exclude from global scope.
+// Exclude from global scope...
 (
 	function ()
 	{
