@@ -9,7 +9,7 @@
 		// Define the APR update controller.
 		// Last modification:
 		// Inject window.
-		function controller($routeParams, $http, $window, itemService)
+		function controller($http, $routeParams, $window, itemService)
 		{
 			var vm = this;
 			vm.isBusy = true;
@@ -95,9 +95,9 @@
 				"aprUpdate"
 				,
 				[
-					"$routeParams"
-					,
 					"$http"
+					,
+					"$routeParams"
 					,
 					"$window"
 					,

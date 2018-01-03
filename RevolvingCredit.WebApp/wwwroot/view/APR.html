@@ -5,17 +5,15 @@
 	<a href="#!/update" data-ng-click="vm.onUpdate()" class="btn btn-sm btn-primary">New</a>
 	<div data-ng-repeat="item in vm.items track by $index">
 		<a href="#!/update" data-ng-click="vm.onUpdate($index)" class="btn btn-sm btn-xs btn-primary">Edit</a>
-		<!--
-		<a data-on-confirm="vm.onRemove($index)" class="btn btn-sm btn-xs" data-toggle="confirmation" data-popout="true" data-singleton="true">Delete (link)</a>
-		<button data-on-confirm="vm.onRemove($index)" class="btn btn-sm btn-xs" data-toggle="confirmation" data-popout="true" data-singleton="true">Delete (button)</button>
-		-->
 		<button
 			data-mwl-confirm
-			class="btn btn-default btn-xs"
+			class="btn btn-sm btn-xs btn-default"
 			data-title="Confirm Delete"
 			data-message="Are you sure?"
 			data-confirm-text="Yes"
-			data-cancel-text="No">
+			data-cancel-text="No"
+			on-confirm="vm.onRemove($index)"
+		>
 			Delete
 		</button>
 		|
