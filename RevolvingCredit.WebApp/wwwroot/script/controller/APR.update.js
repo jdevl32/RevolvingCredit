@@ -44,9 +44,9 @@
 
 			// Create error handler for POST.
 			var onPostError =
-				function (error)
+				function (response)
 				{
-					vm.errorMessage = "[001] Failed to update APR:  " + toString(error);
+					vm.errorMessage = "[001] Failed to update APR:  " + toString(response);
 				};
 
 			// Create finally handler.

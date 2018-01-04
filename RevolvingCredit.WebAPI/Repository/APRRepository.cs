@@ -72,6 +72,17 @@ namespace RevolvingCredit.WebAPI.Repository
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		public void Remove()
+		{
+			Logger.LogInformation($"Remove (all) APRs from the entity context...");
+
+			EntityContext.APR.RemoveRange();
+		}
+
+		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
 		public void Remove(IAPR apr)
 		{
 			Logger.LogInformation($"Remove APR ({apr}) from the entity context...");

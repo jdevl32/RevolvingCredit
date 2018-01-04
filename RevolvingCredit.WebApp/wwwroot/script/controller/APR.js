@@ -19,11 +19,45 @@
 			// Create empty container for error message.
 			vm.errorMessage = "";
 
+			/**
+			// Create empty container for partial message.
+			vm.partialMessage = "";
+			/**/
+
 			// Get the success message from the item service.
 			vm.successMessage = itemService.successMessage;
 
 			// Create empty container for APR(s).
 			vm.items = [];
+
+			// Create null tracking index.
+			vm.index = null;
+
+			// Format (error) message for display.
+			var formatErrorMessage =
+				function(locator, action, object)
+				{
+					vm.errorMessage = 
+						"[" 
+						+ locator
+						+ "] Failed to "
+						+ action
+						+ " APR"
+						+
+							(
+								isNullOrUndefined(vm.index)
+								?
+								"s"
+								:
+								" (" 
+								+ toString(vm.items[vm.index]) 
+								+ ")"
+							) 
+						+ ":  "
+						+ toString(object)
+						;
+				}
+				;
 
 			// Create success handler for GET.
 			var onGetSuccess =
@@ -43,7 +77,7 @@
 
 			// Create error handler for GET.
 			var onGetError =
-				function (error)
+				function (response)
 				{
 					// todo|jdevl32: make this global method...
 					// todo|jdevl32: fix (is-dev not working) --> 
@@ -51,10 +85,11 @@
 					// see https://docs.angularjs.org/guide/expression discussion on "context"...
 					if (vm.isDev)
 					{
-						debug(error, "error");
+						debug(response, "response");
 					} // if
 
-					vm.errorMessage = "[001] Failed to get APRs:  " + toString(error);
+					//vm.errorMessage = "[001] Failed to get APRs:  " + toString(response);
+					formatErrorMessage("001", "get", response);
 				};
 
 			// Create finally handler.
@@ -72,6 +107,9 @@
 			var doGet =
 				function()
 				{
+					// Reset tracking index (doesn't apply for get, and needed for format message).
+					vm.index = null;
+
 					try
 					{
 						$http
@@ -85,7 +123,8 @@
 					{
 						// Reset busy flag.
 						vm.isBusy = false;
-						vm.errorMessage = "[002] Failed to get APRs:  " + toString(e);
+						//vm.errorMessage = "[002] Failed to get APRs:  " + toString(e);
+						formatErrorMessage("002", "get", e);
 					} // catch
 				};
 
@@ -114,28 +153,65 @@
 
 			// Create error handler for DELETE.
 			var onDeleteError =
-				function (error)
+				function (response)
 				{
-					vm.errorMessage = "[001] Failed to remove APR:  " + toString(error);
+					//vm.errorMessage = "[001] Failed to remove APR:  " + toString(response);
+					formatErrorMessage("001", "remove", response);
 				};
 
 			// Create method to initiate (remove) state.
 			vm.onRemove =
 				function(index = null)
 				{
-					// todo|jdevl32: implement remove all (null index)...
-					//itemService.item = isNullOrUndefined(index) ? {} : vm.items[index];
+					// Set the index to track.
+					vm.index = index;
+					//var isAll = isNullOrUndefined(index);
+					var options =
+						//isAll
+						isNullOrUndefined(index)
+						? 
+						{
+							/**
+							headers: null
+							,
+							/**/
+							headers:
+							{
+								"Content-Type": "application/json"
+							}
+							,
+							data: {}
+						}
+						:
+						{
+							headers:
+							{
+								"Content-Type": "application/json"
+							}
+							,
+							data: vm.items[index]
+						}
+						;
 					vm.isBusy = true;
 					vm.errorMessage = "";
 
 					try
 					{
-						$http
-							// Delete the APR from the API...
-							.delete
+						/**
+						var promise;
+
+						// Delete the APR(s) from the API...
+						if (isNullOrUndefined(index))
+						{
+							promise = $http.delete(url);
+						} // if
+						else
+						{
+							promise = $http.delete
 								(
 									url
 									,
+									//options
 									{
 										headers:
 										{
@@ -145,6 +221,14 @@
 										data: vm.items[index]
 									}
 								)
+								;
+						} // else
+
+						promise
+							/**/
+						$http
+							// Delete the APR(s) from the API...
+							.delete(url, options)
 							// ...using the defined handlers.
 							.then(onDeleteSuccess, onDeleteError)
 							.finally(doFinally);
@@ -153,7 +237,24 @@
 					{
 						// Reset busy flag.
 						vm.isBusy = false;
-						vm.errorMessage = "[002] Failed to remove APR:  " + toString(e);
+						/**
+						vm.errorMessage = 
+							"[002] Failed to remove "
+							+
+								(
+									isAll
+									?
+									"all APRs"
+									:
+									"APR (" 
+									+ toString(options.data) 
+									+ ")"
+								) 
+							+ ":  "
+							+ toString(e)
+							;
+						/**/
+						formatErrorMessage("002", "remove", e);
 					} // catch
 				};
 

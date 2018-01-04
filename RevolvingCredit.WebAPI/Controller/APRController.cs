@@ -20,7 +20,7 @@ namespace RevolvingCredit.WebAPI.Controller
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Implement delete (remove) APR.
+	/// Implement delete (remove) (all) APRs.
 	/// </remarks>
 	[Produces("application/json")]
 	[Route("api/APR")]
@@ -70,8 +70,44 @@ namespace RevolvingCredit.WebAPI.Controller
 
 #endregion
 
+		// todo|jdevl32: !!! route(s) cannot be same (this one should be different) !!!
 		/// <summary>
 		/// DELETE: api/APR
+		/// Remove (all) the APRs.
+		/// </summary>
+		/// <returns>
+		/// 
+		/// </returns>
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		[HttpDelete(Name = "RemoveAll")]
+		public async Task<IActionResult> Delete()
+		{
+			try
+			{
+				if (ModelState.IsValid)
+				{
+					APRRepository.Remove();
+
+					// todo|jdevl32: better way (instead of "as") ???
+					if (await (APRRepository as APRRepository).SaveChangesAsync())
+					{
+						return Ok();
+					} // if
+				} // if
+			} // try
+			catch (Exception exception)
+			{
+				Logger.LogError($"Error removing APRs:  {exception}");
+			} // catch
+
+			return BadRequest();
+		}
+
+		/// <summary>
+		/// DELETE: api/APR
+		/// Remove the APR (specified by the view model).
 		/// </summary>
 		/// <returns>
 		/// 
@@ -102,9 +138,9 @@ namespace RevolvingCredit.WebAPI.Controller
 					return BadRequest(ModelState);
 				} // if
 			} // try
-			catch (Exception ex)
+			catch (Exception exception)
 			{
-				Logger.LogError($"Error removing APR ({aprViewModel}):  {ex}");
+				Logger.LogError($"Error removing APR ({aprViewModel}):  {exception}");
 			} // catch
 
 			return BadRequest();
