@@ -16,7 +16,7 @@
 			vm.isBusy = true;
 			vm.isDev = false;
 
-			// Reset.
+			// Create method to reset state.
 			var reset =
 				function()
 				{
@@ -115,6 +115,7 @@
 			var doGet =
 				function()
 				{
+					// Reset the state for fresh get.
 					reset();
 
 					try
@@ -193,9 +194,10 @@
 					{
 						var promise;
 
+						// Check if for all (invalid index).
 						if (isNullOrUndefined(index))
 						{
-							// Delete the APR (type)s from the API...
+							// Delete (all) the APR (type)s from the API...
 							promise = $http.delete(url + "/*");
 						} // if
 						else
