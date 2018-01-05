@@ -16,11 +16,11 @@ namespace RevolvingCredit.WebAPI.Controller
 {
 
 	/// <summary>
-	/// The APR controller.
+	/// The APR (type) controller.
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Implement delete (remove) (all) APRs.
+	/// Implement delete (remove) (all) APR (type)s.
 	/// </remarks>
 	[Produces("application/json")]
 	[Route("api/APR")]
@@ -32,7 +32,7 @@ namespace RevolvingCredit.WebAPI.Controller
 #region Property
 
 		/// <summary>
-		/// The APR repository.
+		/// The APR (type) repository.
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
@@ -44,10 +44,10 @@ namespace RevolvingCredit.WebAPI.Controller
 #region Instance Initialization
 
 		/// <summary>
-		/// Create an APR controller.
+		/// Create an APR (type) controller.
 		/// </summary>
 		/// <param name="aprRepository">
-		/// The (injected) APR repository.
+		/// The (injected) APR (type) repository.
 		/// </param>
 		/// <param name="hostingEnvironment">
 		/// The (injected) hosting environment.
@@ -70,18 +70,18 @@ namespace RevolvingCredit.WebAPI.Controller
 
 #endregion
 
-		// todo|jdevl32: !!! route(s) cannot be same (this one should be different) !!!
 		/// <summary>
 		/// DELETE: api/APR
-		/// Remove (all) the APRs.
+		/// Remove (all) the APR (type)s.
 		/// </summary>
 		/// <returns>
 		/// 
 		/// </returns>
 		/// <remarks>
 		/// Last modification:
+		/// Provision delete all route.
 		/// </remarks>
-		[HttpDelete(Name = "RemoveAll")]
+		[HttpDelete("*", Name = "RemoveAll")]
 		public async Task<IActionResult> Delete()
 		{
 			try
@@ -96,10 +96,14 @@ namespace RevolvingCredit.WebAPI.Controller
 						return Ok();
 					} // if
 				} // if
+				else if (HostingEnvironment.IsDevelopment())
+				{
+					return BadRequest(ModelState);
+				} // if
 			} // try
 			catch (Exception exception)
 			{
-				Logger.LogError($"Error removing APRs:  {exception}");
+				Logger.LogError($"Error removing APR (type)(s):  {exception}");
 			} // catch
 
 			return BadRequest();
@@ -107,7 +111,7 @@ namespace RevolvingCredit.WebAPI.Controller
 
 		/// <summary>
 		/// DELETE: api/APR
-		/// Remove the APR (specified by the view model).
+		/// Remove the APR (type) (specified by the view model).
 		/// </summary>
 		/// <returns>
 		/// 
@@ -140,7 +144,7 @@ namespace RevolvingCredit.WebAPI.Controller
 			} // try
 			catch (Exception exception)
 			{
-				Logger.LogError($"Error removing APR ({aprViewModel}):  {exception}");
+				Logger.LogError($"Error removing APR (type) ({aprViewModel}):  {exception}");
 			} // catch
 
 			return BadRequest();
@@ -166,7 +170,7 @@ namespace RevolvingCredit.WebAPI.Controller
 			} // try
 			catch (Exception ex)
 			{
-				Logger.LogError(ex, $"Error retrieving APR (type)s from the repository:  {ex}");
+				Logger.LogError(ex, $"Error retrieving APR (type)(s) from the repository:  {ex}");
 			} // catch
 
 			return BadRequest();
@@ -210,7 +214,7 @@ namespace RevolvingCredit.WebAPI.Controller
 			} // try
 			catch (Exception ex)
 			{
-				Logger.LogError($"Error updating APR ({aprViewModel}):  {ex}");
+				Logger.LogError($"Error updating APR (type) ({aprViewModel}):  {ex}");
 			} // catch
 
 			return BadRequest();

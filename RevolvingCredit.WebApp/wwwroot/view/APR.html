@@ -5,12 +5,13 @@
 	<a href="#!/update" data-ng-click="vm.onUpdate()" class="btn btn-sm btn-primary">New</a>
 	<button
 		data-mwl-confirm
+		data-ng-show="vm.items.length > 0"
 		class="btn btn-sm btn-default"
 		data-title="Confirm Delete All"
 		data-message="Are you sure?"
 		data-confirm-text="Yes"
 		data-cancel-text="No"
-		on-confirm="vm.onRemove()"
+		data-on-confirm="vm.onRemove()"
 	>
 		Delete All
 	</button>
@@ -23,7 +24,7 @@
 			data-message="Are you sure?"
 			data-confirm-text="Yes"
 			data-cancel-text="No"
-			on-confirm="vm.onRemove($index)"
+			data-on-confirm="vm.onRemove($index)"
 		>
 			Delete
 		</button>

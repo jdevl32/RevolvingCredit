@@ -12,11 +12,11 @@ namespace RevolvingCredit.WebAPI.Repository
 {
 
 	/// <summary>
-	/// The APR repository.
+	/// The APR (type) repository.
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Implement remove APR.
+	/// Implement remove APR (type).
 	/// </remarks>
 	public class APRRepository
 		:
@@ -32,7 +32,7 @@ namespace RevolvingCredit.WebAPI.Repository
 #region Instance Initialization
 
 		/// <summary>
-		/// Create an APR repository.
+		/// Create an APR (type) repository.
 		/// </summary>
 		/// <param name="revolvingCreditContext">
 		/// The revolving credit context.
@@ -63,7 +63,7 @@ namespace RevolvingCredit.WebAPI.Repository
 		/// </remarks>
 		public IEnumerable<IAPR> Get()
 		{
-			Logger.LogInformation($"Get the list of APRs from the entity context...");
+			Logger.LogInformation($"Get the list of APR (type)s from the entity context...");
 
 			return EntityContext.APR.ToList();
 		}
@@ -71,12 +71,13 @@ namespace RevolvingCredit.WebAPI.Repository
 		/// <inheritdoc />
 		/// <remarks>
 		/// Last modification:
+		/// (Re-)implement using (list of) APR (type)(s).
 		/// </remarks>
 		public void Remove()
 		{
-			Logger.LogInformation($"Remove (all) APRs from the entity context...");
+			Logger.LogInformation($"Remove (all) APR (type)(s) from the entity context...");
 
-			EntityContext.APR.RemoveRange();
+			EntityContext.APR.RemoveRange(EntityContext.APR.ToList());
 		}
 
 		/// <inheritdoc />
@@ -85,7 +86,7 @@ namespace RevolvingCredit.WebAPI.Repository
 		/// </remarks>
 		public void Remove(IAPR apr)
 		{
-			Logger.LogInformation($"Remove APR ({apr}) from the entity context...");
+			Logger.LogInformation($"Remove APR (type) ({apr}) from the entity context...");
 
 			EntityContext.APR.Remove(Mapper.Map<APR>(apr));
 		}
@@ -96,7 +97,7 @@ namespace RevolvingCredit.WebAPI.Repository
 		/// </remarks>
 		public void Update(IAPR apr)
 		{
-			Logger.LogInformation($"Update the entity context with APR ({apr})...");
+			Logger.LogInformation($"Update the entity context with APR (type) ({apr})...");
 
 			EntityContext.APR.Update(Mapper.Map<APR>(apr));
 		}

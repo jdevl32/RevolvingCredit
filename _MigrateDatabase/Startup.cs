@@ -118,7 +118,7 @@ namespace _MigrateDatabase
 		/// A logger factory.
 		/// </param>
 		/// <param name="aprSower">
-		/// An APR sower.
+		/// An APR (type)(s) sower.
 		/// </param>
 		/// <remarks>
 		/// Last modification:

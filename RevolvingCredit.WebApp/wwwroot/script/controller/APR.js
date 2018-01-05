@@ -6,7 +6,7 @@
 	{
 		"use strict";
 
-		// Define the APR controller.
+		// Define the APR (type) controller.
 		// Last modification:
 		// Inject window service.
 		function controller($http, $window, itemService)
@@ -16,22 +16,28 @@
 			vm.isBusy = true;
 			vm.isDev = false;
 
-			// Create empty container for error message.
-			vm.errorMessage = "";
+			// Reset.
+			var reset =
+				function()
+				{
+					// Create empty container for error message.
+					vm.errorMessage = "";
 
-			/**
-			// Create empty container for partial message.
-			vm.partialMessage = "";
-			/**/
+					// Create empty container for APR (type)(s).
+					vm.items = [];
+
+					// Create null tracking index.
+					vm.index = null;
+
+					/**
+					// Create empty container for partial message.
+					vm.partialMessage = "";
+					/**/
+				}
+				;
 
 			// Get the success message from the item service.
 			vm.successMessage = itemService.successMessage;
-
-			// Create empty container for APR(s).
-			vm.items = [];
-
-			// Create null tracking index.
-			vm.index = null;
 
 			// Format (error) message for display.
 			var formatErrorMessage =
@@ -42,12 +48,12 @@
 						+ locator
 						+ "] Failed to "
 						+ action
-						+ " APR"
+						+ " APR (type)"
 						+
 							(
 								isNullOrUndefined(vm.index)
 								?
-								"s"
+								"(s)"
 								:
 								" (" 
 								+ toString(vm.items[vm.index]) 
@@ -73,7 +79,8 @@
 					} // if
 
 					angular.copy(response.data, vm.items);
-				};
+				}
+				;
 
 			// Create error handler for GET.
 			var onGetError =
@@ -88,9 +95,9 @@
 						debug(response, "response");
 					} // if
 
-					//vm.errorMessage = "[001] Failed to get APRs:  " + toString(response);
 					formatErrorMessage("001", "get", response);
-				};
+				}
+				;
 
 			// Create finally handler.
 			var doFinally =
@@ -98,7 +105,8 @@
 				{
 					// Reset busy flag.
 					vm.isBusy = false;
-				};
+				}
+				;
 
 			// todo|jdevl32: ??? url to use ???
 			var url = "http://localhost:58410/api/APR";
@@ -107,13 +115,12 @@
 			var doGet =
 				function()
 				{
-					// Reset tracking index (doesn't apply for get, and needed for format message).
-					vm.index = null;
+					reset();
 
 					try
 					{
 						$http
-							// Get the APRs from the API...
+							// Get the APR (type)(s) from the API...
 							.get(url)
 							// ...using the defined handlers.
 							.then(onGetSuccess, onGetError)
@@ -123,10 +130,11 @@
 					{
 						// Reset busy flag.
 						vm.isBusy = false;
-						//vm.errorMessage = "[002] Failed to get APRs:  " + toString(e);
+
 						formatErrorMessage("002", "get", e);
 					} // catch
-				};
+				}
+				;
 
 			// Invoke the main method of this controller.
 			doGet();
@@ -135,6 +143,21 @@
 			var onDeleteSuccess =
 				function (response)
 				{
+					vm.successMessage =
+						"APR (type)"
+						+ 
+							(
+								isNullOrUndefined(vm.index) 
+								? 
+								"s" 
+								: 
+								" ("
+								+ toString(vm.items[vm.index])
+								+ ")"
+							)
+						+ " removed."
+						;
+
 					// todo|jdevl32: make this global method...
 					// todo|jdevl32: fix (is-dev not working) --> 
 					// probably is working, but need to "override" debug to use $window instead of window
@@ -143,8 +166,6 @@
 					{
 						debug(response, "response");
 					} // if
-
-					vm.successMessage = "APR removed.";
 
 					// Invoke the main method of this controller 
 					// (as if refresh but without redirect or reload).
@@ -155,9 +176,9 @@
 			var onDeleteError =
 				function (response)
 				{
-					//vm.errorMessage = "[001] Failed to remove APR:  " + toString(response);
 					formatErrorMessage("001", "remove", response);
-				};
+				}
+				;
 
 			// Create method to initiate (remove) state.
 			vm.onRemove =
@@ -165,59 +186,32 @@
 				{
 					// Set the index to track.
 					vm.index = index;
-					//var isAll = isNullOrUndefined(index);
-					var options =
-						//isAll
-						isNullOrUndefined(index)
-						? 
-						{
-							/**
-							headers: null
-							,
-							/**/
-							headers:
-							{
-								"Content-Type": "application/json"
-							}
-							,
-							data: {}
-						}
-						:
-						{
-							headers:
-							{
-								"Content-Type": "application/json"
-							}
-							,
-							data: vm.items[index]
-						}
-						;
 					vm.isBusy = true;
 					vm.errorMessage = "";
 
 					try
 					{
-						/**
 						var promise;
 
-						// Delete the APR(s) from the API...
 						if (isNullOrUndefined(index))
 						{
-							promise = $http.delete(url);
+							// Delete the APR (type)s from the API...
+							promise = $http.delete(url + "/*");
 						} // if
 						else
 						{
+							// Delete...
 							promise = $http.delete
 								(
 									url
 									,
-									//options
 									{
 										headers:
 										{
 											"Content-Type": "application/json"
 										}
 										,
+										// ...the APR (type) from the API...
 										data: vm.items[index]
 									}
 								)
@@ -225,10 +219,6 @@
 						} // else
 
 						promise
-							/**/
-						$http
-							// Delete the APR(s) from the API...
-							.delete(url, options)
 							// ...using the defined handlers.
 							.then(onDeleteSuccess, onDeleteError)
 							.finally(doFinally);
@@ -237,26 +227,11 @@
 					{
 						// Reset busy flag.
 						vm.isBusy = false;
-						/**
-						vm.errorMessage = 
-							"[002] Failed to remove "
-							+
-								(
-									isAll
-									?
-									"all APRs"
-									:
-									"APR (" 
-									+ toString(options.data) 
-									+ ")"
-								) 
-							+ ":  "
-							+ toString(e)
-							;
-						/**/
+
 						formatErrorMessage("002", "remove", e);
 					} // catch
-				};
+				}
+				;
 
 			// Create method to initiate (update) state.
 			vm.onUpdate =
@@ -266,7 +241,8 @@
 					vm.errorMessage = itemService.errorMessage = "";
 					vm.successMessage = itemService.successMessage = "";
 					itemService.item = isNullOrUndefined(index) ? {} : vm.items[index];
-				};
+				}
+				;
 		}
 
 		// Use the existing module, specify controller.
@@ -286,6 +262,7 @@
 						,
 						controller
 					]
-				);
+				)
+				;
 	}
 )();

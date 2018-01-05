@@ -74,7 +74,7 @@ namespace RevolvingCredit.WebApp
 		/// <inheritdoc />
 		/// <remarks>
 		/// Last modification:
-		/// Add revolving credit context APR sower.
+		/// Add revolving credit context APR (type)(s) sower.
 		/// </remarks>
 		// This method gets called by the runtime. Use this method to add services to the container.
 		// For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
@@ -101,7 +101,7 @@ namespace RevolvingCredit.WebApp
 		/// A logger factory.
 		/// </param>
 		/// <param name="aprSower">
-		/// An APR sower.
+		/// An APR (type)(s) sower.
 		/// </param>
 		/// <remarks>
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
