@@ -23,11 +23,11 @@
 					// Create empty container for error message.
 					vm.errorMessage = "";
 
-					// Create empty container for APR (type)(s).
-					vm.items = [];
-
 					// Create null tracking index.
 					vm.index = null;
+
+					// Create empty container for APR (type)(s).
+					vm.items = [];
 
 					/**
 					// Create empty container for partial message.
