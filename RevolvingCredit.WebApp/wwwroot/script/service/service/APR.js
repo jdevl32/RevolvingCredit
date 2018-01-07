@@ -77,22 +77,11 @@
 		// Create the service module.
 		// Last modification:
 		angular
-			.module
-				(
-					"service"
-					/**
-					,
-					[
-						//"$http"
-					]
-					/**/
-				)
+			.module("service")
 			.service
 				(
 					"aprService"
 					,
-					/**
-						/**/
 					[
 						"$http"
 						,

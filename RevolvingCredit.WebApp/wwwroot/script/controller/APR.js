@@ -139,25 +139,6 @@
 
 					// Get the APR (type)(s) using the defined handlers.
 					aprService.get(url, onGetSuccess, onError, doFinally, doCatch);
-
-					/**
-					try
-					{
-						$http
-							// Get the APR (type)(s) from the API...
-							.get(url)
-							// ...using the defined handlers.
-							.then(onGetSuccess, onError)
-							.finally(doFinally);
-					} // try
-					catch (e)
-					{
-						// Reset busy flag.
-						vm.isBusy = false;
-
-						formatErrorMessage("002", e);
-					} // catch
-					/**/
 				}
 				;
 
@@ -196,16 +177,6 @@
 					// (as if refresh but without redirect or reload).
 					doGet();
 				};
-
-			/**
-			// Create error handler for DELETE.
-			var onDeleteError =
-				function (response)
-				{
-					formatErrorMessage("001", response);
-				}
-				;
-			/**/
 
 			// Create method to initiate (remove) state.
 			vm.onRemove =
@@ -249,51 +220,6 @@
 							)
 							;
 					} // else
-
-					/**
-					try
-					{
-						var promise;
-
-						// Check if for all (invalid index).
-						if (isNullOrUndefined(index))
-						{
-							// Delete (all) the APR (type)s from the API...
-							promise = $http.delete(url + "/*");
-						} // if
-						else
-						{
-							// Delete...
-							promise = $http.delete
-								(
-									url
-									,
-									{
-										headers:
-										{
-											"Content-Type": "application/json"
-										}
-										,
-										// ...the APR (type) from the API...
-										data: vm.items[index]
-									}
-								)
-								;
-						} // else
-
-						promise
-							// ...using the defined handlers.
-							.then(onDeleteSuccess, onDeleteError)
-							.finally(doFinally);
-					} // try
-					catch (e)
-					{
-						// Reset busy flag.
-						vm.isBusy = false;
-
-						formatErrorMessage("002", e);
-					} // catch
-					/**/
 				}
 				;
 
