@@ -1,4 +1,4 @@
-﻿// /script/service/service/APR.js
+﻿// /script/service/service/API.js
 
 // Exclude from global scope...
 (
@@ -6,9 +6,9 @@
 	{
 		"use strict";
 
-		// APR service object.
+		// API service object.
 		// Last modification:
-		function APRService($http)
+		function APIService($http)
 		{
 			// Define DELETE method.
 			// Last modification:
@@ -80,12 +80,12 @@
 			.module("service")
 			.service
 				(
-					"aprService"
+					"apiService"
 					,
 					[
 						"$http"
 						,
-						APRService
+						APIService
 					]
 				)
 			;

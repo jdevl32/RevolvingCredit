@@ -8,9 +8,9 @@
 
 		// Define the APR (type) controller.
 		// Last modification:
-		// Inject APR service.
+		// Inject API service.
 		// Remove http service.
-		function controller($window, itemService, aprService)
+		function controller($window, itemService, apiService)
 		{
 			// Define the view model.
 			var vm = this;
@@ -138,7 +138,7 @@
 					action = "get";
 
 					// Get the APR (type)(s) using the defined handlers.
-					aprService.get(url, onGetSuccess, onError, doFinally, doCatch);
+					apiService.get(url, onGetSuccess, onError, doFinally, doCatch);
 				}
 				;
 
@@ -191,12 +191,12 @@
 					if (isNullOrUndefined(index))
 					{
 						// Delete (all) the APR (type)s from the API...
-						aprService.delete(url + "/*", onDeleteSuccess, onError, doFinally, doCatch);
+						apiService.delete(url + "/*", onDeleteSuccess, onError, doFinally, doCatch);
 					} // if
 					else
 					{
 						// Delete...
-						aprService.delete
+						apiService.delete
 							(
 								url
 								,
@@ -237,7 +237,7 @@
 
 		// Use the existing module, specify controller.
 		// Last modification:
-		// Inject APR service.
+		// Inject API service.
 		// Remove http service.
 		angular
 			.module("app-APR")
@@ -250,7 +250,7 @@
 						,
 						"itemService"
 						,
-						"aprService"
+						"apiService"
 						,
 						controller
 					]
