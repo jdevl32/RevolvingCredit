@@ -8,8 +8,9 @@
 
 		// Define the APR update controller.
 		// Last modification:
-		// Inject window.
-		function controller($http, $routeParams, $window, itemService)
+		// Inject API service.
+		// Remove http service.
+		function controller($routeParams, $window, itemService, apiService)
 		{
 			var vm = this;
 			vm.isBusy = true;
@@ -36,18 +37,20 @@
 					itemService.item = vm.item = {};
 
 					// Set success message in the item service that can be relayed back and displayed.
-					itemService.successMessage = "APR updated.";
+					itemService.successMessage = "APR saved.";
 
 					// Redirect back to APR view.
 					$window.location.href = "#!/";
-				};
+				}
+			;
 
 			// Create error handler for POST.
 			var onPostError =
 				function (response)
 				{
-					vm.errorMessage = "[001] Failed to update APR:  " + toString(response);
-				};
+					vm.errorMessage = "[001] Failed to save APR:  " + toString(response);
+				}
+			;
 
 			// Create finally handler.
 			var doFinally =
@@ -55,7 +58,17 @@
 				{
 					// Reset busy flag.
 					vm.isBusy = false;
-				};
+				}
+			;
+
+			// Create catch handler.
+			var doCatch =
+				function(e)
+				{
+					doFinally();
+					vm.errorMessage = "[002] Failed to save APR:  " + toString(e);
+				}
+			;
 
 			// todo|jdevl32: ??? url to use ???
 			//var url = "http://localhost:58410/api/APR/" + vm.item.id;
@@ -68,27 +81,16 @@
 					vm.isBusy = true;
 					vm.errorMessage = "";
 
-					try
-					{
-						$http
-							// Post the updated APR to the API...
-							.post(url, vm.item)
-							// ...using the defined handlers.
-							.then(onPostSuccess, onPostError)
-							.finally(doFinally);
-					} // try
-					catch (e)
-					{
-						// Reset busy flag.
-						vm.isBusy = false;
-						vm.errorMessage = "[002] Failed to update APR:  " + toString(e);
-					} // catch
-				};
+					// Post the saved APR to the API using the defined handlers.
+					apiService.post(url, onPostSuccess, onPostError, doFinally, doCatch, vm.item);
+				}
+			;
 		}
 
 		// Use the existing module, specify controller.
 		// Last modification:
-		// Rename controller.
+		// Inject API service.
+		// Remove http service.
 		angular
 			.module("app-APR")
 			.controller
@@ -96,13 +98,13 @@
 					"aprUpdate"
 					,
 					[
-						"$http"
-						,
 						"$routeParams"
 						,
 						"$window"
 						,
 						"itemService"
+						,
+						"apiService"
 						,
 						controller
 					]
