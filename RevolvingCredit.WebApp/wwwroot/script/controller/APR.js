@@ -8,13 +8,17 @@
 
 		// Define the APR (type) controller.
 		// Last modification:
-		// Inject window service.
-		function controller($http, $window, itemService)
+		// Inject APR service.
+		// Remove http service.
+		function controller($window, itemService, aprService)
 		{
 			// Define the view model.
 			var vm = this;
 			vm.isBusy = true;
 			vm.isDev = false;
+
+			// Create action member.
+			var action = "";
 
 			// Create method to reset state.
 			var reset =
@@ -39,9 +43,11 @@
 			// Get the success message from the item service.
 			vm.successMessage = itemService.successMessage;
 
-			// Format (error) message for display.
+			// Create format (error) message method for display.
+			// Last modification:
+			// (Re-)implement action as controller member.
 			var formatErrorMessage =
-				function(locator, action, object)
+				function(locator, object)
 				{
 					vm.errorMessage = 
 						"[" 
@@ -82,8 +88,9 @@
 				}
 				;
 
-			// Create error handler for GET.
-			var onGetError =
+			// Create error handler for (all) action(s).
+			// Last modification:
+			var onError =
 				function (response)
 				{
 					// todo|jdevl32: make this global method...
@@ -95,7 +102,7 @@
 						debug(response, "response");
 					} // if
 
-					formatErrorMessage("001", "get", response);
+					formatErrorMessage("001", response);
 				}
 				;
 
@@ -105,6 +112,15 @@
 				{
 					// Reset busy flag.
 					vm.isBusy = false;
+				}
+				;
+
+			// Create catch handler.
+			var doCatch =
+				function(e)
+				{
+					doFinally();
+					formatErrorMessage("002", e);
 				}
 				;
 
@@ -118,13 +134,20 @@
 					// Reset the state for fresh get.
 					reset();
 
+					// Set (get) action.
+					action = "get";
+
+					// Get the APR (type)(s) using the defined handlers.
+					aprService.get(url, onGetSuccess, onError, doFinally, doCatch);
+
+					/**
 					try
 					{
 						$http
 							// Get the APR (type)(s) from the API...
 							.get(url)
 							// ...using the defined handlers.
-							.then(onGetSuccess, onGetError)
+							.then(onGetSuccess, onError)
 							.finally(doFinally);
 					} // try
 					catch (e)
@@ -132,8 +155,9 @@
 						// Reset busy flag.
 						vm.isBusy = false;
 
-						formatErrorMessage("002", "get", e);
+						formatErrorMessage("002", e);
 					} // catch
+					/**/
 				}
 				;
 
@@ -173,13 +197,15 @@
 					doGet();
 				};
 
+			/**
 			// Create error handler for DELETE.
 			var onDeleteError =
 				function (response)
 				{
-					formatErrorMessage("001", "remove", response);
+					formatErrorMessage("001", response);
 				}
 				;
+			/**/
 
 			// Create method to initiate (remove) state.
 			vm.onRemove =
@@ -190,6 +216,41 @@
 					vm.isBusy = true;
 					vm.errorMessage = "";
 
+					// Check if for all (invalid index).
+					if (isNullOrUndefined(index))
+					{
+						// Delete (all) the APR (type)s from the API...
+						aprService.delete(url + "/*", onDeleteSuccess, onError, doFinally, doCatch);
+					} // if
+					else
+					{
+						// Delete...
+						aprService.delete
+							(
+								url
+								,
+								onDeleteSuccess
+								,
+								onError
+								,
+								doFinally
+								,
+								doCatch
+								,
+								{
+									headers:
+									{
+										"Content-Type": "application/json"
+									}
+									,
+									// ...the APR (type) from the API...
+									data: vm.items[index]
+								}
+							)
+							;
+					} // else
+
+					/**
 					try
 					{
 						var promise;
@@ -230,8 +291,9 @@
 						// Reset busy flag.
 						vm.isBusy = false;
 
-						formatErrorMessage("002", "remove", e);
+						formatErrorMessage("002", e);
 					} // catch
+					/**/
 				}
 				;
 
@@ -249,18 +311,20 @@
 
 		// Use the existing module, specify controller.
 		// Last modification:
-		// Inject window service.
-		angular.module("app-APR")
+		// Inject APR service.
+		// Remove http service.
+		angular
+			.module("app-APR")
 			.controller
 				(
 					"apr"
 					,
 					[
-						"$http"
-						,
 						"$window"
 						,
 						"itemService"
+						,
+						"aprService"
 						,
 						controller
 					]

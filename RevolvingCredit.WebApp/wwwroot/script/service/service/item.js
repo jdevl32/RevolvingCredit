@@ -23,7 +23,18 @@
 
 		// Create the service module.
 		// Last modification:
-		angular.module("service", [])
-			.service("itemService", ItemService);
+		angular
+			.module
+				(
+					"service"
+					//, []
+				)
+			.service
+				(
+					"itemService"
+					,
+					ItemService
+				)
+		;
 	}
 )();

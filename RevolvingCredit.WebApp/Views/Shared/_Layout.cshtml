@@ -16,14 +16,17 @@
 <body>
 	<div id="wrapper">
 		<header>
+			[Header]
 		</header>
 		<div id="menu">
+			[Menu]
 		</div>
 		<div id="main">
 			<h2>@ViewBag.Title</h2>
 			@RenderBody()
 		</div>
 		<footer>
+			[Footer]
 		</footer>
 	</div>
 	<!-- Bootstrap must follow jQuery. -->
@@ -38,7 +41,9 @@
 	<script type="text/javascript" language="javascript" src="~/script/global.js"></script>
 	<script type="text/javascript" language="javascript" src="~/script/site.js"></script>
 	<script type="text/javascript" language="javascript" src="~/script/directive/spinner.js"></script>
+	<script type="text/javascript" language="javascript" src="~/script/service/service/service.js"></script>
 	<script type="text/javascript" language="javascript" src="~/script/service/service/item.js"></script>
+	<script type="text/javascript" language="javascript" src="~/script/service/service/APR.js"></script>
 	@RenderSection("script", false)
 </body>
 </html>

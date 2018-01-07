@@ -89,22 +89,24 @@
 		// Use the existing module, specify controller.
 		// Last modification:
 		// Rename controller.
-		angular.module("app-APR")
+		angular
+			.module("app-APR")
 			.controller
-			(
-				"aprUpdate"
-				,
-				[
-					"$http"
+				(
+					"aprUpdate"
 					,
-					"$routeParams"
-					,
-					"$window"
-					,
-					"itemService"
-					,
-					controller
-				]
-			);
+					[
+						"$http"
+						,
+						"$routeParams"
+						,
+						"$window"
+						,
+						"itemService"
+						,
+						controller
+					]
+				)
+		;
 	}
 )();
