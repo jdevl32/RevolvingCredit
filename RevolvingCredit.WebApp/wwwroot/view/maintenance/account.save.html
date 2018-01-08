@@ -1,6 +1,16 @@
 ﻿<div class="form-group">
 	<label for="safeAccountNumber">Safe Account Number:</label>
-	<input class="form-control" id="safeAccountNumber" name="safeAccountNumber" type="text" data-ng-model="vm.item.safeAccountNumber" required data-ng-minlength="1" data-ng-maxlength="4" />
+	<input 
+		class="form-control" 
+		id="safeAccountNumber" 
+		name="safeAccountNumber" 
+		type="text" 
+		data-ng-model="vm.item.safeAccountNumber" 
+		required 
+		data-ng-minlength="1" 
+		data-ng-maxlength="4" 
+		placeholder="Typically last 4 digits of account number."
+	/>
 	<span data-ng-show="item.safeAccountNumber.$dirty && item.safeAccountNumber.$invalid" class="text-warning">
 		<span data-ng-show="item.safeAccountNumber.$error.required">Required.</span>
 		<span data-ng-show="item.safeAccountNumber.$error.minlength">Minimum length not satisfied.</span>
