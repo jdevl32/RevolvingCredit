@@ -8,14 +8,18 @@
 
 		// Configure routing.
 		// Last modification:
-		// Rename controller and template (view).
-		function configRoute($routeProvider)
+		// Rename.
+		// (Re-)implement AngularUI router.
+		function config($urlRouterProvider, $stateProvider)
 		{
-			$routeProvider
+			// Default route configuration.
+			$urlRouterProvider.otherwise("/");
+
+			$stateProvider
 				// APR route configuration.
-				.when
+				.state
 					(
-						"/"
+						"apr"
 						,
 						{
 							controller: "apr"
@@ -23,12 +27,14 @@
 							controllerAs: "vm"
 							,
 							templateUrl: "/view/APR.html"
+							,
+							url: "/"
 						}
 					)
 				// APR update route configuration.
-				.when
+				.state
 					(
-						"/update"
+						"aprUpdate"
 						,
 						{
 							controller: "aprUpdate"
@@ -36,15 +42,16 @@
 							controllerAs: "vm"
 							,
 							templateUrl: "/view/APR.update.html"
+							,
+							url: "/update"
 						}
 					)
-				// Default route configuration.
-				.otherwise({ redirectTo: "/" });
+			;
 		}
 
 		// Create the app module.
 		// Last modification:
-		// Inject angular bootstrap confirm dependency.
+		// (Re-)implement AngularUI router.
 		angular.module
 			(
 				"app-APR"
@@ -52,13 +59,13 @@
 				[
 					"spinner"
 					,
-					"ngRoute"
+					"ui.router"
 					,
 					"service"
 					,
 					"mwl.confirm"
 				]
 			)
-			.config(configRoute);
+			.config(config);
 	}
 )();

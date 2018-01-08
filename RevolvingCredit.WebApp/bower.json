@@ -14,7 +14,8 @@
     "less": "v2.7.3",
     "angular-sanitize": "v1.6.8",
     "ui-bootstrap": "2.5.0",
-    "angular-bootstrap-confirm": "2.5.1"
+    "angular-bootstrap-confirm": "2.5.1",
+    "angular-ui-router": "1.0.12"
   },
   "resolutions": {
     "angular": "v1.6.8",
