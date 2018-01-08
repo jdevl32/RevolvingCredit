@@ -38,7 +38,7 @@
 					vm.partialMessage = "";
 					/**/
 				}
-				;
+			;
 
 			// Get the success message from the item service.
 			vm.successMessage = itemService.successMessage;
@@ -67,9 +67,9 @@
 							) 
 						+ ":  "
 						+ toString(object)
-						;
+					;
 				}
-				;
+			;
 
 			// Create success handler for GET.
 			var onGetSuccess =
@@ -86,7 +86,7 @@
 
 					angular.copy(response.data, vm.items);
 				}
-				;
+			;
 
 			// Create error handler for (all) action(s).
 			// Last modification:
@@ -104,7 +104,7 @@
 
 					formatErrorMessage("001", response);
 				}
-				;
+			;
 
 			// Create finally handler.
 			var doFinally =
@@ -113,7 +113,7 @@
 					// Reset busy flag.
 					vm.isBusy = false;
 				}
-				;
+			;
 
 			// Create catch handler.
 			var doCatch =
@@ -122,7 +122,7 @@
 					doFinally();
 					formatErrorMessage("002", e);
 				}
-				;
+			;
 
 			// todo|jdevl32: ??? url to use ???
 			var url = "http://localhost:58410/api/APR";
@@ -140,7 +140,7 @@
 					// Get the APR (type)(s) using the defined handlers.
 					apiService.get(url, onGetSuccess, onError, doFinally, doCatch);
 				}
-				;
+			;
 
 			// Invoke the main method of this controller.
 			doGet();
@@ -176,7 +176,8 @@
 					// Invoke the main method of this controller 
 					// (as if refresh but without redirect or reload).
 					doGet();
-				};
+				}
+			;
 
 			// Create method to initiate (remove) state.
 			vm.onRemove =
@@ -218,10 +219,10 @@
 									data: vm.items[index]
 								}
 							)
-							;
+						;
 					} // else
 				}
-				;
+			;
 
 			// Create method to initiate (update) state.
 			vm.onUpdate =
@@ -232,7 +233,7 @@
 					vm.successMessage = itemService.successMessage = "";
 					itemService.item = isNullOrUndefined(index) ? {} : vm.items[index];
 				}
-				;
+			;
 		}
 
 		// Use the existing module, specify controller.
@@ -255,6 +256,6 @@
 						controller
 					]
 				)
-				;
+		;
 	}
 )();
