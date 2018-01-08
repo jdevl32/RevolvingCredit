@@ -4,7 +4,7 @@ namespace RevolvingCredit.WebAPI.ViewModel.Interface
 {
 
 	/// <summary>
-	/// The APR (type) view model for a revolving credit account.
+	/// An APR (type) view model for a revolving credit account.
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
