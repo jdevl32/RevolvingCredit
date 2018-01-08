@@ -8,8 +8,7 @@
 
 		// Configure routing.
 		// Last modification:
-		// Rename.
-		// (Re-)implement AngularUI router.
+		// Refactor using unique (save) item(s).
 		function config($urlRouterProvider, $stateProvider)
 		{
 			// Default route configuration.
@@ -19,31 +18,31 @@
 				// APR route configuration.
 				.state
 					(
-						"apr"
+						"unique"
 						,
 						{
-							controller: "apr"
+							controller: "unique"
 							,
 							controllerAs: "vm"
 							,
-							templateUrl: "/view/APR.html"
+							templateUrl: "/view/maintenance/unique.html"
 							,
 							url: "/"
 						}
 					)
-				// APR update route configuration.
+				// APR save route configuration.
 				.state
 					(
-						"aprUpdate"
+						"save"
 						,
 						{
-							controller: "aprUpdate"
+							controller: "uniqueSave"
 							,
 							controllerAs: "vm"
 							,
-							templateUrl: "/view/APR.update.html"
+							templateUrl: "/view/maintenance/unique.save.html"
 							,
-							url: "/update"
+							url: "/save"
 						}
 					)
 			;

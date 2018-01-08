@@ -8,9 +8,12 @@
 
 		// Item service object.
 		// Last modification:
-		// Add message(s).
+		// Add display name.
 		function ItemService()
 		{
+			// The display name for the item.
+			this.displayName = "";
+
 			// The error message associated with the item.
 			this.errorMessage = "";
 
