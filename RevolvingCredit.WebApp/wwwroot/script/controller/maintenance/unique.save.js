@@ -8,7 +8,8 @@
 
 		// Define the unique item save controller.
 		// Last modification:
-		function controller($routeParams, $window, itemService, apiService)
+		// Inject state-params (replacing route-params).
+		function controller($stateParams, $window, itemService, apiService)
 		{
 			var vm = this;
 			vm.isBusy = true;
@@ -95,6 +96,7 @@
 
 		// Use the existing module, specify controller.
 		// Last modification:
+		// Inject state-params (replacing route-params).
 		angular
 			.module("app-APR")
 			.controller
@@ -102,7 +104,7 @@
 					"uniqueSave"
 					,
 					[
-						"$routeParams"
+						"$stateParams"
 						,
 						"$window"
 						,

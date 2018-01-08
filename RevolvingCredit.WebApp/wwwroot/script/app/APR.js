@@ -24,6 +24,14 @@
 							controller: "unique"
 							,
 							controllerAs: "vm"
+							// todo|jdevl32: ??? how to include data specific to each type ???
+							/**
+							,
+							data:
+							{
+								displayName: "APR (type)"
+							}
+							/**/
 							,
 							templateUrl: "/view/maintenance/unique.html"
 							,

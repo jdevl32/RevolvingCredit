@@ -8,7 +8,8 @@
 
 		// Define the unique item controller.
 		// Last modification:
-		function controller($window, itemService, apiService)
+		// Inject state-params.
+		function controller($stateParams, $window, itemService, apiService)
 		{
 			// Define the view model.
 			var vm = this;
@@ -244,6 +245,7 @@
 
 		// Use the existing module, specify controller.
 		// Last modification:
+		// Inject state-params.
 		angular
 			.module("app-APR")
 			.controller
@@ -251,6 +253,8 @@
 					"unique"
 					,
 					[
+						"$stateParams"
+						,
 						"$window"
 						,
 						"itemService"
