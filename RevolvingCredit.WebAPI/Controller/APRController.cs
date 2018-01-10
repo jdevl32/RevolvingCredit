@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RevolvingCredit.Entity.Interface;
-using RevolvingCredit.WebAPI.Repository;
 using RevolvingCredit.WebAPI.Repository.Interface;
 using RevolvingCredit.WebAPI.ViewModel;
 using RevolvingCredit.WebAPI.ViewModel.Interface;
@@ -75,7 +74,7 @@ namespace RevolvingCredit.WebAPI.Controller
 		/// Remove (all) the APR (type)s.
 		/// </summary>
 		/// <returns>
-		/// 
+		/// A(n) (async) action result task.
 		/// </returns>
 		/// <remarks>
 		/// Last modification:
@@ -90,8 +89,7 @@ namespace RevolvingCredit.WebAPI.Controller
 				{
 					APRRepository.Remove();
 
-					// todo|jdevl32: better way (instead of "as") ???
-					if (await (APRRepository as APRRepository).SaveChangesAsync())
+					if (await APRRepository.SaveChangesAsync())
 					{
 						return Ok();
 					} // if
@@ -113,8 +111,11 @@ namespace RevolvingCredit.WebAPI.Controller
 		/// DELETE: api/APR
 		/// Remove the APR (type) (specified by the view model).
 		/// </summary>
+		/// <param name="aprViewModel">
+		/// The APR (type) view model.
+		/// </param>
 		/// <returns>
-		/// 
+		/// A(n) (async) action result task.
 		/// </returns>
 		/// <remarks>
 		/// Last modification:
@@ -131,8 +132,7 @@ namespace RevolvingCredit.WebAPI.Controller
 
 					APRRepository.Remove(apr);
 
-					// todo|jdevl32: better way (instead of "as") ???
-					if (await (APRRepository as APRRepository).SaveChangesAsync())
+					if (await APRRepository.SaveChangesAsync())
 					{
 						return Ok();
 					} // if
@@ -154,7 +154,7 @@ namespace RevolvingCredit.WebAPI.Controller
 		/// GET: api/APR
 		/// </summary>
 		/// <returns>
-		/// 
+		/// An action result.
 		/// </returns>
 		/// <remarks>
 		/// Last modification:
@@ -179,8 +179,11 @@ namespace RevolvingCredit.WebAPI.Controller
 		/// <summary>
 		/// POST: api/APR
 		/// </summary>
+		/// <param name="aprViewModel">
+		/// The APR (type) view model.
+		/// </param>
 		/// <returns>
-		/// 
+		/// A(n) (async) action result task.
 		/// </returns>
 		/// <remarks>
 		/// Last modification:
@@ -188,6 +191,7 @@ namespace RevolvingCredit.WebAPI.Controller
 		[HttpPost]
 		public async Task<IActionResult> Post([FromBody] APRViewModel aprViewModel)
 		{
+			// todo|jdevl32: contant(s)...
 			try
 			{
 				if (ModelState.IsValid)
@@ -197,13 +201,11 @@ namespace RevolvingCredit.WebAPI.Controller
 
 					APRRepository.Update(apr);
 
-					// todo|jdevl32: better way (instead of "as") ???
-					if (await (APRRepository as APRRepository).SaveChangesAsync())
+					if (await APRRepository.SaveChangesAsync())
 					{
 						// Use map in case database modified the APR in any way.
 						var value = Mapper.Map<IAPRViewModel>(apr);
 
-						// todo|jdevl32: contant(s)...
 						return Accepted($"/api/APR/{value.Id}", value);
 					} // if
 				} // if

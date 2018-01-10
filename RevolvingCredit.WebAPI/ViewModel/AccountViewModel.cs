@@ -3,6 +3,7 @@ using RevolvingCredit.WebAPI.ViewModel.Interface;
 
 namespace RevolvingCredit.WebAPI.ViewModel
 {
+
 	/// <summary>
 	/// A view model for a revolving credit account.
 	/// </summary>
@@ -38,4 +39,5 @@ namespace RevolvingCredit.WebAPI.ViewModel
 #endregion
 
 	}
+
 }

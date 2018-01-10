@@ -1,4 +1,5 @@
-﻿using RevolvingCredit.Entity.Interface;
+﻿using JDevl32.Web.Repository.Interface;
+using RevolvingCredit.Entity.Interface;
 using System.Collections.Generic;
 
 namespace RevolvingCredit.WebAPI.Repository.Interface
@@ -9,9 +10,11 @@ namespace RevolvingCredit.WebAPI.Repository.Interface
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Add remove all.
+	/// Inherit entity context repository interface.
 	/// </remarks>
 	public interface IAPRRepository
+		:
+		IEntityContextRepository
 	{
 
 		/// <summary>
