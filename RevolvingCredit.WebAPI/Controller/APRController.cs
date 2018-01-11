@@ -48,11 +48,14 @@ namespace RevolvingCredit.WebAPI.Controller
 		{
 		}
 
+		// todo|jdevl32: ??? is making protected the best solution ???
+		// todo|jdevl32: ??? ...and then...how to handle default display name ???
 		/// <inheritdoc />
 		/// <remarks>
 		/// Last modification:
+		/// Make protected.
 		/// </remarks>
-		public APRController(IHostingEnvironment hostingEnvironment, ILogger<APRController> logger, IMapper mapper, IUniqueEntityContextRepository<IAPR, APR> uniqueEntityContextRepository, string displayName)
+		protected APRController(IHostingEnvironment hostingEnvironment, ILogger<APRController> logger, IMapper mapper, IUniqueEntityContextRepository<IAPR, APR> uniqueEntityContextRepository, string displayName)
 			:
 			base(hostingEnvironment, logger, mapper, uniqueEntityContextRepository, displayName)
 		{

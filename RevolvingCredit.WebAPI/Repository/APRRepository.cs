@@ -28,11 +28,14 @@ namespace RevolvingCredit.WebAPI.Repository
 		/// <inheritdoc />
 		/// <remarks>
 		/// Last modification:
+		/// Set the method to get the db-set of (all) the unique item entity item(s).
 		/// </remarks>
 		public APRRepository(RevolvingCreditContext entityContext, ILogger<APRRepository> logger, IMapper mapper)
 			:
 			base(entityContext, logger, mapper)
 		{
+			// todo|jdevl32: !!! move this into base constructor...
+			GetUniqueEntityDbSet = () => entityContext.APR;
 		}
 
 #endregion
