@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using JDevl32.Web.Repository;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using RevolvingCredit.Entity;
 using RevolvingCredit.Entity.Interface;
@@ -26,6 +27,8 @@ namespace RevolvingCredit.WebAPI.Repository
 	{
 
 #region Property
+
+		private string UniqueController_DisplayName { get; } = "APR (type)";
 
 #endregion
 
@@ -63,9 +66,9 @@ namespace RevolvingCredit.WebAPI.Repository
 		/// </remarks>
 		public IEnumerable<IAPR> Get()
 		{
-			Logger.LogInformation($"Get the list of APR (type)s from the entity context...");
+			Logger.LogInformation($"Get the list of (all) the {UniqueController_DisplayName}(s) from the entity context...");
 
-			return EntityContext.APR.ToList();
+			return GetUniqueEntityDbSet().ToList();
 		}
 
 		/// <inheritdoc />
@@ -75,9 +78,9 @@ namespace RevolvingCredit.WebAPI.Repository
 		/// </remarks>
 		public void Remove()
 		{
-			Logger.LogInformation($"Remove (all) APR (type)(s) from the entity context...");
+			Logger.LogInformation($"Remove (all) the {UniqueController_DisplayName}(s) from the entity context...");
 
-			EntityContext.APR.RemoveRange(EntityContext.APR.ToList());
+			GetUniqueEntityDbSet().RemoveRange(GetUniqueEntityDbSet().ToList());
 		}
 
 		/// <inheritdoc />
@@ -86,9 +89,9 @@ namespace RevolvingCredit.WebAPI.Repository
 		/// </remarks>
 		public void Remove(IAPR apr)
 		{
-			Logger.LogInformation($"Remove APR (type) ({apr}) from the entity context...");
+			Logger.LogInformation($"Remove the {UniqueController_DisplayName} ({apr}) from the entity context...");
 
-			EntityContext.APR.Remove(Mapper.Map<APR>(apr));
+			GetUniqueEntityDbSet().Remove(Mapper.Map<APR>(apr));
 		}
 
 		/// <inheritdoc />
@@ -97,12 +100,14 @@ namespace RevolvingCredit.WebAPI.Repository
 		/// </remarks>
 		public void Update(IAPR apr)
 		{
-			Logger.LogInformation($"Update the entity context with APR (type) ({apr})...");
+			Logger.LogInformation($"Update the entity context with the {UniqueController_DisplayName} ({apr})...");
 
-			EntityContext.APR.Update(Mapper.Map<APR>(apr));
+			GetUniqueEntityDbSet().Update(Mapper.Map<APR>(apr));
 		}
 
 #endregion
+
+		private DbSet<APR> GetUniqueEntityDbSet() => EntityContext.APR;
 
 	}
 

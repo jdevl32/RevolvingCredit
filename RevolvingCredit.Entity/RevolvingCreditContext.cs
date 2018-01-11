@@ -55,48 +55,93 @@ namespace RevolvingCredit.Entity
 #endregion
 
 		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
 		public DbSet<Account> Account { get; set; }
 
 		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
 		public DbSet<AccountAPR> AccountAPR { get; set; }
 
 		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
 		public DbSet<AccountBalance> AccountBalance { get; set; }
 
 		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
 		public DbSet<AccountIssuer> AccountIssuer { get; set; }
 
 		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
 		public DbSet<AccountLabel> AccountLabel { get; set; }
 
 		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
 		public DbSet<AccountLine> AccountLine { get; set; }
 
 		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
 		public DbSet<AccountNote> AccountNote { get; set; }
 
 		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
 		public DbSet<AccountPayment> AccountPayment { get; set; }
 
 		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
 		public DbSet<AccountPromotion> AccountPromotion { get; set; }
 
 		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
 		public DbSet<AccountStatement> AccountStatement { get; set; }
 
 		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
 		public DbSet<APR> APR { get; set; }
 
 		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
 		public DbSet<Issuer> Issuer { get; set; }
 
 		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
 		public DbSet<Label> Label { get; set; }
 
 		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
 		public DbSet<Line> Line { get; set; }
 
 		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
 		public DbSet<Payment> Payment { get; set; }
 
 #endregion
@@ -104,6 +149,9 @@ namespace RevolvingCredit.Entity
 #region Instance Initialization
 
 		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
 		public RevolvingCreditContext(DbContextOptions dbContextOptions, IConfigurationRoot configurationRoot, IHostingEnvironment hostingEnvironment, ILogger<RevolvingCreditContext> logger, IMapper mapper)
 			:
 			base(dbContextOptions, configurationRoot, hostingEnvironment, logger, mapper)
@@ -111,6 +159,9 @@ namespace RevolvingCredit.Entity
 			SetLogger(logger);
 
 		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
 		public RevolvingCreditContext(DbContextOptions dbContextOptions, IConfigurationRoot configurationRoot, IHostingEnvironment hostingEnvironment, ILogger<RevolvingCreditContext> logger, IMapper mapper, string connectionStringKey)
 			:
 			base(dbContextOptions, configurationRoot, hostingEnvironment, logger, mapper, connectionStringKey)
