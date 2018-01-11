@@ -1,15 +1,11 @@
 ﻿using AutoMapper;
 using JDevl32.Web.Controller;
+using JDevl32.Web.Repository.Interface;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RevolvingCredit.Entity.Interface;
-using RevolvingCredit.WebAPI.Repository.Interface;
-using RevolvingCredit.WebAPI.ViewModel;
-using RevolvingCredit.WebAPI.ViewModel.Interface;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using RevolvingCredit.Entity.Model;
 
 namespace RevolvingCredit.WebAPI.Controller
 {
@@ -19,15 +15,53 @@ namespace RevolvingCredit.WebAPI.Controller
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Implement delete (remove) (all) APR (type)s.
+	/// (Re-)implement as unique item entity context controller (base class).
 	/// </remarks>
 	[Produces("application/json")]
 	[Route("api/APR")]
 	public class APRController
 		:
-		ControllerBase<APRController>
+		UniqueEntityContextControllerBase<APRController, IAPR, APR>
 	{
 
+#region Constant
+
+		/// <summary>
+		/// The (default) display name.
+		/// </summary>
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		public const string DefaultDisplayName = "APR (type)";
+
+#endregion
+
+#region Instance Initialization
+
+		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		public APRController(IHostingEnvironment hostingEnvironment, ILogger<APRController> logger, IMapper mapper, IUniqueEntityContextRepository<IAPR, APR> uniqueEntityContextRepository)
+			:
+			this(hostingEnvironment, logger, mapper, uniqueEntityContextRepository, DefaultDisplayName)
+		{
+		}
+
+		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		public APRController(IHostingEnvironment hostingEnvironment, ILogger<APRController> logger, IMapper mapper, IUniqueEntityContextRepository<IAPR, APR> uniqueEntityContextRepository, string displayName)
+			:
+			base(hostingEnvironment, logger, mapper, uniqueEntityContextRepository, displayName)
+		{
+		}
+
+#endregion
+
+		// todo|jdevl32: cleanup...
+		/**
 #region Property
 
 		/// <summary>
@@ -221,6 +255,7 @@ namespace RevolvingCredit.WebAPI.Controller
 
 			return BadRequest();
 		}
+		/**/
 
 	}
 

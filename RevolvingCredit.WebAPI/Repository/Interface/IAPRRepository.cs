@@ -5,8 +5,9 @@ using System.Collections.Generic;
 namespace RevolvingCredit.WebAPI.Repository.Interface
 {
 
+	// todo|jdevl32: this should probably be (able to be) removed once new implementation...
 	/// <summary>
-	/// The APR repository.
+	/// The APR (type) repository.
 	/// </summary>
 	/// <remarks>
 	/// Last modification:

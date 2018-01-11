@@ -1,13 +1,9 @@
 ﻿using AutoMapper;
 using JDevl32.Web.Repository;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using RevolvingCredit.Entity;
 using RevolvingCredit.Entity.Interface;
 using RevolvingCredit.Entity.Model;
-using RevolvingCredit.WebAPI.Repository.Interface;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace RevolvingCredit.WebAPI.Repository
 {
@@ -17,15 +13,31 @@ namespace RevolvingCredit.WebAPI.Repository
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Implement remove APR (type).
+	/// (Re-)implement as unique item (APR (type)) entity context repository (base class).
 	/// </remarks>
 	public class APRRepository
 		:
-		EntityContextRepositoryBase<APRRepository, RevolvingCreditContext>
-		,
-		IAPRRepository
+		UniqueEntityContextRepositoryBase<APRRepository, RevolvingCreditContext, IAPR, APR>
+		// todo|jdevl32: cleanup...
+		//,
+		//IAPRRepository
 	{
 
+#region Instance Initialization
+
+		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		public APRRepository(RevolvingCreditContext entityContext, ILogger<APRRepository> logger, IMapper mapper)
+			:
+			base(entityContext, logger, mapper)
+		{
+		}
+
+#endregion
+
+		/**
 #region Property
 
 		private string UniqueController_DisplayName { get; } = "APR (type)";
@@ -108,6 +120,7 @@ namespace RevolvingCredit.WebAPI.Repository
 #endregion
 
 		private DbSet<APR> GetUniqueEntityDbSet() => EntityContext.APR;
+		/**/
 
 	}
 

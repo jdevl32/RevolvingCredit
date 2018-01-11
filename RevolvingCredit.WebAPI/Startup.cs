@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using JDevl32.Web.Repository.Interface;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using RevolvingCredit.Entity;
+using RevolvingCredit.Entity.Interface;
+using RevolvingCredit.Entity.Model;
 using RevolvingCredit.WebAPI.Repository;
-using RevolvingCredit.WebAPI.Repository.Interface;
 using StartupBase = JDevl32.Web.Host.StartupBase;
 
 namespace RevolvingCredit.WebAPI
@@ -101,12 +103,12 @@ namespace RevolvingCredit.WebAPI
 		/// <inheritdoc />
 		/// <remarks>
 		/// Last modification:
-		/// Add revolving credit context APR sower.
+		/// Replace APR (type) (with unique item context) repository interface.
 		/// </remarks>
 		public override void ConfigureServices(IServiceCollection services)
 		{
 			base.ConfigureServices(services);
-			services.AddScoped<IAPRRepository, APRRepository>();
+			services.AddScoped<IUniqueEntityContextRepository<IAPR, APR>, APRRepository>();
 			services.AddTransient<APRSower>();
 		}
 
