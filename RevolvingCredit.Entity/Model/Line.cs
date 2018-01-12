@@ -9,7 +9,7 @@ namespace RevolvingCredit.Entity.Model
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Add (EF-required) default (parameterless) constructor.
+	/// Remove constructor(s).
 	/// </remarks>
 	public class Line
 		:
@@ -18,6 +18,8 @@ namespace RevolvingCredit.Entity.Model
 		ILine
 	{
 
+		// todo|jdevl32: cleanup...
+		/**
 #region Instance Initialization
 
 #region UniqueBase
@@ -63,6 +65,7 @@ namespace RevolvingCredit.Entity.Model
 #endregion
 
 #endregion
+		/**/
 
 	}
 

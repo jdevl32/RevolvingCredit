@@ -26,9 +26,12 @@ namespace _MigrateDatabase.Profile
 		/// </remarks>
 		public AutoMapperProfile()
 		{
+			// todo|jdevl32: ???
+			/**
 			CreateMap<Account, IAccount>()
 				.ConstructUsing(source => new Account())
 				.ReverseMap();
+			/**/
 			CreateMap<AccountAPR, IAccountAPR>()
 				.ConstructUsing(source => new AccountAPR(source.Mapper))
 				.ReverseMap();
@@ -56,21 +59,23 @@ namespace _MigrateDatabase.Profile
 			CreateMap<AccountStatement, IAccountStatement>()
 				.ConstructUsing(source => new AccountStatement(source.Mapper))
 				.ReverseMap();
+			/**
 			CreateMap<APR, IAPR>()
-				.ConstructUsing(source => new APR(source.Id))
+				.ConstructUsing(source => new APR { Id = source.Id })
 				.ReverseMap();
 			CreateMap<Issuer, IIssuer>()
-				.ConstructUsing(source => new Issuer(source.Id))
+				.ConstructUsing(source => new Issuer { Id = source.Id })
 				.ReverseMap();
 			CreateMap<Label, ILabel>()
-				.ConstructUsing(source => new Label(source.Id))
+				.ConstructUsing(source => new Label { Id = source.Id })
 				.ReverseMap();
 			CreateMap<Line, ILine>()
-				.ConstructUsing(source => new Line(source.Id))
+				.ConstructUsing(source => new Line { Id = source.Id })
 				.ReverseMap();
 			CreateMap<Payment, IPayment>()
-				.ConstructUsing(source => new Payment(source.Id))
+				.ConstructUsing(source => new Payment { Id = source.Id })
 				.ReverseMap();
+			/**/
 			// todo|jdevl32: maybe not needed ???
 			CreateMap<RevolvingCreditContext, IRevolvingCreditContext>()
 				.ConstructUsing

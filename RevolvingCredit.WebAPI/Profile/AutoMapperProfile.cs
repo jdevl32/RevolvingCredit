@@ -1,8 +1,8 @@
-﻿using RevolvingCredit.Entity;
+﻿using JDevl32.Web.ViewModel.Interface;
+using RevolvingCredit.Entity;
 using RevolvingCredit.Entity.Interface;
 using RevolvingCredit.Entity.Model;
 using RevolvingCredit.WebAPI.ViewModel;
-using RevolvingCredit.WebAPI.ViewModel.Interface;
 
 namespace RevolvingCredit.WebAPI.Profile
 {
@@ -31,9 +31,12 @@ namespace RevolvingCredit.WebAPI.Profile
 		{
 			// todo|jdevl32: ??? here (instead of web-app) ???
 			/**/
+			// todo|jdevl32: ???
+			/**
 			CreateMap<Account, IAccount>()
 				.ConstructUsing(source => new Account())
 				.ReverseMap();
+			/**/
 			CreateMap<AccountAPR, IAccountAPR>()
 				.ConstructUsing(source => new AccountAPR(source.Mapper))
 				.ReverseMap();
@@ -61,22 +64,32 @@ namespace RevolvingCredit.WebAPI.Profile
 			CreateMap<AccountStatement, IAccountStatement>()
 				.ConstructUsing(source => new AccountStatement(source.Mapper))
 				.ReverseMap();
+			/**
 			CreateMap<APR, IAPR>()
-				.ConstructUsing(source => new APR(source.Id))
+				.ConstructUsing(source => new APR { Id = source.Id })
 				.ReverseMap();
+			// todo|jdevl32: ??? what about balance (and interface) ???
 			CreateMap<Issuer, IIssuer>()
-				.ConstructUsing(source => new Issuer(source.Id))
+				.ConstructUsing(source => new Issuer { Id = source.Id })
 				.ReverseMap();
 			CreateMap<Label, ILabel>()
-				.ConstructUsing(source => new Label(source.Id))
+				.ConstructUsing(source => new Label { Id = source.Id })
 				.ReverseMap();
 			CreateMap<Line, ILine>()
-				.ConstructUsing(source => new Line(source.Id))
+				.ConstructUsing(source => new Line { Id = source.Id })
 				.ReverseMap();
 			CreateMap<Payment, IPayment>()
-				.ConstructUsing(source => new Payment(source.Id))
+				.ConstructUsing(source => new Payment { Id = source.Id })
 				.ReverseMap();
-			CreateMap<APRViewModel, IAPRViewModel>()
+			/**/
+			// todo|jdevl32: ???
+			CreateMap<APRViewModel, APR>()
+				.ReverseMap();
+			CreateMap<APRViewModel, IUniqueViewModel<IAPR>>()
+				.ReverseMap();
+			CreateMap<IAPR, IUniqueViewModel<IAPR>>()
+				// todo|jdevl32: ??? what about (null) mapper ???
+				.ConstructUsing(source => new APRViewModel(null))
 				.ReverseMap();
 			// todo|jdevl32: maybe not needed ???
 			CreateMap<RevolvingCreditContext, IRevolvingCreditContext>()

@@ -1,5 +1,6 @@
-﻿using JDevl32.Entity.Model;
-using RevolvingCredit.WebAPI.ViewModel.Interface;
+﻿using AutoMapper;
+using JDevl32.Web.ViewModel;
+using RevolvingCredit.Entity.Interface;
 
 namespace RevolvingCredit.WebAPI.ViewModel
 {
@@ -9,25 +10,31 @@ namespace RevolvingCredit.WebAPI.ViewModel
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Remove test.
+	/// Remove constructor(s).
+	/// (Re-)implement as unique item view model.
 	/// </remarks>
 	public class APRViewModel
 		:
-		UniqueBase
+		// todo|jdevl32: cleanup...
+		//UniqueBase
+		//,
+		//IAPRViewModel
+		UniqueViewModelBase<IAPR>
 		,
-		IAPRViewModel
+		IAPR
 	{
 
 #region Property
 
-#region IAPRViewModel
+//#region IAPRViewModel
 
-#endregion
+//#endregion
 
 #endregion
 
 #region Instance Initialization
 
+		/**
 #region UniqueBase
 
 		/// <inheritdoc />
@@ -69,6 +76,17 @@ namespace RevolvingCredit.WebAPI.ViewModel
 		}
 
 #endregion
+		/**/
+
+		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		public APRViewModel(IMapper mapper)
+			:
+			base(mapper)
+		{
+		}
 
 #endregion
 

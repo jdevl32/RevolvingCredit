@@ -1,18 +1,19 @@
-﻿using JDevl32.Entity.Interface;
+﻿using RevolvingCredit.Entity.Interface;
 
 namespace RevolvingCredit.WebAPI.ViewModel.Interface
 {
 
-	/// <summary>
-	/// An APR (type) view model for a revolving credit account.
-	/// </summary>
+	// todo|jdevl32: this should probably be (able to be) removed once new implementation...
+	/// <inheritdoc />
 	/// <remarks>
 	/// Last modification:
 	/// Remove test.
 	/// </remarks>
 	public interface IAPRViewModel
 		:
-		IUnique
+		// todo|jdevl32: ??? (all unique view model(s)) ???
+		//IUnique
+		IAPR
 	{
 
 #region Property

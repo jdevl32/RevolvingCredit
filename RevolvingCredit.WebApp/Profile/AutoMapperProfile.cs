@@ -1,4 +1,4 @@
-﻿namespace _MigrateDatabase.Profile
+﻿namespace RevolvingCredit.WebApp.Profile
 {
 
 	/// <inheritdoc />
@@ -89,7 +89,7 @@
 							)
 					)
 				.ReverseMap();
-			**/
+			/**/
 		}
 
 	}
