@@ -1,8 +1,7 @@
-﻿using JDevl32.Web.ViewModel.Interface;
+﻿using JDevl32.Entity.Model;
 using RevolvingCredit.Entity;
 using RevolvingCredit.Entity.Interface;
 using RevolvingCredit.Entity.Model;
-using RevolvingCredit.WebAPI.ViewModel;
 
 namespace RevolvingCredit.WebAPI.Profile
 {
@@ -24,8 +23,7 @@ namespace RevolvingCredit.WebAPI.Profile
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
-		/// Add APR view model.
-		/// Correct namespace.
+		/// Create map of APR to unique item (base class).
 		/// </remarks>
 		public AutoMapperProfile()
 		{
@@ -82,15 +80,23 @@ namespace RevolvingCredit.WebAPI.Profile
 				.ConstructUsing(source => new Payment { Id = source.Id })
 				.ReverseMap();
 			/**/
+			CreateMap<APR, UniqueBase>()
+				.ConstructUsing(source => new APR { Id = source.Id })
+				.ReverseMap();
 			// todo|jdevl32: ???
+			/**
 			CreateMap<APRViewModel, APR>()
 				.ReverseMap();
 			CreateMap<APRViewModel, IUniqueViewModel<IAPR>>()
 				.ReverseMap();
+			/**/
+			// todo|jdevl32: ???
+			/**
 			CreateMap<IAPR, IUniqueViewModel<IAPR>>()
 				// todo|jdevl32: ??? what about (null) mapper ???
 				.ConstructUsing(source => new APRViewModel(null))
 				.ReverseMap();
+			/**/
 			// todo|jdevl32: maybe not needed ???
 			CreateMap<RevolvingCreditContext, IRevolvingCreditContext>()
 				.ConstructUsing

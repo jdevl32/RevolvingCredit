@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
+using JDevl32.Entity.Model;
 using JDevl32.Web.Repository;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using RevolvingCredit.Entity;
-using RevolvingCredit.Entity.Interface;
-using RevolvingCredit.Entity.Model;
 
 namespace RevolvingCredit.WebAPI.Repository
 {
@@ -13,11 +13,11 @@ namespace RevolvingCredit.WebAPI.Repository
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// (Re-)implement as unique item (APR (type)) entity context repository (base class).
+	/// Remove unique item (and entity) type(s) from unique item entity context repository (base class).
 	/// </remarks>
 	public class APRRepository
 		:
-		UniqueEntityContextRepositoryBase<APRRepository, RevolvingCreditContext, IAPR, APR>
+		UniqueEntityContextRepositoryBase<APRRepository, RevolvingCreditContext>
 		// todo|jdevl32: cleanup...
 		//,
 		//IAPRRepository
@@ -28,11 +28,11 @@ namespace RevolvingCredit.WebAPI.Repository
 		/// <inheritdoc />
 		/// <remarks>
 		/// Last modification:
-		/// Set the method to get the db-set of (all) the unique item entity item(s) (as base class constructor argument).
+		/// Replace method to get a db-set of (all) the APR type(s) with property.
 		/// </remarks>
 		public APRRepository(RevolvingCreditContext entityContext, ILogger<APRRepository> logger, IMapper mapper)
 			:
-			base(entityContext, logger, mapper, () => entityContext.APR)
+			base(entityContext, logger, mapper, mapper.Map<DbSet<UniqueBase>>(entityContext.APR))
 		{
 		}
 

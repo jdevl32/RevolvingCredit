@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using JDevl32.Web.ViewModel;
+﻿using JDevl32.Web.ViewModel;
 using RevolvingCredit.Entity.Interface;
 
 namespace RevolvingCredit.WebAPI.ViewModel
@@ -10,8 +9,7 @@ namespace RevolvingCredit.WebAPI.ViewModel
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Remove constructor(s).
-	/// (Re-)implement as unique item view model.
+	/// Remove unique item type from unique item view model (base class).
 	/// </remarks>
 	public class APRViewModel
 		:
@@ -19,7 +17,7 @@ namespace RevolvingCredit.WebAPI.ViewModel
 		//UniqueBase
 		//,
 		//IAPRViewModel
-		UniqueViewModelBase<IAPR>
+		UniqueViewModelBase
 		,
 		IAPR
 	{
@@ -76,7 +74,6 @@ namespace RevolvingCredit.WebAPI.ViewModel
 		}
 
 #endregion
-		/**/
 
 		/// <inheritdoc />
 		/// <remarks>
@@ -87,6 +84,7 @@ namespace RevolvingCredit.WebAPI.ViewModel
 			base(mapper)
 		{
 		}
+		/**/
 
 #endregion
 

@@ -4,8 +4,6 @@ using JDevl32.Web.Repository.Interface;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using RevolvingCredit.Entity.Interface;
-using RevolvingCredit.Entity.Model;
 
 namespace RevolvingCredit.WebAPI.Controller
 {
@@ -15,13 +13,13 @@ namespace RevolvingCredit.WebAPI.Controller
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// (Re-)implement as unique item entity context controller (base class).
+	/// Remove unique item (and entity) type(s) from unique item entity context controller (base class).
 	/// </remarks>
 	[Produces("application/json")]
 	[Route("api/APR")]
 	public class APRController
 		:
-		UniqueEntityContextControllerBase<APRController, IAPR, APR>
+		UniqueEntityContextControllerBase<APRController>
 	{
 
 #region Constant
@@ -41,8 +39,9 @@ namespace RevolvingCredit.WebAPI.Controller
 		/// <inheritdoc />
 		/// <remarks>
 		/// Last modification:
+		/// Remove unique item (and entity) type(s) from unique item entity context repository.
 		/// </remarks>
-		public APRController(IHostingEnvironment hostingEnvironment, ILogger<APRController> logger, IMapper mapper, IUniqueEntityContextRepository<IAPR, APR> uniqueEntityContextRepository)
+		public APRController(IHostingEnvironment hostingEnvironment, ILogger<APRController> logger, IMapper mapper, IUniqueEntityContextRepository uniqueEntityContextRepository)
 			:
 			this(hostingEnvironment, logger, mapper, uniqueEntityContextRepository, DefaultDisplayName)
 		{
@@ -53,9 +52,9 @@ namespace RevolvingCredit.WebAPI.Controller
 		/// <inheritdoc />
 		/// <remarks>
 		/// Last modification:
-		/// Make protected.
+		/// Remove unique item (and entity) type(s) from unique item entity context repository.
 		/// </remarks>
-		protected APRController(IHostingEnvironment hostingEnvironment, ILogger<APRController> logger, IMapper mapper, IUniqueEntityContextRepository<IAPR, APR> uniqueEntityContextRepository, string displayName)
+		protected APRController(IHostingEnvironment hostingEnvironment, ILogger<APRController> logger, IMapper mapper, IUniqueEntityContextRepository uniqueEntityContextRepository, string displayName)
 			:
 			base(hostingEnvironment, logger, mapper, uniqueEntityContextRepository, displayName)
 		{
