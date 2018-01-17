@@ -1,7 +1,8 @@
-﻿using JDevl32.Entity.Model;
+﻿using JDevl32.Web.ViewModel;
 using RevolvingCredit.Entity;
 using RevolvingCredit.Entity.Interface;
 using RevolvingCredit.Entity.Model;
+using RevolvingCredit.WebAPI.ViewModel;
 
 namespace RevolvingCredit.WebAPI.Profile
 {
@@ -80,8 +81,14 @@ namespace RevolvingCredit.WebAPI.Profile
 				.ConstructUsing(source => new Payment { Id = source.Id })
 				.ReverseMap();
 			/**/
+			// todo|jdevl32: ???
+			/**
 			CreateMap<APR, UniqueBase>()
 				.ConstructUsing(source => new APR { Id = source.Id })
+				.ReverseMap();
+			/**/
+			CreateMap<APR, UniqueViewModelBase>()
+				.ConstructUsing(source => new APRViewModel())
 				.ReverseMap();
 			// todo|jdevl32: ???
 			/**

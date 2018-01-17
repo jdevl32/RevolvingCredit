@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using JDevl32.Entity;
+using JDevl32.Entity.Generic;
 using Microsoft.Extensions.Logging;
 using RevolvingCredit.Entity.Model;
 using System.Linq;

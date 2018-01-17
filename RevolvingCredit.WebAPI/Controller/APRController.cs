@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
-using JDevl32.Web.Controller;
-using JDevl32.Web.Repository.Interface;
+using JDevl32.Web.Controller.Generic;
+using JDevl32.Web.Repository.Interface.Generic;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using RevolvingCredit.Entity.Model;
+using RevolvingCredit.WebAPI.Repository;
+using RevolvingCredit.WebAPI.ViewModel;
 
 namespace RevolvingCredit.WebAPI.Controller
 {
@@ -13,13 +16,15 @@ namespace RevolvingCredit.WebAPI.Controller
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Remove unique item (and entity) type(s) from unique item entity context controller (base class).
+	/// Add repository type.
+	/// Add unique item type.
+	/// Add unique item view model type.
 	/// </remarks>
 	[Produces("application/json")]
 	[Route("api/APR")]
 	public class APRController
 		:
-		UniqueEntityContextControllerBase<APRController>
+		UniqueInformableControllerBase<APRController, APRRepository, APR, APRViewModel>
 	{
 
 #region Constant
@@ -39,11 +44,12 @@ namespace RevolvingCredit.WebAPI.Controller
 		/// <inheritdoc />
 		/// <remarks>
 		/// Last modification:
-		/// Remove unique item (and entity) type(s) from unique item entity context repository.
+		/// Replace derived class with repository type.
+		/// Add unique item type.
 		/// </remarks>
-		public APRController(IHostingEnvironment hostingEnvironment, ILogger<APRController> logger, IMapper mapper, IUniqueEntityContextRepository uniqueEntityContextRepository)
+		public APRController(IHostingEnvironment hostingEnvironment, ILogger<APRController> logger, IMapper mapper, IUniqueInformableEntityContextRepository<APRRepository, APR> uniqueInformableEntityContextRepository)
 			:
-			this(hostingEnvironment, logger, mapper, uniqueEntityContextRepository, DefaultDisplayName)
+			this(hostingEnvironment, logger, mapper, uniqueInformableEntityContextRepository, DefaultDisplayName)
 		{
 		}
 
@@ -52,11 +58,12 @@ namespace RevolvingCredit.WebAPI.Controller
 		/// <inheritdoc />
 		/// <remarks>
 		/// Last modification:
-		/// Remove unique item (and entity) type(s) from unique item entity context repository.
+		/// Replace derived class with repository type.
+		/// Add unique item type.
 		/// </remarks>
-		protected APRController(IHostingEnvironment hostingEnvironment, ILogger<APRController> logger, IMapper mapper, IUniqueEntityContextRepository uniqueEntityContextRepository, string displayName)
+		protected APRController(IHostingEnvironment hostingEnvironment, ILogger<APRController> logger, IMapper mapper, IUniqueInformableEntityContextRepository<APRRepository, APR> uniqueInformableEntityContextRepository, string displayName)
 			:
-			base(hostingEnvironment, logger, mapper, uniqueEntityContextRepository, displayName)
+			base(hostingEnvironment, logger, mapper, uniqueInformableEntityContextRepository, displayName)
 		{
 		}
 

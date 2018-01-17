@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
-using JDevl32.Entity.Model;
-using JDevl32.Web.Repository;
-using Microsoft.EntityFrameworkCore;
+using JDevl32.Web.Repository.Generic;
 using Microsoft.Extensions.Logging;
 using RevolvingCredit.Entity;
+using RevolvingCredit.Entity.Model;
 
 namespace RevolvingCredit.WebAPI.Repository
 {
@@ -13,11 +12,11 @@ namespace RevolvingCredit.WebAPI.Repository
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Remove unique item (and entity) type(s) from unique item entity context repository (base class).
+	/// Add unique item type to unique item entity context repository (base class).
 	/// </remarks>
 	public class APRRepository
 		:
-		UniqueEntityContextRepositoryBase<APRRepository, RevolvingCreditContext>
+		UniqueInformableEntityContextRepositoryBase<APRRepository, RevolvingCreditContext, APR>
 		// todo|jdevl32: cleanup...
 		//,
 		//IAPRRepository
@@ -32,7 +31,7 @@ namespace RevolvingCredit.WebAPI.Repository
 		/// </remarks>
 		public APRRepository(RevolvingCreditContext entityContext, ILogger<APRRepository> logger, IMapper mapper)
 			:
-			base(entityContext, logger, mapper, mapper.Map<DbSet<UniqueBase>>(entityContext.APR))
+			base(entityContext, logger, mapper, entityContext.APR)
 		{
 		}
 

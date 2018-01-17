@@ -1,10 +1,11 @@
-﻿using JDevl32.Web.Repository.Interface;
+﻿using JDevl32.Web.Repository.Interface.Generic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using RevolvingCredit.Entity;
+using RevolvingCredit.Entity.Model;
 using RevolvingCredit.WebAPI.Repository;
 using StartupBase = JDevl32.Web.Host.StartupBase;
 
@@ -101,12 +102,13 @@ namespace RevolvingCredit.WebAPI
 		/// <inheritdoc />
 		/// <remarks>
 		/// Last modification:
-		/// Remove unique item (and entity) type(s) from unique item entity context repository.
+		/// Add repository type.
+		/// Add unique item type.
 		/// </remarks>
 		public override void ConfigureServices(IServiceCollection services)
 		{
 			base.ConfigureServices(services);
-			services.AddScoped<IUniqueEntityContextRepository, APRRepository>();
+			services.AddScoped<IUniqueInformableEntityContextRepository<APRRepository, APR>, APRRepository>();
 			services.AddTransient<APRSower>();
 		}
 
