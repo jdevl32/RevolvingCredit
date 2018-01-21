@@ -13,81 +13,10 @@ namespace RevolvingCredit.WebAPI.ViewModel
 	/// </remarks>
 	public class APRViewModel
 		:
-		// todo|jdevl32: cleanup...
-		//UniqueBase
-		//,
-		//IAPRViewModel
 		UniqueViewModelBase
 		,
 		IAPR
 	{
-
-#region Property
-
-//#region IAPRViewModel
-
-//#endregion
-
-#endregion
-
-#region Instance Initialization
-
-		/**
-#region UniqueBase
-
-		/// <inheritdoc />
-		/// <remarks>
-		/// Last modification:
-		/// </remarks>
-		public APRViewModel()
-		{
-		}
-
-		/// <inheritdoc />
-		/// <remarks>
-		/// Last modification:
-		/// </remarks>
-		public APRViewModel(int id)
-			:
-			base(id)
-		{
-		}
-
-		/// <inheritdoc />
-		/// <remarks>
-		/// Last modification:
-		/// </remarks>
-		public APRViewModel(int id, string shortName, string fullName, string description)
-			:
-			base(id, shortName, fullName, description)
-		{
-		}
-
-		/// <inheritdoc />
-		/// <remarks>
-		/// Last modification:
-		/// </remarks>
-		public APRViewModel(string shortName, string fullName, string description)
-			:
-			base(shortName, fullName, description)
-		{
-		}
-
-#endregion
-
-		/// <inheritdoc />
-		/// <remarks>
-		/// Last modification:
-		/// </remarks>
-		public APRViewModel(IMapper mapper)
-			:
-			base(mapper)
-		{
-		}
-		/**/
-
-#endregion
-
 	}
 
 }

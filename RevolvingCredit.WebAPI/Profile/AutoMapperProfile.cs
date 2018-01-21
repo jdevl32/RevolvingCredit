@@ -81,23 +81,29 @@ namespace RevolvingCredit.WebAPI.Profile
 				.ConstructUsing(source => new Payment { Id = source.Id })
 				.ReverseMap();
 			/**/
-			// todo|jdevl32: ???
+			// todo|jdevl32: cleanup...
 			/**
 			CreateMap<APR, UniqueBase>()
 				.ConstructUsing(source => new APR { Id = source.Id })
 				.ReverseMap();
 			/**/
+			// todo|jdevl32: !!! needed (keep) !!!
+			/**/
 			CreateMap<APR, UniqueViewModelBase>()
 				.ConstructUsing(source => new APRViewModel())
 				.ReverseMap();
-			// todo|jdevl32: ???
+			/**/
+			// todo|jdevl32: cleanup...
 			/**
 			CreateMap<APRViewModel, APR>()
 				.ReverseMap();
+			/**/
+			// todo|jdevl32: cleanup...
+			/**
 			CreateMap<APRViewModel, IUniqueViewModel<IAPR>>()
 				.ReverseMap();
 			/**/
-			// todo|jdevl32: ???
+			// todo|jdevl32: cleanup...
 			/**
 			CreateMap<IAPR, IUniqueViewModel<IAPR>>()
 				// todo|jdevl32: ??? what about (null) mapper ???
