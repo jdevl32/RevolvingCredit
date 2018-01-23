@@ -29,8 +29,8 @@
 			vm.item = itemService.item;
 
 			// Create method to get item detail(s).
-			// Last modification:
 			var getItemDetail =
+				// Last modification:
 				function()
 				{
 					return {
@@ -48,8 +48,8 @@
 			// todo|jdevl32: !!! refactor (with unique.js) !!!
 
 			// Create method to debug.
-			// Last modification:
 			var doDebug =
+				// Last modification:
 				function(locator, message, detail, object, name)
 				{
 					// todo|jdevl32: debug (for now, but eventually need to log) ???
@@ -72,12 +72,12 @@
 			;
 
 			// Create format (error) message method (for display and debug).
-			// Last modification:
-			// Add item detail(s).
-			// Segregate error (display and debug) message.
-			// Refactor debug.
-			// Add name (of object).
 			var formatErrorMessage =
+				// Last modification:
+				// Add item detail(s).
+				// Segregate error (display and debug) message.
+				// Refactor debug.
+				// Add name (of object).
 				function(locator, object, name)
 				{
 					var item = getItemDetail();
@@ -97,8 +97,8 @@
 			;
 
 			// Create format (success) message method (for display and debug).
-			// Last modification:
 			var formatSuccessMessage =
+				// Last modification:
 				function(locator, object, name)
 				{
 					var item = getItemDetail();
@@ -118,15 +118,14 @@
 			;
 
 			// Create success handler for POST.
-			// Last modification:
-			// Refactor format success message.
-			// Refactor debug response.
 			var onPostSuccess =
+				// Last modification:
+				// Refactor format success message.
+				// Refactor debug response.
 				function (response)
 				{
 					// todo|jdevl32: ??? can this be delegated back to unique (parent) controller ???
 					// Set success message in the item service that can be relayed back and displayed.
-					//itemService.successMessage = vm.displayName + " " + action + "d.";
 					itemService.successMessage = formatSuccessMessage("001", response, "response");
 
 					// Clear/reset save unique item (form and item service).
@@ -139,10 +138,10 @@
 			;
 
 			// Create error handler for POST.
-			// Last modification:
-			// Refactor format error message.
-			// Refactor debug response.
 			var onPostError =
+				// Last modification:
+				// Refactor format error message.
+				// Refactor debug response.
 				function (response)
 				{
 					formatErrorMessage("002", response, "response");
@@ -150,8 +149,8 @@
 			;
 
 			// Create finally handler.
-			// Last modification:
 			var doFinally =
+				// Last modification:
 				function ()
 				{
 					// Reset busy flag.
@@ -160,26 +159,23 @@
 			;
 
 			// Create catch handler.
-			// Last modification:
-			// Refactor format error message.
-			// Refactor debug e(xception/rror).
 			var doCatch =
+				// Last modification:
+				// Refactor format error message.
+				// Refactor debug e(xception/rror).
 				function(e)
 				{
 					doFinally();
-					//vm.errorMessage = "[002] Failed to " + action + " " + vm.displayName + ":  " + toString(e);
 					formatErrorMessage("003", e, "e");
 				}
 			;
 
-			// todo|jdevl32: !!! needs to be injected (via ???) !!!
-			//var url = "http://localhost:58410/api/APR";
 			// Get the (API) URL from the item service.
 			var url = itemService.url;
 
 			// Form submit handler.
-			// Last modification:
 			vm.onSubmit =
+				// Last modification:
 				function ()
 				{
 					vm.isBusy = true;

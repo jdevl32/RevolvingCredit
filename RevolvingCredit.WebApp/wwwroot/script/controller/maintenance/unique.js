@@ -19,8 +19,6 @@
 			// Create action member.
 			var action = "";
 
-			// todo|jdevl32: !!! needs to be injected (via data ???) !!!
-			//vm.displayName = "APR (type)";
 			// Get the (view-model) display name from the state-params service.
 			vm.displayName = $stateParams.displayName;
 
@@ -28,8 +26,8 @@
 			itemService.displayName = vm.displayName;
 
 			// Create method to reset state.
-			// Last modification:
 			var reset =
+				// Last modification:
 				function()
 				{
 					// Create empty container for error message.
@@ -52,8 +50,8 @@
 			vm.successMessage = itemService.successMessage;
 
 			// Create method to get item detail(s).
-			// Last modification:
 			var getItemDetail =
+				// Last modification:
 				function()
 				{
 					var item =
@@ -84,8 +82,8 @@
 			// todo|jdevl32: !!! refactor (with unique.save.js) !!!
 
 			// Create method to debug.
-			// Last modification:
 			var doDebug =
+				// Last modification:
 				function(locator, message, detail, object, name)
 				{
 					// todo|jdevl32: debug (for now, but eventually need to log) ???
@@ -108,12 +106,12 @@
 			;
 
 			// Create format (error) message method (for display and debug).
-			// Last modification:
-			// Add item detail(s).
-			// Segregate error (display and debug) message.
-			// Refactor debug.
-			// Add name (of object).
 			var formatErrorMessage =
+				// Last modification:
+				// Add item detail(s).
+				// Segregate error (display and debug) message.
+				// Refactor debug.
+				// Add name (of object).
 				function(locator, object, name)
 				{
 					var item = getItemDetail();
@@ -133,8 +131,8 @@
 			;
 
 			// Create format (success) message method (for display and debug).
-			// Last modification:
 			var formatSuccessMessage =
+				// Last modification:
 				function(locator, object, name)
 				{
 					var item = getItemDetail();
@@ -154,8 +152,8 @@
 			;
 
 			// Create success handler for GET.
-			// Last modification:
 			var onGetSuccess =
+				// Last modification:
 				function (response)
 				{
 					// todo|jdevl32: make this global method...
@@ -172,9 +170,9 @@
 			;
 
 			// Create error handler for (all) API method(s).
-			// Last modification:
-			// Refactor debug response.
 			var onError =
+				// Last modification:
+				// Refactor debug response.
 				function (response)
 				{
 					formatErrorMessage("001", response, "response");
@@ -182,8 +180,8 @@
 			;
 
 			// Create finally handler.
-			// Last modification:
 			var doFinally =
+				// Last modification:
 				function ()
 				{
 					// Reset busy flag.
@@ -192,9 +190,9 @@
 			;
 
 			// Create catch handler.
-			// Last modification:
-			// Refactor debug e(xception/rror).
 			var doCatch =
+				// Last modification:
+				// Refactor debug e(xception/rror).
 				function(e)
 				{
 					doFinally();
@@ -202,8 +200,6 @@
 				}
 			;
 
-			// todo|jdevl32: !!! needs to be injected (via data ???) !!!
-			//var url = "http://localhost:58410/api/APR";
 			// Get the (API) URL from the state-params service.
 			var url = $stateParams.url;
 
@@ -211,8 +207,8 @@
 			itemService.url = url;
 
 			// Create the entry method of this controller.
-			// Last modification:
 			var doGet =
+				// Last modification:
 				function()
 				{
 					// Reset the state for fresh get.
@@ -230,28 +226,12 @@
 			doGet();
 
 			// Create success handler for DELETE.
-			// Last modification:
-			// Refactor format success message.
-			// Refactor debug response.
 			var onDeleteSuccess =
+				// Last modification:
+				// Refactor format success message.
+				// Refactor debug response.
 				function (response)
 				{
-					//vm.successMessage =
-					//	vm.displayName
-					//	+ 
-					//		(
-					//			isNullOrUndefined(vm.index) 
-					//			? 
-					//			"s" 
-					//			: 
-					//			" ("
-					//			+ toString(vm.items[vm.index])
-					//			+ ")"
-					//		)
-					//	+ " "
-					//	+ vm.action
-					//	+ "d."
-					//	;
 					formatSuccessMessage("003", response, "response");
 
 					// Invoke the entry method of this controller 
@@ -261,15 +241,14 @@
 			;
 
 			// Create method to initiate (remove) state.
-			// Last modification:
 			vm.onRemove =
+				// Last modification:
 				function(index = null)
 				{
 					// Set the index to track.
 					vm.index = index;
 					vm.isBusy = true;
 					vm.errorMessage = "";
-					//vm.action = "remove";
 					action = "remove";
 
 					// Check if for all unique item(s) (invalid index).
@@ -308,8 +287,8 @@
 			;
 
 			// Create method to initiate (save) state.
-			// Last modification:
 			vm.onSave =
+				// Last modification:
 				function(index = null)
 				{
 					// Reset message(s);
