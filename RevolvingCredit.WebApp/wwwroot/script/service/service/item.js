@@ -8,11 +8,14 @@
 
 		// Item service object.
 		// Last modification:
-		// Add display name.
+		// Add the (API) URL associated with the item..
 		function ItemService()
 		{
 			// The display name for the item.
 			this.displayName = "";
+
+			// The (API) URL associated with the item.
+			this.url = "";
 
 			// The error message associated with the item.
 			this.errorMessage = "";

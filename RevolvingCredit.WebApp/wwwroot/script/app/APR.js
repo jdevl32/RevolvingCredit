@@ -8,7 +8,7 @@
 
 		// Configure routing.
 		// Last modification:
-		// Refactor using unique (save) item(s).
+		// Refactor angular-ui.
 		function config($urlRouterProvider, $stateProvider)
 		{
 			// Default route configuration.
@@ -24,14 +24,13 @@
 							controller: "unique"
 							,
 							controllerAs: "vm"
-							// todo|jdevl32: ??? how to include data specific to each type ???
-							/**
 							,
-							data:
+							params:
 							{
 								displayName: "APR (type)"
+								,
+								url: "http://localhost:58410/api/APR"
 							}
-							/**/
 							,
 							templateUrl: "/view/maintenance/unique.html"
 							,
