@@ -4,13 +4,11 @@
 
 #main
 {
-	/*border: 3px solid red;*/
 	grid-area: a;
 }
 
 #menu
 {
-	/*border: 3px solid red;*/
 	grid-area: e;
 }
 
@@ -42,12 +40,10 @@ body
 
 footer
 {
-	/*border: 3px solid red;*/
 	grid-area: f;
 }
 
 header
 {
-	/*border: 3px solid red;*/
 	grid-area: h;
 }
