@@ -1,17 +1,65 @@
 ﻿
 @{
+	Layout = null;
 	ViewData["Title"] = "Index";
 }
 
-<div>
-	<ul>
-		@*
-		<li>
-			<a asp-controller="App" asp-action="Index">Index</a>
-		</li>
-		*@
-		<li>
-			<a asp-controller="App" asp-action="APR">APR</a>
-		</li>
-	</ul>
-</div>
+<!DOCTYPE html>
+
+<html>
+<head>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+	<!-- todo|jdevl32: pick a swatch...
+	<link rel="stylesheet" href="~/lib/bootswatch/spacelab/bootstrap.min.css" type="text/css" />
+	-->
+	<link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css" type="text/css" />
+	<link rel="stylesheet" href="~/style/site.css" type="text/css" />
+	<!-- Required meta tags (for Bootstrap). -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Revolving Credit | @ViewBag.Title</title>
+</head>
+<body data-ng-app="app">
+	<div id="wrapper">
+		<header>
+			[Header]
+		</header>
+		<div id="menu">
+			[Menu]
+			@*
+			<ul>
+				<li>
+					<a data-ui-sref="unique">APR</a>
+				</li>
+			</ul>
+			*@
+		</div>
+		<div id="main">
+			<data-ui-view>
+				[View]
+			</data-ui-view>
+		</div>
+		<footer>
+			[Footer]
+		</footer>
+	</div>
+	<!-- Bootstrap must follow jQuery. -->
+	<script type="text/javascript" language="javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" language="javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" language="javascript" src="~/lib/underscore/underscore-min.js"></script>
+	<script type="text/javascript" language="javascript" src="~/lib/angular/angular.min.js"></script>
+	<script type="text/javascript" language="javascript" src="~/lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+	<script type="text/javascript" language="javascript" src="~/lib/angular-sanitize/angular-sanitize.min.js"></script>
+	<script type="text/javascript" language="javascript" src="~/lib/angular-bootstrap-confirm/src/ui-bootstrap-position.js"></script>
+	<script type="text/javascript" language="javascript" src="~/lib/angular-bootstrap-confirm/dist/angular-bootstrap-confirm.min.js"></script>
+	<script type="text/javascript" language="javascript" src="~/script/global.js"></script>
+	<script type="text/javascript" language="javascript" src="~/script/site.js"></script>
+	<script type="text/javascript" language="javascript" src="~/script/directive/spinner.js"></script>
+	<script type="text/javascript" language="javascript" src="~/script/service/service/service.js"></script>
+	<script type="text/javascript" language="javascript" src="~/script/service/service/item.js"></script>
+	<script type="text/javascript" language="javascript" src="~/script/service/service/API.js"></script>
+	<script type="text/javascript" language="javascript" src="~/script/app/app.js"></script>
+	<script type="text/javascript" language="javascript" src="~/script/controller/maintenance/unique.js"></script>
+	<script type="text/javascript" language="javascript" src="~/script/controller/maintenance/unique.save.js"></script>
+</body>
+</html>

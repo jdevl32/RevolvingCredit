@@ -18,15 +18,26 @@
 {
 	display: grid;
 	grid-template-areas:
-		"e e h h h h h h h h h h"
-		"e e a a a a a a a a a a"
-		"f f f f f f f f f f f f";
+		"h h h h h h h h h h h h"
+		". e e e e e e e e e e ."
+		". a a a a a a a a a a ."
+		"f f f f f f f f f f f f"
+		;
+	grid-template-columns: repeat(12, 1fr);
+}
+
+#wrapper
+#wrapper
+{
+	display: grid;
+	grid-template-areas:
+		"e . a a a a a a a a a a"
+		;
 	grid-template-columns: repeat(12, 1fr);
 }
 
 body
 {
-
 }
 
 footer

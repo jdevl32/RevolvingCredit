@@ -21,10 +21,24 @@
 				transclude: true
 				,
 				templateUrl: "/directive/spinner.html"
-			};
+			}
+			;
 		}
 
-		// Create the module.
-		angular.module("spinner", []).directive("spinner", spinner);
+		// Create the module and directive.
+		angular.module
+			(
+				"spinner"
+				,
+				[
+				]
+			)
+			.directive
+				(
+					"spinner"
+					,
+					spinner
+				)
+		;
 	}
 )();

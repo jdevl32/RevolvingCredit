@@ -1,13 +1,13 @@
 ﻿<div>
-	<spinner while="vm.isBusy">Loading APR(s)...</spinner>
+	<spinner while="vm.isBusy">Loading {{vm.displayName}}(s)...</spinner>
 	<div class="text-success" data-ng-bind="vm.successMessage" data-ng-show="vm.successMessage"></div>
 	<div class="text-danger" data-ng-bind="vm.errorMessage" data-ng-show="vm.errorMessage"></div>
-	<a href="#!/update" data-ng-click="vm.onUpdate()" class="btn btn-sm btn-primary">New</a>
+	<a data-ui-sref="save" data-ng-click="vm.onSave()" class="btn btn-sm btn-primary">New</a>
 	<button
 		data-mwl-confirm
 		data-ng-show="vm.items.length > 0"
 		class="btn btn-sm btn-default"
-		data-title="Confirm Delete All"
+		data-title="Confirm Delete All {{vm.displayName}}(s)"
 		data-message="Are you sure?"
 		data-confirm-text="Yes"
 		data-cancel-text="No"
@@ -16,11 +16,11 @@
 		Delete All
 	</button>
 	<div data-ng-repeat="item in vm.items track by $index">
-		<a href="#!/update" data-ng-click="vm.onUpdate($index)" class="btn btn-sm btn-xs btn-primary">Edit</a>
+		<a data-ui-sref="save" data-ng-click="vm.onSave($index)" class="btn btn-sm btn-xs btn-primary">Edit</a>
 		<button
 			data-mwl-confirm
 			class="btn btn-sm btn-xs btn-default"
-			data-title="Confirm Delete"
+			data-title="Confirm Delete {{vm.displayName}}"
 			data-message="Are you sure?"
 			data-confirm-text="Yes"
 			data-cancel-text="No"
@@ -34,5 +34,6 @@
 		<span data-ng-bind="item.fullName"></span>
 		|
 		<span data-ng-bind="item.description"></span>
+		<data-ui-view name="extend" />
 	</div>
 </div>

@@ -190,9 +190,9 @@
 
 		// Use the existing module, specify controller.
 		// Last modification:
-		// Inject state-params (replacing route-params).
+		// Migrate to main/index.
 		angular
-			.module("app-APR")
+			.module("app")
 			.controller
 				(
 					"uniqueSave"
