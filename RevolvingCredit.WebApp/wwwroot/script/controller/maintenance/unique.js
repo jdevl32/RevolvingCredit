@@ -8,8 +8,8 @@
 
 		// Define the unique item controller.
 		// Last modification:
-		// Add the (API) URL associated with the item.
-		function controller($stateParams, $window, itemService, apiService)
+		// Inject log service.
+		function controller($log, $stateParams, $window, itemService, apiService)
 		{
 			// Define the view model.
 			var vm = this;
@@ -84,10 +84,11 @@
 			// Create method to debug.
 			var doDebug =
 				// Last modification:
+				// Add log service.
 				function(locator, message, detail, object, name)
 				{
 					// todo|jdevl32: debug (for now, but eventually need to log) ???
-					debug
+					$log.debug
 						(
 							"[" 
 							+ "[" 
@@ -154,15 +155,16 @@
 			// Create success handler for GET.
 			var onGetSuccess =
 				// Last modification:
+				// (Re-)implement log/debug.
 				function (response)
 				{
 					// todo|jdevl32: make this global method...
 					// todo|jdevl32: fix (is-dev not working) --> 
 					// probably is working, but need to "override" debug to use $window instead of window
 					// see https://docs.angularjs.org/guide/expression discussion on "context"...
-					if (vm.isDev)
+					if (vm.isDev || true)
 					{
-						debug(response, "response");
+						$log.debug(toString(response, "response"));
 					} // if
 
 					angular.copy(response.data, vm.items);
@@ -301,7 +303,7 @@
 
 		// Use the existing module, specify controller.
 		// Last modification:
-		// Migrate to main/index.
+		// Inject log service.
 		angular
 			.module("app")
 			.controller
@@ -309,6 +311,8 @@
 					"unique"
 					,
 					[
+						"$log"
+						,
 						"$stateParams"
 						,
 						"$window"

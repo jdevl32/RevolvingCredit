@@ -8,8 +8,8 @@
 
 		// Define the unique item save controller.
 		// Last modification:
-		// Inject state-params (replacing route-params).
-		function controller($stateParams, $window, itemService, apiService)
+		// Inject log service.
+		function controller($log, $stateParams, $window, itemService, apiService)
 		{
 			// Define the view-model.
 			var vm = this;
@@ -50,10 +50,11 @@
 			// Create method to debug.
 			var doDebug =
 				// Last modification:
+				// (Re-)implement log/debug.
 				function(locator, message, detail, object, name)
 				{
 					// todo|jdevl32: debug (for now, but eventually need to log) ???
-					debug
+					$log.debug
 						(
 							"[" 
 							+ "[" 
@@ -190,7 +191,7 @@
 
 		// Use the existing module, specify controller.
 		// Last modification:
-		// Migrate to main/index.
+		// Inject log service.
 		angular
 			.module("app")
 			.controller
@@ -198,6 +199,8 @@
 					"uniqueSave"
 					,
 					[
+						"$log"
+						,
 						"$stateParams"
 						,
 						"$window"
