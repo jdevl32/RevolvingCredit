@@ -6,25 +6,24 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RevolvingCredit.Entity.Model;
 using RevolvingCredit.WebAPI.Repository;
-using RevolvingCredit.WebAPI.ViewModel;
 
 namespace RevolvingCredit.WebAPI.Controller
 {
 
 	/// <summary>
-	/// The APR (type) controller.
+	/// An APR (type) controller.
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Add repository type.
-	/// Add unique item type.
-	/// Add unique item view model type.
+	/// Refactor unique entity item(s) on (value) type of (global) unique identifier.
+	/// Add the type of the unique entity item.
 	/// </remarks>
 	[Produces("application/json")]
 	[Route("api/APR")]
 	public class APRController
 		:
-		UniqueInformableControllerBase<APRController, APRRepository, APR, APRViewModel>
+		// todo|jdevl32: ??? apr or int-unique-entity ???
+		InformableIntUniqueEntityControllerBase<APRController, APRRepository, APR/**IntUniqueEntity/**/>
 	{
 
 #region Constant
@@ -41,15 +40,17 @@ namespace RevolvingCredit.WebAPI.Controller
 
 #region Instance Initialization
 
+		// todo|jdevl32: can the repository be refactored (see startup.cs) ???
+
 		/// <inheritdoc />
 		/// <remarks>
-		/// Last modification:
-		/// Replace derived class with repository type.
-		/// Add unique item type.
+		/// Refactor unique entity item(s) on (value) type of (global) unique identifier.
+		/// Add the type of the unique entity item.
 		/// </remarks>
-		public APRController(IHostingEnvironment hostingEnvironment, ILogger<APRController> logger, IMapper mapper, IUniqueInformableEntityContextRepository<APRRepository, APR> uniqueInformableEntityContextRepository)
+		// todo|jdevl32: ??? apr or int-unique-entity ???
+		public APRController(IHostingEnvironment hostingEnvironment, ILogger<APRController> logger, IMapper mapper, IInformableUniqueEntityContextRepository<APRRepository, APR/**IntUniqueEntity/**/, int> informableUniqueEntityContextRepository)
 			:
-			this(hostingEnvironment, logger, mapper, uniqueInformableEntityContextRepository, DefaultDisplayName)
+			this(hostingEnvironment, logger, mapper, informableUniqueEntityContextRepository, DefaultDisplayName)
 		{
 		}
 
@@ -57,13 +58,13 @@ namespace RevolvingCredit.WebAPI.Controller
 		// todo|jdevl32: ??? ...and then...how to handle default display name ???
 		/// <inheritdoc />
 		/// <remarks>
-		/// Last modification:
-		/// Replace derived class with repository type.
-		/// Add unique item type.
+		/// Refactor unique entity item(s) on (value) type of (global) unique identifier.
+		/// Add the type of the unique entity item.
 		/// </remarks>
-		protected APRController(IHostingEnvironment hostingEnvironment, ILogger<APRController> logger, IMapper mapper, IUniqueInformableEntityContextRepository<APRRepository, APR> uniqueInformableEntityContextRepository, string displayName)
+		// todo|jdevl32: ??? apr or int-unique-entity ???
+		protected APRController(IHostingEnvironment hostingEnvironment, ILogger<APRController> logger, IMapper mapper, IInformableUniqueEntityContextRepository<APRRepository, APR/**IntUniqueEntity/**/, int> informableUniqueEntityContextRepository, string displayName)
 			:
-			base(hostingEnvironment, logger, mapper, uniqueInformableEntityContextRepository, displayName)
+			base(hostingEnvironment, logger, mapper, informableUniqueEntityContextRepository, displayName)
 		{
 		}
 

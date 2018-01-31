@@ -1,4 +1,5 @@
-﻿using JDevl32.Entity.Interface;
+﻿using JDevl32.Entity.Interface.Generic;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace RevolvingCredit.WebAPI.ViewModel.Interface
@@ -8,10 +9,11 @@ namespace RevolvingCredit.WebAPI.ViewModel.Interface
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
+	/// Refactor unique entity item(s) on (value) type of (global) unique identifier.
 	/// </remarks>
 	public interface IAccountViewModel
 		:
-		IGlobalUnique
+		IUniqueEntity<Guid>
 	{
 
 #region Property

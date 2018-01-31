@@ -9,10 +9,11 @@ namespace RevolvingCredit.WebAPI.ViewModel
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
+	/// Refactor unique entity item(s) on (value) type of (global) unique identifier.
 	/// </remarks>
 	public class AccountViewModel
 		:
-		GlobalUniqueBase
+		GuidUniqueEntity
 		,
 		IAccountViewModel
 	{
@@ -29,12 +30,6 @@ namespace RevolvingCredit.WebAPI.ViewModel
 		public short SafeAccountNumber { get; }
 
 #endregion
-
-#endregion
-
-#region Instance Initialization
-
-		// todo|jdevl32: implement ctors...
 
 #endregion
 

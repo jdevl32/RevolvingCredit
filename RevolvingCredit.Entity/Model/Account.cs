@@ -9,11 +9,11 @@ namespace RevolvingCredit.Entity.Model
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Add (EF-required) setters.
+	/// Refactor unique entity item(s) on (value) type of (global) unique identifier.
 	/// </remarks>
 	public class Account
 		:
-		GlobalUniqueBase
+		GuidUniqueEntity
 		,
 		IAccount
 	{
@@ -29,25 +29,6 @@ namespace RevolvingCredit.Entity.Model
 		public short SafeAccountNumber { get; set; }
 
 #endregion
-
-#endregion
-
-#region Instance Initialization
-
-		// todo|jdevl32: ???
-		/**
-		/// <summary>
-		/// Create an account.
-		/// </summary>
-		/// <remarks>
-		/// Last modification:
-		/// </remarks>
-		public Account()
-		{
-		}
-		**/
-
-		// todo|jdevl32: implement ctors...
 
 #endregion
 

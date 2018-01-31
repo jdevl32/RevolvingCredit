@@ -9,64 +9,14 @@ namespace RevolvingCredit.Entity.Model
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Remove constructor(s).
+	/// Refactor unique entity item(s) on (value) type of (global) unique identifier.
 	/// </remarks>
 	public class Label
 		:
-		UniqueBase
+		IntUniqueEntity
 		,
 		ILabel
 	{
-
-		// todo|jdevl32: cleanup...
-		/**
-#region Instance Initialization
-
-#region UniqueBase
-
-		/// <inheritdoc />
-		/// <remarks>
-		/// Last modification:
-		/// </remarks>
-		public Label()
-		{
-		}
-
-		/// <inheritdoc />
-		/// <remarks>
-		/// Last modification:
-		/// </remarks>
-		public Label(int id)
-			:
-			base(id)
-		{
-		}
-
-		/// <inheritdoc />
-		/// <remarks>
-		/// Last modification:
-		/// </remarks>
-		public Label(int id, string shortName, string fullName, string description)
-			:
-			base(id, shortName, fullName, description)
-		{
-		}
-
-		/// <inheritdoc />
-		/// <remarks>
-		/// Last modification:
-		/// </remarks>
-		public Label(string shortName, string fullName, string description)
-			:
-			base(shortName, fullName, description)
-		{
-		}
-
-#endregion
-
-#endregion
-		/**/
-
 	}
 
 }

@@ -1,4 +1,4 @@
-﻿using JDevl32.Web.ViewModel;
+﻿using JDevl32.Web.ViewModel.Generic;
 using RevolvingCredit.Entity;
 using RevolvingCredit.Entity.Model;
 using RevolvingCredit.WebAPI.ViewModel;
@@ -25,13 +25,13 @@ namespace RevolvingCredit.WebAPI.Profile
 		/// </summary>
 		/// <remarks>
 		/// Last modification:
-		/// Create map of APR to unique item (base class).
+		/// Refactor unique entity item(s) on (value) type of (global) unique identifier.
 		/// </remarks>
 		public AutoMapperProfile()
 		{
 			// todo|jdevl32: ??? here (instead of web-app) ???
 			Common.Configure(this);
-			CreateMap<APR, UniqueViewModelBase>()
+			CreateMap<APR, UniqueEntityViewModelBase<int>>()
 				.ConstructUsing(source => new APRViewModel())
 				.ReverseMap()
 			;

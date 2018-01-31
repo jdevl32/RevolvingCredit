@@ -1,4 +1,5 @@
-﻿using JDevl32.Entity.Interface;
+﻿using JDevl32.Entity.Interface.Generic;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace RevolvingCredit.Entity.Interface
@@ -9,11 +10,11 @@ namespace RevolvingCredit.Entity.Interface
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Add (EF-required) setters.
+	/// Refactor unique entity item(s) on (value) type of (global) unique identifier.
 	/// </remarks>
 	public interface IAccount
 		:
-		IGlobalUnique
+		IUniqueEntity<Guid>
 	{
 
 #region Property

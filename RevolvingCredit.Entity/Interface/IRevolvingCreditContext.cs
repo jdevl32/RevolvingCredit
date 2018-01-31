@@ -105,7 +105,9 @@ namespace RevolvingCredit.Entity.Interface
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		// todo|jdevl32: ??? apr or int-unique-entity ???
 		DbSet<APR> APR { get; set; }
+		//DbSet<IntUniqueEntity> APR { get; set; }
 
 		/// <summary>
 		/// The issuer (type) table.

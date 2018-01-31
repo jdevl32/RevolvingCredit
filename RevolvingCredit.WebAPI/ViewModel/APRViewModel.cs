@@ -9,11 +9,11 @@ namespace RevolvingCredit.WebAPI.ViewModel
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Remove unique item type from unique item view model (base class).
+	/// Refactor unique entity item(s) on (value) type of (global) unique identifier.
 	/// </remarks>
 	public class APRViewModel
 		:
-		UniqueViewModelBase
+		IntUniqueEntityViewModel
 		,
 		IAPR
 	{

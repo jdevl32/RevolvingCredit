@@ -8,15 +8,17 @@ namespace RevolvingCredit.WebAPI.Repository
 {
 
 	/// <summary>
-	/// The APR (type) repository.
+	/// An APR (type) repository.
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Add unique item type to unique item entity context repository (base class).
+	/// Refactor unique entity item(s) on (value) type of (global) unique identifier.
+	/// Add the type of the unique entity item.
 	/// </remarks>
 	public class APRRepository
 		:
-		UniqueInformableEntityContextRepositoryBase<APRRepository, RevolvingCreditContext, APR>
+		// todo|jdevl32: ??? apr or int-unique-entity ???
+		InformableIntUniqueEntityContextRepositoryBase<APRRepository, RevolvingCreditContext, APR/**IntUniqueEntity/**/>
 	{
 
 #region Instance Initialization
@@ -24,11 +26,11 @@ namespace RevolvingCredit.WebAPI.Repository
 		/// <inheritdoc />
 		/// <remarks>
 		/// Last modification:
-		/// Replace method to get a db-set of (all) the APR type(s) with property.
+		/// Refactor unique entity item(s) on (value) type of (global) unique identifier.
 		/// </remarks>
-		public APRRepository(RevolvingCreditContext entityContext, ILogger<APRRepository> logger, IMapper mapper)
+		public APRRepository(RevolvingCreditContext entityContext, ILogger<APRRepository> logger, IMapper mapper/**, DbSet<UniqueEntityBase<int>> uniqueEntityDbSet/**/)
 			:
-			base(entityContext, logger, mapper, entityContext.APR)
+			base(entityContext, logger, mapper, entityContext.APR/**uniqueEntityDbSet/**/)
 		{
 		}
 

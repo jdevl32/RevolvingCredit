@@ -118,7 +118,9 @@ namespace RevolvingCredit.Entity
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
+		// todo|jdevl32: ??? apr or int-unique-entity ???
 		public DbSet<APR> APR { get; set; }
+		//public DbSet<IntUniqueEntity> APR { get; set; }
 
 		/// <inheritdoc />
 		/// <remarks>
