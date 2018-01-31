@@ -22,8 +22,7 @@ namespace RevolvingCredit.WebAPI.Controller
 	[Route("api/APR")]
 	public class APRController
 		:
-		// todo|jdevl32: ??? apr or int-unique-entity ???
-		InformableIntUniqueEntityControllerBase<APRController, APRRepository, APR/**IntUniqueEntity/**/>
+		InformableIntUniqueEntityControllerBase<APRController, APRRepository, APR>
 	{
 
 #region Constant
@@ -47,8 +46,7 @@ namespace RevolvingCredit.WebAPI.Controller
 		/// Refactor unique entity item(s) on (value) type of (global) unique identifier.
 		/// Add the type of the unique entity item.
 		/// </remarks>
-		// todo|jdevl32: ??? apr or int-unique-entity ???
-		public APRController(IHostingEnvironment hostingEnvironment, ILogger<APRController> logger, IMapper mapper, IInformableUniqueEntityContextRepository<APRRepository, APR/**IntUniqueEntity/**/, int> informableUniqueEntityContextRepository)
+		public APRController(IHostingEnvironment hostingEnvironment, ILogger<APRController> logger, IMapper mapper, IInformableUniqueEntityContextRepository<APRRepository, APR, int> informableUniqueEntityContextRepository)
 			:
 			this(hostingEnvironment, logger, mapper, informableUniqueEntityContextRepository, DefaultDisplayName)
 		{
@@ -61,8 +59,7 @@ namespace RevolvingCredit.WebAPI.Controller
 		/// Refactor unique entity item(s) on (value) type of (global) unique identifier.
 		/// Add the type of the unique entity item.
 		/// </remarks>
-		// todo|jdevl32: ??? apr or int-unique-entity ???
-		protected APRController(IHostingEnvironment hostingEnvironment, ILogger<APRController> logger, IMapper mapper, IInformableUniqueEntityContextRepository<APRRepository, APR/**IntUniqueEntity/**/, int> informableUniqueEntityContextRepository, string displayName)
+		protected APRController(IHostingEnvironment hostingEnvironment, ILogger<APRController> logger, IMapper mapper, IInformableUniqueEntityContextRepository<APRRepository, APR, int> informableUniqueEntityContextRepository, string displayName)
 			:
 			base(hostingEnvironment, logger, mapper, informableUniqueEntityContextRepository, displayName)
 		{

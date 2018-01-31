@@ -17,8 +17,7 @@ namespace RevolvingCredit.WebAPI.Repository
 	/// </remarks>
 	public class APRRepository
 		:
-		// todo|jdevl32: ??? apr or int-unique-entity ???
-		InformableIntUniqueEntityContextRepositoryBase<APRRepository, RevolvingCreditContext, APR/**IntUniqueEntity/**/>
+		InformableIntUniqueEntityContextRepositoryBase<APRRepository, RevolvingCreditContext, APR>
 	{
 
 #region Instance Initialization
@@ -28,9 +27,9 @@ namespace RevolvingCredit.WebAPI.Repository
 		/// Last modification:
 		/// Refactor unique entity item(s) on (value) type of (global) unique identifier.
 		/// </remarks>
-		public APRRepository(RevolvingCreditContext entityContext, ILogger<APRRepository> logger, IMapper mapper/**, DbSet<UniqueEntityBase<int>> uniqueEntityDbSet/**/)
+		public APRRepository(RevolvingCreditContext entityContext, ILogger<APRRepository> logger, IMapper mapper)
 			:
-			base(entityContext, logger, mapper, entityContext.APR/**uniqueEntityDbSet/**/)
+			base(entityContext, logger, mapper, entityContext.APR)
 		{
 		}
 

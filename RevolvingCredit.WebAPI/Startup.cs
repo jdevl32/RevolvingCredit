@@ -40,15 +40,6 @@ namespace RevolvingCredit.WebAPI
 		/// </remarks>
 		public override bool UseCORS { get; } = true;
 
-		// todo|jdev32: ???
-		/**
-		/// <inheritdoc />
-		/// <remarks>
-		/// Last modification:
-		/// </remarks>
-		public override bool UseStaticFiles { get; } = false;
-		**/
-
 #endregion
 
 #endregion
@@ -109,8 +100,7 @@ namespace RevolvingCredit.WebAPI
 		{
 			base.ConfigureServices(services);
 			// todo|jdevl32: can the repository be refactored (see aprcontroller.cs) ???
-			// todo|jdevl32: ??? apr or int-unique-entity ???
-			services.AddScoped<IInformableUniqueEntityContextRepository<APRRepository, APR/**IntUniqueEntity/**/, int>, APRRepository>();
+			services.AddScoped<IInformableUniqueEntityContextRepository<APRRepository, APR, int>, APRRepository>();
 			services.AddTransient<APRSower>();
 		}
 
