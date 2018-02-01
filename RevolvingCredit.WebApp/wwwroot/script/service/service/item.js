@@ -6,37 +6,39 @@
 	{
 		"use strict";
 
-		// Item service object.
-		// Last modification:
-		// Add the (API) URL associated with the item..
-		function ItemService()
-		{
-			// The display name for the item.
-			this.displayName = "";
+		// Define the Item service object.
+		var ItemService =
+			// Last modification:
+			// Add the (API) URL associated with the item..
+			function ()
+			{
+				// The display name for the item.
+				this.displayName = "";
 
-			// The (API) URL associated with the item.
-			this.url = "";
+				// The (API) URL associated with the item.
+				this.url = "";
 
-			// The error message associated with the item.
-			this.errorMessage = "";
+				// The error message associated with the item.
+				this.errorMessage = "";
 
-			// The success message associated with the item.
-			this.successMessage = "";
+				// The success message associated with the item.
+				this.successMessage = "";
 
-			// The item which this service holds.
-			this.item = {};
-		}
+				// The item which this service holds.
+				this.item = {};
+			}
+		;
+
+		// Define the service dependenc(y/ies).
+		/**
+		var dependency = 
+			[
+			]
+		;
+		/**/
 
 		// Create the service module.
 		// Last modification:
-		angular
-			.module("service")
-			.service
-				(
-					"itemService"
-					,
-					ItemService
-				)
-		;
+		angular.module("service").service("itemService", ItemService);
 	}
 )();
