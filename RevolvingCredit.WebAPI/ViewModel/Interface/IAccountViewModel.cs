@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RevolvingCredit.WebAPI.ViewModel.Interface
 {
+
 	/// <summary>
 	/// A view model for a revolving credit account.
 	/// </summary>
@@ -32,4 +33,5 @@ namespace RevolvingCredit.WebAPI.ViewModel.Interface
 #endregion
 
 	}
+
 }
