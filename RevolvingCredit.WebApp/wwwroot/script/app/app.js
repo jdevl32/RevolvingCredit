@@ -8,10 +8,9 @@
 
 		// Define the module configuration.
 		var config =
-			// Configure routing.
+			// Configure state machine and routing.
 			// Last modification:
-			// Inject log provider.
-			// Add methods to capture state entry and exit.
+			// Migrate to component(s).
 			function ($logProvider, $stateProvider, $urlRouterProvider)
 			{
 				// Enable debugging.
@@ -79,24 +78,28 @@
 				{
 					abstract: true
 					,
+					component: "maintenance"
+					,
 					name: "maintenance"
 					,
 					onEnter: onStateEnter
 					,
 					onExit: onStateExit
-					,
-					templateUrl: "/template/maintenance.html"
+					//,
+					//templateUrl: "/template/maintenance.html"
 					,
 					url: "/maintenance"
 				}
 				;
 
-				// Define the APR (type) (child to maintenance) view state.
+				// Define the APR (type) (child of maintenance) view state.
 				var aprViewState =
 				{
-					controller: "unique"
-					,
-					controllerAs: "vm"
+					component: "unique"
+					//,
+					//controller: "unique"
+					//,
+					//controllerAs: "vm"
 					,
 					name: "apr"
 					,
@@ -107,19 +110,21 @@
 					params: aprParams
 					,
 					parent: maintenanceState
-					,
-					templateUrl: "/template/unique.html"
+					//,
+					//templateUrl: "/template/unique.html"
 					,
 					url: "/apr"
 				}
 				;
 
-				// Define the APR (type) (child to maintenance) save state.
+				// Define the APR (type) (child of maintenance) save state.
 				var aprSaveState =
 				{
-					controller: "uniqueSave"
-					,
-					controllerAs: "vm"
+					component: "uniqueSave"
+					//,
+					//controller: "uniqueSave"
+					//,
+					//controllerAs: "vm"
 					,
 					name: "save"
 					,
@@ -130,8 +135,8 @@
 					params: aprParams
 					,
 					parent: maintenanceState
-					,
-					templateUrl: "/template/unique.save.html"
+					//,
+					//templateUrl: "/template/unique.save.html"
 					,
 					url: "/save"
 				}
@@ -140,9 +145,9 @@
 				$stateProvider
 					// Create the (abstract) maintenance state.
 					.state(maintenanceState)
-					// Create the APR (type) (child to maintenance) view state.
+					// Create the APR (type) (child of maintenance) view state.
 					.state(aprViewState)
-					// Create the APR (type) (child to maintenance) save state.
+					// Create the APR (type) (child of maintenance) save state.
 					.state(aprSaveState)
 				;
 			}
