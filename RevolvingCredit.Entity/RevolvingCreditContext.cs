@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using JDevl32.Entity.Generic;
+﻿using JDevl32.Entity;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -17,12 +16,13 @@ namespace RevolvingCredit.Entity
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Re-implement logger from mapper entity context base class.
-	/// Re-implement base class as generic.
+	/// Refactor loggable logger category name.
 	/// </remarks>
 	public class RevolvingCreditContext
 		:
-		MapperEntityContextBase<RevolvingCreditContext>
+		// todo|jdevl32: ???
+		//MapperEntityContextBase<RevolvingCreditContext>
+		EntityContextBase
 		,
 		IRevolvingCreditContext
 	{
@@ -39,20 +39,9 @@ namespace RevolvingCredit.Entity
 		/// </remarks>
 		public override string ConnectionStringKey { get; } = "ConnectionStrings:RevolvingCreditConnection";
 
-		/// <summary>
-		/// The logger.
-		/// </summary>
-		/// <remarks>
-		/// Last modification:
-		/// Add setter.
-		/// </remarks>
-		public new ILogger<RevolvingCreditContext> Logger { get; protected set; }
-
 #endregion
 
 #region IRevolvingCreditContext
-
-#endregion
 
 		/// <inheritdoc />
 		/// <remarks>
@@ -146,27 +135,37 @@ namespace RevolvingCredit.Entity
 
 #endregion
 
+#endregion
+
 #region Instance Initialization
 
 		/// <inheritdoc />
 		/// <remarks>
 		/// Last modification:
+		/// Refactor loggable logger category name.
 		/// </remarks>
-		public RevolvingCreditContext(DbContextOptions dbContextOptions, IConfigurationRoot configurationRoot, IHostingEnvironment hostingEnvironment, ILogger<RevolvingCreditContext> logger, IMapper mapper)
+		public RevolvingCreditContext(DbContextOptions dbContextOptions, IConfigurationRoot configurationRoot, IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory)
 			:
-			base(dbContextOptions, configurationRoot, hostingEnvironment, logger, mapper)
-			=>
-			SetLogger(logger);
+			base(dbContextOptions, configurationRoot, hostingEnvironment, loggerFactory)
+			// todo|jdevl32: ???
+			//=>
+			//SetLogger(logger);
+		{
+		}
 
 		/// <inheritdoc />
 		/// <remarks>
 		/// Last modification:
+		/// Refactor loggable logger category name.
 		/// </remarks>
-		public RevolvingCreditContext(DbContextOptions dbContextOptions, IConfigurationRoot configurationRoot, IHostingEnvironment hostingEnvironment, ILogger<RevolvingCreditContext> logger, IMapper mapper, string connectionStringKey)
+		public RevolvingCreditContext(DbContextOptions dbContextOptions, IConfigurationRoot configurationRoot, IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory, string connectionStringKey)
 			:
-			base(dbContextOptions, configurationRoot, hostingEnvironment, logger, mapper, connectionStringKey)
-			=>
-			SetLogger(logger);
+			base(dbContextOptions, configurationRoot, hostingEnvironment, loggerFactory, connectionStringKey)
+			// todo|jdevl32: ???
+			//=>
+			//SetLogger(logger);
+		{
+		}
 
 		// todo|jdevl32: implement ctors...
 
@@ -182,7 +181,8 @@ namespace RevolvingCredit.Entity
 		/// </remarks>
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			modelBuilder.Entity<AccountAPR>()
+			modelBuilder
+				.Entity<AccountAPR>()
 				.HasKey
 					(
 						accountAPR => new
@@ -195,7 +195,8 @@ namespace RevolvingCredit.Entity
 						}
 					)
 			;
-			modelBuilder.Entity<AccountBalance>()
+			modelBuilder
+				.Entity<AccountBalance>()
 				.HasKey
 					(
 						accountBalance => new
@@ -206,7 +207,8 @@ namespace RevolvingCredit.Entity
 						}
 					)
 			;
-			modelBuilder.Entity<AccountIssuer>()
+			modelBuilder
+				.Entity<AccountIssuer>()
 				.HasKey
 					(
 						accountIssuer => new
@@ -219,7 +221,8 @@ namespace RevolvingCredit.Entity
 						}
 					)
 			;
-			modelBuilder.Entity<AccountLabel>()
+			modelBuilder
+				.Entity<AccountLabel>()
 				.HasKey
 					(
 						accountLabel => new
@@ -232,7 +235,8 @@ namespace RevolvingCredit.Entity
 						}
 					)
 			;
-			modelBuilder.Entity<AccountLine>()
+			modelBuilder
+				.Entity<AccountLine>()
 				.HasKey
 					(
 						accountLine => new
@@ -245,7 +249,8 @@ namespace RevolvingCredit.Entity
 						}
 					)
 			;
-			modelBuilder.Entity<AccountNote>()
+			modelBuilder
+				.Entity<AccountNote>()
 				.HasKey
 					(
 						accountNote => new
@@ -256,7 +261,8 @@ namespace RevolvingCredit.Entity
 						}
 					)
 			;
-			modelBuilder.Entity<AccountPayment>()
+			modelBuilder
+				.Entity<AccountPayment>()
 				.HasKey
 					(
 						accountPayment => new
@@ -267,7 +273,8 @@ namespace RevolvingCredit.Entity
 						}
 					)
 			;
-			modelBuilder.Entity<AccountPromotion>()
+			modelBuilder
+				.Entity<AccountPromotion>()
 				.HasKey
 					(
 						accountPromotion => new
@@ -282,7 +289,8 @@ namespace RevolvingCredit.Entity
 						}
 					)
 			;
-			modelBuilder.Entity<AccountStatement>()
+			modelBuilder
+				.Entity<AccountStatement>()
 				.HasKey
 					(
 						accountStatement => new

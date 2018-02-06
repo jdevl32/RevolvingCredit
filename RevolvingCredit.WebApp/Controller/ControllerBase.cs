@@ -7,8 +7,11 @@ namespace RevolvingCredit.WebApp.Controller
 
 	/// <inheritdoc />
 	/// <summary>
-	/// The base class for (most) controllers contained in this application.
+	/// The base class for (most of) the controller(s) contained in this application.
 	/// </summary>
+	/// <remarks>
+	/// Last modification:
+	/// </remarks>
 	public class ControllerBase
 		:
 		JDevl32.Web.Controller.ControllerBase
@@ -16,16 +19,16 @@ namespace RevolvingCredit.WebApp.Controller
 
 #region Instance Initialization
 
-#region JDevl32.Web.Controller.ControllerBase
+#region Implementation of JDevl32.Web.Controller.ControllerBase
 
 		/// <inheritdoc />
 		/// <remarks>
 		/// Last modification:
-		/// Implement instance mapper interface.
+		/// Refactor loggable logger category name.
 		/// </remarks>
-		public ControllerBase(IHostingEnvironment hostingEnvironment, ILogger<JDevl32.Web.Controller.ControllerBase> logger, IMapper mapper)
+		public ControllerBase(IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory, IMapper mapper)
 			:
-			base(hostingEnvironment, logger, mapper)
+			base(hostingEnvironment, loggerFactory, mapper)
 		{
 		}
 

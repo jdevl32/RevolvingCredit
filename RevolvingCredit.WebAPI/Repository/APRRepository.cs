@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using JDevl32.Web.Repository.Generic;
+﻿using JDevl32.Web.Repository.Generic;
 using Microsoft.Extensions.Logging;
 using RevolvingCredit.Entity;
 using RevolvingCredit.Entity.Model;
@@ -12,12 +11,11 @@ namespace RevolvingCredit.WebAPI.Repository
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Refactor unique entity item(s) on (value) type of (global) unique identifier.
-	/// Add the type of the unique entity item.
+	/// Refactor loggable logger category name.
 	/// </remarks>
 	public class APRRepository
 		:
-		InformableIntUniqueEntityContextRepositoryBase<APRRepository, RevolvingCreditContext, APR>
+		InformableIntUniqueEntityContextRepositoryBase<RevolvingCreditContext, APR>
 	{
 
 #region Instance Initialization
@@ -25,11 +23,11 @@ namespace RevolvingCredit.WebAPI.Repository
 		/// <inheritdoc />
 		/// <remarks>
 		/// Last modification:
-		/// Refactor unique entity item(s) on (value) type of (global) unique identifier.
+		/// Refactor loggable logger category name.
 		/// </remarks>
-		public APRRepository(RevolvingCreditContext entityContext, ILogger<APRRepository> logger, IMapper mapper)
+		public APRRepository(RevolvingCreditContext entityContext, ILoggerFactory loggerFactory)
 			:
-			base(entityContext, logger, mapper, entityContext.APR)
+			base(entityContext, loggerFactory, entityContext.APR)
 		{
 		}
 

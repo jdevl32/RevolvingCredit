@@ -1,21 +1,23 @@
 ﻿using JDevl32.Web.ViewModel;
-using RevolvingCredit.Entity.Interface;
+using RevolvingCredit.WebAPI.ViewModel.Interface;
 
 namespace RevolvingCredit.WebAPI.ViewModel
 {
 
 	/// <summary>
-	/// An APR (type) view model for a revolving credit account.
+	/// A view model for an APR (type) for a revolving credit account.
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Refactor unique entity item(s) on (value) type of (global) unique identifier.
+	/// (Re-)implement as extension of view model interface.
 	/// </remarks>
 	public class APRViewModel
 		:
 		IntUniqueEntityViewModel
 		,
-		IAPR
+		// todo|jdevl32: ???
+		IAPRViewModel
+		//IAPR
 	{
 	}
 

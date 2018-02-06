@@ -93,14 +93,13 @@ namespace RevolvingCredit.WebAPI
 		/// <inheritdoc />
 		/// <remarks>
 		/// Last modification:
-		/// Refactor unique entity item(s) on (value) type of (global) unique identifier.
-		/// Add the type of the unique entity item.
+		/// Refactor loggable logger category name.
 		/// </remarks>
 		public override void ConfigureServices(IServiceCollection services)
 		{
 			base.ConfigureServices(services);
 			// todo|jdevl32: can the repository be refactored (see aprcontroller.cs) ???
-			services.AddScoped<IInformableUniqueEntityContextRepository<APRRepository, APR, int>, APRRepository>();
+			services.AddScoped<IInformableUniqueEntityContextRepository<RevolvingCreditContext, APR, int>, APRRepository>();
 			services.AddTransient<APRSower>();
 		}
 

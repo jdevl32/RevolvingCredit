@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using JDevl32.Entity.Generic;
+﻿using JDevl32.Entity.Generic;
 using Microsoft.Extensions.Logging;
 using RevolvingCredit.Entity.Model;
 using System.Linq;
@@ -13,67 +12,29 @@ namespace RevolvingCredit.Entity
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
+	/// Refactor loggable logger category name.
 	/// </remarks>
 	public class APRSower
 		:
-		EntityContextSowerBase<APRSower, RevolvingCreditContext>
-		//IEntityContextSower
-		//,
-		//ILoggable<APRSower>
-		//,
-		//IInstanceMapper
+		EntityContextSowerBase<RevolvingCreditContext>
 	{
 
 #region Property
-
-		// todo|jdevl32: cleanup...
-		/**
-#region IEntityContextSower
-
-		/// <inheritdoc />
-		/// <remarks>
-		/// Last modification:
-		/// </remarks>
-		IEntityContext IEntityContextSower.EntityContext => Mapper.Map<IEntityContext>(EntityContext);
-
-#endregion
-
-#region ILoggable<APRSower>
-
-		/// <inheritdoc />
-		/// <remarks>
-		/// Last modification:
-		/// </remarks>
-		public ILogger<APRSower> Logger { get; }
-
-#endregion
-
-#region IInstanceMapper
-
-		/// <inheritdoc />
-		public IMapper Mapper { get; }
-
-#endregion
-
-		/// <remarks>
-		/// Last modification:
-		/// </remarks>
-		public virtual IRevolvingCreditContext EntityContext { get; }
-		**/
 
 #endregion
 
 #region Instance Initialization
 
-#region EntityContextSowerBase<APRSower, RevolvingCreditContext>
+#region EntityContextSowerBase<RevolvingCreditContext>
 
 		/// <inheritdoc />
 		/// <remarks>
 		/// Last modification:
+		/// Refactor loggable logger category name.
 		/// </remarks>
-		public APRSower(RevolvingCreditContext revolvingCreditContext, ILogger<APRSower> logger, IMapper mapper)
+		public APRSower(RevolvingCreditContext revolvingCreditContext, ILoggerFactory loggerFactory)
 			:
-			base(revolvingCreditContext, logger, mapper)
+			base(revolvingCreditContext, loggerFactory)
 		{
 		}
 
@@ -81,7 +42,7 @@ namespace RevolvingCredit.Entity
 
 #endregion
 
-#region EntityContextSowerBase<APRSower, RevolvingCreditContext>
+#region EntityContextSowerBase<RevolvingCreditContext>
 
 		/// <inheritdoc />
 		/// <remarks>

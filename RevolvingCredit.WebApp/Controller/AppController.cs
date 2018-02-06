@@ -20,16 +20,16 @@ namespace RevolvingCredit.WebApp.Controller
 
 #region Instance Initialization
 
-#region ControllerBase
+#region Implementation of ControllerBase
 
 		/// <inheritdoc />
 		/// <remarks>
 		/// Last modification:
-		/// Implement instance mapper interface.
+		/// Refactor loggable logger category name.
 		/// </remarks>
-		public AppController(IHostingEnvironment hostingEnvironment, ILogger<ControllerBase> logger, IMapper mapper)
+		public AppController(IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory, IMapper mapper)
 			:
-			base(hostingEnvironment, logger, mapper)
+			base(hostingEnvironment, loggerFactory, mapper)
 		{
 		}
 
@@ -47,20 +47,6 @@ namespace RevolvingCredit.WebApp.Controller
 		/// Last modification:
 		/// </remarks>
 		public ActionResult Index()
-		{
-			return View();
-		}
-
-		/// <summary>
-		/// GET: App/APR
-		/// </summary>
-		/// <returns>
-		/// 
-		/// </returns>
-		/// <remarks>
-		/// Last modification:
-		/// </remarks>
-		public ActionResult APR()
 		{
 			return View();
 		}

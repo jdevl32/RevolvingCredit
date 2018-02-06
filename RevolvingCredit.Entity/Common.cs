@@ -35,6 +35,7 @@ namespace RevolvingCredit.Entity
 		/// </param>
 		/// <remarks>
 		/// Last modification:
+		/// Refactor loggable logger category name.
 		/// </remarks>
 		public static void Configure(IProfileExpression profileExpression)
 		{
@@ -131,6 +132,7 @@ namespace RevolvingCredit.Entity
 				.ReverseMap();
 			/**/
 			// todo|jdevl32: maybe not needed ???
+			/**
 			profileExpression
 				.CreateMap<RevolvingCreditContext, IRevolvingCreditContext>()
 				.ConstructUsing
@@ -142,16 +144,18 @@ namespace RevolvingCredit.Entity
 						source.ConfigurationRoot
 						,
 						source.HostingEnvironment
-						,
-						source.Logger
-						,
-						source.Mapper
+						// todo|jdevl32: ???
+						//,
+						//source.Logger
+						//,
+						//source.Mapper
 						,
 						source.ConnectionStringKey
 					)
 				)
 				.ReverseMap()
 			;
+			/**/
 		}
 
 	}
