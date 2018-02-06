@@ -10,7 +10,7 @@
 		var config =
 			// Configure state machine and routing.
 			// Last modification:
-			// Migrate to component(s).
+			// Enhance URL route.
 			function ($logProvider, $stateProvider, $urlRouterProvider)
 			{
 				// Enable debugging.
@@ -138,7 +138,8 @@
 					//,
 					//templateUrl: "/template/unique.save.html"
 					,
-					url: "/save"
+					// todo|jdevl32: is this the correct/preferred way to "force" parent (which should actually be apr-view-state) ???
+					url: "/apr/save"
 				}
 				;
 
