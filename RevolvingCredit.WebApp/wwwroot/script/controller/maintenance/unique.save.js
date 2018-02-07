@@ -32,7 +32,7 @@
 				// Create method to get item detail(s).
 				var getItemDetail =
 					// Last modification:
-					function()
+					function ()
 					{
 						return {
 							suffix: ""
@@ -52,7 +52,7 @@
 				var doDebug =
 					// Last modification:
 					// (Re-)implement log/debug.
-					function(locator, message, detail, object, name)
+					function (locator, message, detail, object, name)
 					{
 						// todo|jdevl32: debug (for now, but eventually need to log) ???
 						$log.debug
@@ -73,49 +73,113 @@
 					}
 				;
 
+				// Create (debug and display) message method.
+				var debugMessage =
+					// Last modification:
+					function (locator, getMessageMethod, itemAction, displayName, object, name)
+					{
+						var item = getItemDetail();
+						var message = getMessageMethod(itemAction, displayName, item.suffix);
+
+						doDebug(locator, message, item.detail, object, name);
+
+						message += ".";
+						return message;
+					}
+				;
+
+				// Create get message method (for display and debug).
+				var getDebugMessage =
+					// Last modification:
+					function (itemAction, displayName, itemSuffix)
+					{
+						return ""
+							+ "Action :="
+							+ itemAction
+							+ " "
+							+ displayName
+							+ itemSuffix
+						;
+					}
+				;
+
+				// Create get (error) message method (for display and debug).
+				var getErrorMessage =
+					// Last modification:
+					function (itemAction, displayName, itemSuffix)
+					{
+						return ""
+							+ "Failed to "
+							+ itemAction
+							+ " "
+							+ displayName
+							+ itemSuffix
+						;
+					}
+				;
+
+				// Create get (success) message method (for display and debug).
+				var getSuccessMessage =
+					// Last modification:
+					function (itemAction, displayName, itemSuffix)
+					{
+						return ""
+							+ displayName
+							+ itemSuffix
+							+ " "
+							+ itemAction
+							+ "d"
+						;
+					}
+				;
+
 				// Create format (error) message method (for display and debug).
 				var formatErrorMessage =
 					// Last modification:
-					// Add item detail(s).
-					// Segregate error (display and debug) message.
-					// Refactor debug.
-					// Add name (of object).
-					function(locator, object, name)
+					// Refactor get message.
+					function (locator, object, name)
 					{
-						var item = getItemDetail();
-						vm.errorMessage = ""
-							+ "Failed to "
-							+ action
-							+ " " 
-							+ vm.displayName
-							+ item.suffix
+						return vm.errorMessage =
+							debugMessage
+								(
+									locator
+									,
+									getErrorMessage
+									,
+									action
+									,
+									vm.displayName
+									,
+									object
+									,
+									name
+								)
 						;
-
-						doDebug(locator, vm.errorMessage, item.detail, object, name);
-
-						vm.errorMessage += ".";
-						return vm.errorMessage;
 					}
 				;
 
 				// Create format (success) message method (for display and debug).
 				var formatSuccessMessage =
 					// Last modification:
-					function(locator, object, name)
+					// Refactor get message.
+					function (locator, object, name)
 					{
-						var item = getItemDetail();
-						vm.successMessage = ""
-							+ vm.displayName
-							+ item.suffix
-							+ " " 
-							+ action
-							+ "d"
+						return vm.successMessage =
+							debugMessage
+								(
+									locator
+									,
+									getSuccessMessage
+									,
+									action
+									,
+									vm.displayName
+									,
+									object
+									,
+									name
+								)
 						;
-
-						doDebug(locator, vm.successMessage, item.detail, object, name);
-
-						vm.successMessage += ".";
-						return vm.successMessage;
 					}
 				;
 
@@ -165,7 +229,7 @@
 					// Last modification:
 					// Refactor format error message.
 					// Refactor debug e(xception/rror).
-					function(e)
+					function (e)
 					{
 						doFinally();
 						formatErrorMessage("003", e, "e");
@@ -183,6 +247,9 @@
 						vm.isBusy = true;
 						vm.errorMessage = "";
 						action = "save";
+
+						// todo|jdevl32: remove (debug only)...
+						debugMessage("debug-vm.onSubmit-001", getDebugMessage, action, vm.displayName, vm, "vm");
 
 						// Post the saved unique item to the API using the defined handlers.
 						apiService.post(url, onPostSuccess, onPostError, doFinally, doCatch, vm.item);

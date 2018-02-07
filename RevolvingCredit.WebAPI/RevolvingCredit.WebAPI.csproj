@@ -10,10 +10,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="JDevl32.Entity" Version="1.3.1.1" />
-    <PackageReference Include="JDevl32.Logging" Version="1.4.0.1" />
+    <PackageReference Include="JDevl32.Entity" Version="1.3.1.4" />
+    <PackageReference Include="JDevl32.Logging" Version="1.4.0.2" />
     <PackageReference Include="JDevl32.Mapper" Version="1.0.0.1" />
-    <PackageReference Include="JDevl32.Web" Version="1.2.3.1" />
+    <PackageReference Include="JDevl32.Web" Version="1.2.5.1" />
     <PackageReference Include="JDevl32.Web.Host" Version="1.0.6.4" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" />

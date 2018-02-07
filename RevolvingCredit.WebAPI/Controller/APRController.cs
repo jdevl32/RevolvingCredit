@@ -16,8 +16,7 @@ namespace RevolvingCredit.WebAPI.Controller
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Refactor loggable logger category name.
-	/// Add the type of the unique entity item view model.
+	/// Refactor (default) display name (from APR (type) sower).
 	/// </remarks>
 	[Produces("application/json")]
 	[Route("api/APR")]
@@ -29,13 +28,9 @@ namespace RevolvingCredit.WebAPI.Controller
 
 #region Constant
 
-		/// <summary>
-		/// The (default) display name.
-		/// </summary>
-		/// <remarks>
-		/// Last modification:
-		/// </remarks>
-		public const string DefaultDisplayName = "APR (type)";
+#endregion
+
+#region Property
 
 #endregion
 
@@ -45,11 +40,11 @@ namespace RevolvingCredit.WebAPI.Controller
 
 		/// <inheritdoc />
 		/// <remarks>
-		/// Refactor loggable logger category name.
+		/// Refactor (default) display name (from APR (type) sower).
 		/// </remarks>
 		public APRController(IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory, IMapper mapper, IInformableUniqueEntityContextRepository<RevolvingCreditContext, APR, int> informableUniqueEntityContextRepository)
 			:
-			this(hostingEnvironment, loggerFactory, mapper, informableUniqueEntityContextRepository, DefaultDisplayName)
+			this(hostingEnvironment, loggerFactory, mapper, informableUniqueEntityContextRepository, APRSower.DefaultDisplayName)
 		{
 		}
 

@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using RevolvingCredit.Entity;
 using RevolvingCredit.Entity.Model;
 using RevolvingCredit.WebAPI.Repository;
+using System;
 using StartupBase = JDevl32.Web.Host.StartupBase;
 
 namespace RevolvingCredit.WebAPI
@@ -122,12 +123,20 @@ namespace RevolvingCredit.WebAPI
 		/// </param>
 		/// <remarks>
 		/// Last modification:
-		/// Rename (base class) configure methods (to avoid possible collisions).
+		/// Catch and log error on seed (APR (type)).
 		/// </remarks>
 		public virtual void Configure(IApplicationBuilder applicationBuilder, IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory, APRSower aprSower)
 		{
 			ConfigureStartup(applicationBuilder, hostingEnvironment, loggerFactory);
-			aprSower.Seed().Wait();
+
+			try
+			{
+				aprSower.Seed().Wait();
+			} // try
+			catch (Exception ex)
+			{
+				loggerFactory.CreateLogger(GetType()).LogError(ex, $"Error on seed {aprSower.DisplayName}:  {ex}");
+			} // catch
 		}
 
 	}

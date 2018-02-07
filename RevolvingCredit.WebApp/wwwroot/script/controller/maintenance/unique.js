@@ -29,7 +29,7 @@
 				// Create method to reset state.
 				var reset =
 					// Last modification:
-					function()
+					function ()
 					{
 						// Create empty container for error message.
 						vm.errorMessage = "";
@@ -53,7 +53,7 @@
 				// Create method to get item detail(s).
 				var getItemDetail =
 					// Last modification:
-					function()
+					function ()
 					{
 						var item =
 						{
@@ -86,7 +86,7 @@
 				var doDebug =
 					// Last modification:
 					// Add log service.
-					function(locator, message, detail, object, name)
+					function (locator, message, detail, object, name)
 					{
 						// todo|jdevl32: debug (for now, but eventually need to log) ???
 						$log.debug
@@ -107,49 +107,113 @@
 					}
 				;
 
+				// Create (debug and display) message method.
+				var debugMessage =
+					// Last modification:
+					function (locator, getMessageMethod, itemAction, displayName, object, name)
+					{
+						var item = getItemDetail();
+						var message = getMessageMethod(itemAction, displayName, item.suffix);
+
+						doDebug(locator, message, item.detail, object, name);
+
+						message += ".";
+						return message;
+					}
+				;
+
+				// Create get message method (for display and debug).
+				var getDebugMessage =
+					// Last modification:
+					function (itemAction, displayName, itemSuffix)
+					{
+						return ""
+							+ "Action :="
+							+ itemAction
+							+ " "
+							+ displayName
+							+ itemSuffix
+						;
+					}
+				;
+
+				// Create get (error) message method (for display and debug).
+				var getErrorMessage =
+					// Last modification:
+					function (itemAction, displayName, itemSuffix)
+					{
+						return ""
+							+ "Failed to "
+							+ itemAction
+							+ " "
+							+ displayName
+							+ itemSuffix
+						;
+					}
+				;
+
+				// Create get (success) message method (for display and debug).
+				var getSuccessMessage =
+					// Last modification:
+					function (itemAction, displayName, itemSuffix)
+					{
+						return ""
+							+ displayName
+							+ itemSuffix
+							+ " "
+							+ itemAction
+							+ "d"
+						;
+					}
+				;
+
 				// Create format (error) message method (for display and debug).
 				var formatErrorMessage =
 					// Last modification:
-					// Add item detail(s).
-					// Segregate error (display and debug) message.
-					// Refactor debug.
-					// Add name (of object).
-					function(locator, object, name)
+					// Refactor get message.
+					function (locator, object, name)
 					{
-						var item = getItemDetail();
-						vm.errorMessage = ""
-							+ "Failed to "
-							+ action
-							+ " " 
-							+ vm.displayName
-							+ item.suffix
+						return vm.errorMessage =
+							debugMessage
+								(
+									locator
+									,
+									getErrorMessage
+									,
+									action
+									,
+									vm.displayName
+									,
+									object
+									,
+									name
+								)
 						;
-
-						doDebug(locator, vm.errorMessage, item.detail, object, name);
-
-						vm.errorMessage += ".";
-						return vm.errorMessage;
 					}
 				;
 
 				// Create format (success) message method (for display and debug).
 				var formatSuccessMessage =
 					// Last modification:
-					function(locator, object, name)
+					// Refactor get message.
+					function (locator, object, name)
 					{
-						var item = getItemDetail();
-						vm.successMessage = ""
-							+ vm.displayName
-							+ item.suffix
-							+ " " 
-							+ action
-							+ "d"
+						return vm.successMessage =
+							debugMessage
+								(
+									locator
+									,
+									getSuccessMessage
+									,
+									action
+									,
+									vm.displayName
+									,
+									object
+									,
+									name
+								)
 						;
-
-						doDebug(locator, vm.successMessage, item.detail, object, name);
-
-						vm.successMessage += ".";
-						return vm.successMessage;
 					}
 				;
 
@@ -178,7 +242,7 @@
 					// Refactor debug response.
 					function (response)
 					{
-						formatErrorMessage("001", response, "response");
+						formatErrorMessage("002", response, "response");
 					}
 				;
 
@@ -196,10 +260,10 @@
 				var doCatch =
 					// Last modification:
 					// Refactor debug e(xception/rror).
-					function(e)
+					function (e)
 					{
 						doFinally();
-						formatErrorMessage("002", e, "e");
+						formatErrorMessage("003", e, "e");
 					}
 				;
 
@@ -235,7 +299,7 @@
 					// Refactor debug response.
 					function (response)
 					{
-						formatSuccessMessage("003", response, "response");
+						formatSuccessMessage("001", response, "response");
 
 						// Invoke the entry method of this controller 
 						// (as if refresh but without redirect or reload).
@@ -246,13 +310,16 @@
 				// Create method to initiate (remove) state.
 				vm.onRemove =
 					// Last modification:
-					function(index = null)
+					function (index = null)
 					{
 						// Set the index to track.
 						vm.index = index;
 						vm.isBusy = true;
 						vm.errorMessage = "";
 						action = "remove";
+
+						// todo|jdevl32: remove (debug only)...
+						debugMessage("debug-vm.onRemove-001", getDebugMessage, action, vm.displayName, vm, "vm");
 
 						// Check if for all unique item(s) (invalid index).
 						if (isNullOrUndefined(index))
@@ -298,6 +365,9 @@
 						vm.errorMessage = itemService.errorMessage = "";
 						vm.successMessage = itemService.successMessage = "";
 						itemService.item = isNullOrUndefined(index) ? {} : vm.items[index];
+
+						// todo|jdevl32: remove (debug only)...
+						debugMessage("debug-vm.onSave-001", getDebugMessage, action, vm.displayName, vm, "vm");
 					}
 				;
 			}

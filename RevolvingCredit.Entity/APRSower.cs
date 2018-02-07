@@ -8,16 +8,28 @@ namespace RevolvingCredit.Entity
 {
 
 	/// <summary>
-	/// An APR sower (seeder).
+	/// An APR (type) sower (seeder).
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Refactor loggable logger category name.
+	/// (Re-)implement as (generic) informable entity context sower (base class).
 	/// </remarks>
 	public class APRSower
 		:
-		EntityContextSowerBase<RevolvingCreditContext>
+		InformableEntityContextSowerBase<RevolvingCreditContext>
 	{
+
+#region Constant
+
+		/// <summary>
+		/// The (default) display name.
+		/// </summary>
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		public const string DefaultDisplayName = "APR (type)";
+
+#endregion
 
 #region Property
 
@@ -25,7 +37,7 @@ namespace RevolvingCredit.Entity
 
 #region Instance Initialization
 
-#region EntityContextSowerBase<RevolvingCreditContext>
+#region InformableEntityContextSowerBase<RevolvingCreditContext>
 
 		/// <inheritdoc />
 		/// <remarks>
@@ -34,7 +46,17 @@ namespace RevolvingCredit.Entity
 		/// </remarks>
 		public APRSower(RevolvingCreditContext revolvingCreditContext, ILoggerFactory loggerFactory)
 			:
-			base(revolvingCreditContext, loggerFactory)
+			this(revolvingCreditContext, loggerFactory, DefaultDisplayName)
+		{
+		}
+
+		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		protected APRSower(RevolvingCreditContext revolvingCreditContext, ILoggerFactory loggerFactory, string displayName)
+			:
+			base(revolvingCreditContext, loggerFactory, displayName)
 		{
 		}
 
@@ -47,18 +69,17 @@ namespace RevolvingCredit.Entity
 		/// <inheritdoc />
 		/// <remarks>
 		/// Last modification:
-		/// Add database generated identity annotation.
-		/// Enhance logging.
+		/// (Re-)implement as (generic) informable entity context sower (base class).
 		/// </remarks>
 		public override async Task Seed()
 		{
-			Logger.LogInformation("Seed APR...");
+			Logger.LogInformation($"Seed {DisplayName}...");
 
 			var @new = string.Empty;
 
 			if (EntityContext.APR.Any())
 			{
-				Logger.LogInformation("...APR already seeded.");
+				Logger.LogInformation($"...{DisplayName} already seeded.");
 			} // if
 			else
 			{
@@ -68,7 +89,7 @@ namespace RevolvingCredit.Entity
 					(
 						new APR
 						{
-							Description = "APR that applies to the line of cash for a revolving credit account."
+							Description = $"{DisplayName} that applies to the line of cash for a revolving credit account."
 							,
 							FullName = "Cash APR"
 							//,
@@ -79,7 +100,7 @@ namespace RevolvingCredit.Entity
 						,
 						new APR
 						{
-							Description = "APR that applies to the line of credit for a revolving credit account."
+							Description = $"{DisplayName} that applies to the line of credit for a revolving credit account."
 							,
 							FullName = "Credit APR"
 							//,
@@ -92,7 +113,7 @@ namespace RevolvingCredit.Entity
 				await EntityContext.SaveChangesAsync();
 			} // else
 
-			Logger.LogInformation($"{@new}APR count = {EntityContext.APR.Count()}.");
+			Logger.LogInformation($"{@new}{DisplayName} count = {EntityContext.APR.Count()}.");
 		}
 
 #endregion
