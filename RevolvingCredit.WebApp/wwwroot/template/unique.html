@@ -3,7 +3,7 @@
 	<div class="text-success" data-ng-bind="vm.successMessage" data-ng-show="vm.successMessage"></div>
 	<div class="text-danger" data-ng-bind="vm.errorMessage" data-ng-show="vm.errorMessage"></div>
 	<a data-ui-sref="save" data-ng-click="vm.onSave()" class="btn btn-sm btn-primary">New</a>
-	<button
+	<input
 		data-mwl-confirm
 		data-ng-show="vm.items.length > 0"
 		class="btn btn-sm btn-default"
@@ -12,12 +12,12 @@
 		data-confirm-text="Yes"
 		data-cancel-text="No"
 		data-on-confirm="vm.onRemove()"
-	>
-		Delete All
-	</button>
+		type="button"
+		value="Delete All"
+	/>
 	<div data-ng-repeat="item in vm.items track by $index">
 		<a data-ui-sref="save" data-ng-click="vm.onSave($index)" class="btn btn-sm btn-xs btn-primary">Edit</a>
-		<button
+		<input
 			data-mwl-confirm
 			class="btn btn-sm btn-xs btn-default"
 			data-title="Confirm Delete {{vm.displayName}}"
@@ -25,9 +25,9 @@
 			data-confirm-text="Yes"
 			data-cancel-text="No"
 			data-on-confirm="vm.onRemove($index)"
-		>
-			Delete
-		</button>
+			type="button"
+			value="Delete"
+		/>
 		|
 		<span data-ng-bind="item.shortName"></span>
 		|

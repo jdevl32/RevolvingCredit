@@ -9,11 +9,12 @@
 		// Define the API service object.
 		var APIService =
 			// Last modification:
+			// Refactor (use local method(s)).
 			function ($http)
 			{
 				// Define DELETE method.
-				// Last modification:
-				this.delete = 
+				var _delete = 
+					// Last modification:
 					function(url, onSuccess, onError, doFinally, doCatch, config = null)
 					{
 						try
@@ -23,18 +24,19 @@
 								.delete(url, config)
 								// ...using the provided handlers.
 								.then(onSuccess, onError)
-								.finally(doFinally);
+								.finally(doFinally)
+							;
 						} // try
 						catch (e)
 						{
 							doCatch(e);
 						} // catch
 					}
-					;
+				;
 
 				// Define GET method.
-				// Last modification:
-				this.get = 
+				var _get = 
+					// Last modification:
 					function(url, onSuccess, onError, doFinally, doCatch)
 					{
 						try
@@ -44,18 +46,19 @@
 								.get(url)
 								// ...using the provided handlers.
 								.then(onSuccess, onError)
-								.finally(doFinally);
+								.finally(doFinally)
+							;
 						} // try
 						catch (e)
 						{
 							doCatch(e);
 						} // catch
 					}
-					;
+				;
 
 				// Define POST method.
-				// Last modification:
-				this.post = 
+				var _post = 
+					// Last modification:
 					function(url, onSuccess, onError, doFinally, doCatch, item)
 					{
 						try
@@ -65,14 +68,19 @@
 								.post(url, item)
 								// ...using the provided handlers.
 								.then(onSuccess, onError)
-								.finally(doFinally);
+								.finally(doFinally)
+							;
 						} // try
 						catch (e)
 						{
 							doCatch(e);
 						} // catch
 					}
-					;
+				;
+
+				this.delete = _delete;
+				this.get = _get;
+				this.post = _post;
 			}
 		;
 

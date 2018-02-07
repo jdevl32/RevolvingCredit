@@ -30,15 +30,15 @@
 		;
 
 		// Define the service dependenc(y/ies).
-		/**
 		var dependency = 
 			[
+				ItemService
 			]
 		;
-		/**/
 
 		// Create the service module.
 		// Last modification:
-		angular.module("service").service("itemService", ItemService);
+		// Use the dependency (array).
+		angular.module("service").service("itemService", dependency);
 	}
 )();

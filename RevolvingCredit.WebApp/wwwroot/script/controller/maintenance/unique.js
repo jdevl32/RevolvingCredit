@@ -9,8 +9,9 @@
 		// Define the unique item controller.
 		var controller =
 			// Last modification:
-			// Inject log service.
-			function ($log, $stateParams, $window, itemService, apiService)
+			// Remove log service (migrate to message service).
+			// Inject message service.
+			function ($stateParams, $window, apiService, itemService, messageService)
 			{
 				// Define the view model.
 				var vm = this;
@@ -26,7 +27,7 @@
 				// Set the (item service from the view-model) display name.
 				itemService.displayName = vm.displayName;
 
-				// Create method to reset state.
+				// Create method to reset action state.
 				var reset =
 					// Last modification:
 					function ()
@@ -39,11 +40,6 @@
 
 						// Create empty container for unique item(s).
 						vm.items = [];
-
-						/**
-						// Create empty container for partial message.
-						vm.partialMessage = "";
-						/**/
 					}
 				;
 
@@ -80,109 +76,25 @@
 					}
 				;
 
-				// todo|jdevl32: !!! refactor (with unique.save.js) !!!
+				// todo|jdevl32: refactor (with unique.save.js) ???
 
-				// Create method to debug.
-				var doDebug =
-					// Last modification:
-					// Add log service.
-					function (locator, message, detail, object, name)
-					{
-						// todo|jdevl32: debug (for now, but eventually need to log) ???
-						$log.debug
-							(
-								"[" 
-								+ "[" 
-								+ locator
-								+ "] "
-								+ message
-								+ detail
-								+ ".:  "
-								+ name
-								+ "="
-								+ toString(object)
-								+ "]"
-							)
-						;
-					}
-				;
-
-				// Create (debug and display) message method.
-				var debugMessage =
-					// Last modification:
-					function (locator, getMessageMethod, itemAction, displayName, object, name)
-					{
-						var item = getItemDetail();
-						var message = getMessageMethod(itemAction, displayName, item.suffix);
-
-						doDebug(locator, message, item.detail, object, name);
-
-						message += ".";
-						return message;
-					}
-				;
-
-				// Create get message method (for display and debug).
-				var getDebugMessage =
-					// Last modification:
-					function (itemAction, displayName, itemSuffix)
-					{
-						return ""
-							+ "Action :="
-							+ itemAction
-							+ " "
-							+ displayName
-							+ itemSuffix
-						;
-					}
-				;
-
-				// Create get (error) message method (for display and debug).
-				var getErrorMessage =
-					// Last modification:
-					function (itemAction, displayName, itemSuffix)
-					{
-						return ""
-							+ "Failed to "
-							+ itemAction
-							+ " "
-							+ displayName
-							+ itemSuffix
-						;
-					}
-				;
-
-				// Create get (success) message method (for display and debug).
-				var getSuccessMessage =
-					// Last modification:
-					function (itemAction, displayName, itemSuffix)
-					{
-						return ""
-							+ displayName
-							+ itemSuffix
-							+ " "
-							+ itemAction
-							+ "d"
-						;
-					}
-				;
-
-				// Create format (error) message method (for display and debug).
+				// Create method to format (error) message (for display and debug).
 				var formatErrorMessage =
 					// Last modification:
-					// Refactor get message.
+					// Refactor debug message.
+					// Implement message service.
 					function (locator, object, name)
 					{
 						return vm.errorMessage =
-							debugMessage
+							messageService.debugErrorMessage
 								(
-									locator
-									,
-									getErrorMessage
+									getItemDetail
 									,
 									action
 									,
 									vm.displayName
+									,
+									locator
 									,
 									object
 									,
@@ -192,22 +104,23 @@
 					}
 				;
 
-				// Create format (success) message method (for display and debug).
+				// Create method to format (success) message (for display and debug).
 				var formatSuccessMessage =
 					// Last modification:
-					// Refactor get message.
+					// Refactor debug message.
+					// Implement message service.
 					function (locator, object, name)
 					{
 						return vm.successMessage =
-							debugMessage
+							messageService.debugSuccessMessage
 								(
-									locator
-									,
-									getSuccessMessage
+									getItemDetail
 									,
 									action
 									,
 									vm.displayName
+									,
+									locator
 									,
 									object
 									,
@@ -220,7 +133,7 @@
 				// Create success handler for GET.
 				var onGetSuccess =
 					// Last modification:
-					// (Re-)implement log/debug.
+					// Implement message service.
 					function (response)
 					{
 						// todo|jdevl32: make this global method...
@@ -229,7 +142,7 @@
 						// see https://docs.angularjs.org/guide/expression discussion on "context"...
 						if (vm.isDev || true)
 						{
-							$log.debug(toString(response, "response"));
+							messageService.doDebug("debug-onGetSuccess-001-unique", "", "", response, "response");
 						} // if
 
 						angular.copy(response.data, vm.items);
@@ -278,7 +191,7 @@
 					// Last modification:
 					function()
 					{
-						// Reset the state for fresh get.
+						// Reset the action state for fresh get.
 						reset();
 
 						// Set (get) action.
@@ -307,9 +220,10 @@
 					}
 				;
 
-				// Create method to initiate (remove) state.
+				// Create method to initiate (remove) action state.
 				vm.onRemove =
 					// Last modification:
+					// Implement message service.
 					function (index = null)
 					{
 						// Set the index to track.
@@ -319,7 +233,7 @@
 						action = "remove";
 
 						// todo|jdevl32: remove (debug only)...
-						debugMessage("debug-vm.onRemove-001", getDebugMessage, action, vm.displayName, vm, "vm");
+						messageService.debugMessage(getItemDetail, action, vm.displayName, "debug-vm.onRemove-001-unique", vm, "vm");
 
 						// Check if for all unique item(s) (invalid index).
 						if (isNullOrUndefined(index))
@@ -356,18 +270,21 @@
 					}
 				;
 
-				// Create method to initiate (save) state.
+				// Create method to initiate (save) action state.
 				vm.onSave =
 					// Last modification:
-					function(index = null)
+					// Implement message service.
+					function (index = null)
 					{
-						// Reset message(s);
+						// Reset message(s).
 						vm.errorMessage = itemService.errorMessage = "";
 						vm.successMessage = itemService.successMessage = "";
 						itemService.item = isNullOrUndefined(index) ? {} : vm.items[index];
+						// todo|jdevl32: only necessary if debug (below) - otherwise could set inline (debug, below) ???
+						action = "save";
 
 						// todo|jdevl32: remove (debug only)...
-						debugMessage("debug-vm.onSave-001", getDebugMessage, action, vm.displayName, vm, "vm");
+						messageService.debugMessage(getItemDetail, action, vm.displayName, "debug-vm.onSave-001-unique", vm, "vm");
 					}
 				;
 			}
@@ -376,15 +293,15 @@
 		// Define the module dependenc(y/ies).
 		var dependency =
 			[
-				"$log"
-				,
 				"$stateParams"
 				,
 				"$window"
 				,
+				"apiService"
+				,
 				"itemService"
 				,
-				"apiService"
+				"messageService"
 				,
 				controller
 			]
@@ -392,7 +309,6 @@
 
 		// Use the existing module, specify controller.
 		// Last modification:
-		// Inject log service.
 		angular.module("app").controller("unique", dependency);
 	}
 )();

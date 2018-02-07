@@ -56,7 +56,7 @@
 			<data-ui-view name="extendSave" />
 			<div class="form-group">
 				<input class="btn btn-sm btn-primary" type="submit" value="Save" data-ng-disabled="item.$pristine || item.$invalid" />
-				<button
+				<input
 					data-mwl-confirm
 					class="btn btn-sm btn-default"
 					data-title="Confirm Delete {{vm.displayName}}"
@@ -64,10 +64,11 @@
 					data-confirm-text="Yes"
 					data-cancel-text="No"
 					data-on-confirm="vm.onRemove()"
-				>
-					Delete
-				</button>
-				<a href="#!/" data-ng-click="vm.onSave()" class="btn btn-sm btn-default">Cancel</a>
+					type="button"
+					value="Delete"
+					data-ng-hide="vm.isNew()"
+				/>
+				<a href="#!/" data-ng-click="vm.onCancel()" class="btn btn-sm btn-default">Cancel</a>
 			</div>
 		</form>
 	</div>

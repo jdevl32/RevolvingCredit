@@ -9,8 +9,10 @@
 		// Define the unique item save controller.
 		var controller =
 			// Last modification:
-			// Inject log service.
-			function ($log, $stateParams, $window, itemService, apiService)
+			// Remove log service (migrate to message service).
+			// Inject message service.
+			// Refactor POST handler(s) for (all) API method(s).
+			function ($stateParams, $window, apiService, itemService, messageService)
 			{
 				// Define the view-model.
 				var vm = this;
@@ -46,109 +48,25 @@
 					}
 				;
 
-				// todo|jdevl32: !!! refactor (with unique.js) !!!
+				// todo|jdevl32: refactor (with unique.js) ???
 
-				// Create method to debug.
-				var doDebug =
-					// Last modification:
-					// (Re-)implement log/debug.
-					function (locator, message, detail, object, name)
-					{
-						// todo|jdevl32: debug (for now, but eventually need to log) ???
-						$log.debug
-							(
-								"[" 
-								+ "[" 
-								+ locator
-								+ "] "
-								+ message
-								+ detail
-								+ ".:  "
-								+ name
-								+ "="
-								+ toString(object)
-								+ "]"
-							)
-						;
-					}
-				;
-
-				// Create (debug and display) message method.
-				var debugMessage =
-					// Last modification:
-					function (locator, getMessageMethod, itemAction, displayName, object, name)
-					{
-						var item = getItemDetail();
-						var message = getMessageMethod(itemAction, displayName, item.suffix);
-
-						doDebug(locator, message, item.detail, object, name);
-
-						message += ".";
-						return message;
-					}
-				;
-
-				// Create get message method (for display and debug).
-				var getDebugMessage =
-					// Last modification:
-					function (itemAction, displayName, itemSuffix)
-					{
-						return ""
-							+ "Action :="
-							+ itemAction
-							+ " "
-							+ displayName
-							+ itemSuffix
-						;
-					}
-				;
-
-				// Create get (error) message method (for display and debug).
-				var getErrorMessage =
-					// Last modification:
-					function (itemAction, displayName, itemSuffix)
-					{
-						return ""
-							+ "Failed to "
-							+ itemAction
-							+ " "
-							+ displayName
-							+ itemSuffix
-						;
-					}
-				;
-
-				// Create get (success) message method (for display and debug).
-				var getSuccessMessage =
-					// Last modification:
-					function (itemAction, displayName, itemSuffix)
-					{
-						return ""
-							+ displayName
-							+ itemSuffix
-							+ " "
-							+ itemAction
-							+ "d"
-						;
-					}
-				;
-
-				// Create format (error) message method (for display and debug).
+				// Create method to format (error) message (for display and debug).
 				var formatErrorMessage =
 					// Last modification:
-					// Refactor get message.
+					// Refactor debug message.
+					// Implement message service.
 					function (locator, object, name)
 					{
 						return vm.errorMessage =
-							debugMessage
+							messageService.debugErrorMessage
 								(
-									locator
-									,
-									getErrorMessage
+									getItemDetail
 									,
 									action
 									,
 									vm.displayName
+									,
+									locator
 									,
 									object
 									,
@@ -158,22 +76,23 @@
 					}
 				;
 
-				// Create format (success) message method (for display and debug).
+				// Create method to format (success) message (for display and debug).
 				var formatSuccessMessage =
 					// Last modification:
-					// Refactor get message.
+					// Refactor debug message.
+					// Implement message service.
 					function (locator, object, name)
 					{
 						return vm.successMessage =
-							debugMessage
+							messageService.debugSuccessMessage
 								(
-									locator
-									,
-									getSuccessMessage
+									getItemDetail
 									,
 									action
 									,
 									vm.displayName
+									,
+									locator
 									,
 									object
 									,
@@ -183,11 +102,9 @@
 					}
 				;
 
-				// Create success handler for POST.
-				var onPostSuccess =
+				// Create success handler for (all) API method(s).
+				var onSuccess =
 					// Last modification:
-					// Refactor format success message.
-					// Refactor debug response.
 					function (response)
 					{
 						// todo|jdevl32: ??? can this be delegated back to unique (parent) controller ???
@@ -203,11 +120,9 @@
 					}
 				;
 
-				// Create error handler for POST.
-				var onPostError =
+				// Create error handler for (all) API method(s).
+				var onError =
 					// Last modification:
-					// Refactor format error message.
-					// Refactor debug response.
 					function (response)
 					{
 						formatErrorMessage("002", response, "response");
@@ -239,9 +154,74 @@
 				// Get the (API) URL from the item service.
 				var url = itemService.url;
 
+				// Create method to check save (new) action state.
+				vm.isNew =
+					// Last modification:
+					function ()
+					{
+						return _.isEmpty(vm.item);
+					}
+				;
+
+				// Create method to initiate (cancel) action state.
+				vm.onCancel =
+					// Last modification:
+					function()
+					{
+						// Reset message(s).
+						vm.errorMessage = itemService.errorMessage = "";
+						vm.successMessage = itemService.successMessage = "";
+						itemService.item = {};
+						// todo|jdevl32: only necessary if debug (below) - otherwise could set inline (debug, below) ???
+						action = "cancel";
+
+						// todo|jdevl32: remove (debug only)...
+						messageService.debugMessage(getItemDetail, action, vm.displayName, "debug-vm.onCancel-001-unique-save", vm, "vm");
+					}
+				;
+
+				// Create method to initiate (remove) action state.
+				vm.onRemove =
+					// Last modification:
+					function ()
+					{
+						vm.isBusy = true;
+						vm.errorMessage = "";
+						action = "remove";
+
+						// todo|jdevl32: remove (debug only)...
+						messageService.debugMessage(getItemDetail, action, vm.displayName, "debug-vm.onRemove-001-unique-save", vm, "vm");
+
+						// Delete the unique item from the API using the defined handlers.
+						apiService.delete
+							(
+								url
+								,
+								onSuccess
+								,
+								onError
+								,
+								doFinally
+								,
+								doCatch
+								,
+								{
+									headers:
+									{
+										"Content-Type": "application/json"
+									}
+									,
+									data: vm.item
+								}
+							)
+						;
+					}
+				;
+
 				// Form submit handler.
 				vm.onSubmit =
 					// Last modification:
+					// Implement message service.
 					function ()
 					{
 						vm.isBusy = true;
@@ -249,10 +229,10 @@
 						action = "save";
 
 						// todo|jdevl32: remove (debug only)...
-						debugMessage("debug-vm.onSubmit-001", getDebugMessage, action, vm.displayName, vm, "vm");
+						messageService.debugMessage(getItemDetail, action, vm.displayName, "debug-vm.onSubmit-001-unique-save", vm, "vm");
 
 						// Post the saved unique item to the API using the defined handlers.
-						apiService.post(url, onPostSuccess, onPostError, doFinally, doCatch, vm.item);
+						apiService.post(url, onSuccess, onError, doFinally, doCatch, vm.item);
 					}
 				;
 			}
@@ -261,15 +241,15 @@
 		// Define the module dependenc(y/ies).
 		var dependency =
 			[
-				"$log"
-				,
 				"$stateParams"
 				,
 				"$window"
 				,
+				"apiService"
+				,
 				"itemService"
 				,
-				"apiService"
+				"messageService"
 				,
 				controller
 			]
@@ -277,7 +257,6 @@
 
 		// Use the existing module, specify controller.
 		// Last modification:
-		// Inject log service.
 		angular.module("app").controller("uniqueSave", dependency);
 	}
 )();
