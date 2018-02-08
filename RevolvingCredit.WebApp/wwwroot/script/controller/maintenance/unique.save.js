@@ -157,9 +157,20 @@
 				// Create method to check save (new) action state.
 				vm.isNew =
 					// Last modification:
+					// Enhance save (new) action state determination.
 					function ()
 					{
-						return _.isEmpty(vm.item);
+						// The unique item key (property) is the id.
+						var key = "id";
+
+						// The save action state is new...
+						// ...if the unique item is empty...
+						return _.isEmpty(vm.item)
+						// ...or, if the unique item key (id) value is undefined...
+							|| !_.has(vm.item, key)
+						// ...or, if the unique item key (id) value is invalid (zero).
+							|| 0 === _.property(key)(vm.item)
+						;
 					}
 				;
 
