@@ -2,23 +2,28 @@
   "name": "asp.net",
   "private": true,
   "dependencies": {
-    "bootstrap": "v3.3.7",
+    "bootstrap": "v4.0.0",
     "underscore": "1.8.3",
     "font-awesome": "Font-Awesome#v4.7.0",
-    "jquery": "3.2.1",
-    "angular": "v1.6.8",
-    "angular-route": "v1.6.8",
-    "bootswatch": "v3.3.7",
+    "jquery": "3.3.1",
+    "angular": "v1.6.9",
+    "angular-route": "v1.6.9",
+    "bootswatch": "v4.0.0",
     "jquery-validation": "1.17.0",
     "jquery-validation-unobtrusive": "v3.2.6",
     "less": "v2.7.3",
-    "angular-sanitize": "v1.6.8",
+    "angular-sanitize": "v1.6.9",
     "ui-bootstrap": "2.5.0",
     "angular-bootstrap-confirm": "2.5.1",
-    "angular-ui-router": "1.0.12"
+    "angular-ui-router": "1.0.14"
   },
   "resolutions": {
-    "angular": "v1.6.8",
-    "angular-route": "v1.6.8"
+    "angular": "v1.6.9",
+    "angular-route": "v1.6.9",
+    "jquery": "3.3.1",
+    "bootswatch": "v4.0.0",
+    "bootstrap": "v4.0.0",
+    "angular-ui-router": "1.0.14",
+    "angular-sanitize": "v1.6.9"
   }
 }
