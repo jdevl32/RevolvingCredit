@@ -23,16 +23,8 @@ namespace RevolvingCredit.WebAPI.Controller
 	public class APRController
 		:
 		// todo|jdevl32: ???
-		InformableIntUniqueEntityControllerBase<RevolvingCreditContext, APR, APRViewModel>
+		InformableUniqueIntEntityControllerBase<RevolvingCreditContext, APR, APRViewModel>
 	{
-
-#region Constant
-
-#endregion
-
-#region Property
-
-#endregion
 
 #region Instance Initialization
 
@@ -40,11 +32,12 @@ namespace RevolvingCredit.WebAPI.Controller
 
 		/// <inheritdoc />
 		/// <remarks>
+		/// Last modification:
 		/// Refactor (default) display name (from APR (type) sower).
 		/// </remarks>
-		public APRController(IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory, IMapper mapper, IInformableUniqueEntityContextRepository<RevolvingCreditContext, APR, int> informableUniqueEntityContextRepository)
+		public APRController(IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory, IMapper mapper, IInformableUniqueIntEntityContextRepository<RevolvingCreditContext, APR> informableUniqueIntEntityContextRepository)
 			:
-			this(hostingEnvironment, loggerFactory, mapper, informableUniqueEntityContextRepository, APRSower.DefaultDisplayName)
+			this(hostingEnvironment, loggerFactory, mapper, informableUniqueIntEntityContextRepository, APRSower.DefaultDisplayName)
 		{
 		}
 
@@ -52,11 +45,12 @@ namespace RevolvingCredit.WebAPI.Controller
 		// todo|jdevl32: ??? ...and then...how to handle default display name ???
 		/// <inheritdoc />
 		/// <remarks>
+		/// Last modification:
 		/// Refactor loggable logger category name.
 		/// </remarks>
-		protected APRController(IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory, IMapper mapper, IInformableUniqueEntityContextRepository<RevolvingCreditContext, APR, int> informableUniqueEntityContextRepository, string displayName)
+		protected APRController(IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory, IMapper mapper, IInformableUniqueIntEntityContextRepository<RevolvingCreditContext, APR> informableUniqueIntEntityContextRepository, string displayName)
 			:
-			base(hostingEnvironment, loggerFactory, mapper, informableUniqueEntityContextRepository, displayName)
+			base(hostingEnvironment, loggerFactory, mapper, informableUniqueIntEntityContextRepository, displayName)
 		{
 		}
 

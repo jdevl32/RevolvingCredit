@@ -1,18 +1,19 @@
 ﻿<div>
+	<h3>{{vm.displayName}}</h3>
 	<div class="text-danger" data-ng-bind="vm.errorMessage" data-ng-show="vm.errorMessage"></div>
 	<div>
 		<form name="item" novalidate data-ng-submit="vm.onSubmit()">
 			<div class="form-group">
 				<label for="shortName">Short Name:</label>
-				<input 
-					class="form-control" 
-					id="shortName" 
-					name="shortName" 
-					type="text" 
-					data-ng-model="vm.item.shortName" 
-					required 
-					data-ng-minlength="1" 
+				<input
+					class="form-control"
+					data-ng-minlength="1"
+					data-ng-model="vm.item.shortName"
+					id="shortName"
+					name="shortName"
 					placeholder="...up to ### characters."
+					required
+					type="text"
 				/>
 				<span data-ng-show="item.shortName.$dirty && item.shortName.$invalid" class="text-warning">
 					<span data-ng-show="item.shortName.$error.required">Required.</span>
@@ -21,15 +22,15 @@
 			</div>
 			<div class="form-group">
 				<label for="fullName">Full Name:</label>
-				<input 
-					class="form-control" 
-					id="fullName" 
-					name="fullName" 
-					type="text" 
-					data-ng-model="vm.item.fullName" 
-					required 
-					data-ng-minlength="1" 
+				<input
+					class="form-control"
+					data-ng-minlength="1"
+					data-ng-model="vm.item.fullName"
+					id="fullName"
+					name="fullName"
 					placeholder="...up to ### characters."
+					required
+					type="text"
 				/>
 				<span data-ng-show="item.fullName.$dirty && item.fullName.$invalid" class="text-warning">
 					<span data-ng-show="item.fullName.$error.required">Required.</span>
@@ -40,12 +41,12 @@
 				<label for="description">Description:</label>
 				<textarea 
 					class="form-control" 
+					data-ng-minlength="1" 
+					data-ng-model="vm.item.description" 
 					id="description" 
 					name="description" 
-					data-ng-model="vm.item.description" 
-					required 
-					data-ng-minlength="1" 
 					placeholder="...up to ### characters."
+					required 
 				>
 				</textarea>
 				<span data-ng-show="item.description.$dirty && item.description.$invalid" class="text-warning">
@@ -53,22 +54,33 @@
 					<span data-ng-show="item.description.$error.minlength">Minimum length not satisfied.</span>
 				</span>
 			</div>
-			<data-ui-view name="extendSave" />
+			<data-ui-view name="extendSave"/>
 			<div class="form-group">
-				<input class="btn btn-sm btn-primary" type="submit" value="Save" data-ng-disabled="item.$pristine || item.$invalid" />
 				<input
-					data-mwl-confirm
+					class="btn btn-sm btn-primary"
+					data-ng-disabled="item.$pristine || item.$invalid"
+					type="submit"
+					value="Save"
+				/>
+				<input
 					class="btn btn-sm btn-default"
-					data-title="Confirm Delete {{vm.displayName}}"
-					data-message="Are you sure?"
-					data-confirm-text="Yes"
 					data-cancel-text="No"
+					data-confirm-text="Yes"
+					data-message="Are you sure?"
+					data-mwl-confirm
+					data-ng-hide="vm.isNew()"
 					data-on-confirm="vm.onRemove()"
+					data-title="Confirm Delete {{vm.displayName}}"
 					type="button"
 					value="Delete"
-					data-ng-hide="vm.isNew()"
 				/>
-				<a href="#!/" data-ng-click="vm.onCancel()" class="btn btn-sm btn-default">Cancel</a>
+				<input
+					class="btn btn-sm btn-default"
+					data-ng-click="vm.onCancel()"
+					data-ui-sref="^"
+					type="button"
+					value="Cancel"
+				/>
 			</div>
 		</form>
 	</div>

@@ -1,4 +1,4 @@
-﻿using JDevl32.Entity.Model;
+﻿using JDevl32.Web.ViewModel;
 using RevolvingCredit.WebAPI.ViewModel.Interface;
 
 namespace RevolvingCredit.WebAPI.ViewModel
@@ -9,11 +9,11 @@ namespace RevolvingCredit.WebAPI.ViewModel
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Refactor unique entity item(s) on (value) type of (global) unique identifier.
+	/// (Re-)implement as (GUID) identifier unique entity item view model (base class).
 	/// </remarks>
 	public class AccountViewModel
 		:
-		GuidUniqueEntity
+		UniqueGuidEntityViewModel
 		,
 		IAccountViewModel
 	{
@@ -22,12 +22,12 @@ namespace RevolvingCredit.WebAPI.ViewModel
 
 #region IAccountViewModel
 
-		// todo|jdevl32: setter required ???
 		/// <inheritdoc />
 		/// <remarks>
 		/// Last modification:
+		/// Implement setter.
 		/// </remarks>
-		public short SafeAccountNumber { get; }
+		public short SafeAccountNumber { get; set; }
 
 #endregion
 

@@ -13,7 +13,7 @@ namespace RevolvingCredit.Entity.Model
 	/// </remarks>
 	public class Balance
 		:
-		IntUniqueEntity
+		UniqueIntEntity
 		,
 		IBalance
 	{

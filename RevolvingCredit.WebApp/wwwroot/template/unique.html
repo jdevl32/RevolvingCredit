@@ -1,30 +1,43 @@
 ﻿<div>
-	<spinner while="vm.isBusy">Loading {{vm.displayName}}(s)...</spinner>
-	<div class="text-success" data-ng-bind="vm.successMessage" data-ng-show="vm.successMessage"></div>
+	<h3>{{vm.displayName}}(s)</h3>
 	<div class="text-danger" data-ng-bind="vm.errorMessage" data-ng-show="vm.errorMessage"></div>
-	<a data-ui-sref="save" data-ng-click="vm.onSave()" class="btn btn-sm btn-primary">New</a>
+	<div class="text-success" data-ng-bind="vm.successMessage" data-ng-show="vm.successMessage"></div>
 	<input
+		class="btn btn-sm btn-primary"
+		data-ng-click="vm.onSave()"
+		data-ui-sref=".save"
+		type="button"
+		value="New"
+	/>
+	<input
+		class="btn btn-sm btn-default"
+		data-cancel-text="No"
+		data-confirm-text="Yes"
+		data-message="Are you sure?"
 		data-mwl-confirm
 		data-ng-show="vm.items.length > 0"
-		class="btn btn-sm btn-default"
-		data-title="Confirm Delete All {{vm.displayName}}(s)"
-		data-message="Are you sure?"
-		data-confirm-text="Yes"
-		data-cancel-text="No"
 		data-on-confirm="vm.onRemove()"
+		data-title="Confirm Delete All {{vm.displayName}}(s)"
 		type="button"
 		value="Delete All"
 	/>
+	<spinner while="vm.isBusy">Loading {{vm.displayName}}(s)...</spinner>
 	<div data-ng-repeat="item in vm.items track by $index">
-		<a data-ui-sref="save" data-ng-click="vm.onSave($index)" class="btn btn-sm btn-xs btn-primary">Edit</a>
 		<input
-			data-mwl-confirm
+			class="btn btn-sm btn-xs btn-primary"
+			data-ng-click="vm.onSave($index)"
+			data-ui-sref=".save"
+			type="button"
+			value="Edit"
+		/>
+		<input
 			class="btn btn-sm btn-xs btn-default"
-			data-title="Confirm Delete {{vm.displayName}}"
-			data-message="Are you sure?"
-			data-confirm-text="Yes"
 			data-cancel-text="No"
+			data-confirm-text="Yes"
+			data-message="Are you sure?"
+			data-mwl-confirm
 			data-on-confirm="vm.onRemove($index)"
+			data-title="Confirm Delete {{vm.displayName}}"
 			type="button"
 			value="Delete"
 		/>

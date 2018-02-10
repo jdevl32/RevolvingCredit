@@ -1,8 +1,13 @@
 ﻿/**
 	/style/site.css
+
+	Last modification:
+	Include "main" by name.
 **/
 
 #main
+,
+[name=main]
 {
 	grid-area: a;
 }
@@ -16,12 +21,16 @@
 {
 	display: grid;
 	grid-template-areas:
-		"h h h h h h h h h h h h"
-		". e e e e e e e e e e ."
-		". a a a a a a a a a a ."
-		"f f f f f f f f f f f f"
+		"h h h"
+		". e ."
+		". a ."
+		"f f f"
 		;
-	grid-template-columns: repeat(12, 1fr);
+	grid-template-columns:
+		repeat(1, 1fr)
+		repeat(1, 10fr)
+		repeat(1, 1fr)
+	;
 }
 
 #wrapper
@@ -29,9 +38,13 @@
 {
 	display: grid;
 	grid-template-areas:
-		"e . a a a a a a a a a a"
+		"e . a"
 		;
-	grid-template-columns: repeat(12, 1fr);
+	grid-template-columns:
+		repeat(1, 2fr)
+		1%
+		repeat(1, 9fr)
+	;
 }
 
 body

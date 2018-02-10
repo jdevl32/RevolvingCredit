@@ -13,7 +13,7 @@ namespace RevolvingCredit.Entity.Model
 	/// </remarks>
 	public class Line
 		:
-		IntUniqueEntity
+		UniqueIntEntity
 		,
 		ILine
 	{

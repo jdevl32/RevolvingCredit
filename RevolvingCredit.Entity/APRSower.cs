@@ -1,22 +1,23 @@
 ﻿using JDevl32.Entity.Generic;
 using Microsoft.Extensions.Logging;
 using RevolvingCredit.Entity.Model;
-using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace RevolvingCredit.Entity
 {
 
+	/// <inheritdoc />
 	/// <summary>
 	/// An APR (type) sower (seeder).
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// (Re-)implement as (generic) informable entity context sower (base class).
+	/// (Re-)implement as (generic) informable unique (integer) identifier entity context sower (base class).
 	/// </remarks>
 	public class APRSower
 		:
-		InformableEntityContextSowerBase<RevolvingCreditContext>
+		InformableUniqueIntEntityContextSowerBase<RevolvingCreditContext, APR>
 	{
 
 #region Constant
@@ -29,24 +30,61 @@ namespace RevolvingCredit.Entity
 		/// </remarks>
 		public const string DefaultDisplayName = "APR (type)";
 
+		/**
+		public const IEnumerable<APR> DefaultEntity =
+			new []
+			{
+				new APR
+				{
+					Description = $"{DefaultDisplayName} that applies to the line of cash for a revolving credit account."
+					,
+					FullName = "Cash APR"
+					//,
+					//Id = 1
+					,
+					ShortName = "Cash"
+				}
+				,
+				new APR
+				{
+					Description = $"{DefaultDisplayName} that applies to the line of credit for a revolving credit account."
+					,
+					FullName = "Credit APR"
+					//,
+					//Id = 2
+					,
+					ShortName = "Credit"
+				}
+			}
+		;
+		/**/
+
 #endregion
 
 #region Property
 
+#region Overrides of InformableEntityContextSowerBase<RevolvingCreditContext, APR, int>
+
+		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		protected override IEnumerable<APR> Entity { get; set; }
+
+#endregion
+
 #endregion
 
 #region Instance Initialization
-
-#region InformableEntityContextSowerBase<RevolvingCreditContext>
 
 		/// <inheritdoc />
 		/// <remarks>
 		/// Last modification:
 		/// Refactor loggable logger category name.
 		/// </remarks>
-		public APRSower(RevolvingCreditContext revolvingCreditContext, ILoggerFactory loggerFactory)
+		public APRSower(RevolvingCreditContext entityContext, ILoggerFactory loggerFactory)
 			:
-			this(revolvingCreditContext, loggerFactory, DefaultDisplayName)
+			this(entityContext, loggerFactory, DefaultDisplayName)
 		{
 		}
 
@@ -54,17 +92,37 @@ namespace RevolvingCredit.Entity
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		protected APRSower(RevolvingCreditContext revolvingCreditContext, ILoggerFactory loggerFactory, string displayName)
+		public APRSower(RevolvingCreditContext entityContext, ILoggerFactory loggerFactory, string displayName)
 			:
-			base(revolvingCreditContext, loggerFactory, displayName)
+			// todo|jdelv32: implement default entity !!!
+			base(entityContext, loggerFactory, displayName)
+			//this(entityContext, loggerFactory, displayName, )
+		{
+		}
+
+		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		public APRSower(RevolvingCreditContext entityContext, ILoggerFactory loggerFactory, IEnumerable<APR> entity)
+			:
+			this(entityContext, loggerFactory, DefaultDisplayName, entity)
+		{
+		}
+
+		/// <inheritdoc />
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		public APRSower(RevolvingCreditContext entityContext, ILoggerFactory loggerFactory, string displayName, IEnumerable<APR> entity)
+			:
+			base(entityContext, loggerFactory, displayName, entity)
 		{
 		}
 
 #endregion
 
-#endregion
-
-#region EntityContextSowerBase<RevolvingCreditContext>
+#region Overrides of EntityContextSowerBase<RevolvingCreditContext>
 
 		/// <inheritdoc />
 		/// <remarks>
@@ -72,49 +130,8 @@ namespace RevolvingCredit.Entity
 		/// (Re-)implement as (generic) informable entity context sower (base class).
 		/// </remarks>
 		public override async Task Seed()
-		{
-			Logger.LogInformation($"Seed {DisplayName}...");
-
-			var @new = string.Empty;
-
-			if (EntityContext.APR.Any())
-			{
-				Logger.LogInformation($"...{DisplayName} already seeded.");
-			} // if
-			else
-			{
-				@new = "New ";
-
-				await EntityContext.APR.AddRangeAsync
-					(
-						new APR
-						{
-							Description = $"{DisplayName} that applies to the line of cash for a revolving credit account."
-							,
-							FullName = "Cash APR"
-							//,
-							//Id = 1
-							,
-							ShortName = "Cash"
-						}
-						,
-						new APR
-						{
-							Description = $"{DisplayName} that applies to the line of credit for a revolving credit account."
-							,
-							FullName = "Credit APR"
-							//,
-							//Id = 2
-							,
-							ShortName = "Credit"
-						}
-					);
-
-				await EntityContext.SaveChangesAsync();
-			} // else
-
-			Logger.LogInformation($"{@new}{DisplayName} count = {EntityContext.APR.Count()}.");
-		}
+			=>
+			await Seed(EntityContext.APR);
 
 #endregion
 

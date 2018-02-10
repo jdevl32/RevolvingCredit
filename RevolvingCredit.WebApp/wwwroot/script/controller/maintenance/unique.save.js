@@ -9,10 +9,8 @@
 		// Define the unique item save controller.
 		var controller =
 			// Last modification:
-			// Remove log service (migrate to message service).
-			// Inject message service.
-			// Refactor POST handler(s) for (all) API method(s).
-			function ($stateParams, $window, apiService, itemService, messageService)
+			// Inject state service dependency.
+			function ($state, $stateParams, $window, apiService, itemService, messageService)
 			{
 				// Define the view-model.
 				var vm = this;
@@ -114,9 +112,8 @@
 						// Clear/reset save unique item (form and item service).
 						itemService.item = vm.item = {};
 
-						// todo|jdevl32: ??? state.go ???
-						// Redirect back to unique item view.
-						$window.location.href = "#!/";
+						// Redirect back to unique item view (parent state).
+						$state.go("^");
 					}
 				;
 
@@ -250,8 +247,12 @@
 		;
 
 		// Define the module dependenc(y/ies).
+		// Last modification:
+		// Inject state service dependency.
 		var dependency =
 			[
+				"$state"
+				,
 				"$stateParams"
 				,
 				"$window"

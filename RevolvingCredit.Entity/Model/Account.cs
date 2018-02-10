@@ -13,7 +13,7 @@ namespace RevolvingCredit.Entity.Model
 	/// </remarks>
 	public class Account
 		:
-		GuidUniqueEntity
+		UniqueGuidEntity
 		,
 		IAccount
 	{

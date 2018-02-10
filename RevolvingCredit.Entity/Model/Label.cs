@@ -13,7 +13,7 @@ namespace RevolvingCredit.Entity.Model
 	/// </remarks>
 	public class Label
 		:
-		IntUniqueEntity
+		UniqueIntEntity
 		,
 		ILabel
 	{

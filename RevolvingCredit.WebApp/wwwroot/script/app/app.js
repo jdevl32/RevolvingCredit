@@ -10,14 +10,32 @@
 		var config =
 			// Configure state machine and routing.
 			// Last modification:
-			// Enhance URL route.
+			// Implement revolving credit account state(s).
 			function ($logProvider, $stateProvider, $urlRouterProvider)
 			{
 				// Enable debugging.
 				$logProvider.debugEnabled(true);
 
+				var maintenanceName = "maintenance";
+				var maintenanceURL = "/" + maintenanceName;
+				var accountName = "account";
+				var accountURL = "/" + accountName;
+				var saveName = "save";
+				var saveURL = "/" + saveName;
+				var aprName = "apr";
+				var aprURL = "/" + aprName;
+
 				// Default route configuration.
-				$urlRouterProvider.otherwise("/maintenance/apr");
+				$urlRouterProvider.otherwise(maintenanceURL + accountURL);
+
+				// Define the revolving credit account common params.
+				var accountParams = 
+				{
+					displayName: "Revolving Credit Account"
+					,
+					url: "http://localhost:58410/api/account"
+				}
+				;
 
 				// Define the APR (type) common params.
 				var aprParams = 
@@ -78,30 +96,89 @@
 				{
 					abstract: true
 					,
-					component: "maintenance"
+					component: maintenanceName
 					,
-					name: "maintenance"
+					name: maintenanceName
 					,
 					onEnter: onStateEnter
 					,
 					onExit: onStateExit
-					//,
-					//templateUrl: "/template/maintenance.html"
 					,
-					url: "/maintenance"
+					url: maintenanceURL
+				}
+				;
+
+				//var mainViewName = "main";
+				//var mainStateViewName = mainViewName + "@" + maintenanceName;
+
+				var uniqueView =
+				{
+					component: "unique"
+				}
+				;
+
+				var uniqueSaveView =
+				{
+					component: "uniqueSave"
+				}
+				;
+
+				var uniqueViewMap =
+				{
+					"main@maintenance": uniqueView
+				}
+				;
+
+				var uniqueSaveViewMap =
+				{
+					"main@maintenance": uniqueSaveView
+				}
+				;
+
+				//var accountView =
+				//{
+				//	"main@maintenance": uniqueView
+				//}
+				//;
+
+				// Define the revolving credit account (child of maintenance) view state.
+				var accountMaintenanceState =
+				{
+					name: maintenanceName + "." + accountName
+					,
+					onEnter: onStateEnter
+					,
+					onExit: onStateExit
+					,
+					params: accountParams
+					,
+					url: accountURL
+					,
+					views: uniqueViewMap
+				}
+				;
+
+				// Define the revolving credit account (child of maintenance) save state.
+				var accountMaintenanceSaveState =
+				{
+					name: accountMaintenanceState.name + "." + saveName
+					,
+					onEnter: onStateEnter
+					,
+					onExit: onStateExit
+					,
+					params: accountParams
+					,
+					url: saveURL
+					,
+					views: uniqueSaveViewMap
 				}
 				;
 
 				// Define the APR (type) (child of maintenance) view state.
-				var aprViewState =
+				var aprMaintenanceState =
 				{
-					component: "unique"
-					//,
-					//controller: "unique"
-					//,
-					//controllerAs: "vm"
-					,
-					name: "apr"
+					name: maintenanceName + "." + aprName
 					,
 					onEnter: onStateEnter
 					,
@@ -109,24 +186,16 @@
 					,
 					params: aprParams
 					,
-					parent: maintenanceState
-					//,
-					//templateUrl: "/template/unique.html"
+					url: aprURL
 					,
-					url: "/apr"
+					views: uniqueViewMap
 				}
 				;
 
 				// Define the APR (type) (child of maintenance) save state.
-				var aprSaveState =
+				var aprMaintenanceSaveState =
 				{
-					component: "uniqueSave"
-					//,
-					//controller: "uniqueSave"
-					//,
-					//controllerAs: "vm"
-					,
-					name: "save"
+					name: aprMaintenanceState.name + "." + saveName
 					,
 					onEnter: onStateEnter
 					,
@@ -134,22 +203,23 @@
 					,
 					params: aprParams
 					,
-					parent: maintenanceState
-					//,
-					//templateUrl: "/template/unique.save.html"
+					url: saveURL
 					,
-					// todo|jdevl32: is this the correct/preferred way to "force" parent (which should actually be apr-view-state) ???
-					url: "/apr/save"
+					views: uniqueSaveViewMap
 				}
 				;
 
 				$stateProvider
 					// Create the (abstract) maintenance state.
 					.state(maintenanceState)
+					// Create the revolving credit account (child of maintenance) view state.
+					.state(accountMaintenanceState)
+					// Create the revolving credit account (child of maintenance) save state.
+					.state(accountMaintenanceSaveState)
 					// Create the APR (type) (child of maintenance) view state.
-					.state(aprViewState)
+					.state(aprMaintenanceState)
 					// Create the APR (type) (child of maintenance) save state.
-					.state(aprSaveState)
+					.state(aprMaintenanceSaveState)
 				;
 			}
 		;

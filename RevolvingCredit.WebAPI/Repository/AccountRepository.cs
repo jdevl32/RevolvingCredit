@@ -6,17 +6,15 @@ using RevolvingCredit.Entity.Model;
 namespace RevolvingCredit.WebAPI.Repository
 {
 
-	/// <inheritdoc />
 	/// <summary>
-	/// An APR (type) repository.
+	/// A revolvling credit account repository.
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// Refactor loggable logger category name.
 	/// </remarks>
-	public class APRRepository
+	public class AccountRepository
 		:
-		InformableUniqueIntEntityContextRepositoryBase<RevolvingCreditContext, APR>
+		InformableUniqueGuidEntityContextRepositoryBase<RevolvingCreditContext, Account>
 	{
 
 #region Instance Initialization
@@ -24,11 +22,10 @@ namespace RevolvingCredit.WebAPI.Repository
 		/// <inheritdoc />
 		/// <remarks>
 		/// Last modification:
-		/// Refactor loggable logger category name.
 		/// </remarks>
-		public APRRepository(RevolvingCreditContext entityContext, ILoggerFactory loggerFactory)
+		public AccountRepository(RevolvingCreditContext entityContext, ILoggerFactory loggerFactory)
 			:
-			base(entityContext, loggerFactory, entityContext.APR)
+			base(entityContext, loggerFactory, entityContext.Account)
 		{
 		}
 

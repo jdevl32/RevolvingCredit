@@ -1,4 +1,5 @@
-﻿using JDevl32.Web.Repository.Interface.Generic;
+﻿using JDevl32.Entity.Generic;
+using JDevl32.Web.Repository.Interface.Generic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Routing;
@@ -7,7 +8,6 @@ using Microsoft.Extensions.Logging;
 using RevolvingCredit.Entity;
 using RevolvingCredit.Entity.Model;
 using RevolvingCredit.WebAPI.Repository;
-using System;
 using StartupBase = JDevl32.Web.Host.StartupBase;
 
 namespace RevolvingCredit.WebAPI
@@ -94,13 +94,15 @@ namespace RevolvingCredit.WebAPI
 		/// <inheritdoc />
 		/// <remarks>
 		/// Last modification:
-		/// Refactor loggable logger category name.
+		/// Implement revolvling credit account sower (seeder).
 		/// </remarks>
 		public override void ConfigureServices(IServiceCollection services)
 		{
 			base.ConfigureServices(services);
 			// todo|jdevl32: can the repository be refactored (see aprcontroller.cs) ???
-			services.AddScoped<IInformableUniqueEntityContextRepository<RevolvingCreditContext, APR, int>, APRRepository>();
+			services.AddScoped<IInformableUniqueGuidEntityContextRepository<RevolvingCreditContext, Account>, AccountRepository>();
+			services.AddScoped<IInformableUniqueIntEntityContextRepository<RevolvingCreditContext, APR>, APRRepository>();
+			services.AddTransient<AccountSower>();
 			services.AddTransient<APRSower>();
 		}
 
@@ -118,25 +120,33 @@ namespace RevolvingCredit.WebAPI
 		/// <param name="loggerFactory">
 		/// A logger factory.
 		/// </param>
+		/// <param name="accountSower">
+		/// A revolving credit account sower.
+		/// </param>
 		/// <param name="aprSower">
-		/// An APR sower.
+		/// An APR (type) sower.
 		/// </param>
 		/// <remarks>
 		/// Last modification:
-		/// Catch and log error on seed (APR (type)).
+		/// Implement revolvling credit account sower (seeder).
 		/// </remarks>
-		public virtual void Configure(IApplicationBuilder applicationBuilder, IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory, APRSower aprSower)
+		public virtual void Configure(IApplicationBuilder applicationBuilder, IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory, AccountSower accountSower, APRSower aprSower)
 		{
 			ConfigureStartup(applicationBuilder, hostingEnvironment, loggerFactory);
 
-			try
+			var informableEntityContextSower =
+				new InformableEntityContextSowerBase<RevolvingCreditContext>[]
+				{
+					accountSower
+					,
+					aprSower
+				}
+			;
+
+			foreach (var sower in informableEntityContextSower)
 			{
-				aprSower.Seed().Wait();
-			} // try
-			catch (Exception ex)
-			{
-				loggerFactory.CreateLogger(GetType()).LogError(ex, $"Error on seed {aprSower.DisplayName}:  {ex}");
-			} // catch
+				sower.TrySeed().Wait();
+			} // foreach
 		}
 
 	}

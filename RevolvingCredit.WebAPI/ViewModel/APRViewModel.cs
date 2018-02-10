@@ -13,11 +13,9 @@ namespace RevolvingCredit.WebAPI.ViewModel
 	/// </remarks>
 	public class APRViewModel
 		:
-		IntUniqueEntityViewModel
+		UniqueIntEntityViewModel
 		,
-		// todo|jdevl32: ???
 		IAPRViewModel
-		//IAPR
 	{
 	}
 
