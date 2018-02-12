@@ -13,7 +13,8 @@ namespace RevolvingCredit.Entity
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// (Re-)implement as (generic) informable unique (integer) identifier entity context sower (base class).
+	/// Refactor (set of) unique entity item(s) to seed.
+	/// Remove unnecessary constructor.
 	/// </remarks>
 	public class APRSower
 		:
@@ -29,49 +30,6 @@ namespace RevolvingCredit.Entity
 		/// Last modification:
 		/// </remarks>
 		public const string DefaultDisplayName = "APR (type)";
-
-		/**
-		public const IEnumerable<APR> DefaultEntity =
-			new []
-			{
-				new APR
-				{
-					Description = $"{DefaultDisplayName} that applies to the line of cash for a revolving credit account."
-					,
-					FullName = "Cash APR"
-					//,
-					//Id = 1
-					,
-					ShortName = "Cash"
-				}
-				,
-				new APR
-				{
-					Description = $"{DefaultDisplayName} that applies to the line of credit for a revolving credit account."
-					,
-					FullName = "Credit APR"
-					//,
-					//Id = 2
-					,
-					ShortName = "Credit"
-				}
-			}
-		;
-		/**/
-
-#endregion
-
-#region Property
-
-#region Overrides of InformableEntityContextSowerBase<RevolvingCreditContext, APR, int>
-
-		/// <inheritdoc />
-		/// <remarks>
-		/// Last modification:
-		/// </remarks>
-		protected override IEnumerable<APR> Entity { get; set; }
-
-#endregion
 
 #endregion
 
@@ -91,22 +49,11 @@ namespace RevolvingCredit.Entity
 		/// <inheritdoc />
 		/// <remarks>
 		/// Last modification:
+		/// Implement the default (set of) unique entity item(s) to seed.
 		/// </remarks>
 		public APRSower(RevolvingCreditContext entityContext, ILoggerFactory loggerFactory, string displayName)
 			:
-			// todo|jdelv32: implement default entity !!!
-			base(entityContext, loggerFactory, displayName)
-			//this(entityContext, loggerFactory, displayName, )
-		{
-		}
-
-		/// <inheritdoc />
-		/// <remarks>
-		/// Last modification:
-		/// </remarks>
-		public APRSower(RevolvingCreditContext entityContext, ILoggerFactory loggerFactory, IEnumerable<APR> entity)
-			:
-			this(entityContext, loggerFactory, DefaultDisplayName, entity)
+			this(entityContext, loggerFactory, displayName, GetDefaultEntity(displayName))
 		{
 		}
 
@@ -134,6 +81,44 @@ namespace RevolvingCredit.Entity
 			await Seed(EntityContext.APR);
 
 #endregion
+
+		/// <summary>
+		/// Get the default (set of) unique entity item(s) to seed.
+		/// </summary>
+		/// <param name="displayName">
+		/// A display name.
+		/// </param>
+		/// <returns>
+		/// The default (set of) unique entity item(s) to seed.
+		/// </returns>
+		/// <remarks>
+		/// Last modification:
+		/// </remarks>
+		public static IEnumerable<APR> GetDefaultEntity(string displayName)
+		{
+			return
+				new []
+				{
+					new APR
+					{
+						Description = $"{displayName} that applies to the line of cash for a revolving credit account."
+						,
+						FullName = "Cash APR"
+						,
+						ShortName = "Cash"
+					}
+					,
+					new APR
+					{
+						Description = $"{displayName} that applies to the line of credit for a revolving credit account."
+						,
+						FullName = "Credit APR"
+						,
+						ShortName = "Credit"
+					}
+				}
+			;
+		}
 
 	}
 

@@ -13,6 +13,8 @@ namespace RevolvingCredit.Entity
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
+	/// Refactor (set of) unique entity item(s) to seed.
+	/// Remove unnecessary constructor.
 	/// </remarks>
 	public class AccountSower
 		:
@@ -28,20 +30,6 @@ namespace RevolvingCredit.Entity
 		/// Last modification:
 		/// </remarks>
 		public const string DefaultDisplayName = "Revolving Credit Account";
-
-#endregion
-
-#region Property
-
-#region Overrides of InformableEntityContextSowerBase<RevolvingCreditContext, Account, Guid>
-
-		/// <inheritdoc />
-		/// <remarks>
-		/// Last modification:
-		/// </remarks>
-		protected override IEnumerable<Account> Entity { get; set; }
-
-#endregion
 
 #endregion
 
@@ -64,16 +52,6 @@ namespace RevolvingCredit.Entity
 		public AccountSower(RevolvingCreditContext entityContext, ILoggerFactory loggerFactory, string displayName)
 			:
 			base(entityContext, loggerFactory, displayName)
-		{
-		}
-
-		/// <inheritdoc />
-		/// <remarks>
-		/// Last modification:
-		/// </remarks>
-		public AccountSower(RevolvingCreditContext entityContext, ILoggerFactory loggerFactory, IEnumerable<Account> entity)
-			:
-			this(entityContext, loggerFactory, DefaultDisplayName, entity)
 		{
 		}
 
