@@ -13,6 +13,7 @@ using StartupBase = JDevl32.Web.Host.StartupBase;
 namespace RevolvingCredit.WebAPI
 {
 
+	/// <inheritdoc />
 	/// <summary>
 	/// The app startup.
 	/// </summary>

@@ -6,6 +6,7 @@ using RevolvingCredit.Entity.Model;
 namespace RevolvingCredit.WebAPI.Repository
 {
 
+	/// <inheritdoc />
 	/// <summary>
 	/// A revolvling credit account repository.
 	/// </summary>

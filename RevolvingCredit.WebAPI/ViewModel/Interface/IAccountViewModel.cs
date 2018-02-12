@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace RevolvingCredit.WebAPI.ViewModel.Interface
 {
 
+	/// <inheritdoc />
 	/// <summary>
 	/// A view model for a revolving credit account.
 	/// </summary>

@@ -38,10 +38,10 @@ namespace RevolvingCredit.WebApp.Controller
 #endregion
 
 		/// <summary>
-		/// GET: App
+		/// Get the (default) index view.
 		/// </summary>
 		/// <returns>
-		/// 
+		/// The (default) index view.
 		/// </returns>
 		/// <remarks>
 		/// Last modification:

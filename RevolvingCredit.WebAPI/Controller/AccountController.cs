@@ -11,6 +11,7 @@ using RevolvingCredit.WebAPI.ViewModel;
 namespace RevolvingCredit.WebAPI.Controller
 {
 
+	/// <inheritdoc />
 	/// <summary>
 	/// A revolving credit account controller.
 	/// </summary>

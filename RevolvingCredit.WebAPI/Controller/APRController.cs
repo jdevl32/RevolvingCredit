@@ -11,6 +11,7 @@ using RevolvingCredit.WebAPI.ViewModel;
 namespace RevolvingCredit.WebAPI.Controller
 {
 
+	/// <inheritdoc />
 	/// <summary>
 	/// An APR (type) controller.
 	/// </summary>
@@ -22,7 +23,6 @@ namespace RevolvingCredit.WebAPI.Controller
 	[Route("api/APR")]
 	public class APRController
 		:
-		// todo|jdevl32: ???
 		InformableUniqueIntEntityControllerBase<RevolvingCreditContext, APR, APRViewModel>
 	{
 
@@ -55,30 +55,6 @@ namespace RevolvingCredit.WebAPI.Controller
 		}
 
 #endregion
-
-		// todo|jdevl32: cleanup...
-		/**
-		// todo|jdevl32: remove (debug/test only)...
-#region Overrides of InformableUniqueEntityControllerBase<RevolvingCreditContext, APR, APRViewModel, int>
-
-		/// <inheritdoc />
-		public override Task<IActionResult> Delete([FromBody] APRViewModel uniqueEntityViewModel)
-		{
-			Logger.LogInformation($"[{nameof(Delete)}:{nameof(uniqueEntityViewModel)}={uniqueEntityViewModel}]");
-
-			return base.Delete(uniqueEntityViewModel);
-		}
-
-		/// <inheritdoc />
-		public override Task<IActionResult> Post([FromBody] APRViewModel uniqueEntityViewModel)
-		{
-			Logger.LogInformation($"[{nameof(Post)}:{nameof(uniqueEntityViewModel)}={uniqueEntityViewModel}]");
-
-			return base.Post(uniqueEntityViewModel);
-		}
-
-#endregion
-		/**/
 
 	}
 

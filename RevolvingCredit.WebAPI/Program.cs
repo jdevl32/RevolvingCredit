@@ -14,22 +14,24 @@ namespace RevolvingCredit.WebAPI
 	{
 
 		/// <summary>
-		/// Builds the web host.
+		/// Build the web host.
 		/// </summary>
 		/// <param name="args">
 		/// The arguments passed to the app.
 		/// </param>
 		/// <returns>
-		/// The web host.
+		/// The (built) web host.
 		/// </returns>
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
 		public static IWebHost BuildWebHost(string[] args)
 			=>
-			WebHost.CreateDefaultBuilder(args)
+			WebHost
+				.CreateDefaultBuilder(args)
 				.UseStartup<Startup>()
-				.Build();
+				.Build()
+		;
 
 		/// <summary>
 		/// The main entry point for the app.
@@ -40,7 +42,9 @@ namespace RevolvingCredit.WebAPI
 		/// <remarks>
 		/// Last modification:
 		/// </remarks>
-		public static void Main(string[] args) => BuildWebHost(args).Run();
+		public static void Main(string[] args)
+			=>
+			BuildWebHost(args).Run();
 
 	}
 
