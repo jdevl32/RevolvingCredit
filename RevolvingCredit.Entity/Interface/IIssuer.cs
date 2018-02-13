@@ -3,6 +3,7 @@
 namespace RevolvingCredit.Entity.Interface
 {
 
+	/// <inheritdoc />
 	/// <summary>
 	/// An issuer of a revolving credit accont.
 	/// </summary>

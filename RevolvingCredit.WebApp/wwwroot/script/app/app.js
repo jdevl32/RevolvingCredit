@@ -10,7 +10,7 @@
 		var config =
 			// Configure state machine and routing.
 			// Last modification:
-			// Implement line (type).
+			// Implement (major) label.
 			function ($logProvider, $stateProvider, $urlRouterProvider)
 			{
 				// Enable debugging.
@@ -21,6 +21,8 @@
 				var accountURL = "/" + accountName;
 				var aprName = "apr";
 				var aprURL = "/" + aprName;
+				var labelName = "label";
+				var labelURL = "/" + labelName;
 				var lineName = "line";
 				var lineURL = "/" + lineName;
 				var maintenanceName = "maintenance";
@@ -62,6 +64,15 @@
 					displayName: "APR (type)"
 					,
 					url: "http://localhost:58410/api/APR"
+				}
+				;
+
+				// Define the (major) label common params.
+				var labelParams = 
+				{
+					displayName: "(Major) label"
+					,
+					url: "http://localhost:58410/api/label"
 				}
 				;
 
@@ -252,6 +263,43 @@
 				}
 				;
 
+				// Define the (major) label view state.
+				var labelMaintenanceViewState =
+				{
+					// ...as a child of the (parent) maintenance state.
+					name: maintenanceName + "." + labelName
+					,
+					onEnter: onStateEnter
+					,
+					onExit: onStateExit
+					,
+					params: labelParams
+					,
+					url: labelURL
+					,
+					views: viewViewMap
+				}
+				;
+
+				// Define the (major) label save state.
+				var labelMaintenanceSaveState =
+				{
+					// todo|jdevl32: is parent correct ???
+					// ...as a child of the (parent) (major) label view state.
+					name: labelMaintenanceViewState.name + "." + saveName
+					,
+					onEnter: onStateEnter
+					,
+					onExit: onStateExit
+					,
+					params: labelParams
+					,
+					url: saveURL
+					,
+					views: saveViewMap
+				}
+				;
+
 				// Define the line (type) view state.
 				var lineMaintenanceViewState =
 				{
@@ -298,6 +346,10 @@
 					.state(aprMaintenanceSaveState)
 					// Create the APR (type) view state.
 					.state(aprMaintenanceViewState)
+					// Create the (major) label save state.
+					.state(labelMaintenanceSaveState)
+					// Create the (major) label view state.
+					.state(labelMaintenanceViewState)
 					// Create the line (type) save state.
 					.state(lineMaintenanceSaveState)
 					// Create the line (type) view state.

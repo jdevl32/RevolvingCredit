@@ -3,6 +3,7 @@
 namespace RevolvingCredit.Entity.Interface
 {
 
+	/// <inheritdoc />
 	/// <summary>
 	/// A payment type for a revolving credit account.
 	/// </summary>

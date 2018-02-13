@@ -3,6 +3,7 @@
 namespace RevolvingCredit.Entity.Interface
 {
 
+	/// <inheritdoc />
 	/// <summary>
 	/// A (major) label for a revolving credit account.
 	/// </summary>

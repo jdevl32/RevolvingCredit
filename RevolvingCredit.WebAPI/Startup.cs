@@ -96,7 +96,7 @@ namespace RevolvingCredit.WebAPI
 		/// <inheritdoc />
 		/// <remarks>
 		/// Last modification:
-		/// Implement line (type).
+		/// Implement (major) label.
 		/// </remarks>
 		public override void ConfigureServices(IServiceCollection services)
 		{
@@ -104,9 +104,11 @@ namespace RevolvingCredit.WebAPI
 			// todo|jdevl32: can the repository be refactored (see aprcontroller.cs) ???
 			services.AddScoped<IInformableUniqueGuidEntityContextRepository<RevolvingCreditContext, Account>, AccountRepository>();
 			services.AddScoped<IInformableUniqueIntEntityContextRepository<RevolvingCreditContext, APR>, APRRepository>();
+			services.AddScoped<IInformableUniqueIntEntityContextRepository<RevolvingCreditContext, Label>, LabelRepository>();
 			services.AddScoped<IInformableUniqueIntEntityContextRepository<RevolvingCreditContext, Line>, LineRepository>();
 			services.AddTransient<AccountSower>();
 			services.AddTransient<APRSower>();
+			services.AddTransient<LabelSower>();
 			services.AddTransient<LineSower>();
 		}
 
@@ -130,14 +132,17 @@ namespace RevolvingCredit.WebAPI
 		/// <param name="aprSower">
 		/// An APR (type) sower.
 		/// </param>
+		/// <param name="labelSower">
+		/// A (major) label sower.
+		/// </param>
 		/// <param name="lineSower">
 		/// A line (type) sower.
 		/// </param>
 		/// <remarks>
 		/// Last modification:
-		/// Implement line (type) sower (seeder).
+		/// Implement (major) label sower (seeder).
 		/// </remarks>
-		public virtual void Configure(IApplicationBuilder applicationBuilder, IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory, AccountSower accountSower, APRSower aprSower, LineSower lineSower)
+		public virtual void Configure(IApplicationBuilder applicationBuilder, IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory, AccountSower accountSower, APRSower aprSower, LabelSower labelSower, LineSower lineSower)
 		{
 			ConfigureStartup(applicationBuilder, hostingEnvironment, loggerFactory);
 
@@ -147,6 +152,8 @@ namespace RevolvingCredit.WebAPI
 					accountSower
 					,
 					aprSower
+					,
+					labelSower
 					,
 					lineSower
 				}
