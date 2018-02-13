@@ -1,4 +1,4 @@
-﻿// /script/component/maintenance/unique.js
+﻿// /script/component/maintenance/view.js
 
 // Exclude from global scope...
 (
@@ -7,20 +7,20 @@
 		"use strict";
 
 		// Define the (controller and component) name.
-		var name = "unique";
+		var name = "view";
 
-		// Define the unique item component.
+		// Define the (view) unique item component.
 		var component =
 		{
 			controller: name
 			,
 			controllerAs: "vm"
 			,
-			templateUrl: "/template/unique.html"
+			templateUrl: "/template/maintenance/view.html"
 		}
 		;
 
-		// Create the unique item component.
+		// Create the (view) unique item component.
 		// Last modification:
 		angular.module("app").component(name, component);
 	}

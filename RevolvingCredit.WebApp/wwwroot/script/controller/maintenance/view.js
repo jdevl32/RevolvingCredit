@@ -1,4 +1,4 @@
-﻿// /script/controller/maintenance/unique.js
+﻿// /script/controller/maintenance/view.js
 
 // Exclude from global scope...
 (
@@ -6,7 +6,7 @@
 	{
 		"use strict";
 
-		// Define the unique item controller.
+		// Define the (view) unique item controller.
 		var controller =
 			// Last modification:
 			// Remove log service (migrate to message service).
@@ -18,14 +18,17 @@
 				vm.isBusy = true;
 				vm.isDev = false;
 
-				// Create action member.
-				var action = "";
-
 				// Get the (view-model) display name from the state-params service.
 				vm.displayName = $stateParams.displayName;
 
 				// Set the (item service from the view-model) display name.
 				itemService.displayName = vm.displayName;
+
+				// Get the (optional) unique item template from the state-params service.
+				vm.template = $stateParams.template;
+
+				// Create action member.
+				var action = "";
 
 				// Create method to reset action state.
 				var reset =
@@ -76,7 +79,7 @@
 					}
 				;
 
-				// todo|jdevl32: refactor (with unique.save.js) ???
+				// todo|jdevl32: refactor (with save.js) ???
 
 				// Create method to format (error) message (for display and debug).
 				var formatErrorMessage =
@@ -142,7 +145,7 @@
 						// see https://docs.angularjs.org/guide/expression discussion on "context"...
 						if (vm.isDev || true)
 						{
-							messageService.doDebug("debug-onGetSuccess-001-unique", "", "", response, "response");
+							messageService.doDebug("debug-onGetSuccess-001-view", "", "", response, "response");
 						} // if
 
 						angular.copy(response.data, vm.items);
@@ -233,7 +236,7 @@
 						action = "remove";
 
 						// todo|jdevl32: remove (debug only)...
-						messageService.debugMessage(getItemDetail, action, vm.displayName, "debug-vm.onRemove-001-unique", vm, "vm");
+						messageService.debugMessage(getItemDetail, action, vm.displayName, "debug-vm.onRemove-001-view", vm, "vm");
 
 						// Check if for all unique item(s) (invalid index).
 						if (isNullOrUndefined(index))
@@ -284,11 +287,13 @@
 						action = "save";
 
 						// todo|jdevl32: remove (debug only)...
-						messageService.debugMessage(getItemDetail, action, vm.displayName, "debug-vm.onSave-001-unique", vm, "vm");
+						messageService.debugMessage(getItemDetail, action, vm.displayName, "debug-vm.onSave-001-view", vm, "vm");
 					}
 				;
 			}
 		;
+
+		// todo|jdevl32: constant(s)...
 
 		// Define the module dependenc(y/ies).
 		var dependency =
@@ -309,6 +314,6 @@
 
 		// Use the existing module, specify controller.
 		// Last modification:
-		angular.module("app").controller("unique", dependency);
+		angular.module("app").controller("view", dependency);
 	}
 )();

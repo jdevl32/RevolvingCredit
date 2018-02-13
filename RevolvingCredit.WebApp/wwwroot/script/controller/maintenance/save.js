@@ -1,4 +1,4 @@
-﻿// /script/controller/maintenance/unique.save.js
+﻿// /script/controller/maintenance/save.js
 
 // Exclude from global scope...
 (
@@ -6,7 +6,7 @@
 	{
 		"use strict";
 
-		// Define the unique item save controller.
+		// Define the (save) unique item controller.
 		var controller =
 			// Last modification:
 			// Inject state service dependency.
@@ -17,9 +17,6 @@
 				vm.isBusy = true;
 				vm.isDev = false;
 
-				// Create action member.
-				var action = "";
-
 				// Get the (view-model) display name from the item service.
 				vm.displayName = itemService.displayName;
 
@@ -28,6 +25,12 @@
 
 				// Get the unique item to save (for the view-model) from the item service.
 				vm.item = itemService.item;
+
+				// Get the (optional) unique item template from the state-params service.
+				vm.template = $stateParams.template;
+
+				// Create action member.
+				var action = "";
 
 				// Create method to get item detail(s).
 				var getItemDetail =
@@ -46,7 +49,7 @@
 					}
 				;
 
-				// todo|jdevl32: refactor (with unique.js) ???
+				// todo|jdevl32: refactor (with view.js) ???
 
 				// Create method to format (error) message (for display and debug).
 				var formatErrorMessage =
@@ -184,7 +187,7 @@
 						action = "cancel";
 
 						// todo|jdevl32: remove (debug only)...
-						messageService.debugMessage(getItemDetail, action, vm.displayName, "debug-vm.onCancel-001-unique-save", vm, "vm");
+						messageService.debugMessage(getItemDetail, action, vm.displayName, "debug-vm.onCancel-001-save", vm, "vm");
 					}
 				;
 
@@ -198,7 +201,7 @@
 						action = "remove";
 
 						// todo|jdevl32: remove (debug only)...
-						messageService.debugMessage(getItemDetail, action, vm.displayName, "debug-vm.onRemove-001-unique-save", vm, "vm");
+						messageService.debugMessage(getItemDetail, action, vm.displayName, "debug-vm.onRemove-001-save", vm, "vm");
 
 						// Delete the unique item from the API using the defined handlers.
 						apiService.delete
@@ -237,7 +240,7 @@
 						action = "save";
 
 						// todo|jdevl32: remove (debug only)...
-						messageService.debugMessage(getItemDetail, action, vm.displayName, "debug-vm.onSubmit-001-unique-save", vm, "vm");
+						messageService.debugMessage(getItemDetail, action, vm.displayName, "debug-vm.onSubmit-001-save", vm, "vm");
 
 						// Post the saved unique item to the API using the defined handlers.
 						apiService.post(url, onSuccess, onError, doFinally, doCatch, vm.item);
@@ -245,6 +248,8 @@
 				;
 			}
 		;
+
+		// todo|jdevl32: constant(s)...
 
 		// Define the module dependenc(y/ies).
 		// Last modification:
@@ -269,6 +274,6 @@
 
 		// Use the existing module, specify controller.
 		// Last modification:
-		angular.module("app").controller("uniqueSave", dependency);
+		angular.module("app").controller("save", dependency);
 	}
 )();

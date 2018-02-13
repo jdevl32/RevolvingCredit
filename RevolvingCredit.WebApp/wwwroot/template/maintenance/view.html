@@ -47,6 +47,9 @@
 		<span data-ng-bind="item.fullName"></span>
 		|
 		<span data-ng-bind="item.description"></span>
-		<data-ui-view name="extend" />
+		<data-ng-include
+			data-ng-if="vm.template && vm.template.viewURL"
+			src="vm.template.viewURL"
+		/>
 	</div>
 </div>

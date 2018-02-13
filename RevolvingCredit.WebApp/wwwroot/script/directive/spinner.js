@@ -9,6 +9,7 @@
 		// Define the directive.
 		var spinner = 
 			// Last modification:
+			// Add class scope.
 			function ()
 			{
 				return {
@@ -17,6 +18,8 @@
 					,
 					scope:
 					{
+						class: "="
+						,
 						while: "="
 					}
 					,
