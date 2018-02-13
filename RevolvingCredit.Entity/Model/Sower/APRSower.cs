@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using JDevl32.Entity.Generic;
+﻿using JDevl32.Entity.Generic;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace RevolvingCredit.Entity.Model.Sower
 {
@@ -94,31 +94,28 @@ namespace RevolvingCredit.Entity.Model.Sower
 		/// Last modification:
 		/// </remarks>
 		public static IEnumerable<APR> GetDefaultEntity(string displayName)
-		{
-			return
-				new []
+			=>
+			new []
+			{
+				new APR
 				{
-					new APR
-					{
-						Description = $"{displayName} that applies to the line of cash for a revolving credit account."
-						,
-						FullName = "Cash APR"
-						,
-						ShortName = "Cash"
-					}
+					Description = $"{displayName} that applies to the line of cash for a revolving credit account."
 					,
-					new APR
-					{
-						Description = $"{displayName} that applies to the line of credit for a revolving credit account."
-						,
-						FullName = "Credit APR"
-						,
-						ShortName = "Credit"
-					}
+					FullName = "Cash APR"
+					,
+					ShortName = "Cash"
 				}
-			;
-		}
-
+				,
+				new APR
+				{
+					Description = $"{displayName} that applies to the line of credit for a revolving credit account."
+					,
+					FullName = "Credit APR"
+					,
+					ShortName = "Credit"
+				}
+			}
+		;
 	}
 
 }

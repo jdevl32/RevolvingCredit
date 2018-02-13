@@ -9,7 +9,6 @@ namespace RevolvingCredit.WebAPI.ViewModel
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
-	/// (Re-)implement as extension of view model interface.
 	/// </remarks>
 	public class LabelViewModel
 		:

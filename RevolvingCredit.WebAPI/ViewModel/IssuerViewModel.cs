@@ -5,16 +5,16 @@ namespace RevolvingCredit.WebAPI.ViewModel
 {
 
 	/// <summary>
-	/// A view model for a line (type) for a revolving credit account.
+	/// A view model for an issuer for a revolving credit account.
 	/// </summary>
 	/// <remarks>
 	/// Last modification:
 	/// </remarks>
-	public class LineViewModel
+	public class IssuerViewModel
 		:
 		UniqueIntEntityViewModel
 		,
-		ILineViewModel
+		IIssuerViewModel
 	{
 	}
 

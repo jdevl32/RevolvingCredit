@@ -89,40 +89,37 @@ namespace RevolvingCredit.Entity.Model.Sower
 		/// Last modification:
 		/// </remarks>
 		public static IEnumerable<Label> GetDefaultEntity(string displayName)
-		{
-			return
-				new []
+			=>
+			new []
+			{
+				new Label
 				{
-					new Label
-					{
-						Description = $"The Discover credit card {displayName}."
-						,
-						FullName = "Discover credit card"
-						,
-						ShortName = "Discover"
-					}
+					Description = $"The Discover credit card {displayName}."
 					,
-					new Label
-					{
-						Description = $"The MasterCard credit card {displayName}."
-						,
-						FullName = "MasterCard credit card"
-						,
-						ShortName = "MasterCard"
-					}
+					FullName = "Discover credit card"
 					,
-					new Label
-					{
-						Description = $"The Visa credit card {displayName}."
-						,
-						FullName = "Visa credit card"
-						,
-						ShortName = "Visa"
-					}
+					ShortName = "Discover"
 				}
-			;
-		}
-
+				,
+				new Label
+				{
+					Description = $"The MasterCard credit card {displayName}."
+					,
+					FullName = "MasterCard credit card"
+					,
+					ShortName = "MasterCard"
+				}
+				,
+				new Label
+				{
+					Description = $"The Visa credit card {displayName}."
+					,
+					FullName = "Visa credit card"
+					,
+					ShortName = "Visa"
+				}
+			}
+		;
 	}
 
 }

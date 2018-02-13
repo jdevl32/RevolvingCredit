@@ -96,7 +96,7 @@ namespace RevolvingCredit.WebAPI
 		/// <inheritdoc />
 		/// <remarks>
 		/// Last modification:
-		/// Implement (major) label.
+		/// Implement issuer.
 		/// </remarks>
 		public override void ConfigureServices(IServiceCollection services)
 		{
@@ -104,10 +104,12 @@ namespace RevolvingCredit.WebAPI
 			// todo|jdevl32: can the repository be refactored (see aprcontroller.cs) ???
 			services.AddScoped<IInformableUniqueGuidEntityContextRepository<RevolvingCreditContext, Account>, AccountRepository>();
 			services.AddScoped<IInformableUniqueIntEntityContextRepository<RevolvingCreditContext, APR>, APRRepository>();
+			services.AddScoped<IInformableUniqueIntEntityContextRepository<RevolvingCreditContext, Issuer>, IssuerRepository>();
 			services.AddScoped<IInformableUniqueIntEntityContextRepository<RevolvingCreditContext, Label>, LabelRepository>();
 			services.AddScoped<IInformableUniqueIntEntityContextRepository<RevolvingCreditContext, Line>, LineRepository>();
 			services.AddTransient<AccountSower>();
 			services.AddTransient<APRSower>();
+			services.AddTransient<IssuerSower>();
 			services.AddTransient<LabelSower>();
 			services.AddTransient<LineSower>();
 		}
@@ -132,6 +134,9 @@ namespace RevolvingCredit.WebAPI
 		/// <param name="aprSower">
 		/// An APR (type) sower.
 		/// </param>
+		/// <param name="issuerSower">
+		/// An issuer sower.
+		/// </param>
 		/// <param name="labelSower">
 		/// A (major) label sower.
 		/// </param>
@@ -142,7 +147,7 @@ namespace RevolvingCredit.WebAPI
 		/// Last modification:
 		/// Implement (major) label sower (seeder).
 		/// </remarks>
-		public virtual void Configure(IApplicationBuilder applicationBuilder, IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory, AccountSower accountSower, APRSower aprSower, LabelSower labelSower, LineSower lineSower)
+		public virtual void Configure(IApplicationBuilder applicationBuilder, IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory, AccountSower accountSower, APRSower aprSower, IssuerSower issuerSower, LabelSower labelSower, LineSower lineSower)
 		{
 			ConfigureStartup(applicationBuilder, hostingEnvironment, loggerFactory);
 
@@ -152,6 +157,8 @@ namespace RevolvingCredit.WebAPI
 					accountSower
 					,
 					aprSower
+					,
+					issuerSower
 					,
 					labelSower
 					,

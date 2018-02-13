@@ -10,7 +10,7 @@
 		var config =
 			// Configure state machine and routing.
 			// Last modification:
-			// Implement (major) label.
+			// Implement issuer.
 			function ($logProvider, $stateProvider, $urlRouterProvider)
 			{
 				// Enable debugging.
@@ -21,6 +21,8 @@
 				var accountURL = "/" + accountName;
 				var aprName = "apr";
 				var aprURL = "/" + aprName;
+				var issuerName = "issuer";
+				var issuerURL = "/" + issuerName;
 				var labelName = "label";
 				var labelURL = "/" + labelName;
 				var lineName = "line";
@@ -64,6 +66,15 @@
 					displayName: "APR (type)"
 					,
 					url: "http://localhost:58410/api/APR"
+				}
+				;
+
+				// Define the issuer common params.
+				var issuerParams = 
+				{
+					displayName: "Issuer"
+					,
+					url: "http://localhost:58410/api/issuer"
 				}
 				;
 
@@ -263,6 +274,43 @@
 				}
 				;
 
+				// Define the issuer view state.
+				var issuerMaintenanceViewState =
+				{
+					// ...as a child of the (parent) maintenance state.
+					name: maintenanceName + "." + issuerName
+					,
+					onEnter: onStateEnter
+					,
+					onExit: onStateExit
+					,
+					params: issuerParams
+					,
+					url: issuerURL
+					,
+					views: viewViewMap
+				}
+				;
+
+				// Define the issuer save state.
+				var issuerMaintenanceSaveState =
+				{
+					// todo|jdevl32: is parent correct ???
+					// ...as a child of the (parent) issuer view state.
+					name: issuerMaintenanceViewState.name + "." + saveName
+					,
+					onEnter: onStateEnter
+					,
+					onExit: onStateExit
+					,
+					params: issuerParams
+					,
+					url: saveURL
+					,
+					views: saveViewMap
+				}
+				;
+
 				// Define the (major) label view state.
 				var labelMaintenanceViewState =
 				{
@@ -346,6 +394,10 @@
 					.state(aprMaintenanceSaveState)
 					// Create the APR (type) view state.
 					.state(aprMaintenanceViewState)
+					// Create the issuer save state.
+					.state(issuerMaintenanceSaveState)
+					// Create the issuer view state.
+					.state(issuerMaintenanceViewState)
 					// Create the (major) label save state.
 					.state(labelMaintenanceSaveState)
 					// Create the (major) label view state.
