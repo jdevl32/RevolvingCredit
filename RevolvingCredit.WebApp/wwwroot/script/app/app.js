@@ -10,7 +10,7 @@
 		var config =
 			// Configure state machine and routing.
 			// Last modification:
-			// Implement revolving credit account partial template(s).
+			// Implement line (type).
 			function ($logProvider, $stateProvider, $urlRouterProvider)
 			{
 				// Enable debugging.
@@ -21,6 +21,8 @@
 				var accountURL = "/" + accountName;
 				var aprName = "apr";
 				var aprURL = "/" + aprName;
+				var lineName = "line";
+				var lineURL = "/" + lineName;
 				var maintenanceName = "maintenance";
 				var maintenanceURL = "/" + maintenanceName;
 				var partialFileExt = ".partial.html";
@@ -60,6 +62,15 @@
 					displayName: "APR (type)"
 					,
 					url: "http://localhost:58410/api/APR"
+				}
+				;
+
+				// Define the line (type) common params.
+				var lineParams = 
+				{
+					displayName: "Line (type)"
+					,
+					url: "http://localhost:58410/api/line"
 				}
 				;
 
@@ -241,6 +252,43 @@
 				}
 				;
 
+				// Define the line (type) view state.
+				var lineMaintenanceViewState =
+				{
+					// ...as a child of the (parent) maintenance state.
+					name: maintenanceName + "." + lineName
+					,
+					onEnter: onStateEnter
+					,
+					onExit: onStateExit
+					,
+					params: lineParams
+					,
+					url: lineURL
+					,
+					views: viewViewMap
+				}
+				;
+
+				// Define the line (type) save state.
+				var lineMaintenanceSaveState =
+				{
+					// todo|jdevl32: is parent correct ???
+					// ...as a child of the (parent) line (type) view state.
+					name: lineMaintenanceViewState.name + "." + saveName
+					,
+					onEnter: onStateEnter
+					,
+					onExit: onStateExit
+					,
+					params: lineParams
+					,
+					url: saveURL
+					,
+					views: saveViewMap
+				}
+				;
+
 				$stateProvider
 					// Create the revolving credit account save state.
 					.state(accountMaintenanceSaveState)
@@ -250,6 +298,10 @@
 					.state(aprMaintenanceSaveState)
 					// Create the APR (type) view state.
 					.state(aprMaintenanceViewState)
+					// Create the line (type) save state.
+					.state(lineMaintenanceSaveState)
+					// Create the line (type) view state.
+					.state(lineMaintenanceViewState)
 					// Create the (abstract, ancestor) maintenance state.
 					.state(maintenanceState)
 				;

@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace RevolvingCredit.Entity.Interface
 {
 
+	/// <inheritdoc />
 	/// <summary>
 	/// A revolving credit account.
 	/// </summary>

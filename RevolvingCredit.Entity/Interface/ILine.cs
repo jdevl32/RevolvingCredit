@@ -3,8 +3,9 @@
 namespace RevolvingCredit.Entity.Interface
 {
 
+	/// <inheritdoc />
 	/// <summary>
-	/// A line type for a revolving credit account.
+	/// A line (type) for a revolving credit account.
 	/// </summary>
 	/// <remarks>
 	/// Last modification:

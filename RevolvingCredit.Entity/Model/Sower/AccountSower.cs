@@ -1,10 +1,9 @@
-﻿using JDevl32.Entity.Generic;
-using Microsoft.Extensions.Logging;
-using RevolvingCredit.Entity.Model;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using JDevl32.Entity.Generic;
+using Microsoft.Extensions.Logging;
 
-namespace RevolvingCredit.Entity
+namespace RevolvingCredit.Entity.Model.Sower
 {
 
 	/// <inheritdoc />

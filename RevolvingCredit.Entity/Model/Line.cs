@@ -5,7 +5,7 @@ namespace RevolvingCredit.Entity.Model
 {
 
 	/// <summary>
-	/// A line type for a revolving credit account.
+	/// A line (type) for a revolving credit account.
 	/// </summary>
 	/// <remarks>
 	/// Last modification:

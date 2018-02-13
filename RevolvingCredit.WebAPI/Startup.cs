@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using RevolvingCredit.Entity;
 using RevolvingCredit.Entity.Model;
+using RevolvingCredit.Entity.Model.Sower;
 using RevolvingCredit.WebAPI.Repository;
 using StartupBase = JDevl32.Web.Host.StartupBase;
 
@@ -95,7 +96,7 @@ namespace RevolvingCredit.WebAPI
 		/// <inheritdoc />
 		/// <remarks>
 		/// Last modification:
-		/// Implement revolvling credit account sower (seeder).
+		/// Implement line (type).
 		/// </remarks>
 		public override void ConfigureServices(IServiceCollection services)
 		{
@@ -103,8 +104,10 @@ namespace RevolvingCredit.WebAPI
 			// todo|jdevl32: can the repository be refactored (see aprcontroller.cs) ???
 			services.AddScoped<IInformableUniqueGuidEntityContextRepository<RevolvingCreditContext, Account>, AccountRepository>();
 			services.AddScoped<IInformableUniqueIntEntityContextRepository<RevolvingCreditContext, APR>, APRRepository>();
+			services.AddScoped<IInformableUniqueIntEntityContextRepository<RevolvingCreditContext, Line>, LineRepository>();
 			services.AddTransient<AccountSower>();
 			services.AddTransient<APRSower>();
+			services.AddTransient<LineSower>();
 		}
 
 #endregion
@@ -127,11 +130,14 @@ namespace RevolvingCredit.WebAPI
 		/// <param name="aprSower">
 		/// An APR (type) sower.
 		/// </param>
+		/// <param name="lineSower">
+		/// A line (type) sower.
+		/// </param>
 		/// <remarks>
 		/// Last modification:
-		/// Implement revolvling credit account sower (seeder).
+		/// Implement line (type) sower (seeder).
 		/// </remarks>
-		public virtual void Configure(IApplicationBuilder applicationBuilder, IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory, AccountSower accountSower, APRSower aprSower)
+		public virtual void Configure(IApplicationBuilder applicationBuilder, IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory, AccountSower accountSower, APRSower aprSower, LineSower lineSower)
 		{
 			ConfigureStartup(applicationBuilder, hostingEnvironment, loggerFactory);
 
@@ -141,6 +147,8 @@ namespace RevolvingCredit.WebAPI
 					accountSower
 					,
 					aprSower
+					,
+					lineSower
 				}
 			;
 

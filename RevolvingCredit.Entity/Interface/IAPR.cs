@@ -3,6 +3,7 @@
 namespace RevolvingCredit.Entity.Interface
 {
 
+	/// <inheritdoc />
 	/// <summary>
 	/// An APR (type) for a revolving credit account.
 	/// </summary>

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RevolvingCredit.Entity;
 using RevolvingCredit.Entity.Model;
+using RevolvingCredit.Entity.Model.Sower;
 using RevolvingCredit.WebAPI.ViewModel;
 
 namespace RevolvingCredit.WebAPI.Controller

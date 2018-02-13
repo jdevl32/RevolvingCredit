@@ -6,7 +6,7 @@
 	{
 		"use strict";
 
-		// Define the (controller and component) name.
+		// Define the (component) name.
 		var name = "maintenance";
 
 		// Define the maintenance component.
