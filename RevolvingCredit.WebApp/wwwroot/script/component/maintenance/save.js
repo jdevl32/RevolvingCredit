@@ -6,22 +6,25 @@
 	{
 		"use strict";
 
-		// Define the (controller and component) name.
-		var name = "save";
+		// Define the (controller and component) name and URL (part).
+		var maintenanceName = "maintenance";
+		var maintenanceUrl = "/" + maintenanceName;
+		var saveName = "save";
+		var saveUrl = "/" + saveName;
 
 		// Define the (save) unique item component.
 		var component =
 		{
-			controller: name
+			controller: saveName
 			,
 			controllerAs: "vm"
 			,
-			templateUrl: "/template/maintenance/save.html"
+			templateUrl: "/template" + maintenanceUrl + saveUrl + ".html"
 		}
 		;
 
 		// Create the (save) unique item component.
 		// Last modification:
-		angular.module("app").component(name, component);
+		angular.module("app").component(saveName, component);
 	}
 )();

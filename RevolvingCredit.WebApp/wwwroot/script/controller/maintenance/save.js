@@ -6,6 +6,9 @@
 	{
 		"use strict";
 
+		// Define the (save) unique item controller name.
+		var saveName = "save";
+
 		// Define the (save) unique item controller.
 		var controller =
 			// Last modification:
@@ -237,7 +240,7 @@
 					{
 						vm.isBusy = true;
 						vm.errorMessage = "";
-						action = "save";
+						action = saveName;
 
 						// todo|jdevl32: remove (debug only)...
 						messageService.debugMessage(getItemDetail, action, vm.displayName, "debug-vm.onSubmit-001-save", vm, "vm");
@@ -251,7 +254,7 @@
 
 		// todo|jdevl32: constant(s)...
 
-		// Define the module dependenc(y/ies).
+		// Define the controller dependenc(y/ies).
 		// Last modification:
 		// Inject state service dependency.
 		var dependency =
@@ -272,8 +275,8 @@
 			]
 		;
 
-		// Use the existing module, specify controller.
+		// Using the existing app module, create the controller.
 		// Last modification:
-		angular.module("app").controller("save", dependency);
+		angular.module("app").controller(saveName, dependency);
 	}
 )();

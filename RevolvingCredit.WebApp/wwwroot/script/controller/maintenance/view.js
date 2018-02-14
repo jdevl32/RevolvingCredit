@@ -6,6 +6,9 @@
 	{
 		"use strict";
 
+		// Define the (view) unique item controller name.
+		var viewName = "view";
+
 		// Define the (view) unique item controller.
 		var controller =
 			// Last modification:
@@ -312,8 +315,8 @@
 			]
 		;
 
-		// Use the existing module, specify controller.
+		// Using the existing app module, create the controller.
 		// Last modification:
-		angular.module("app").controller("view", dependency);
+		angular.module("app").controller(viewName, dependency);
 	}
 )();

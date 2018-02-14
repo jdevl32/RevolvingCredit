@@ -6,18 +6,19 @@
 	{
 		"use strict";
 
-		// Define the (component) name.
-		var name = "maintenance";
+		// Define the (component) name and URL (part).
+		var maintenanceName = "maintenance";
+		var maintenanceUrl = "/" + maintenanceName;
 
 		// Define the maintenance component.
 		var component =
 		{
-			templateUrl: "/template/maintenance.html"
+			templateUrl: "/template" + maintenanceUrl + ".html"
 		}
 		;
 
 		// Create the maintenance component.
 		// Last modification:
-		angular.module("app").component(name, component);
+		angular.module("app").component(maintenanceName, component);
 	}
 )();

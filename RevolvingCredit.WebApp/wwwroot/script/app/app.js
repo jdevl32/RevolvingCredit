@@ -16,36 +16,37 @@
 				// Enable debugging.
 				$logProvider.debugEnabled(true);
 
+				// todo|jdevl32: (global) constant(s)...
 				// Define component/controller/route name(s) and URL(s).
 				var accountName = "account";
-				var accountURL = "/" + accountName;
+				var accountUrl = "/" + accountName;
 				var aprName = "apr";
-				var aprURL = "/" + aprName;
+				var aprUrl = "/" + aprName;
 				var issuerName = "issuer";
-				var issuerURL = "/" + issuerName;
+				var issuerUrl = "/" + issuerName;
 				var labelName = "label";
-				var labelURL = "/" + labelName;
+				var labelUrl = "/" + labelName;
 				var lineName = "line";
-				var lineURL = "/" + lineName;
+				var lineUrl = "/" + lineName;
 				var maintenanceName = "maintenance";
-				var maintenanceURL = "/" + maintenanceName;
+				var maintenanceUrl = "/" + maintenanceName;
 				var partialFileExt = ".partial.html";
 				var saveName = "save";
-				var saveURL = "/" + saveName;
+				var saveUrl = "/" + saveName;
 				var templateName = "template";
-				var templateURL = "/" + templateName;
+				var templateUrl = "/" + templateName;
 				var viewName = "view";
-				var viewURL = "/" + viewName;
+				var viewUrl = "/" + viewName;
 
 				// Default route configuration.
-				$urlRouterProvider.otherwise(maintenanceURL + accountURL);
+				$urlRouterProvider.otherwise(maintenanceUrl + accountUrl);
 
 				// Define the revolving credit account partial template(s).
 				var accountTemplate =
 				{
-					saveURL: templateURL + maintenanceURL + saveURL + accountURL + partialFileExt
+					saveUrl: templateUrl + maintenanceUrl + saveUrl + accountUrl + partialFileExt
 					,
-					viewURL: templateURL + maintenanceURL + viewURL + accountURL + partialFileExt
+					viewUrl: templateUrl + maintenanceUrl + viewUrl + accountUrl + partialFileExt
 				}
 				;
 
@@ -154,7 +155,7 @@
 					,
 					onExit: onStateExit
 					,
-					url: maintenanceURL
+					url: maintenanceUrl
 				}
 				;
 
@@ -212,7 +213,7 @@
 					,
 					params: accountParams
 					,
-					url: accountURL
+					url: accountUrl
 					,
 					views: accountViewViewMap
 				}
@@ -231,7 +232,7 @@
 					,
 					params: accountParams
 					,
-					url: saveURL
+					url: saveUrl
 					,
 					views: accountSaveViewMap
 				}
@@ -249,7 +250,7 @@
 					,
 					params: aprParams
 					,
-					url: aprURL
+					url: aprUrl
 					,
 					views: viewViewMap
 				}
@@ -268,7 +269,7 @@
 					,
 					params: aprParams
 					,
-					url: saveURL
+					url: saveUrl
 					,
 					views: saveViewMap
 				}
@@ -286,7 +287,7 @@
 					,
 					params: issuerParams
 					,
-					url: issuerURL
+					url: issuerUrl
 					,
 					views: viewViewMap
 				}
@@ -305,7 +306,7 @@
 					,
 					params: issuerParams
 					,
-					url: saveURL
+					url: saveUrl
 					,
 					views: saveViewMap
 				}
@@ -323,7 +324,7 @@
 					,
 					params: labelParams
 					,
-					url: labelURL
+					url: labelUrl
 					,
 					views: viewViewMap
 				}
@@ -342,7 +343,7 @@
 					,
 					params: labelParams
 					,
-					url: saveURL
+					url: saveUrl
 					,
 					views: saveViewMap
 				}
@@ -360,7 +361,7 @@
 					,
 					params: lineParams
 					,
-					url: lineURL
+					url: lineUrl
 					,
 					views: viewViewMap
 				}
@@ -379,7 +380,7 @@
 					,
 					params: lineParams
 					,
-					url: saveURL
+					url: saveUrl
 					,
 					views: saveViewMap
 				}
@@ -415,13 +416,13 @@
 		// Define the module dependenc(y/ies).
 		var dependency =
 			[
-				"spinner"
-				,
-				"ui.router"
+				"mwl.confirm"
 				,
 				"service"
 				,
-				"mwl.confirm"
+				"spinner"
+				,
+				"ui.router"
 			]
 		;
 
