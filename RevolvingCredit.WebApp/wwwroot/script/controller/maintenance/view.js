@@ -36,13 +36,14 @@
 				// Create method to reset action state.
 				var reset =
 					// Last modification:
+					// (Re-)implement using item itself (instead of via index).
 					function ()
 					{
 						// Create empty container for error message.
 						vm.errorMessage = "";
 
-						// Create null tracking index.
-						vm.index = null;
+						// Create null tracking item.
+						vm.item = null;
 
 						// Create empty container for unique item(s).
 						vm.items = [];
@@ -55,9 +56,10 @@
 				// Create method to get item detail(s).
 				var getItemDetail =
 					// Last modification:
+					// (Re-)implement using item itself (instead of via index).
 					function ()
 					{
-						var item =
+						var info =
 						{
 							suffix: ""
 							,
@@ -65,20 +67,20 @@
 						}
 						;
 
-						if (isNullOrUndefined(vm.index))
+						if (isNullOrUndefinedOrEmpty(vm.item))
 						{
-							item.suffix = "(s)";
+							info.suffix = "(s)";
 						} // if
 						else
 						{
-							item.detail = " "
+							info.detail = " "
 								+ "("
-								+ toString(vm.items[vm.index])
+								+ toString(vm.item)
 								+ ")"
 							;
 						} // else
 
-						return item;
+						return info;
 					}
 				;
 
@@ -229,11 +231,12 @@
 				// Create method to initiate (remove) action state.
 				vm.onRemove =
 					// Last modification:
-					// Implement message service.
-					function (index = null)
+					// (Re-)implement using item itself (instead of via index).
+					function (item = null/**index = null/**/)
 					{
-						// Set the index to track.
-						vm.index = index;
+						// Set the item to track.
+						// todo|jdevl32: still needed (after re-implementation of item/index, but be cautious of below usage) ???
+						vm.item = item;
 						vm.isBusy = true;
 						vm.errorMessage = "";
 						action = "remove";
@@ -241,8 +244,8 @@
 						// todo|jdevl32: remove (debug only)...
 						messageService.debugMessage(getItemDetail, action, vm.displayName, "debug-vm.onRemove-001-view", vm, "vm");
 
-						// Check if for all unique item(s) (invalid index).
-						if (isNullOrUndefined(index))
+						// Check if for all unique item(s) (invalid item).
+						if (isNullOrUndefinedOrEmpty(vm.item))
 						{
 							// Delete (all) the unique item(s) from the API using the defined handlers.
 							apiService.delete(url + "/*", onDeleteSuccess, onError, doFinally, doCatch);
@@ -268,7 +271,7 @@
 											"Content-Type": "application/json"
 										}
 										,
-										data: vm.items[index]
+										data: vm.item
 									}
 								)
 							;
@@ -279,13 +282,16 @@
 				// Create method to initiate (save) action state.
 				vm.onSave =
 					// Last modification:
-					// Implement message service.
-					function (index = null)
+					// (Re-)implement using item itself (instead of via index).
+					function (item = {})
 					{
 						// Reset message(s).
 						vm.errorMessage = itemService.errorMessage = "";
 						vm.successMessage = itemService.successMessage = "";
-						itemService.item = isNullOrUndefined(index) ? {} : vm.items[index];
+
+						// Set the item to track.
+						itemService.item = item;
+
 						// todo|jdevl32: only necessary if debug (below) - otherwise could set inline (debug, below) ???
 						action = "save";
 

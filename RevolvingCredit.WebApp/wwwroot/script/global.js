@@ -3,81 +3,91 @@
 "use strict";
 
 // Debug.
-// Last modification:
-// Qualify alert method.
-function debug(value, valueName = "", separator = "\n", showAlert = false)
-{
-	value = toString(value, valueName, separator);
-
-	console.log(value);
-
-	if (showAlert)
+var debug = 
+	// Last modification:
+	// Qualify alert method.
+	function (value, valueName = "", separator = "\n", showAlert = false)
 	{
-		if ($window)
+		value = toString(value, valueName, separator);
+
+		console.log(value);
+
+		if (showAlert)
 		{
-			if ($window.alert)
+			if ($window)
 			{
-				$window.alert(value);
+				if ($window.alert)
+				{
+					$window.alert(value);
+				} // if
+			} // if
+
+			if (window)
+			{
+				if (window.alert)
+				{
+					window.alert(value);
+				} // if
 			} // if
 		} // if
+	}
+;
 
-		if (window)
-		{
-			if (window.alert)
-			{
-				window.alert(value);
-			} // if
-		} // if
-	} // if
-}
-
-function isEmpty(value)
-{
-	return "" === value;
-}
-
-function isNullOrUndefined(object)
-{
-	return object === null || object === undefined;
-}
+var isNullOrUndefinedOrEmpty =
+	// @summary 
+	// @param {} object 
+	// @returns {} 
+	// Last modification:
+	function(object)
+	{
+		return _.isNull(object) 
+			|| 
+			_.isUndefined(object) 
+			|| 
+			_.isEmpty(object)
+		;
+	}
+;
 
 // Convert (the object) to a string representation.
-// Last modification:
-// Enhance object string representation.
-function toString(object, objectName = "", separator = "\n")
-{
-	var empty = isEmpty(objectName);
-	var value = empty ? objectName : "[" + objectName + "=";
-
-	switch (typeof object)
+var toString = 
+	// Last modification:
+	// (Re-)implement using underscore library.
+	function (object, objectName = "", separator = "\n")
 	{
-		case "string":
-			value += object;
-			break;
+		var empty = _.isEmpty(objectName);
+		var value = empty ? objectName : "[" + objectName + "=";
 
-		default:
-			for (var propertyName in object)
-			{
-				if (!object.hasOwnProperty(propertyName))
+		switch (typeof object)
+		{
+			case "string":
+				value += object;
+				break;
+
+			default:
+				for (var propertyName in object)
 				{
-					continue;
-				} // if
+					if (!object.hasOwnProperty(propertyName))
+					{
+						continue;
+					} // if
 
-				if (!isEmpty(value))
-				{
-					value += separator;
-				} // if
+					if (!_.isEmpty(value))
+					{
+						value += separator;
+					} // if
 
-				value += "[." + propertyName + "=" + object[propertyName] + "]";
-			} // for
+					value += "[." + propertyName + "=" + object[propertyName] + "]";
+				} // for
 
-			break;
-	} // switch
+				break;
+		} // switch
 
-	if (!empty)
-	{
-		value += "]";
-	} // if
+		if (!empty)
+		{
+			value += "]";
+		} // if
 
-	return value;
-}
+		return value;
+	}
+;
