@@ -232,7 +232,7 @@
 				vm.onRemove =
 					// Last modification:
 					// (Re-)implement using item itself (instead of via index).
-					function (item = null/**index = null/**/)
+					function (item = null)
 					{
 						// Set the item to track.
 						// todo|jdevl32: still needed (after re-implementation of item/index, but be cautious of below usage) ???
@@ -305,6 +305,7 @@
 		// todo|jdevl32: constant(s)...
 
 		// Define the module dependenc(y/ies).
+		// Last modification:
 		var dependency =
 			[
 				"$stateParams"

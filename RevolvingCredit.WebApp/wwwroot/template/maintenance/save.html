@@ -1,6 +1,11 @@
 ﻿<div>
-	<h3>{{vm.displayName}}</h3>
-	<div class="text-danger" data-ng-bind="vm.errorMessage" data-ng-show="vm.errorMessage"></div>
+	<h3 data-ng-bind="vm.displayName"></h3>
+	<div
+		class="text-danger"
+		data-ng-bind="vm.errorMessage"
+		data-ng-show="vm.errorMessage"
+	>
+	</div>
 	<div>
 		<form name="item" novalidate data-ng-submit="vm.onSubmit()">
 			<div class="form-group">
@@ -15,9 +20,20 @@
 					required
 					type="text"
 				/>
-				<span data-ng-show="item.shortName.$dirty && item.shortName.$invalid" class="text-warning">
-					<span data-ng-show="item.shortName.$error.required">Required.</span>
-					<span data-ng-show="item.shortName.$error.minlength">Minimum length not satisfied.</span>
+				<span
+					class="text-warning"
+					data-ng-show="item.shortName.$dirty && item.shortName.$invalid"
+				>
+					<span
+						data-ng-show="item.shortName.$error.required"
+					>
+						Required.
+					</span>
+					<span
+						data-ng-show="item.shortName.$error.minlength"
+					>
+						Minimum length not satisfied.
+					</span>
 				</span>
 			</div>
 			<div class="form-group">
@@ -32,9 +48,20 @@
 					required
 					type="text"
 				/>
-				<span data-ng-show="item.fullName.$dirty && item.fullName.$invalid" class="text-warning">
-					<span data-ng-show="item.fullName.$error.required">Required.</span>
-					<span data-ng-show="item.fullName.$error.minlength">Minimum length not satisfied.</span>
+				<span
+					class="text-warning"
+					data-ng-show="item.fullName.$dirty && item.fullName.$invalid"
+				>
+					<span
+						data-ng-show="item.fullName.$error.required"
+					>
+						Required.
+					</span>
+					<span
+						data-ng-show="item.fullName.$error.minlength"
+					>
+						Minimum length not satisfied.
+					</span>
 				</span>
 			</div>
 			<div class="form-group">
@@ -49,9 +76,20 @@
 					required 
 				>
 				</textarea>
-				<span data-ng-show="item.description.$dirty && item.description.$invalid" class="text-warning">
-					<span data-ng-show="item.description.$error.required">Required.</span>
-					<span data-ng-show="item.description.$error.minlength">Minimum length not satisfied.</span>
+				<span
+					class="text-warning"
+					data-ng-show="item.description.$dirty && item.description.$invalid"
+				>
+					<span
+						data-ng-show="item.description.$error.required"
+					>
+						Required.
+					</span>
+					<span
+						data-ng-show="item.description.$error.minlength"
+					>
+						Minimum length not satisfied.
+					</span>
 				</span>
 			</div>
 			<data-ng-include

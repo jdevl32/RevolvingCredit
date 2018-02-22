@@ -414,6 +414,7 @@
 		;
 
 		// Define the module dependenc(y/ies).
+		// Last modification:
 		var dependency =
 			[
 				"mwl.confirm"
